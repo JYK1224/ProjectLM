@@ -1,4 +1,4 @@
-package green.model;
+package lm.model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

@@ -1,4 +1,4 @@
-package green.model;
+package lm.model;
 
 public class MemberVo {
 	// Fields
