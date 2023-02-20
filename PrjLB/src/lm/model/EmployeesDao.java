@@ -27,7 +27,7 @@ public class EmployeesDao {
 	// 회원 추가
 	public int insertEmp(String userid, String userpw, String username, String ty,  String intro) {
 		String sql = "";
-		sql += " insert into employees " + "  ( userid , userpw, username, ty,  intro ) " + " values  "
+		sql += " insert into user_1 " + "  ( userid , userpw, username, ty,  intro ) " + " values  "
 				+ "  (  ? ,  ?,  ?,  ?,  ?,  ? ) ";
 		PreparedStatement pstmt = null;
 		int aftcnt = 0;
@@ -88,7 +88,7 @@ public class EmployeesDao {
 	
 	//수정
 	public int updateEmp1(Employees ep) {
-		String sql = " update member " 
+		String sql = " update user_1 " 
 	               + " set  " 
 				   + "       username = ?, " 
 	               + "       userpw   = ?, "
@@ -125,7 +125,7 @@ public class EmployeesDao {
 		Employees ep = null;
 		
 		String sql = " select userid, userpw, username, ty, intro, indate "
-				   + " from member "
+				   + " from user_1 "
 				   + " where userid = ? ";
 		PreparedStatement pstmt = null;
 		ResultSet            rs = null;
