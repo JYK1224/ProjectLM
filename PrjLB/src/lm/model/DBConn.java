@@ -9,9 +9,9 @@ public class DBConn {
 	// instance 가 한개만 만들어지도록 한다
 	// Connection String
 	private  static      String      driver = "oracle.jdbc.OracleDriver"; 
-	private  static      String      dburl  = "jdbc:oracle:thin:@localhost:1521:xe"; 
-	private  static      String      dbuid  = "hr"; 
-	private  static      String      dbpwd  = "1234";
+	private  static      String      dburl  = "jdbc:oracle:thin:@LMDATABASE_medium?TNS_ADMIN=‪D:\\wallet\\Wallet_LMDATABASE"; 
+	private  static      String      dbuid  = "admin"; 
+	private  static      String      dbpwd  = "Lmdata123456";
 	
 	private  static      Connection  conn = null;
 	
