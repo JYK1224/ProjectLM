@@ -25,7 +25,7 @@ public class EmployeesDao {
 	}
 
 	// 회원 추가
-	public int insertEmp(String userid, String userpw, String username, String ty,  String intro) {
+	public int insertUSER_1(String userid, String userpw, String username, String ty,  String intro) {
 		String sql = "";
 		sql += " insert into employees " + "  ( userid , userpw, username, ty,  intro ) " + " values  "
 				+ "  (  ? ,  ?,  ?,  ?,  ?,  ? ) ";
@@ -53,7 +53,7 @@ public class EmployeesDao {
 		return aftcnt;
 	}
 
-	public int insertEmp (Employees ep) {
+	public int insertEmp (USER_1 ep) {
 
 		String userid = ep.getUserid();
 		String userpw = ep.getUserpw();
@@ -61,7 +61,7 @@ public class EmployeesDao {
 		String ty = ep.getty();
 		String intro = ep.getIntro();
 
-		int aftcnt = insertEmp(userid, userpw, username, ty, intro);
+		int aftcnt = insertUSER_1(userid, userpw, username, ty, intro);
 		return aftcnt;
 	}
 	
@@ -87,7 +87,7 @@ public class EmployeesDao {
 	}
 	
 	//수정
-	public int updateEmp1(Employees ep) {
+	public int updateEmp1(USER_1 ep) {
 		String sql = " update member " 
 	               + " set  " 
 				   + "       username = ?, " 
@@ -120,9 +120,9 @@ public class EmployeesDao {
 	
 	
 	//조회
-	public Employees getEmp(String userid) {
+	public USER_1 getEmp(String userid) {
 		
-		Employees ep = null;
+		USER_1 ep = null;
 		
 		String sql = " select userid, userpw, username, ty, intro, indate "
 				   + " from member "
@@ -141,7 +141,7 @@ public class EmployeesDao {
 				String intro    = rs.getString("intro");
 				String indate   = rs.getString("indate");
 				
-				ep = new Employees(
+				ep = new USER_1(
 						userID, userpw, username, ty, intro, indate);
 			}
 		} catch (SQLException e) {

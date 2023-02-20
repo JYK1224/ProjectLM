@@ -1,6 +1,6 @@
 package lm.model;
 
-public class Employees {
+public class USER_1 {
 	
 	private String userid;
 	private String userpw;
@@ -8,8 +8,8 @@ public class Employees {
 	private String ty;
 	private String intro;
 	private String indate;
-	public Employees() {};
-	public Employees(String userid, String userpw, String username, String ty, String intro, String indate) {
+	public USER_1() {};
+	public USER_1(String userid, String userpw, String username, String ty, String intro, String indate) {
 		this.userid = userid;
 		this.userpw = userpw;
 		this.username = username;
