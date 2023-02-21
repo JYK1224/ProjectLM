@@ -3,36 +3,47 @@ package lm.model;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
+
+import oracle.jdbc.OracleConnection;
+import oracle.jdbc.pool.OracleDataSource;
 
 public class DBConn {
-	// 한번만 new 하도록 고정 - singleton pattern
-	// instance 가 한개만 만들어지도록 한다
 	// Connection String
-	private  static      String      driver = "oracle.jdbc.OracleDriver"; 
-	private  static      String      dburl  = "jdbc:oracle:thin:@LMDATABASE_medium?TNS_ADMIN=‪D:\\wallet\\Wallet_LMDATABASE"; 
-	private  static      String      dbuid  = "admin"; 
-	private  static      String      dbpwd  = "Lmdata123456";
-	
-	private  static      Connection  conn = null;
+	  final static String DB_URL="jdbc:oracle:thin:@lmdatabase_medium?TNS_ADMIN=D:/wwww/Wallet_LMDATABASE";
+	  final static String DB_USER = "admin";
+	  final static String DB_PASSWORD = "Lmdata123456";
+      private  static      OracleConnection  conn = null;
+
 	
 	// 생성자 - private
 	private  DBConn() {		
 	}
 	
-	public  static Connection  getInstance() {
-		if( conn  != null  ) {
-			return  conn;
+	public  static OracleConnection getInstance() {
+		if(conn != null) {
+			return conn;
 		}
 		
+		Properties info = new Properties();     
+	    info.put(OracleConnection.CONNECTION_PROPERTY_USER_NAME, DB_USER);
+	    info.put(OracleConnection.CONNECTION_PROPERTY_PASSWORD, DB_PASSWORD);          
+	    info.put(OracleConnection.CONNECTION_PROPERTY_DEFAULT_ROW_PREFETCH, "20");    
+	  
+	    OracleDataSource ods = null;
 		try {
-			Class.forName(driver);
-			conn  =  DriverManager.getConnection(dburl, dbuid, dbpwd); 
-		} catch (ClassNotFoundException e) {			
-			e.printStackTrace();
-		} catch (SQLException e) {			
+			ods = new OracleDataSource();
+			ods.setURL(DB_URL);    
+			ods.setConnectionProperties(info);
+			conn = (OracleConnection) ods.getConnection();
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
 		return conn;
+		
+		
+	    
 	}
 	
 }
