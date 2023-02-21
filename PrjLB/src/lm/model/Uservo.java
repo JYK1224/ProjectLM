@@ -1,26 +1,31 @@
 package lm.model;
 
-public class USER_1 {
+public class Uservo {
 	
-	private String userid;
-	private String userpw;
+	private int    userid;
 	private String username;
+	private String userpw;
 	private String ty;
 	private String intro;
 	private String indate;
-	public USER_1() {};
-	public USER_1(String userid, String userpw, String username, String ty, String intro, String indate) {
+	
+	
+	
+	
+	public Uservo() {};
+	
+	public Uservo(int userid, String userpw, String username, String ty, String intro, String indate) {
 		this.userid = userid;
-		this.userpw = userpw;
 		this.username = username;
+		this.userpw = userpw;
 		this.ty = ty;
 		this.intro = intro;
 		this.indate = indate;
 	}
-	public String getUserid() {
+	public int getUserid() {
 		return userid;
 	}
-	public void setUserid(String userid) {
+	public void setUserid(int userid) {
 		this.userid = userid;
 	}
 	public String getUserpw() {
@@ -55,7 +60,7 @@ public class USER_1 {
 	}
 	@Override
 	public String toString() {
-		return "Employees [userid=" + userid + ", userpw=" + userpw + ", username=" + username + ", ty=" + ty
+		return "Uservo [userid=" + userid + ", userpw=" + userpw + ", username=" + username + ", ty=" + ty
 				+ ", intro=" + intro + ", indate=" + indate + "]";
 	}
 	
