@@ -109,7 +109,6 @@ public class LMProductInquiry extends JFrame implements ActionListener{
 	btn.setFont(new Font("굴림", Font.PLAIN, 15));
 	getContentPane().add(btn);
 	gbAdd( btn, 3, 0, 1, 1);
-
 	btn.addActionListener(this);
 
 	//상품코드
@@ -163,7 +162,6 @@ public class LMProductInquiry extends JFrame implements ActionListener{
 	jlb6.setHorizontalAlignment(SwingConstants.CENTER);
 	gbAdd( jlb6, 2, 3, 1, 1);
 	jlbvat = new JLabel(" 10 % ");
-	jlbvat.setFont(new Font("굴림", Font.PLAIN, 15));
 	jlbvat.setHorizontalAlignment(SwingConstants.CENTER);
 	gbAdd( jlbvat, 3, 3, 1, 1);
 	
@@ -191,7 +189,6 @@ public class LMProductInquiry extends JFrame implements ActionListener{
 	jlb9.setHorizontalAlignment(SwingConstants.CENTER);
 	gbAdd( jlb9, 0, 5, 1, 1);
 	tab9 = new JLabel();
-	tab9.setFont(new Font("굴림", Font.PLAIN, 15));
 	tab9.setHorizontalAlignment(SwingConstants.CENTER);
 	gbAdd( tab9, 1, 5, 1, 1);
 

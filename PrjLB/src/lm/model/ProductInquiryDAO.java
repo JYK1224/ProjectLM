@@ -1,6 +1,7 @@
 package lm.model;
 
 
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -34,10 +35,13 @@ public class ProductInquiryDAO {
 	private void init() throws SQLException {
 		if(ProductInquiry.code.isSelected()) {
 			conn  =   DBConn.getInstance(); 
-			String  sql  = " SELECT  P.PCODE, P.PNAME, DA.DCODE, P.IPRICE, P.SPRICE , A.ANAME, DA.DNAME";
-			sql += " FROM   PRODUCT P, ASSORTMENT A, DEPARTMENT_ACCOUNT DA ";
-			sql += " WHERE  P.ACODE = A.ACODE ";
-			sql += " AND P.DCODE = DA.DCODE ";
+			String  sql  = " SELECT  P.PCODE, P.PNAME, DA.DCODE, P.IPRICE, P.SPRICE ,"
+					+ " A.ANAME, DA.DNAME,NVL(S.STOCKNUM,0) STOCKNUM,ROUND(100-(IPRICE*1.1/SPRICE*100),2) RATEOFRETURN ";
+			sql += " FROM   PRODUCT P, ASSORTMENT A, DEPT_ACC DA, STOCK S ";
+			sql += " WHERE  P.ACODE(+) = A.ACODE ";
+			sql += " AND P.DCODE(+) = DA.DCODE ";
+			sql += " AND S.PCODE(+) = P.PCODE ";
+			
 			sql += " AND P.PCODE = ? ";
 			
 			PreparedStatement  pstmt = conn.prepareStatement(sql);
@@ -60,6 +64,10 @@ public class ProductInquiryDAO {
 				ProductInquiry.tab7.setText(sprice);
 				String  aname   =  rs.getString("ANAME");
 				ProductInquiry.tab10.setText(aname);
+				String  stocknum  =  rs.getString("STOCKNUM");
+				ProductInquiry.tab8.setText(stocknum);
+				String  rateofreturn  =  rs.getString("RATEOFRETURN");
+				ProductInquiry.tab9.setText(rateofreturn + "%");
 			}else {
 
 				JOptionPane.showMessageDialog(null, "잘못된 상품코드 입니다.");
@@ -70,14 +78,16 @@ public class ProductInquiryDAO {
 	private void init1() throws SQLException {
 		if(ProductInquiry.name.isSelected()) {
 			conn  =   DBConn.getInstance(); 
-			String  sql  = " SELECT  P.PCODE, P.PNAME, DA.DCODE, P.IPRICE, P.SPRICE, A.ANAME, DA.DNAME ";
-					sql += " FROM   PRODUCT P, ASSORTMENT A, DEPARTMENT_ACCOUNT DA ";
+			String  sql  = " SELECT  P.PCODE, P.PNAME, DA.DCODE, P.IPRICE, P.SPRICE,"
+					+ " A.ANAME, DA.DNAME, NVL(S.STOCKNUM,0) STOCKNUM, ROUND(100-(IPRICE*1.1/SPRICE*100),2) RATEOFRETURN  ";
+					sql += " FROM   PRODUCT P, ASSORTMENT A, DEPT_ACC DA, STOCK S  ";
 					sql += " WHERE  P.ACODE = A.ACODE ";
-					sql += " AND P.DCODE = DA.DCODE ";
-					sql += " AND P.PNAME = ? ";
+					sql += " AND P.DCODE(+) = DA.DCODE ";
+					sql += " AND S.PCODE(+) = P.PCODE ";
+					sql += " AND P.PNAME(+) = ? ";
 		
 
-			PreparedStatement  pstmt = conn.prepareStatement(sql);;
+			PreparedStatement  pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1,ProductInquiry.txt.getText());
 			ResultSet          rs    = pstmt.executeQuery();;
 			if( rs.next() ) {			
@@ -96,6 +106,10 @@ public class ProductInquiryDAO {
 				ProductInquiry.tab7.setText(sprice);
 				String  aname   =  rs.getString("ANAME");
 				ProductInquiry.tab10.setText(aname);
+				String  stocknum  =  rs.getString("STOCKNUM");
+				ProductInquiry.tab8.setText(stocknum);
+				String  rateofreturn  =  rs.getString("RATEOFRETURN");
+				ProductInquiry.tab9.setText(rateofreturn + "%");
 				
 			}else {
 				JOptionPane.showMessageDialog(null, "잘못된 상품명 입니다.");
