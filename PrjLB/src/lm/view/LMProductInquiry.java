@@ -35,7 +35,6 @@ public class LMProductInquiry extends JFrame{
 		
 		init();
 		
-		
 	}
 
 	private void init() {
