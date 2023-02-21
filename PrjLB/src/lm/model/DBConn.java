@@ -15,7 +15,7 @@ public class DBConn {
 	  final static String DB_PASSWORD = "Lmdata123456";
       private  static      OracleConnection  conn = null;
 
-	
+	                     
 	// 생성자 - private
 	private  DBConn() {		
 	}
