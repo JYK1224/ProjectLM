@@ -59,9 +59,11 @@ public class ManagerTitle extends JFrame{
       btnNewButton_2.setBounds(49, 424, 199, 59);
       getContentPane().add(btnNewButton_2);
       btnNewButton_2.addActionListener(new ActionListener() {
+		
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			new UserList();		
+			new UserList();
+			
 		}
 	});
       
@@ -76,6 +78,14 @@ public class ManagerTitle extends JFrame{
       btnNewButton_4.setBackground(new Color(229,255,204));
       btnNewButton_4.setBounds(260, 424, 199, 59);
       getContentPane().add(btnNewButton_4);
+      btnNewButton_4.addActionListener( new ActionListener() {
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			new LMProductInquiry();
+			
+		}
+	});
       
       JButton btnNewButton_5 = new JButton("상품전체조회");
       btnNewButton_5.setFont(new Font("굴림", Font.BOLD, 20));
