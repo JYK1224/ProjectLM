@@ -105,7 +105,7 @@ public class UserTitle extends JFrame{
       JPanel panel = new JPanel();
       panel.setBounds(798, 565, 139, 29);
       getContentPane().add(panel);
-      setVisible(true);
+      setVisible(true); 
       
    }
 

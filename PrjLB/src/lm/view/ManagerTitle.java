@@ -20,7 +20,7 @@ public class ManagerTitle extends JFrame{
    private void Init() {
       setTitle("물류관리시스템-관리자");
       setSize(1000,580);
-      setLocation(600,150);
+      setLocation(600,150); 
       getContentPane().setLayout(null);
       
       JLabel lblNewLabel = new JLabel("그린물류시스템");
