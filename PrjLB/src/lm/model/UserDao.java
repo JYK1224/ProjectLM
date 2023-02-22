@@ -141,6 +141,12 @@ public class UserDao {
 			String ty = rs.getString("ty");
 			String id= rs.getString("joindate");
 			
+			System.out.println(ui);
+			System.out.println(un);
+			System.out.println(ty);
+			System.out.println(id);
+			
+			
 			Vector v = new Vector();
 			v.add(ui);
 			v.add(un);
@@ -172,10 +178,10 @@ public class UserDao {
 				   + " from user_mng"
 				   + " where username = ? " ;
 		PreparedStatement pstmt = null;
-		pstmt.setString(1,li.txtname.getText());
 		ResultSet rs = null;
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1,li.txtname.getText());
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				
@@ -184,12 +190,14 @@ public class UserDao {
 			String ty = rs.getString("ty");
 			String id= rs.getString("joindate");
 			
-			Vector v = new Vector();
+			Vector v = new Vector<>();
 			v.add(ui);
 			v.add(un);
 			v.add(ty);
 			v.add(id);
+			
 			list.add(v);
+						
 			}
 		
 		} catch (SQLException e) {
@@ -201,6 +209,62 @@ public class UserDao {
 			} catch (SQLException e) {
 			}
 		}
+		
+		return list;
+	}
+
+	public Vector<Vector> getUserlist2(UserList userList) {
+		this.li = userList;
+		
+		Vector <Vector> list = new Vector<>();
+		
+		
+		String sql = " select userid, username, ty, "
+				   + " to_char(joindate, 'yyyy-mm-dd-hh24:mi') joindate"
+				   + " from user_mng"
+				   + " where username = "
+				   + "'" +li.txtname.getText().trim()+ "'";
+		
+		PreparedStatement pstmt = null;
+		ResultSet         rs    = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			System.out.println(sql);
+			
+			if(rs.next()) {
+			String ui = rs.getString("userid");
+			String un = rs.getString("username");
+			String ty = rs.getString("ty");
+			String id = rs.getString("joindate");
+			
+			Vector v = new Vector<>();
+			v.add(ui);
+			v.add(un);
+			v.add(ty);
+			v.add(id);
+			
+			list.add(v);
+			
+			}
+			
+			
+			
+			
+			
+			
+			
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(pstmt != null) pstmt.close();
+			} catch (SQLException e) {
+			}
+		}
+		
+		
 		
 		return list;
 	}

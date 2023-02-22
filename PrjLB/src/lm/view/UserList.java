@@ -25,6 +25,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import lm.model.UserDao;
+import lm.model.Uservo;
 
 public class UserList extends JFrame implements ActionListener{
 	
@@ -56,18 +57,9 @@ public class UserList extends JFrame implements ActionListener{
 		topPane.add(btnIn);
 		topPane.add(btnRe);
 		topPane.add(btnEx);
+		//회원조회
+		btnfind.addActionListener(this);
 		
-		btnfind.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				try {
-					findUser();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
-			}	
-		});
 		//회원가입
 		btnIn.addActionListener(new ActionListener() {
 			@Override
@@ -95,11 +87,11 @@ public class UserList extends JFrame implements ActionListener{
 				int hh = now.getHour();
 				int mi = now.getMinute();
 				
-				String fmt = "D:\\excel\\ "
-						   + "jtable_%4d %02d %02d %2d %2d.xlsx";
-				String filepath = String.format(fmt, year, mm, dd, hh, mi );
+				String fmt = "D:\\excel\\ ";
+				String fmt2 = "jtable_%4d %02d %02d %2d %2d.xlsx";
+				String filepath = String.format(fmt+fmt2, year, mm, dd, hh, mi );
 				excelWrite(filepath);
-				JOptionPane.showMessageDialog(btnEx, "엑셀로 저장되었습니다");
+				JOptionPane.showMessageDialog(btnEx, fmt +"로 엑셀파일 저장되었습니다");
 				
 			}
 		});
@@ -133,6 +125,8 @@ public class UserList extends JFrame implements ActionListener{
 		return list;
 	}
 
+
+	
 	private Vector<String> getColumnlist() {
 		Vector<String> cols = new Vector<String>();
 		cols.add("아이디");
@@ -152,8 +146,15 @@ public class UserList extends JFrame implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-	
+		Vector<Vector> list = FindUser(this);
+		System.out.println(list);
+		jtableRe2(list);
+		
+		
+		
 	}
+
+
 	//엑셀
 	private void excelWrite(String filepath) {
 		XSSFWorkbook workbook = new XSSFWorkbook();
@@ -209,9 +210,16 @@ public class UserList extends JFrame implements ActionListener{
 		
 	}
 
+
+	private Vector<Vector> FindUser(UserList userList ){
+		UserDao ud = new UserDao();
+		Vector<Vector> list2 = ud.getUserlist2(userList);
+		System.out.println(list2);
+		return list2;
+	}
 	
 	
-	private void jtableRe() {
+	public void jtableRe() {
 		jtable.setModel(
 				new DefaultTableModel(getDatalist(), getColumnlist()) {
 
@@ -219,11 +227,26 @@ public class UserList extends JFrame implements ActionListener{
 					public boolean isCellEditable(int row, int column) {
 						return false;
 					}});
+		
 					jtable.repaint();
 		}
 
-	
 
+	private void jtableRe2(Vector<Vector> list) {
+		jtable.setModel(
+				new DefaultTableModel(list, getColumnlist()) {
+
+					@Override
+					public boolean isCellEditable(int row, int column) {
+						return false;
+					}});
+		
+					jtable.repaint();
+		
+	}
+
+
+	
 	
 }
 	
