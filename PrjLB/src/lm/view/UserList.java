@@ -33,11 +33,11 @@ import lm.model.Uservo;
 
 public class UserList extends JFrame implements ActionListener, MouseListener{
 	
-	JButton btnIn,  btnRe , btnEx, btnfind;
-	public JTextField txtname;
-	JPanel  topPane;
-	JTable  jtable;
-	JScrollPane pane;
+	private static JButton btnIn,  btnRe , btnEx, btnfind;
+	private static JTextField txtname;
+	private static JPanel  topPane;
+	private static JTable  jtable;
+	private static JScrollPane pane;
 	
 	Proc pc = null;
 	static UserList ulist = null;
@@ -167,7 +167,8 @@ public class UserList extends JFrame implements ActionListener, MouseListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		Vector<Vector> list = FindUser(this);
+		String search = txtname.getText();
+		Vector<Vector> list = FindUser(search);
 		jtableRe2(list);
 		
 	}
@@ -220,9 +221,9 @@ public class UserList extends JFrame implements ActionListener, MouseListener{
 	}
 	//조회
 
-	private Vector<Vector> FindUser(UserList userList ){
+	private Vector<Vector> FindUser(String search ){
 		UserDao ud = new UserDao();
-		Vector<Vector> list2 = ud.getUserlist2(userList);
+		Vector<Vector> list2 = ud.getUserlist2(search);
 		return list2;
 	}
 	//새로고침

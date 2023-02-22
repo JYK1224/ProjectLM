@@ -162,8 +162,7 @@ public class UserDao {
 		return list;
 	}
 	//개별조회
-	public Vector<Vector> getUserlist2(UserList userList) {
-		this.li = userList;
+	public Vector<Vector> getUserlist2(String search) {
 		
 		Vector <Vector> list = new Vector<>();
 		
@@ -171,7 +170,7 @@ public class UserDao {
 				   + " to_char(joindate, 'yyyy-mm-dd-hh24:mi') joindate"
 				   + " from usermng"
 				   + " where username like "
-				   + "'%" +li.txtname.getText().trim()+ "%'";
+				   + "'%" +search.trim()+ "%'";
 		
 		PreparedStatement pstmt = null;
 		ResultSet         rs    = null;
