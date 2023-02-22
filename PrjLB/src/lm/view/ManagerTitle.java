@@ -46,6 +46,12 @@ public class ManagerTitle extends JFrame{
       btnNewButton_2.setBackground(new Color(204,255,229));
       btnNewButton_2.setBounds(49, 424, 199, 59);
       getContentPane().add(btnNewButton_2);
+      btnNewButton_2.addActionListener(new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			new UserList();		
+		}
+	});
       
       JButton btnNewButton_3 = new JButton("신규상품등록");
       btnNewButton_3.setFont(new Font("굴림", Font.BOLD, 20));

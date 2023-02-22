@@ -3,6 +3,8 @@ package lm.view;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -57,6 +59,21 @@ public class UserList extends JFrame implements ActionListener{
 		topPane.add(btnIn);
 		topPane.add(btnRe);
 		topPane.add(btnEx);
+		this.txtname.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+			}
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+					btnfind.doClick();
+				}
+			}
+			@Override
+			public void keyPressed(KeyEvent e) {
+			}
+		});
+		
 		//회원조회
 		btnfind.addActionListener(this);
 		
@@ -64,7 +81,8 @@ public class UserList extends JFrame implements ActionListener{
 		btnIn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (pc != null);
+				if (pc != null)
+					pc.dispose();
 					pc = new Proc(ulist);
 			}
 		});
@@ -197,14 +215,6 @@ public class UserList extends JFrame implements ActionListener{
 				    cell.setCellValue((String)v.get(j));
 			}
 		} 
-	}
-	//조회
-	private Vector<Vector> findUser() throws SQLException {
-		UserDao ud = new UserDao();
-		Vector<Vector> list1 = ud.getUserlist2();
-		
-		return list1;
-		
 	}
 	//조회
 

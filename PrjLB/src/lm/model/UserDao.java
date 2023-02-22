@@ -167,50 +167,6 @@ public class UserDao {
 		
 		return list;
 	}
-	//조회
-	public Vector<Vector> getUserlist2() throws SQLException {
-		UserList li = new UserList();
-		Vector <Vector> list = new Vector<>();
-		
-		String sql = " select userid, username, ty, "
-				   + " to_char(joindate, 'yyyy-mm-dd-hh24:mi') joindate"
-				   + " from usermng"
-				   + " where username = ? " ;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1,li.txtname.getText());
-			rs = pstmt.executeQuery();
-			while(rs.next()) {
-				
-			String ui = rs.getString("userid");
-			String un = rs.getString("username");
-			String ty = rs.getString("ty");
-			String id= rs.getString("joindate");
-			
-			Vector v = new Vector<>();
-			v.add(ui);
-			v.add(un);
-			v.add(ty);
-			v.add(id);
-			
-			list.add(v);
-						
-			}
-		
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			try {
-				if(rs != null) rs.close();
-				if(pstmt != null) pstmt.close();
-			} catch (SQLException e) {
-			}
-		}
-		
-		return list;
-	}
 	//개별조회
 	public Vector<Vector> getUserlist2(UserList userList) {
 		this.li = userList;
