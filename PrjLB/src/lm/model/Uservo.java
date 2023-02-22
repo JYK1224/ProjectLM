@@ -9,9 +9,6 @@ public class Uservo {
 	private String intro;
 	private String indate;
 	
-	
-	
-	
 	public Uservo() {};
 	
 	public Uservo(int userid, String userpw, String username, String ty, String intro, String indate) {

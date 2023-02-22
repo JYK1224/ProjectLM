@@ -31,7 +31,7 @@ public class UserDao {
 	// 회원 추가
 	public int insertUser(int userid, String userpw, String username, String ty,  String intro) {
 		String sql = "";
-		sql += " insert into user_mng " + "  ( userid , userpw, username, ty,  intro ) " + " values  "
+		sql += " insert into usermng " + "  ( userid , userpw, username, ty,  intro ) " + " values  "
 				+ "  (  ? ,  ?,  ?,  ?,  ? ) ";
 		PreparedStatement pstmt = null;
 		int aftcnt = 0;
@@ -71,7 +71,7 @@ public class UserDao {
 	
 	//삭제
 	public int deleteUser (String userid) {
-		String sql = " delete from user_mng " + " where userid = ?  ";
+		String sql = " delete from usermng " + " where userid = ?  ";
 		PreparedStatement pstmt = null;
 		int aftcnt = 0;
 		try {
@@ -92,7 +92,7 @@ public class UserDao {
 	
 	//수정
 	public int updateUser(Uservo ep) {
-		String sql = " update user_mng " 
+		String sql = " update usermng " 
 	               + " set  " 
 	               + "       userpw   = ?, "
 	               + "       username = ?, " 
@@ -127,7 +127,7 @@ public class UserDao {
 		
 		String sql = " select userid, username, ty, "
 				   + " to_char(joindate, 'yyyy-mm-dd-hh24:mi') joindate"
-				   + " from user_mng"
+				   + " from usermng"
 				   + " order by userid asc ";
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -168,14 +168,13 @@ public class UserDao {
 		return list;
 	}
 	//조회
-	
 	public Vector<Vector> getUserlist2() throws SQLException {
 		UserList li = new UserList();
 		Vector <Vector> list = new Vector<>();
 		
 		String sql = " select userid, username, ty, "
 				   + " to_char(joindate, 'yyyy-mm-dd-hh24:mi') joindate"
-				   + " from user_mng"
+				   + " from usermng"
 				   + " where username = ? " ;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -212,16 +211,15 @@ public class UserDao {
 		
 		return list;
 	}
-
+	//개별조회
 	public Vector<Vector> getUserlist2(UserList userList) {
 		this.li = userList;
 		
 		Vector <Vector> list = new Vector<>();
 		
-		
 		String sql = " select userid, username, ty, "
 				   + " to_char(joindate, 'yyyy-mm-dd-hh24:mi') joindate"
-				   + " from user_mng"
+				   + " from usermng"
 				   + " where username = "
 				   + "'" +li.txtname.getText().trim()+ "'";
 		
@@ -247,13 +245,6 @@ public class UserDao {
 			list.add(v);
 			
 			}
-			
-			
-			
-			
-			
-			
-			
 		
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -264,11 +255,7 @@ public class UserDao {
 			}
 		}
 		
-		
-		
 		return list;
 	}
-
-	
 
 }

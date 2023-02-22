@@ -95,6 +95,7 @@ public class UserList extends JFrame implements ActionListener{
 				
 			}
 		});
+		//테이블
 		this.add(topPane, BorderLayout.NORTH);
 		jtable = new JTable();
 		jtable.setModel( 
@@ -125,7 +126,6 @@ public class UserList extends JFrame implements ActionListener{
 		return list;
 	}
 
-
 	
 	private Vector<String> getColumnlist() {
 		Vector<String> cols = new Vector<String>();
@@ -150,10 +150,7 @@ public class UserList extends JFrame implements ActionListener{
 		System.out.println(list);
 		jtableRe2(list);
 		
-		
-		
 	}
-
 
 	//엑셀
 	private void excelWrite(String filepath) {
@@ -201,7 +198,7 @@ public class UserList extends JFrame implements ActionListener{
 			}
 		} 
 	}
-
+	//조회
 	private Vector<Vector> findUser() throws SQLException {
 		UserDao ud = new UserDao();
 		Vector<Vector> list1 = ud.getUserlist2();
@@ -209,7 +206,7 @@ public class UserList extends JFrame implements ActionListener{
 		return list1;
 		
 	}
-
+	//조회
 
 	private Vector<Vector> FindUser(UserList userList ){
 		UserDao ud = new UserDao();
@@ -217,8 +214,7 @@ public class UserList extends JFrame implements ActionListener{
 		System.out.println(list2);
 		return list2;
 	}
-	
-	
+	//새로고침
 	public void jtableRe() {
 		jtable.setModel(
 				new DefaultTableModel(getDatalist(), getColumnlist()) {
@@ -230,8 +226,7 @@ public class UserList extends JFrame implements ActionListener{
 		
 					jtable.repaint();
 		}
-
-
+	//개별조회 새로고침
 	private void jtableRe2(Vector<Vector> list) {
 		jtable.setModel(
 				new DefaultTableModel(list, getColumnlist()) {
