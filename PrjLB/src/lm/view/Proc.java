@@ -251,6 +251,7 @@ public class Proc extends JFrame{
 				msg + " ",
 				"삭제하였습니다",
 				JOptionPane.OK_OPTION );
+		
 	}
 	//수정
 	protected void updateUser() {
@@ -276,6 +277,7 @@ public class Proc extends JFrame{
 		JOptionPane.showConfirmDialog(null, msg,
 				" ",
 				JOptionPane.OK_OPTION);
+		
 	}
 	//새로고침
 	protected void cancelUser() {
