@@ -61,7 +61,7 @@ public class LMProductInquiry extends JFrame implements ActionListener{
 		gbc.weightx  =  1.0; 
 		gbc.weighty  =  1.0;
 
-	setTitle("상품개별조회");
+	setTitle("상품상세조회");
 	
 	
 	
