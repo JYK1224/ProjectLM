@@ -9,8 +9,20 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTable;
+
 
 public class ManagerTitle extends JFrame{
+	private JTable table;
    
    
    public ManagerTitle() {
@@ -20,7 +32,7 @@ public class ManagerTitle extends JFrame{
    private void Init() {
       setTitle("물류관리시스템-관리자");
       setSize(1000,580);
-      setLocation(600,150); 
+      setLocation(600,150);
       getContentPane().setLayout(null);
       
       JLabel lblNewLabel = new JLabel("그린물류시스템");
@@ -128,6 +140,10 @@ public class ManagerTitle extends JFrame{
       JPanel panel = new JPanel();
       panel.setBounds(798, 565, 139, 29);
       getContentPane().add(panel);
+      
+      table = new JTable();
+      table.setBounds(33, 136, 922, 374);
+      getContentPane().add(table);
       setVisible(true);
       
    }
