@@ -9,9 +9,11 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 
 
 public class UserTitle extends JFrame{
+	private JTable table;
    
    
    public UserTitle() {
@@ -105,7 +107,11 @@ public class UserTitle extends JFrame{
       JPanel panel = new JPanel();
       panel.setBounds(798, 565, 139, 29);
       getContentPane().add(panel);
-      setVisible(true); 
+      
+      table = new JTable();
+      table.setBounds(35, 136, 720, 377);
+      getContentPane().add(table);
+      setVisible(true);
       
    }
 
