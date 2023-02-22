@@ -141,12 +141,6 @@ public class UserDao {
 			String ty = rs.getString("ty");
 			String id= rs.getString("joindate");
 			
-			System.out.println(ui);
-			System.out.println(un);
-			System.out.println(ty);
-			System.out.println(id);
-			
-			
 			Vector v = new Vector();
 			v.add(ui);
 			v.add(un);
@@ -176,15 +170,14 @@ public class UserDao {
 		String sql = " select userid, username, ty, "
 				   + " to_char(joindate, 'yyyy-mm-dd-hh24:mi') joindate"
 				   + " from usermng"
-				   + " where username = "
-				   + "'" +li.txtname.getText().trim()+ "'";
+				   + " where username like "
+				   + "'%" +li.txtname.getText().trim()+ "%'";
 		
 		PreparedStatement pstmt = null;
 		ResultSet         rs    = null;
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-			System.out.println(sql);
 			
 			if(rs.next()) {
 			String ui = rs.getString("userid");
@@ -212,6 +205,40 @@ public class UserDao {
 		}
 		
 		return list;
+	}
+	//조회
+	public Uservo getUser(String userid) {
+		Uservo vo = null;
+		
+		String sql = " select userid, userpw, username, ty, intro, joindate"
+				   + " from usermng "
+				   + " where userid = ? ";
+		PreparedStatement pstmt = null;
+		ResultSet            rs = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userid);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				String userID = rs.getString("userid");
+				String userpw = rs.getString("userpw");
+				String username = rs.getString("username");
+				String ty = rs.getString("ty");
+				String intro = rs.getString("intro");
+				String joindate = rs.getString("joindate");
+				
+				vo = new Uservo(
+						Integer.parseInt(userid), userpw, username, ty, intro, joindate);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+			}
+		}
+		return vo;
 	}
 
 }

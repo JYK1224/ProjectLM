@@ -48,6 +48,13 @@ public class Proc extends JFrame{
 		this.uList = ulist;
 	}
 
+	public Proc(String id, UserList userList) {
+		this();
+		this.uList = uList;
+		txtid.setText(id);
+		btnFind.doClick();
+	}
+
 	private void init() {
 		setTitle( "회원가입");
 		
@@ -114,6 +121,7 @@ public class Proc extends JFrame{
 		btnUpdate = new JButton("수정");
 		btnCancel = new JButton("새로고침");
 		btnCancel.setForeground(Color.blue);
+		btnFind = new JButton("조회");
 		//기능
 		btnAdd.addActionListener(new ActionListener() {
 			
@@ -145,12 +153,19 @@ public class Proc extends JFrame{
 				cancelUser();
 			}
 		});
+		btnFind.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				findUser();
+			}
+		});
 		
 		pButton.add( btnAdd );
 		pButton.add( btnDelete );
 		pButton.add( btnUpdate );
 		pButton.add( btnCancel );
-		
+		pButton.add( btnFind);
 		
 		gbAdd(pButton , 0, 7, 4, 1);
 		
@@ -160,6 +175,15 @@ public class Proc extends JFrame{
 		setSize(350,500);
 		setVisible(true);
 		
+	}
+
+	protected void findUser() {
+		String userid = this.txtid.getText();
+		if(userid.trim().equals(" ") )
+			return;
+		UserDao ud = new UserDao();
+		Uservo vo = ud.getUser(userid);
+		setViewData(vo); 
 	}
 
 	private void gbAdd(JComponent c, int x, int y, int w, int h) {
