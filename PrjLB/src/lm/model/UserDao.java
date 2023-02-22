@@ -31,7 +31,7 @@ public class UserDao {
 	// 회원 추가
 	public int insertUser(int userid, String userpw, String username, String ty,  String intro) {
 		String sql = "";
-		sql += " insert into user_mng " + "  ( userid , userpw, username, ty,  intro ) " + " values  "
+		sql += " insert into usermng " + "  ( userid , userpw, username, ty,  intro ) " + " values  "
 				+ "  (  ? ,  ?,  ?,  ?,  ? ) ";
 		PreparedStatement pstmt = null;
 		int aftcnt = 0;
@@ -71,7 +71,7 @@ public class UserDao {
 	
 	//삭제
 	public int deleteUser (String userid) {
-		String sql = " delete from user_mng " + " where userid = ?  ";
+		String sql = " delete from usermng " + " where userid = ?  ";
 		PreparedStatement pstmt = null;
 		int aftcnt = 0;
 		try {
@@ -92,7 +92,7 @@ public class UserDao {
 	
 	//수정
 	public int updateUser(Uservo ep) {
-		String sql = " update user_mng " 
+		String sql = " update usermng " 
 	               + " set  " 
 	               + "       userpw   = ?, "
 	               + "       username = ?, " 
@@ -127,7 +127,7 @@ public class UserDao {
 		
 		String sql = " select userid, username, ty, "
 				   + " to_char(joindate, 'yyyy-mm-dd-hh24:mi') joindate"
-				   + " from user_mng"
+				   + " from usermng"
 				   + " order by userid asc ";
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -140,6 +140,12 @@ public class UserDao {
 			String un = rs.getString("username");
 			String ty = rs.getString("ty");
 			String id= rs.getString("joindate");
+			
+			System.out.println(ui);
+			System.out.println(un);
+			System.out.println(ty);
+			System.out.println(id);
+			
 			
 			Vector v = new Vector();
 			v.add(ui);
@@ -162,20 +168,19 @@ public class UserDao {
 		return list;
 	}
 	//조회
-	
 	public Vector<Vector> getUserlist2() throws SQLException {
 		UserList li = new UserList();
 		Vector <Vector> list = new Vector<>();
 		
 		String sql = " select userid, username, ty, "
 				   + " to_char(joindate, 'yyyy-mm-dd-hh24:mi') joindate"
-				   + " from user_mng"
+				   + " from usermng"
 				   + " where username = ? " ;
 		PreparedStatement pstmt = null;
-		pstmt.setString(1,li.txtname.getText());
 		ResultSet rs = null;
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1,li.txtname.getText());
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				
@@ -184,12 +189,14 @@ public class UserDao {
 			String ty = rs.getString("ty");
 			String id= rs.getString("joindate");
 			
-			Vector v = new Vector();
+			Vector v = new Vector<>();
 			v.add(ui);
 			v.add(un);
 			v.add(ty);
 			v.add(id);
+			
 			list.add(v);
+						
 			}
 		
 		} catch (SQLException e) {
@@ -204,7 +211,51 @@ public class UserDao {
 		
 		return list;
 	}
-
-	
+	//개별조회
+	public Vector<Vector> getUserlist2(UserList userList) {
+		this.li = userList;
+		
+		Vector <Vector> list = new Vector<>();
+		
+		String sql = " select userid, username, ty, "
+				   + " to_char(joindate, 'yyyy-mm-dd-hh24:mi') joindate"
+				   + " from usermng"
+				   + " where username = "
+				   + "'" +li.txtname.getText().trim()+ "'";
+		
+		PreparedStatement pstmt = null;
+		ResultSet         rs    = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			System.out.println(sql);
+			
+			if(rs.next()) {
+			String ui = rs.getString("userid");
+			String un = rs.getString("username");
+			String ty = rs.getString("ty");
+			String id = rs.getString("joindate");
+			
+			Vector v = new Vector<>();
+			v.add(ui);
+			v.add(un);
+			v.add(ty);
+			v.add(id);
+			
+			list.add(v);
+			
+			}
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(pstmt != null) pstmt.close();
+			} catch (SQLException e) {
+			}
+		}
+		
+		return list;
+	}
 
 }

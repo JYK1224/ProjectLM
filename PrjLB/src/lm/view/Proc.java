@@ -100,7 +100,7 @@ public class Proc extends JFrame{
 		JLabel lblIndate = new JLabel("가입일");
 		txtindate = new JTextField(20);
 		String today     =LocalDateTime.now().
-				          format(DateTimeFormatter.ofPattern("yyyy-mm-dd HH:mm:ss"));
+				          format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 		txtindate.setText(today);
 		txtindate.setEditable(false);
 		gbAdd( lblIndate, 0, 6, 1, 1); 
