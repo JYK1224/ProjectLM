@@ -35,12 +35,12 @@ public class ProductInquiryDAO {
 	private void init() throws SQLException {
 		if(ProductInquiry.code.isSelected()) {
 			conn  =   DBConn.getInstance(); 
-			String  sql  = " SELECT  P.PCODE, P.PNAME, DA.DCODE, P.IPRICE, P.SPRICE ,"
-					+ " A.ANAME, DA.DNAME,NVL(S.STOCKNUM,0) STOCKNUM,ROUND(100-(IPRICE*1.1/SPRICE*100),2) RATEOFRETURN ";
+			String  sql  = " SELECT  P.PID, P.PNAME, DA.DID, P.IPRICE, P.SPRICE ,"
+					+ " A.ANAME, DA.DNAME, NVL(S.STOCKNUM,0) STOCKNUM,ROUND(100-(IPRICE*1.1/SPRICE*100),2) RATEOFRETURN ";
 			sql += " FROM   PRODUCT P, ASSORTMENT A, DEPT_ACC DA, STOCK S ";
-			sql += " WHERE  P.ACODE(+) = A.ACODE ";
-			sql += " AND P.DCODE(+) = DA.DCODE ";
-			sql += " AND S.PCODE(+) = P.PCODE ";
+			sql += " WHERE  P.AID(+) = A.AID ";
+			sql += " AND P.DID(+) = DA.DID ";
+			sql += " AND S.PID(+) = P.PID ";
 			
 			sql += " AND P.PCODE = ? ";
 			
@@ -49,10 +49,10 @@ public class ProductInquiryDAO {
 			ResultSet          rs    = pstmt.executeQuery();
 			if( rs.next() ) {			
 
-				String  pcode    =  rs.getString("PCODE");
+				String  pcode    =  rs.getString("PID");
 				ProductInquiry.tab1.setText(pcode);
 				
-				String  dcode    =  rs.getString("DCODE");
+				String  dcode    =  rs.getString("DID");
 				ProductInquiry.tab2.setText(dcode);
 				String   pname   =  rs.getString("PNAME");
 				ProductInquiry.tab3.setText(pname);
@@ -78,12 +78,13 @@ public class ProductInquiryDAO {
 	private void init1() throws SQLException {
 		if(ProductInquiry.name.isSelected()) {
 			conn  =   DBConn.getInstance(); 
-			String  sql  = " SELECT  P.PCODE, P.PNAME, DA.DCODE, P.IPRICE, P.SPRICE,"
-					+ " A.ANAME, DA.DNAME, NVL(S.STOCKNUM,0) STOCKNUM, ROUND(100-(IPRICE*1.1/SPRICE*100),2) RATEOFRETURN  ";
-					sql += " FROM   PRODUCT P, ASSORTMENT A, DEPT_ACC DA, STOCK S  ";
-					sql += " WHERE  P.ACODE = A.ACODE ";
-					sql += " AND P.DCODE(+) = DA.DCODE ";
-					sql += " AND S.PCODE(+) = P.PCODE ";
+			String  sql  = " SELECT  P.PID, P.PNAME, DA.DID, P.IPRICE, P.SPRICE ,"
+					+ " A.ANAME, DA.DNAME, NVL(S.STOCKNUM,0) STOCKNUM,ROUND(100-(IPRICE*1.1/SPRICE*100),2) RATEOFRETURN ";
+			sql += " FROM   PRODUCT P, ASSORTMENT A, DEPT_ACC DA, STOCK S ";
+			sql += " WHERE  P.AID(+) = A.AID ";
+			sql += " AND P.DID(+) = DA.DID ";
+			sql += " AND S.PID(+) = P.PID ";
+			
 					sql += " AND P.PNAME(+) = ? ";
 		
 
@@ -92,9 +93,9 @@ public class ProductInquiryDAO {
 			ResultSet          rs    = pstmt.executeQuery();;
 			if( rs.next() ) {			
 
-				String  pcode    =  rs.getString("PCODE");
+				String  pcode    =  rs.getString("PID");
 				ProductInquiry.tab1.setText(pcode);
-				String  dcode    =  rs.getString("DCODE");
+				String  dcode    =  rs.getString("DID");
 				ProductInquiry.tab2.setText(dcode);
 				String   pname   =  rs.getString("PNAME");
 				ProductInquiry.tab3.setText(pname);
