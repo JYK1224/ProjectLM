@@ -84,7 +84,8 @@ public class Login extends JFrame {
 				String userpw = passwordField.getText();
 				UserDao dao = UserDao.getInstance();
 				int result = dao.findIdAndPw(userid, userpw);
-					if(result == 1 ) {
+				
+					if(result == 1 ) {						
 					JOptionPane.showMessageDialog(null, "로그인 성공");
 					ManagerTitle mtl = new ManagerTitle(userid);
 					dispose();
