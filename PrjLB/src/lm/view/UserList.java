@@ -46,6 +46,7 @@ public class UserList extends JFrame implements ActionListener, MouseListener{
 		init ();
 	}
 	
+	
 	private void init() {
 		setTitle( "회원관리 ");
 		topPane = new JPanel();
@@ -251,7 +252,7 @@ public class UserList extends JFrame implements ActionListener, MouseListener{
 					jtable.repaint();
 		
 	}
-
+	//마우스 이벤트 - 두번클릭으로 회원 상세보기
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if(e.getClickCount() == 2) {

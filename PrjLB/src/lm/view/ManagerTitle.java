@@ -22,14 +22,19 @@ import javax.swing.JTable;
 
 
 public class ManagerTitle extends JFrame{
-	private JTable table;
-   
+   private JTable table;
+   String userid; 
    
    public ManagerTitle() {
       Init();
    }
 
-   private void Init() {
+   public ManagerTitle(String userid) {
+	   this();
+	   this.userid = userid;
+   }
+
+private void Init() {
       setTitle("물류관리시스템-관리자");
       setSize(1000,580);
       setLocation(600,150);

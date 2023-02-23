@@ -14,6 +14,7 @@ public class UserDao {
 	
 	private OracleConnection conn = null;
 
+	private static UserDao instance = new UserDao();
 	// 생성자
 	public UserDao() {
 		conn = DBConn.getInstance();
@@ -178,7 +179,7 @@ public class UserDao {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
-			if(rs.next()) {
+			while(rs.next()) {
 			String ui = rs.getString("userid");
 			String un = rs.getString("username");
 			String ty = rs.getString("ty");
@@ -239,5 +240,32 @@ public class UserDao {
 		}
 		return vo;
 	}
-
+	//로그인
+	public int findIdAndPw(String userid, String userpw) {
+		
+		String sql = " select *  "
+			 	   + " from usermng"
+			 	   + " where userid = ?"
+			 	   + " and userpw = ? ";
+		PreparedStatement pstmt ;
+		ResultSet rs ;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userid);
+			pstmt.setString(2, userpw);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+					return 1;
+				}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return -1;
+	
+	}
+	public static UserDao getInstance() {
+		return instance;
+	}
+	
+	
 }

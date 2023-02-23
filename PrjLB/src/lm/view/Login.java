@@ -1,97 +1,115 @@
 package lm.view;
 
 
-import java.awt.Component;
 import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-//신강원
-public class Login extends JFrame{
 
-	JLabel lbl1 , lbl2,  lbl3;
-	JButton btn1, btn2;
-	JTextField tox;
-	JComboBox com;
-	JPasswordField ptox;
+import lm.model.UserDao;
+import oracle.jdbc.driver.OracleConnection;
+//신강원
+public class Login extends JFrame {
+	
+	private OracleConnection conn = null;
+
+	String userid , userpw;
+	JLabel lbl1 , lbl2;
+	JButton btn1 ;
 	JPanel p;
-	GridBagLayout gb ;
-	GridBagConstraints gbc;
+	private JTextField textField;
+	private JPasswordField passwordField;
+	UserDao dao ;
 	
 	public Login() {
 		inti();
 	}
 	
-	
 	private void inti() {
 
-		setTitle("물류관리 프로그램");
+		setTitle("\uADF8\uB9B0\uBB3C\uB958\uC2DC\uC2A4\uD15C");
 		JPanel pp = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		
-		gb          = new GridBagLayout();
-		getContentPane().setLayout(gb);
-		gbc = new GridBagConstraints();
-		gbc.fill = GridBagConstraints.BOTH;
-		gbc.weightx = 1.0;
-		gbc.weighty = 1.0;
 				
 		JLabel lbl1 = new JLabel("아이디");
-		tox = new JTextField(20);
+		lbl1.setBounds(42, 63, 93, 36);
 		gbadd(lbl1, 0, 0, 1, 1);
-		gbadd(tox,  1, 0, 3, 1);
+		
+		JLabel lblNewLabel = new JLabel("\uBE44\uBC00\uBC88\uD638");
+		lblNewLabel.setBounds(42, 108, 93, 56);
+		getContentPane().add(lblNewLabel);
+		
+		textField = new JTextField();
+		textField.setBounds(147, 71, 123, 21);
+		getContentPane().add(textField);
+		textField.setColumns(10);
+		
+		JButton btn1 = new JButton("\uB85C\uADF8\uC778");
+		btn1.setBounds(108, 191, 97, 30);
+		getContentPane().add(btn1);
+		
+		passwordField = new JPasswordField();
+		passwordField.setBounds(147, 126, 123, 21);
+		getContentPane().add(passwordField);
 
-		JLabel lbl2 = new JLabel("비밀번호");
-		ptox = new JPasswordField(30);
-		gbadd(lbl2, 0, 1, 1, 1);
-		gbadd(ptox, 1, 1, 3, 1);
-		
-		JButton btn1 = new JButton("로그인");
-		gbadd(btn1, 0,2,1,1);
-		JButton btn2 = new JButton("회원가입");
-		gbadd(btn2, 1,2,1,1 );
-		 
-		String [] type = {"관리자" , "일반사용자"};
-		JLabel lbl3 = new JLabel ("타입");
-		        com = new JComboBox(type);
-		gbadd (lbl3, 2, 0, 3, 1);
-		gbadd (com, 2, 1, 3, 1);
-		
-		
-		
+		this.passwordField.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+			}
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+					btn1.doClick();
+				}
+			}
+			@Override
+			public void keyPressed(KeyEvent e) {
+			}
+		});
+	
+		btn1.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String userid = textField.getText();
+				String userpw = passwordField.getText();
+				UserDao dao = UserDao.getInstance();
+				int result = dao.findIdAndPw(userid, userpw);
+					if(result == 1 ) {
+					JOptionPane.showMessageDialog(null, "로그인 성공");
+					ManagerTitle mtl = new ManagerTitle(userid);
+					dispose();
+				}else{
+					JOptionPane.showMessageDialog(null, "실패 : "
+							+ "아이디와 비밀번호를 확인해주세요");
+				}
+			}
+		});
 		
 		setLocation(700,300);
-		setSize(350,212);
+		setSize(350,316);
 		setVisible(true);
-		
-	
 		
 	}	
 	
-
 	private void gbadd(JComponent c, int x, int y, int w, int h) {
-		gbc.gridx       = x;
-		gbc.gridy       = y;
-		gbc.gridwidth   = w;
-		gbc.gridheight  = h;
-		gb.setConstraints(c, gbc);
-		gbc.insets = new Insets(2, 2, 2, 2);
-		getContentPane().add(c, gbc);
+		getContentPane().setLayout(null);
+		getContentPane().add(c);
 		
 	}
-
 
 	public static void main(String[] args) {
 		
 		new Login();
-		
 	}
+
 }
