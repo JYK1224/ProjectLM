@@ -85,7 +85,7 @@ public class Proc extends JFrame{
 		
 		//유형
 		JLabel lblty = new JLabel("유형");
-		user = new JRadioButton("일반사용자");
+		user = new JRadioButton("사용자");
 		manager = new JRadioButton ("관리자");
 		group = new ButtonGroup();
 		group.add(user);
@@ -218,7 +218,7 @@ public class Proc extends JFrame{
 		String userpw = this.txtp.getText();
 		String username = this.txtname.getText();
 		String ty = "";
-		if(this.user.isSelected()) ty = "일반사용자";
+		if(this.user.isSelected()) ty = "사용자";
 		if(this.manager.isSelected()) ty = "관리자";
 		String intro = this.intro.getText();
 		String indate = this.txtindate.getText();
