@@ -132,6 +132,12 @@ private void Init() {
       btnNewButton_7.setBackground(new Color(255,255,204));
       btnNewButton_7.setBounds(260, 255, 199, 59);
       getContentPane().add(btnNewButton_7);
+      btnNewButton_7.addActionListener(new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			new ShopList();
+		}
+	});
       
       JButton btnNewButton_8 = new JButton("입고내역조회");
       btnNewButton_8.setFont(new Font("굴림", Font.BOLD, 20));

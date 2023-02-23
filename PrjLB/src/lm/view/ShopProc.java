@@ -19,14 +19,27 @@ import lm.model.Shopvo;
 
 public class ShopProc extends JFrame{
    private JTextField txtCode, txtdname, txtName, txtdPhone;
-   private JButton btnIn, btnUp, btnDe, btnCn ;
+   private JButton btnIn, btnUp, btnDe, btnCn, btnFind ;
    
+   ShopList slist = null;
    
    public ShopProc () {
       init();
    }
    
-   public void init () {
+   public ShopProc(ShopList slist) {
+	   this();
+	   this.slist = slist;
+   }
+
+   public ShopProc(String sid, ShopList shopList) {
+	   this();
+	   this.slist = slist;
+	   txtCode.setText(sid);
+	   btnFind.doClick();
+   }
+
+public void init () {
    
       
       setTitle("그린물류시스템");
@@ -58,7 +71,7 @@ public class ShopProc extends JFrame{
       txtdPhone = new JTextField();
       txtdPhone.setColumns(10);
       //등록
-       btnIn = new JButton("등록");
+      btnIn = new JButton("등록");
       btnIn.addActionListener(new ActionListener() {
          @Override
          public void actionPerformed(ActionEvent e) {
@@ -66,7 +79,7 @@ public class ShopProc extends JFrame{
          }
       });
       //수정
-       btnUp = new JButton("수정");
+      btnUp = new JButton("수정");
       btnUp.addActionListener(new ActionListener() {
          @Override
          public void actionPerformed(ActionEvent e) {
@@ -74,7 +87,7 @@ public class ShopProc extends JFrame{
          }
       });
       //삭제
-     btnDe = new JButton("삭제");
+      btnDe = new JButton("삭제");
       btnDe.addActionListener(new ActionListener() {
          @Override
          public void actionPerformed(ActionEvent e) {
@@ -82,7 +95,7 @@ public class ShopProc extends JFrame{
          }
       });
       //취소
-     btnCn = new JButton("취소");
+      btnCn = new JButton("취소");
       btnCn.addActionListener(new ActionListener() {
          @Override
          public void actionPerformed(ActionEvent e) {
@@ -90,8 +103,13 @@ public class ShopProc extends JFrame{
          }
       });
       
-      JButton btnIn_1 = new JButton("\uC870\uD68C");
-      
+      btnFind = new JButton( "조회");
+      btnFind.addActionListener(new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			findShop();
+		}
+	});
       
       GroupLayout groupLayout = new GroupLayout(getContentPane());
       groupLayout.setHorizontalGroup(
@@ -126,7 +144,7 @@ public class ShopProc extends JFrame{
                         .addComponent(btnCn, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnUp, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE))
                      .addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                     .addComponent(btnIn_1, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
+                     .addComponent(btnFind, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
                      .addGap(23))))
             .addGroup(groupLayout.createSequentialGroup()
                .addGap(107)
@@ -166,7 +184,7 @@ public class ShopProc extends JFrame{
                         .addComponent(btnDe, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)))
                   .addGroup(groupLayout.createSequentialGroup()
                      .addGap(50)
-                     .addComponent(btnIn_1, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)))
+                     .addComponent(btnFind, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)))
                .addContainerGap(33, Short.MAX_VALUE))
       );
       getContentPane().setLayout(groupLayout);
@@ -176,10 +194,34 @@ public class ShopProc extends JFrame{
       setVisible(true);
       
    }
+	//조회
+	protected void findShop() {
+	   String sid = this.txtCode.getText();
+	   if(sid.trim().equals(" "))
+		   return;
+	   ShopDao sdao = new ShopDao();
+	   Shopvo sv = sdao.getSid(sid);
+	   setViewData(sv);
+	   
+   }
+	//조회
+   private void setViewData(Shopvo sv) {
+	   int       shopid = sv.getShopid();
+	   String  shopname = sv.getShopname();
+	   String sincharge = sv.getSincharge();
+	   String    sphone = sv.getSphone();
+	   
+	   this.txtCode.setText(String.valueOf(shopid));
+	   this.txtdname.setText(shopname);
+	   this.txtName.setText(sincharge);
+	   this.txtdPhone.setText(sphone);
+	   
+   }
+   //새로고침
    protected void cnShop() {
       clearViewData();
    }
-
+   //새로고침
    private void clearViewData() {
       this.txtCode.setText("");
       this.txtdname.setText("");

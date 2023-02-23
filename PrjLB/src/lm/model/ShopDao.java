@@ -3,6 +3,7 @@ package lm.model;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Vector;
 
 import oracle.jdbc.OracleConnection;
 
@@ -103,6 +104,116 @@ public class ShopDao {
       }
       return aftcnt;
    }
+//전체 리스트
+	public Vector<Vector> getshoplist1() {
+		Vector<Vector> list = new Vector<>();
+		String sql = " select shopid, shopname,sincharge, sphone"
+				   + " from shop"
+				   + " order by shopid asc ";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				String si = rs.getString("shopid");
+				String sn = rs.getString("shopname");
+				String sc = rs.getString("sincharge");
+				String sp = rs.getString("sphone");
+				
+				Vector v = new Vector();
+				v.add(si);
+				v.add(sn);
+				v.add(sc);
+				v.add(sp);
+				list.add(v);
+			}
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+			} catch (SQLException e) {
+			}
+		}
+		return list;
+	}
+	//개별 조회
+	public Vector<Vector> getShoplist2(String search) {
+		Vector<Vector> list = new Vector<>();
+		String sql = " select shopid, shopname, sincharge, sphone "
+				   + " from shop "
+				   + " where shopname like "
+				   + " '%" + search.trim() + "%' ";
+				   
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				String si = rs.getString("shopid");
+				String sn = rs.getString("shopname");
+				String sc = rs.getString("sincharge");
+				String sp = rs.getString("sphone");
+				
+				Vector v = new Vector();
+				v.add(si);
+				v.add(sn);
+				v.add(sc);
+				v.add(sp);
+				list.add(v);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+			} catch (SQLException e) {
+			}
+			
+		}
+		
+		return list;
+	}
+	//조회
+	public Shopvo getSid(String sid) {
+		
+		Shopvo sv = null;
+		String sql = " select shopid, shopname, sincharge, sphone "
+				   + " from shop "
+				   + " where shopid = ? " ;
+		
+		PreparedStatement pstmt = null;
+		ResultSet            rs = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, sid);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				String si = rs.getString("shopid");
+				String sn = rs.getString("shopname");
+				String sc = rs.getString("sincharge");
+				String sp = rs.getString("sphone");
+				
+				sv = new Shopvo (
+						Integer.parseInt(si), sn, sc, sp);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+			} catch (SQLException e) {
+			}
+		}
+		return sv;
+	}
       
 
 }
