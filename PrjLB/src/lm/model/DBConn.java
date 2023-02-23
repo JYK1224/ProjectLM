@@ -10,7 +10,7 @@ import oracle.jdbc.pool.OracleDataSource;
 
 public class DBConn {
 	// Connection String
-	  final static String DB_URL="jdbc:oracle:thin:@lmdatabase_medium?TNS_ADMIN=D:/wallet/Wallet_LMDATABASE";
+	  final static String DB_URL="jdbc:oracle:thin:@lmdatabase_high?TNS_ADMIN=D:/wallet/Wallet_LMDATABASE";
 	  final static String DB_USER = "admin";
 	  final static String DB_PASSWORD = "Lmdata123456";
       private  static      OracleConnection  conn = null;
