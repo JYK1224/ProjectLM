@@ -1,6 +1,6 @@
 package lm.view;
 
-
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -9,8 +9,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.sql.SQLException;
-import java.util.Vector;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -19,40 +17,129 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.table.DefaultTableModel;
-
 
 import lm.model.ProductInquiryDAO;
 
 public class LMProductInquiry extends JFrame implements ActionListener{
 	
+	//fields
 	JLabel jlb1, jlb2, jlb3, jlb4, jlb5, jlb6, jlb7, jlb8, jlb9, jlb10, jlbvat, jlb23;
 	JPanel p;
-	public JRadioButton code;
-	public JRadioButton name;
-	public JTextField txt;
-
-	public JLabel tab1, tab2, tab3, tab4, tab5, tab7, tab8, tab9, tab10;
+	JRadioButton code;
+	JRadioButton name;
+	JTextField txt;
+	JLabel tab1, tab2, tab3, tab4, tab5, tab7, tab8, tab9, tab10;
 	ButtonGroup group;
 	JButton btn;
 	
+	
+	//Getter Setter
+	public JRadioButton getCode() {
+		return code;
+	}
+	
+	public void setCode(JRadioButton code) {
+		this.code = code;
+	}
+	
+	public JRadioButton getName2() {
+		return name;
+	}
+	
+	public void setName(JRadioButton name) {
+		this.name = name;
+	}
+	
+	public JTextField getTxt() {
+		return txt;
+	}
+
+	public void setTxt(JTextField txt) {
+		this.txt = txt;
+	}
+
+	public JLabel getTab1() {
+		return tab1;
+	}
+
+	public void setTab1(JLabel tab1) {
+		this.tab1 = tab1;
+	}
+
+	public JLabel getTab2() {
+		return tab2;
+	}
+
+	public void setTab2(JLabel tab2) {
+		this.tab2 = tab2;
+	}
+
+	public JLabel getTab3() {
+		return tab3;
+	}
+
+	public void setTab3(JLabel tab3) {
+		this.tab3 = tab3;
+	}
+
+	public JLabel getTab4() {
+		return tab4;
+	}
+
+	public void setTab4(JLabel tab4) {
+		this.tab4 = tab4;
+	}
+
+	public JLabel getTab5() {
+		return tab5;
+	}
+
+	public void setTab5(JLabel tab5) {
+		this.tab5 = tab5;
+	}
+
+	public JLabel getTab7() {
+		return tab7;
+	}
+
+	public void setTab7(JLabel tab7) {
+		this.tab7 = tab7;
+	}
+
+	public JLabel getTab8() {
+		return tab8;
+	}
+
+	public void setTab8(JLabel tab8) {
+		this.tab8 = tab8;
+	}
+
+	public JLabel getTab9() {
+		return tab9;
+	}
+
+	public void setTab9(JLabel tab9) {
+		this.tab9 = tab9;
+	}
+
+	public JLabel getTab10() {
+		return tab10;
+	}
+
+	public void setTab10(JLabel tab10) {
+		this.tab10 = tab10;
+	}
+
 	GridBagLayout        gb;
 	GridBagConstraints   gbc;
 	
-	
-
-	
 	public LMProductInquiry() {
-		
 		init();
-		
 	}
-
-	private  void init() {
-
+	
+	private void init() {
 		gb           =  new GridBagLayout();
 		getContentPane().setLayout(gb);
 		
@@ -110,6 +197,8 @@ public class LMProductInquiry extends JFrame implements ActionListener{
 	getContentPane().add(btn);
 	gbAdd( btn, 3, 0, 1, 1);
 	btn.addActionListener(this);
+	
+	
 
 	//상품코드
 	jlb1 = new JLabel("상품코드");
@@ -209,14 +298,11 @@ public class LMProductInquiry extends JFrame implements ActionListener{
 	setSize(600,200);
 	setVisible(true);
 	setResizable(false);
-	
-	
+		
+		
+		
 	}
 	
-
-
-
-
 	private void gbAdd(JComponent c, int x, int y, int w, int h) {
 		gbc.gridx        = x;
 		gbc.gridy        = y;
@@ -226,24 +312,16 @@ public class LMProductInquiry extends JFrame implements ActionListener{
 		gbc.insets       = new Insets(2, 2, 2, 2);
 		getContentPane().add( c, gbc );
 	}
-
-
+	
 	public static void main(String[] args) {
 		new LMProductInquiry();
-		
-		
+
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-	try {
-		new ProductInquiryDAO(this);
-	} catch (SQLException e1) {
-		e1.printStackTrace();
-	}
+		ProductInquiryDAO dao = new ProductInquiryDAO(this);
 		
 	}
+
 }
-
-
-
