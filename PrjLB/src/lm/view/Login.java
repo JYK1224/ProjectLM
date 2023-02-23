@@ -94,7 +94,7 @@ public class Login extends JFrame {
 						}
 						dispose();
 				}else{
-					JOptionPane.showMessageDialog(null, "로그인 실패");
+					JOptionPane.showMessageDialog(null, "실패 : 아이디와 비밀번호를 확인해주세요");
 				}
 			}
 		});
