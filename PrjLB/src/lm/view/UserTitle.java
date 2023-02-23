@@ -13,14 +13,19 @@ import javax.swing.JTable;
 
 
 public class UserTitle extends JFrame{
-	private JTable table;
-   
+   private JTable table;
+   String userid;
    
    public UserTitle() {
       Init();
    }
 
-   private void Init() {
+   public UserTitle(String userid) {
+	   this();
+	   this.userid = userid;
+   }
+
+private void Init() {
       setTitle("물류관리시스템-일반사용자");
       setSize(800,580);
       setLocation(600,150);

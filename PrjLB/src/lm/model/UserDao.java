@@ -268,6 +268,25 @@ public class UserDao {
 	public static UserDao getInstance() {
 		return instance;
 	}
-	
+
+	public int findTy(String userid) {
+		String sql = " select ty"
+				   + " from usermng "
+				   + " where userid =" + userid;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				if(rs.getString(1).equals("관리자")) {
+					return 1;
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
 	
 }

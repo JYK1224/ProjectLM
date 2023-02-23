@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 import lm.model.UserDao;
@@ -23,10 +24,11 @@ public class Login extends JFrame {
 	
 	private OracleConnection conn = null;
 
-	String userid , userpw;
+	String userid , userpw ;
 	JLabel lbl1 , lbl2;
 	JButton btn1 ;
 	JPanel p;
+	
 	private JTextField textField;
 	private JPasswordField passwordField;
 	UserDao dao ;
@@ -82,12 +84,19 @@ public class Login extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String userid = textField.getText();
 				String userpw = passwordField.getText();
+			
 				UserDao dao = UserDao.getInstance();
-				int result = dao.findIdAndPw(userid, userpw);
-					if(result == 1 ) {
-					JOptionPane.showMessageDialog(null, "로그인 성공");
-					ManagerTitle mtl = new ManagerTitle(userid);
-					dispose();
+				int result1 = dao.findIdAndPw(userid, userpw);
+				int result2 = dao.findTy(userid);
+					if(result1 == 1 ) {
+						if (result2 == 1) {
+							JOptionPane.showMessageDialog(null, "환영합니다 관리자");
+							ManagerTitle mtl = new ManagerTitle(userid);
+						}else {
+							JOptionPane.showMessageDialog(null, "환영합니다 사용자");
+							UserTitle utl = new UserTitle(userid);
+						}
+						dispose();
 				}else{
 					JOptionPane.showMessageDialog(null, "실패 : "
 							+ "아이디와 비밀번호를 확인해주세요");
