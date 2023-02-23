@@ -23,6 +23,7 @@ import javax.swing.JTable;
 import lm.model.LoginVo;
 
 
+
 public class ManagerTitle extends JFrame{
    private JTable table;
    String userid; 
@@ -61,6 +62,14 @@ private void Init() {
       btnNewButton_1.setBackground(new Color(255,255,204));
       btnNewButton_1.setBounds(49, 255, 199, 59);
       getContentPane().add(btnNewButton_1);
+      btnNewButton_1.addActionListener(new ActionListener() {
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			new ShopProc();
+			
+		}
+	});
       
       
       JButton btnNewButton_2 = new JButton("사용자관리");
