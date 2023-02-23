@@ -15,6 +15,9 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import org.apache.poi.util.SystemOutLogger;
+
+import lm.model.LoginVo;
 import lm.model.UserDao;
 import oracle.jdbc.driver.OracleConnection;
 //신강원
@@ -29,6 +32,8 @@ public class Login extends JFrame {
 	private JTextField textField;
 	private JPasswordField passwordField;
 	UserDao dao ;
+	LoginVo vo;
+	ManagerTitle mt;
 	
 	public Login() {
 		inti();
@@ -92,6 +97,10 @@ public class Login extends JFrame {
 							JOptionPane.showMessageDialog(null, "환영합니다 사용자");
 							UserTitle utl = new UserTitle(userid);
 						}
+
+			
+						 
+						 
 						dispose();
 				}else{
 					JOptionPane.showMessageDialog(null, "실패 : 아이디와 비밀번호를 확인해주세요");
@@ -114,6 +123,7 @@ public class Login extends JFrame {
 	public static void main(String[] args) {
 		
 		new Login();
+		
 	}
 
 }

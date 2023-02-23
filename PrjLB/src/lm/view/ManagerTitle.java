@@ -20,19 +20,24 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 
+import lm.model.LoginVo;
+
 
 public class ManagerTitle extends JFrame{
    private JTable table;
    String userid; 
+   LoginVo log;
    
    public ManagerTitle() {
       Init();
    }
 
    public ManagerTitle(String userid) {
-	   this();
 	   this.userid = userid;
+	   Init();
    }
+
+
 
 private void Init() {
       setTitle("물류관리시스템-관리자");
@@ -165,6 +170,13 @@ private void Init() {
       table = new JTable();
       table.setBounds(33, 136, 922, 374);
       getContentPane().add(table);
+      
+      JLabel lbluserid = new JLabel("관리자");
+      lbluserid.setFont(new Font("굴림", Font.BOLD, 15));
+      lbluserid.setBounds(33, 10, 165, 40);
+      getContentPane().add(lbluserid);
+      lbluserid.setText("관리자:" + this.userid);
+      
       setVisible(true);
       
    }

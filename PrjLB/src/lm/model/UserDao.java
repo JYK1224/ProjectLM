@@ -256,7 +256,7 @@ public class UserDao {
 			pstmt.setString(1, userid);
 			pstmt.setString(2, userpw);
 			rs = pstmt.executeQuery();
-			if (rs.next()) {
+			if (rs.next()) {;
 					return 1;
 				}
 		} catch (SQLException e) {
