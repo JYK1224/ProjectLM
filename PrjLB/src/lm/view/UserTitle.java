@@ -15,6 +15,9 @@ import javax.swing.JTable;
 public class UserTitle extends JFrame{
    private JTable table;
    String userid;
+   UserTitle utl;
+   DeptList dpl;
+   ShopList spl;
    
    public UserTitle() {
       Init();
@@ -64,7 +67,9 @@ private void Init() {
       btnNewButton_6.addActionListener(new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			new DeptList();
+			if(dpl != null)
+				dpl.dispose();
+		 	  dpl = new DeptList(utl);
 		}
 	});
       
@@ -76,7 +81,9 @@ private void Init() {
       btnNewButton_7.addActionListener(new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			new ShopList();
+				if(spl != null)
+					spl.dispose();
+				spl = new ShopList(utl);
 		}
 	});
       

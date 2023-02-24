@@ -41,12 +41,20 @@ import lm.model.DeptDao;
 		String did ;
 		DeptProc dpc = null;
 		static DeptList dlist = null;
+		UserTitle utl;
 		
 		public DeptList () {
 			init ();
 		}
 		
 		
+		public DeptList(UserTitle utl) {
+			this();
+			this.utl = utl;
+			btnIn.setVisible(false);
+		}
+
+
 		private void init() {
 			setTitle( "거래처목록 ");
 			topPane = new JPanel();

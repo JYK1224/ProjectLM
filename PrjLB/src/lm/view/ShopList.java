@@ -39,11 +39,18 @@ import lm.model.ShopDao;
 		String sid ;
 		ShopProc spc = null;
 		static ShopList slist = null;
+		UserTitle utl;
 		
 		public ShopList () {
 			init ();
 		}
 		
+		public ShopList(UserTitle utl) {
+			this();
+			this.utl = utl;
+			btnIn.setVisible(false);
+		}
+
 		private void init() {
 			setTitle( " 점포 목록 ");
 			topPane = new JPanel();
