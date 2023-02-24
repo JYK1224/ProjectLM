@@ -68,6 +68,10 @@ public class Login extends JFrame {
 		getContentPane().add(textField);
 		textField.setColumns(10);
 		
+		passwordField = new JPasswordField();
+		passwordField.setBounds(182, 304, 150, 21);
+		getContentPane().add(passwordField);
+		
 		JButton btn1 = new JButton("");
 		btn1.setIcon(new ImageIcon(Login.class.getResource("/lmimage/\uBC84\uD2BC222.png")));
 		btn1.setHorizontalAlignment(SwingConstants.LEADING);
@@ -77,10 +81,6 @@ public class Login extends JFrame {
 		btn1.setFocusPainted(false);
 		
 		getContentPane().add(btn1);
-		
-		passwordField = new JPasswordField();
-		passwordField.setBounds(182, 304, 150, 21);
-		getContentPane().add(passwordField);
 		
 		JLabel lblNewLabel_2 = new JLabel("New label");
 		lblNewLabel_2.setIcon(new ImageIcon(Login.class.getResource("/lmimage/logistics-7721552_640.jpg")));
