@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -15,16 +16,18 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import org.apache.poi.util.SystemOutLogger;
-
 import lm.model.LoginVo;
 import lm.model.UserDao;
 import oracle.jdbc.driver.OracleConnection;
+import javax.swing.JTable;
+import java.awt.Font;
+import java.awt.Color;
+import javax.swing.SwingConstants;
 //신강원
 public class Login extends JFrame {
 	
 	private OracleConnection conn = null;
-
+	JLabel lblNewLabel_1;
 	String userid , userpw;
 	JLabel lbl1 , lbl2;
 	JButton btn1 ;
@@ -33,9 +36,10 @@ public class Login extends JFrame {
 	private JPasswordField passwordField;
 	UserDao dao ;
 	LoginVo vo;
-	ManagerTitle mt;
+
 	
 	public Login() {
+		getContentPane().setBackground(new Color(231,231,231));
 		inti();
 	}
 	
@@ -43,28 +47,53 @@ public class Login extends JFrame {
 
 		setTitle("\uADF8\uB9B0\uBB3C\uB958\uC2DC\uC2A4\uD15C");
 		JPanel pp = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		
 				
-		JLabel lbl1 = new JLabel("아이디");
-		lbl1.setBounds(42, 63, 93, 36);
+		JLabel lbl1 = new JLabel("아이디 :");
+		lbl1.setForeground(Color.WHITE);
+		lbl1.setVerticalAlignment(SwingConstants.BOTTOM);
+		lbl1.setFont(new Font("굴림", Font.BOLD, 17));
+		lbl1.setBounds(70, 268, 67, 30);
 		gbadd(lbl1, 0, 0, 1, 1);
 		
-		JLabel lblNewLabel = new JLabel("\uBE44\uBC00\uBC88\uD638");
-		lblNewLabel.setBounds(42, 108, 93, 56);
+		JLabel lblNewLabel = new JLabel("비밀번호 :");
+		lblNewLabel.setForeground(Color.WHITE);
+		lblNewLabel.setVerticalAlignment(SwingConstants.BOTTOM);
+		lblNewLabel.setFont(new Font("굴림", Font.BOLD, 17));
+		lblNewLabel.setBounds(70, 297, 110, 30);
 		getContentPane().add(lblNewLabel);
 		
 		textField = new JTextField();
-		textField.setBounds(147, 71, 123, 21);
+		textField.setBounds(182, 276, 150, 21);
 		getContentPane().add(textField);
 		textField.setColumns(10);
 		
-		JButton btn1 = new JButton("\uB85C\uADF8\uC778");
-		btn1.setBounds(108, 191, 97, 30);
+		JButton btn1 = new JButton("");
+		btn1.setIcon(new ImageIcon(Login.class.getResource("/lmimage/\uBC84\uD2BC222.png")));
+		btn1.setHorizontalAlignment(SwingConstants.LEADING);
+		btn1.setBounds(340, 276, 138, 51);
+		btn1.setBorderPainted(false);
+		btn1.setContentAreaFilled(false);
+		btn1.setFocusPainted(false);
+		
 		getContentPane().add(btn1);
 		
 		passwordField = new JPasswordField();
-		passwordField.setBounds(147, 126, 123, 21);
+		passwordField.setBounds(182, 304, 150, 21);
 		getContentPane().add(passwordField);
 		
+		JLabel lblNewLabel_2 = new JLabel("New label");
+		lblNewLabel_2.setIcon(new ImageIcon(Login.class.getResource("/lmimage/logistics-7721552_640.jpg")));
+		lblNewLabel_2.setBounds(0, -24, 494, 268);
+		getContentPane().add(lblNewLabel_2);
+		
+		JLabel lblNewLabel_3 = new JLabel("d");
+		lblNewLabel_3.setIcon(new ImageIcon(Login.class.getResource("/lmimage/texture-990104_640.jpg")));
+		lblNewLabel_3.setBounds(-12, 215, 506, 146);
+		getContentPane().add(lblNewLabel_3);
+		
+	
+	
 		passwordField.addKeyListener(new KeyListener() {
 			@Override
 			public void keyTyped(KeyEvent e) {
@@ -109,7 +138,7 @@ public class Login extends JFrame {
 		});
 		
 		setLocation(700,300);
-		setSize(350,316);
+		setSize(500,400);
 		setVisible(true);
 		
 	}	
@@ -125,6 +154,5 @@ public class Login extends JFrame {
 		new Login();
 		
 	}
-
 }
 
