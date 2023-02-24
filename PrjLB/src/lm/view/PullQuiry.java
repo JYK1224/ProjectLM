@@ -96,7 +96,7 @@ public class PullQuiry extends JFrame implements ActionListener{
 
 	public PullQuiry() {
 		init();
-		
+
 
 	}
 	public int getSum(){
@@ -145,9 +145,9 @@ public class PullQuiry extends JFrame implements ActionListener{
 		this.group.add(ra1);
 		this.group.add(ra2);
 
-		
-		
-		
+
+
+
 		ra3.addItemListener(new ItemListener() {
 			@Override
 			public void itemStateChanged(ItemEvent e) {
@@ -163,26 +163,26 @@ public class PullQuiry extends JFrame implements ActionListener{
 			}
 		});
 		ra3.addKeyListener(new KeyListener() {
-			
+
 			@Override
 			public void keyTyped(KeyEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void keyReleased(KeyEvent e) {
-				
+
 				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
 					btn1.doClick();
 				}
-				
+
 			}
-			
+
 			@Override
 			public void keyPressed(KeyEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
 		});
 		ra1.addItemListener(new ItemListener() {
@@ -195,25 +195,25 @@ public class PullQuiry extends JFrame implements ActionListener{
 			}
 		});
 		ra1.addKeyListener(new KeyListener() {
-			
+
 			@Override
 			public void keyTyped(KeyEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void keyReleased(KeyEvent e) {
 				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
 					btn1.doClick();
 				}
-				
+
 			}
-			
+
 			@Override
 			public void keyPressed(KeyEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
 		});
 		ra2.addItemListener(new ItemListener() {
@@ -225,26 +225,26 @@ public class PullQuiry extends JFrame implements ActionListener{
 					combo.setEnabled(true);
 			}
 		});
-		
+
 		ra2.addKeyListener(new KeyListener() {
-			
+
 			@Override
 			public void keyTyped(KeyEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void keyReleased(KeyEvent e) {
-			    if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
 					btn1.doClick();
 				}
 			}
-			
+
 			@Override
 			public void keyPressed(KeyEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
 		});
 
@@ -252,25 +252,25 @@ public class PullQuiry extends JFrame implements ActionListener{
 		txt = new JTextField();
 		txt.setColumns(10);
 		txt.addKeyListener(new KeyListener() {
-			
+
 			@Override
 			public void keyTyped(KeyEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void keyReleased(KeyEvent e) {
 				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
 					btn1.doClick();
 				}
-				
+
 			}
-			
+
 			@Override
 			public void keyPressed(KeyEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
 		});
 
@@ -280,30 +280,12 @@ public class PullQuiry extends JFrame implements ActionListener{
 		btn1 = new JButton("조회");
 		btn1.setFont(new Font("굴림", Font.PLAIN, 15));
 		btn1.addActionListener(this);
-	
+
 
 
 		btn2 = new JButton("엑셀로저장");
 		btn2.setFont(new Font("굴림", Font.PLAIN, 15));
-		btn2.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				LocalDateTime now = LocalDateTime.now();
-				int year = now.getYear();
-				int mm = now.getMonthValue();
-				int dd = now.getDayOfMonth();
-				int hh = now.getHour();
-				int mi = now.getMinute();
-
-				String fmt = "D:\\excel\\ ";
-				String fmt2 = "jtable_%4d %02d %02d %2d %2d.xlsx";
-				String filepath = String.format(fmt+fmt2, year, mm, dd, hh, mi );
-				excelWrite(filepath);
-				JOptionPane.showMessageDialog(btn2, fmt + "로 엑셀파일 저장되었습니다.");
-
-			}
-		});
+		btn2.addActionListener(this);
 
 		btn3 = new JButton("상품개별조회");
 		btn3.setFont(new Font("굴림", Font.PLAIN, 15));
@@ -335,25 +317,25 @@ public class PullQuiry extends JFrame implements ActionListener{
 		combo.setFont(new Font("굴림", Font.PLAIN, 15));
 		combo.setModel(new DefaultComboBoxModel(new String[] {"가공식품","기호식품","냉동냉장","주류"}));
 		combo.addKeyListener(new KeyListener() {
-			
+
 			@Override
 			public void keyTyped(KeyEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void keyReleased(KeyEvent e) {
 				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
 					btn1.doClick();
 				}
-				
+
 			}
-			
+
 			@Override
 			public void keyPressed(KeyEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
 		});
 
@@ -438,9 +420,9 @@ public class PullQuiry extends JFrame implements ActionListener{
 								.addComponent(lalb4, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
 						.addGap(26))
 				);
-		
-		
-		
+
+
+
 		txt.setEnabled(false);
 		combo.setEnabled(false);
 		getContentPane().setLayout(groupLayout);
@@ -475,38 +457,57 @@ public class PullQuiry extends JFrame implements ActionListener{
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		PullquiryDAO dao = new PullquiryDAO(this);
-		if(ra3.isSelected()) {
-			Vector<Vector> list = dao.ra11();
-			tablePaint(list);
-			DecimalFormat dc = new DecimalFormat("###,###,###,###"+"원");
-			String ch = dc.format(Double.parseDouble(String.valueOf(getSum())));
-			lalb4.setText(String.valueOf(ch));
-			double dd = (Double.parseDouble(String.valueOf(getAverage())));
-			String ss = String.format("%.2f", dd );
-			lalb2.setText(String.valueOf(ss) + "%");
-		}
-		if(ra1.isSelected()) {
-			String combobox =comboboxString();
-			Vector<Vector> list = dao.ra22(combobox);
-			tablePaint(list);
-			DecimalFormat dc = new DecimalFormat("###,###,###,###"+"원");
-			String ch = dc.format(Double.parseDouble(String.valueOf(getSum())));
-			lalb4.setText(String.valueOf(ch));
-			double dd = (Double.parseDouble(String.valueOf(getAverage())));
-			String ss = String.format("%.2f", dd );
-			lalb2.setText(String.valueOf(ss) + "%");
-		}
-		if(ra2.isSelected()) {
-			Vector<Vector> list =dao.ra33();
-			tablePaint(list);
-			DecimalFormat dc = new DecimalFormat("###,###,###,###"+"원");
-			String ch = dc.format(Double.parseDouble(String.valueOf(getSum())));
-			lalb4.setText(String.valueOf(ch));
-			double dd = (Double.parseDouble(String.valueOf(getAverage())));
-			String ss = String.format("%.2f", dd );
-			lalb2.setText(String.valueOf(ss) + "%");
+		switch(e.getActionCommand()) {
+		case "조회" :
+			PullquiryDAO dao = new PullquiryDAO(this);
+			if(ra3.isSelected()) {
+				Vector<Vector> list = dao.ra11();
+				tablePaint(list);
+				DecimalFormat dc = new DecimalFormat("###,###,###,###"+"원");
+				String ch = dc.format(Double.parseDouble(String.valueOf(getSum())));
+				lalb4.setText(String.valueOf(ch));
+				double dd = (Double.parseDouble(String.valueOf(getAverage())));
+				String ss = String.format("%.2f", dd );
+				lalb2.setText(String.valueOf(ss) + "%");
+			}
+			if(ra1.isSelected()) {
+				String combobox =comboboxString();
+				Vector<Vector> list = dao.ra22(combobox);
+				tablePaint(list);
+				DecimalFormat dc = new DecimalFormat("###,###,###,###"+"원");
+				String ch = dc.format(Double.parseDouble(String.valueOf(getSum())));
+				lalb4.setText(String.valueOf(ch));
+				double dd = (Double.parseDouble(String.valueOf(getAverage())));
+				String ss = String.format("%.2f", dd );
+				lalb2.setText(String.valueOf(ss) + "%");
+			}
+			if(ra2.isSelected()) {
+				Vector<Vector> list =dao.ra33();
+				tablePaint(list);
+				DecimalFormat dc = new DecimalFormat("###,###,###,###"+"원");
+				String ch = dc.format(Double.parseDouble(String.valueOf(getSum())));
+				lalb4.setText(String.valueOf(ch));
+				double dd = (Double.parseDouble(String.valueOf(getAverage())));
+				String ss = String.format("%.2f", dd );
+				lalb2.setText(String.valueOf(ss) + "%");
 
+			}
+			break;
+		case "엑셀로저장":
+			LocalDateTime now = LocalDateTime.now();
+			int year = now.getYear();
+			int mm = now.getMonthValue();
+			int dd = now.getDayOfMonth();
+			int hh = now.getHour();
+			int mi = now.getMinute();
+
+			String fmt = "D:\\excel\\ ";
+			String fmt2 = "상품목록_%4d %02d %02d %2d %2d.xlsx";
+			String filepath = String.format(fmt+fmt2, year, mm, dd, hh, mi );
+			excelWrite1(filepath);
+			JOptionPane.showMessageDialog(btn2, fmt + "로 엑셀파일 저장되었습니다.");
+
+			break;
 		}
 	}
 
@@ -536,11 +537,14 @@ public class PullQuiry extends JFrame implements ActionListener{
 	//		return  list;
 	//	}
 
-	private void excelWrite(String filepath) {
+	private void excelWrite1(String filepath) {
 		XSSFWorkbook  workbook =  new XSSFWorkbook();
 		XSSFSheet     sheet    =  workbook.createSheet("Data");
 
-		getWorkbook_Data( sheet );
+
+		if(ra3.isSelected())getWorkbook_Datara3( sheet );
+		if(ra2.isSelected())getWorkbook_Datara2(sheet);
+		if(ra1.isSelected())getWorkbook_Datara1(sheet);
 
 		// 파일 저장
 		FileOutputStream  fos = null;
@@ -560,7 +564,7 @@ public class PullQuiry extends JFrame implements ActionListener{
 
 	}
 
-	private void getWorkbook_Data(XSSFSheet sheet) {
+	private void getWorkbook_Datara3(XSSFSheet sheet) {
 		XSSFRow     row   =  null;
 		XSSFCell    cell  =  null;
 		PullquiryDAO dao = new PullquiryDAO(this);
@@ -572,7 +576,7 @@ public class PullQuiry extends JFrame implements ActionListener{
 			cell     =  row.createCell(i);
 			cell.setCellValue(  cols.get(i) );    
 		}
-		// Data 줄 처리
+		// Data 줄 처리 r3
 		Vector< Vector >  dataList = dao.ra11();
 		for (int i = 0; i < dataList.size(); i++) {
 			row    =   sheet.createRow(i + 1);
@@ -583,7 +587,49 @@ public class PullQuiry extends JFrame implements ActionListener{
 			}
 
 		}
-		// Data 줄 처리
+
+	}
+
+	private void getWorkbook_Datara2(XSSFSheet sheet) {
+		XSSFRow     row   =  null;
+		XSSFCell    cell  =  null;
+		PullquiryDAO dao = new PullquiryDAO(this);
+
+		// 제목줄 처리
+		Vector<String>  cols =  getColumnList();
+		row          =  sheet.createRow( 0 );
+		for (int i = 0; i < cols.size(); i++) {
+			cell     =  row.createCell(i);
+			cell.setCellValue(  cols.get(i) );    
+		}
+
+		// Data 줄 처리 ra2
+		Vector< Vector >  dataList2 = dao.ra33();
+		for (int i = 0; i < dataList2.size(); i++) {
+			row    =   sheet.createRow(i + 1);
+			for (int j = 0; j < dataList2.get(i).size() ; j++) {
+				Vector  v  =  dataList2.get(i);
+				cell       =  row.createCell( j );
+				cell.setCellValue( (String) v.get( j ) );
+			}
+
+		}
+	}
+
+	private void getWorkbook_Datara1(XSSFSheet sheet) {
+		XSSFRow     row   =  null;
+		XSSFCell    cell  =  null;
+		PullquiryDAO dao = new PullquiryDAO(this);
+
+		// 제목줄 처리
+		Vector<String>  cols =  getColumnList();
+		row          =  sheet.createRow( 0 );
+		for (int i = 0; i < cols.size(); i++) {
+			cell     =  row.createCell(i);
+			cell.setCellValue(  cols.get(i) );    
+		}
+
+		// Data 줄 처리 ra1
 		String com =comboboxString();
 		Vector< Vector >  dataList1 = dao.ra22(com);
 		for (int i = 0; i < dataList1.size(); i++) {
@@ -595,16 +641,6 @@ public class PullQuiry extends JFrame implements ActionListener{
 			}
 
 		}
-		// Data 줄 처리
-		Vector< Vector >  dataList2 = dao.ra33();
-		for (int i = 0; i < dataList2.size(); i++) {
-			row    =   sheet.createRow(i + 1);
-			for (int j = 0; j < dataList2.get(i).size() ; j++) {
-				Vector  v  =  dataList2.get(i);
-				cell       =  row.createCell( j );
-				cell.setCellValue( (String) v.get( j ) );
-			}
 
-		}
 	}
 }
