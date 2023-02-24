@@ -54,7 +54,7 @@ public class UserList extends JFrame implements ActionListener, MouseListener{
 		txtname.setColumns(15);
 		btnIn   = new JButton("회원가입");
 		btnRe   = new JButton("새로고침");
-		btnEx   = new JButton("엑셀");
+		btnEx   = new JButton("엑셀로 저장");
 		btnfind = new JButton("조회");
 		
 		topPane.add(txtname);
@@ -109,7 +109,7 @@ public class UserList extends JFrame implements ActionListener, MouseListener{
 				int mi = now.getMinute();
 				
 				String fmt = "D:\\excel\\ ";
-				String fmt2 = "jtable_%4d %02d %02d %2d %2d.xlsx";
+				String fmt2 = "사용자_%4d %02d %02d %2d %2d.xlsx";
 				String filepath = String.format(fmt+fmt2, year, mm, dd, hh, mi );
 				excelWrite(filepath);
 				JOptionPane.showMessageDialog(btnEx, fmt +"로 엑셀파일 저장되었습니다");
@@ -202,6 +202,7 @@ public class UserList extends JFrame implements ActionListener, MouseListener{
 	private void getWorkbook_Data(XSSFSheet sheet) {
 		XSSFRow   row = null;
 		XSSFCell cell = null;
+		String search = txtname.getText();
 		
 		Vector<String> cols = getColumnlist();
 		row = sheet.createRow(0);
@@ -210,15 +211,27 @@ public class UserList extends JFrame implements ActionListener, MouseListener{
 			cell.setCellValue(cols.get(i));
 			
 		}
-		Vector<Vector> dataList =  getDatalist();
-		for (int i = 0; i < dataList.size(); i++) {
-			row = sheet.createRow(i + 1);
-			for (int j = 0; j < dataList.get(i).size(); j++) {
-				Vector v = dataList.get(i);
-				    cell = row.createCell(j);
-				    cell.setCellValue((String)v.get(j));
-			}
-		} 
+		if(txtname.getText() == null) {
+			Vector<Vector> dataList1 =  getDatalist();
+			for (int i = 0; i < dataList1.size(); i++) {
+				row = sheet.createRow(i + 1);
+				for (int j = 0; j < dataList1.get(i).size(); j++) {
+					Vector v = dataList1.get(i);
+					    cell = row.createCell(j);
+					    cell.setCellValue((String)v.get(j));
+				}
+			} 
+		}else {
+			Vector<Vector> dataList2 = FindUser(search);
+			for (int i = 0; i < dataList2.size(); i++) {
+				row = sheet.createRow(i + 1);
+				for (int j = 0; j < dataList2.get(i).size(); j++) {
+					Vector v = dataList2.get(i);
+					cell = row.createCell(j);
+					cell.setCellValue((String)v.get(j));
+				}
+			} 
+		}
 	}
 	//조회
 
