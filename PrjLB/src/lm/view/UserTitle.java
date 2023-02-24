@@ -19,6 +19,11 @@ public class UserTitle extends JFrame{
    UserTitle utl;
    DeptList dpl;
    ShopList spl;
+   IpgoList ipl;
+   LMipgo   ipo;
+   LMProdOrder pro;
+   
+   
    
    public UserTitle() {
       Init();
@@ -95,6 +100,14 @@ private void Init() {
       btnNewButton_8.setBackground(new Color(204,229,255));
       btnNewButton_8.setBounds(546, 255, 199, 59);
       getContentPane().add(btnNewButton_8);
+      btnNewButton_8.addActionListener(new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+				if(ipl != null)
+					ipl.dispose();
+					ipl = new IpgoList();
+		}
+	});
       
       JButton btnNewButton_9 = new JButton("상품출고업무");
       btnNewButton_9.setFont(new Font("굴림", Font.BOLD, 20));
@@ -119,6 +132,14 @@ private void Init() {
       btnNewButton_6_1.setBackground(new Color(204,255,255));
       btnNewButton_6_1.setBounds(335, 171, 199, 59);
       getContentPane().add(btnNewButton_6_1);
+      btnNewButton_6_1.addActionListener(new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+				if(pro != null)
+					pro.dispose();
+					pro = new LMProdOrder(); 
+		}
+	});
       
       JButton btnNewButton_7_1 = new JButton("주문내역조회");
       btnNewButton_7_1.setFont(new Font("굴림", Font.BOLD, 20));
@@ -131,6 +152,14 @@ private void Init() {
       btnNewButton_8_1.setBackground(new Color(204,229,255));
       btnNewButton_8_1.setBounds(335, 255, 199, 59);
       getContentPane().add(btnNewButton_8_1);
+      btnNewButton_8_1.addActionListener(new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+				if(ipo != null)
+					ipo.dispose();
+					ipo = new LMipgo();
+		}
+	});
       
       JButton btnNewButton_9_1 = new JButton("출고내역조회");
       btnNewButton_9_1.setFont(new Font("굴림", Font.BOLD, 20));

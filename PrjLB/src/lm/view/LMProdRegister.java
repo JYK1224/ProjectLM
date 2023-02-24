@@ -158,6 +158,7 @@ public class LMProdRegister extends JFrame{
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setVisible(true);
+		setLocation(600,150);
 		setSize(400,600);
 		
 	}
