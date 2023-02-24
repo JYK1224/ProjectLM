@@ -38,6 +38,7 @@ public class ManagerTitle extends JFrame{
    IpgoList ipl;
    LMProdOrder pro;
    LMProdRegister prs;
+   PullQuiry pqr;
    
    public ManagerTitle() {
       Init();
@@ -138,6 +139,19 @@ public class ManagerTitle extends JFrame{
       btnNewButton_5.setBackground(new Color(229,255,204));
       btnNewButton_5.setBounds(260, 341, 199, 59);
       getContentPane().add(btnNewButton_5);
+      btnNewButton_5.addActionListener(new ActionListener() {
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if(pqr != null) 
+				pqr.dispose();
+			
+			pqr = new PullQuiry();
+				
+			
+			
+		}
+	});
       
       JButton btnNewButton_6 = new JButton("거래처조회");
       btnNewButton_6.setFont(new Font("굴림", Font.BOLD, 20));
