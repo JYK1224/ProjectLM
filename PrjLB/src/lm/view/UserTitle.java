@@ -14,6 +14,7 @@ import javax.swing.JTable;
 
 public class UserTitle extends JFrame{
    private JTable table;
+   LMProductInquiry piy;
    String userid;
    UserTitle utl;
    DeptList dpl;
@@ -48,7 +49,9 @@ private void Init() {
       btnNewButton_4.addActionListener(new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			new LMProductInquiry();
+				if(piy != null)
+					piy.dispose();
+					piy = new LMProductInquiry();
 			
 		}
 	});

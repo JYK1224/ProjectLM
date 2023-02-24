@@ -26,8 +26,16 @@ import lm.model.LoginVo;
 
 public class ManagerTitle extends JFrame{
    private JTable table;
+   LMProductInquiry piy;
    String userid; 
    LoginVo log;
+   DeptList dpl;
+   ShopList spl;
+   UserList utl;
+   DeptProc dpc;
+   ShopProc spc;
+  
+   
    
    public ManagerTitle() {
       Init();
@@ -59,7 +67,9 @@ private void Init() {
       btnNewButton.addActionListener(new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			new DeptProc();
+			if(dpc != null)
+				dpc.dispose();
+			   dpc = new DeptProc();
 		}
 	});
       
@@ -71,7 +81,9 @@ private void Init() {
       btnNewButton_1.addActionListener(new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			new ShopProc();
+			if(spc != null)
+				spc.dispose();
+				spc = new ShopProc();
 		}
 	});
 
@@ -84,8 +96,9 @@ private void Init() {
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			new UserList();
-			
+				if(utl!= null)
+					utl.dispose();
+					utl = new UserList();
 		}
 	});
       
@@ -104,8 +117,9 @@ private void Init() {
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			new LMProductInquiry();
-			
+				if(piy != null)
+					piy.dispose();
+					piy = new LMProductInquiry();
 		}
 	});
       
@@ -123,7 +137,9 @@ private void Init() {
       btnNewButton_6.addActionListener(new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			new DeptList();
+				if(dpl != null)
+					dpl.dispose();
+					dpl = new DeptList();
 		}
 	});
       
@@ -135,7 +151,9 @@ private void Init() {
       btnNewButton_7.addActionListener(new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			new ShopList();
+				if(spl != null)
+					spl.dispose();
+					spl = new ShopList();
 		}
 	});
       
