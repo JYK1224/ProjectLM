@@ -145,8 +145,8 @@ private void init() {
 				System.out.println("입고내역 조회 클릭");
 				if(  iProc != null )
 					iProc.dispose();  // 강제로 닫는다
-				System.out.println("this:" + this);
-				System.out.println("mList:" + mList);
+//				System.out.println("this:" + this);
+//				System.out.println("mList:" + mList);
 				iProc = new IpgoList( mList );				
 			}
 		});
@@ -284,12 +284,12 @@ private void init() {
           excelWrite( filepath );
          
          break;
-      case "입고내역 조회":
-    	  System.out.println("입고내역 조회 클릭");
-			if(  iProc != null )
-				iProc.dispose();  // 강제로 닫는다
-			iProc = new IpgoList( this );   // this : 현재 실행중인 MemberList        
-          break;
+//      case "입고내역 조회":
+//    	  System.out.println("입고내역 조회 클릭");
+//			if(  iProc != null )
+//				iProc.dispose();  // 강제로 닫는다
+//			iProc = new IpgoList( this );   // this : 현재 실행중인 MemberList        
+//          break;
       }
          
    }
