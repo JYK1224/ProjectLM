@@ -150,9 +150,7 @@ public class LMOrderList implements ActionListener {
 				// 선택된 종료날짜를 DATE 타입으로 저장
 				selectedDate2 = (Date) datePicker2.getModel().getValue();
 				SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-				System.out.println("ㅇㅇ"+date2);
 				date2 = simpleDateFormat.format(selectedDate2);
-				System.out.println(date2);
 				
 				Calendar cal = Calendar.getInstance();
 				cal.setTime(selectedDate2);

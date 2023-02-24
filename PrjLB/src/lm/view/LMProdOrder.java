@@ -41,8 +41,8 @@ public class LMProdOrder extends JFrame implements ActionListener{
 	// Fields
 	private static JFrame frame;
 	private static JTextField textField, textField_1, textField_2;
-	private static JTable table;
 	private static String selDate = "";
+	private static JTable table;
 	private static JButton btnNewButton, btnNewButton_1, btnNewButton_2, btnNewButton_3;
 	private JLabel lblNewLabel_1, lblNewLabel_2, lblNewLabel_3, lblNewLabel_4;
 
