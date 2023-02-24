@@ -43,7 +43,6 @@ private void Init() {
       btnNewButton_4.setBounds(46, 424, 199, 59);
       getContentPane().add(btnNewButton_4);
       btnNewButton_4.addActionListener(new ActionListener() {
-		
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			new LMProductInquiry();
@@ -62,12 +61,24 @@ private void Init() {
       btnNewButton_6.setBackground(new Color(255,229,204));
       btnNewButton_6.setBounds(46, 171, 199, 59);
       getContentPane().add(btnNewButton_6);
+      btnNewButton_6.addActionListener(new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			new DeptList();
+		}
+	});
       
       JButton btnNewButton_7 = new JButton("점포전체조회");
       btnNewButton_7.setFont(new Font("굴림", Font.BOLD, 20));
       btnNewButton_7.setBackground(new Color(255,255,204));
       btnNewButton_7.setBounds(46, 255, 199, 59);
       getContentPane().add(btnNewButton_7);
+      btnNewButton_7.addActionListener(new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			new ShopList();
+		}
+	});
       
       JButton btnNewButton_8 = new JButton("입고내역조회");
       btnNewButton_8.setFont(new Font("굴림", Font.BOLD, 20));

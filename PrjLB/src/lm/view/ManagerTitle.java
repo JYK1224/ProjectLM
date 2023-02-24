@@ -23,6 +23,7 @@ import javax.swing.JTable;
 import lm.model.LoginVo;
 
 
+
 public class ManagerTitle extends JFrame{
    private JTable table;
    String userid; 
@@ -55,14 +56,25 @@ private void Init() {
       btnNewButton.setBackground(new Color(255,229,204));
       btnNewButton.setBounds(49, 171, 199, 59);
       getContentPane().add(btnNewButton);
+      btnNewButton.addActionListener(new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			new DeptProc();
+		}
+	});
       
       JButton btnNewButton_1 = new JButton("신규점포등록");
       btnNewButton_1.setFont(new Font("굴림", Font.BOLD, 20));
       btnNewButton_1.setBackground(new Color(255,255,204));
       btnNewButton_1.setBounds(49, 255, 199, 59);
       getContentPane().add(btnNewButton_1);
-      
-      
+      btnNewButton_1.addActionListener(new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			new ShopProc();
+		}
+	});
+
       JButton btnNewButton_2 = new JButton("사용자관리");
       btnNewButton_2.setFont(new Font("굴림", Font.BOLD, 20));
       btnNewButton_2.setBackground(new Color(204,255,229));
@@ -108,12 +120,24 @@ private void Init() {
       btnNewButton_6.setBackground(new Color(255,229,204));
       btnNewButton_6.setBounds(260, 171, 199, 59);
       getContentPane().add(btnNewButton_6);
+      btnNewButton_6.addActionListener(new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			new DeptList();
+		}
+	});
       
       JButton btnNewButton_7 = new JButton("점포전체조회");
       btnNewButton_7.setFont(new Font("굴림", Font.BOLD, 20));
       btnNewButton_7.setBackground(new Color(255,255,204));
       btnNewButton_7.setBounds(260, 255, 199, 59);
       getContentPane().add(btnNewButton_7);
+      btnNewButton_7.addActionListener(new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			new ShopList();
+		}
+	});
       
       JButton btnNewButton_8 = new JButton("입고내역조회");
       btnNewButton_8.setFont(new Font("굴림", Font.BOLD, 20));
