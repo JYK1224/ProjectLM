@@ -111,7 +111,7 @@ private lm.view.PullQuiry ev;
 			sql  +=  " WHERE P.PID = S.PID(+) "
 					+ " AND P.DID = DA.DID(+) "
 					+ " AND  P.AID = A.AID(+) "
-					+ " AND A.ANAME =   " + "'" +combobox.trim()+ "'";
+					+ " AND A.ANAME LIKE   " + "'" +combobox.trim()+ "'";
 			
 			PreparedStatement  pstmt = null;
 			ResultSet          rs    = null;
@@ -172,14 +172,14 @@ private lm.view.PullQuiry ev;
 			sql  +=  " WHERE P.PID = S.PID(+) "
 					+ " AND P.DID = DA.DID(+) "
 					+ " AND  P.AID = A.AID(+)"
-					+ " AND DA.DNAME = ?";
+					+ " AND DA.DNAME LIKE UPPER( ? ) ";
 				
 			
 			PreparedStatement  pstmt = null;
 			ResultSet          rs    = null;
 			try {
 				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, ev.getTxt().getText());
+				pstmt.setString(1, "%" + ev.getTxt().getText() + "%");
 
 				rs    = pstmt.executeQuery();
 				while( rs.next() ) {			

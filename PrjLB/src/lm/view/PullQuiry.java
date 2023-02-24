@@ -7,6 +7,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Vector;
@@ -51,7 +53,7 @@ public class PullQuiry extends JFrame implements ActionListener{
 	JRadioButton ra1,ra2,ra3;
 	JButton btn1 , btn2, btn3;
 	PullQuiry ev;
-	
+
 	public JRadioButton getRa1() {
 		return ra1;
 	}
@@ -71,7 +73,7 @@ public class PullQuiry extends JFrame implements ActionListener{
 		this.ra3 = ra3;
 	}
 	public JComboBox getCombo() {
-				
+
 		return combo;
 	}
 	public void setCombo(JComboBox combo) {
@@ -91,55 +93,60 @@ public class PullQuiry extends JFrame implements ActionListener{
 	}
 
 
-	
+
 	public PullQuiry() {
 		init();
-	
+		
+
 	}
 	public int getSum(){
-        int rowsCount = jtb1.getRowCount();
-        int sum = 0;
-        for(int i = 0; i < rowsCount; i++){
-            sum = sum+Integer.parseInt(jtb1.getValueAt(i, 6).toString());
-        }
-        return sum;
-          }
+		int rowsCount = jtb1.getRowCount();
+		int sum = 0;
+		for(int i = 0; i < rowsCount; i++){
+			sum = sum+Integer.parseInt(jtb1.getValueAt(i, 6).toString());
+		}
+		return sum;
+	}
 
-   public double getAverage(){
-	   int rowsCount1 = jtb1.getRowCount();
-       double average = 0;
-	   double sum = 0;
-        for(int i = 0; i < rowsCount1; i++){
-            sum = sum + Double.parseDouble(jtb1.getValueAt(i, 4).toString());
-      
-        }
-        average = sum/rowsCount1;
-    
-        return average;
-    }
-	
+	public double getAverage(){
+		int rowsCount1 = jtb1.getRowCount();
+		double average = 0;
+		double sum = 0;
+		for(int i = 0; i < rowsCount1; i++){
+			sum = sum + Double.parseDouble(jtb1.getValueAt(i, 4).toString());
+
+		}
+		average = sum/rowsCount1;
+
+		return average;
+	}
+
 
 	private void init() {
 		setTitle("전체상품조회");
-		
-		
-		
+
+
+
 		JLabel lab1 = new JLabel("전체상품조회");
 		lab1.setFont(new Font("굴림", Font.BOLD, 40));
 		lab1.setBounds(336, 10, 400, 84);
 		getContentPane().add(lab1);
-		
+
 		ra3 = new JRadioButton("전체조회");
 		ra3.setFont(new Font("굴림", Font.PLAIN, 15));
+		ra3.setSelected(true);
 		ra1 = new JRadioButton("상품분류");
 		ra1.setFont(new Font("굴림", Font.PLAIN, 15));
 		ra2 = new JRadioButton("거래처명");
 		ra2.setFont(new Font("굴림", Font.PLAIN, 15));
-		
+
 		this.group        = new ButtonGroup();
 		this.group.add(ra3);
 		this.group.add(ra1);
 		this.group.add(ra2);
+
+		
+		
 		
 		ra3.addItemListener(new ItemListener() {
 			@Override
@@ -151,7 +158,30 @@ public class PullQuiry extends JFrame implements ActionListener{
 					txt.setEnabled(true);
 					combo.setEnabled(true);
 				}
+
+
+			}
+		});
+		ra3.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
 				
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent e) {
+				
+				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+					btn1.doClick();
+				}
+				
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// TODO Auto-generated method stub
 				
 			}
 		});
@@ -164,6 +194,28 @@ public class PullQuiry extends JFrame implements ActionListener{
 					txt.setEnabled(true);
 			}
 		});
+		ra1.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+					btn1.doClick();
+				}
+				
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		ra2.addItemListener(new ItemListener() {
 			@Override
 			public void itemStateChanged(ItemEvent e) {
@@ -174,37 +226,82 @@ public class PullQuiry extends JFrame implements ActionListener{
 			}
 		});
 		
-		
+		ra2.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent e) {
+			    if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+					btn1.doClick();
+				}
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+
+
 		txt = new JTextField();
 		txt.setColumns(10);
-		
+		txt.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+					btn1.doClick();
+				}
+				
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+
 		jtb1 = new JTable();
-		
-		
+
+
 		btn1 = new JButton("조회");
 		btn1.setFont(new Font("굴림", Font.PLAIN, 15));
 		btn1.addActionListener(this);
-		
+	
+
 
 		btn2 = new JButton("엑셀로저장");
 		btn2.setFont(new Font("굴림", Font.PLAIN, 15));
 		btn2.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				LocalDateTime now = LocalDateTime.now();
-	            int year = now.getYear();
-	            int mm = now.getMonthValue();
-	            int dd = now.getDayOfMonth();
-	            int hh = now.getHour();
-	            int mi = now.getMinute();
-	            
-	            String fmt = "D:\\excel\\ ";
-	            String fmt2 = "jtable_%4d %02d %02d %2d %2d.xlsx";
-	            String filepath = String.format(fmt+fmt2, year, mm, dd, hh, mi );
-	            excelWrite(filepath);
-	           JOptionPane.showMessageDialog(btn2, fmt + "로 엑셀파일 저장되었습니다.");
-				
+				int year = now.getYear();
+				int mm = now.getMonthValue();
+				int dd = now.getDayOfMonth();
+				int hh = now.getHour();
+				int mi = now.getMinute();
+
+				String fmt = "D:\\excel\\ ";
+				String fmt2 = "jtable_%4d %02d %02d %2d %2d.xlsx";
+				String filepath = String.format(fmt+fmt2, year, mm, dd, hh, mi );
+				excelWrite(filepath);
+				JOptionPane.showMessageDialog(btn2, fmt + "로 엑셀파일 저장되었습니다.");
+
 			}
 		});
 
@@ -237,7 +334,28 @@ public class PullQuiry extends JFrame implements ActionListener{
 		combo = new JComboBox();
 		combo.setFont(new Font("굴림", Font.PLAIN, 15));
 		combo.setModel(new DefaultComboBoxModel(new String[] {"가공식품","기호식품","냉동냉장","주류"}));
-
+		combo.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+					btn1.doClick();
+				}
+				
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 
 
 
@@ -320,6 +438,11 @@ public class PullQuiry extends JFrame implements ActionListener{
 								.addComponent(lalb4, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
 						.addGap(26))
 				);
+		
+		
+		
+		txt.setEnabled(false);
+		combo.setEnabled(false);
 		getContentPane().setLayout(groupLayout);
 		setVisible(true);
 		setLocation(450,200);
