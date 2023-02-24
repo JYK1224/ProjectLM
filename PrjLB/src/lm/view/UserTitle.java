@@ -22,7 +22,7 @@ public class UserTitle extends JFrame{
    IpgoList ipl;
    LMipgo   ipo;
    LMProdOrder pro;
-   
+   PullQuiry pqr;
    
    
    public UserTitle() {
@@ -66,6 +66,17 @@ private void Init() {
       btnNewButton_5.setBackground(new Color(229,255,204));
       btnNewButton_5.setBounds(46, 341, 199, 59);
       getContentPane().add(btnNewButton_5);
+      btnNewButton_5.addActionListener(new ActionListener() {
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if(pqr != null)
+				pqr.dispose();
+			
+				pqr = new PullQuiry();
+			
+		}
+	});
       
       JButton btnNewButton_6 = new JButton("거래처조회");
       btnNewButton_6.setFont(new Font("굴림", Font.BOLD, 20));
