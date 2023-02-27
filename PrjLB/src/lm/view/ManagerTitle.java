@@ -71,7 +71,7 @@ public class ManagerTitle extends JFrame  {
       getContentPane().add(lblNewLabel);
       
       lblNewLabel_1 = new JLabel("aaa");
-	  lblNewLabel_1.setBounds(796, 516, 164, 15);
+	  lblNewLabel_1.setBounds(785, 516, 168, 15);
 	  getContentPane().add(lblNewLabel_1);
       
       ThreadTime();
