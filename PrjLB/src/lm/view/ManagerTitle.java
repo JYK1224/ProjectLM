@@ -14,7 +14,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import lm.model.LoginVo;
-import javax.swing.SwingConstants;
 
 
 
@@ -32,10 +31,13 @@ public class ManagerTitle extends JFrame{
    LMipgo ipo;
    IpgoList ipl;
    LMProdOrder pro;
-   LMProdRegister prs;
+   LMOrderList lol;
+   Prodproc prs;
    PullQuiry pqr;
    JScrollPane scrollPane;
    ImageIcon icon;
+   
+   
    
    public ManagerTitle() {
       Init();
@@ -49,12 +51,6 @@ public class ManagerTitle extends JFrame{
 
 
    private void Init() {
-	   
-	   
-	   
-	   
-	   
-	   
 	   
       setTitle("물류관리시스템-관리자");
       setSize(1000,580);
@@ -123,7 +119,7 @@ public class ManagerTitle extends JFrame{
 		public void actionPerformed(ActionEvent e) {
 				if(prs != null)
 					prs.dispose();
-					prs = new LMProdRegister();
+					prs = new Prodproc();
 		}
 	});
       
@@ -252,7 +248,7 @@ public class ManagerTitle extends JFrame{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 				if( pro != null )
-					pro.dispose();
+					pro.setVisible(false);
 					pro = new LMProdOrder(userid);
 		}
 	});
@@ -263,6 +259,14 @@ public class ManagerTitle extends JFrame{
       btnNewButton_7_1.setBackground(new Color(204,255,255));
       btnNewButton_7_1.setBounds(784, 188, 153, 59);
       getContentPane().add(btnNewButton_7_1);
+      btnNewButton_7_1.addActionListener(new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if (lol != null)
+				lol.setVisible(false);
+				lol = new LMOrderList();
+		}
+	});
       
       JButton btnNewButton_8_1 = new JButton("상품입고업무");
       btnNewButton_8_1.setIcon(new ImageIcon(ManagerTitle.class.getResource("/lmimage/\uBC84\uD2BC61.png")));
