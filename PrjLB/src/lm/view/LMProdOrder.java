@@ -388,6 +388,9 @@ public class LMProdOrder extends JFrame implements ActionListener{
 		XSSFRow     row   =  null;
 		XSSFCell    cell  =  null;
 
+		int numcols = table.getColumnCount();
+		int numrows = table.getRowCount();
+
 		// 제목줄 처리
 		Vector<String>  cols =  getColumnList();
 		row          =  sheet.createRow( 0 );
@@ -396,23 +399,12 @@ public class LMProdOrder extends JFrame implements ActionListener{
 			cell.setCellValue(  cols.get(i) );    
 		}
 
-		// Data 줄 처리
-		Vector< Vector >  dataList = null;
-
-		if( btnNewButton_1.isSelected() ) {
-			System.out.println("검색 눌림");
-			//						dataList = getDataList( Order3 order3 );
-		}
-		else {
-			dataList = getDataList();
-		}
-
-		for (int i = 0; i < dataList.size(); i++) {
-			row    =   sheet.createRow(i + 1);
-			for (int j = 0; j < dataList.get(i).size() ; j++) {
-				Vector  v  =  dataList.get(i);
-				cell       =  row.createCell( j );
-				cell.setCellValue( (String) v.get( j ) );
+		//데이터 처리
+		for (int i = 0; i < numrows; i++) {
+			row    =  sheet.createRow(i+1);
+			for (int j = 0; j < numcols ; j++) {
+				cell = row.createCell(j);
+				cell.setCellValue((String) table.getValueAt(i, j));
 			}
 		}
 	} // 엑셀 끝
@@ -443,7 +435,7 @@ public class LMProdOrder extends JFrame implements ActionListener{
 	static void getOrderArrayData() {
 		int rowsCount = table.getRowCount();
 		for (int i = 0; i < rowsCount; i++) {
-			
+
 			try {
 				orderDname.add(i, table.getValueAt(i, 0).toString() );	// dname 거래처명
 				orderDate.add(i, table.getValueAt(i, 1).toString() ); 	// orderdate 주문일자
