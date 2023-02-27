@@ -3,6 +3,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -24,10 +26,13 @@ import lm.model.LoginVo;
 
 
 
-public class ManagerTitle extends JFrame{
+public class ManagerTitle extends JFrame  {
+	
    private JTable table;
+   private Thread t1;
    LMProductInquiry piy;
-   String userid; 
+   String userid , timeClock; 
+   JLabel lblNewLabel_1;
    LoginVo log;
    DeptList dpl;
    ShopList spl;
@@ -52,15 +57,25 @@ public class ManagerTitle extends JFrame{
 
 
    private void Init() {
+	   
+	   
       setTitle("물류관리시스템-관리자");
       setSize(1000,580);
       setLocation(600,150);
       getContentPane().setLayout(null);
       
+      
       JLabel lblNewLabel = new JLabel("그린물류시스템");
       lblNewLabel.setFont(new Font("굴림", Font.BOLD, 70));
       lblNewLabel.setBounds(239, 39, 550, 87);
       getContentPane().add(lblNewLabel);
+      
+      lblNewLabel_1 = new JLabel("aaa");
+	  lblNewLabel_1.setBounds(796, 516, 164, 15);
+	  getContentPane().add(lblNewLabel_1);
+      
+      ThreadTime();
+             
       
       JButton btnNewButton = new JButton("신규거래처등록");
       btnNewButton.setFont(new Font("굴림", Font.BOLD, 20));
@@ -267,12 +282,59 @@ public class ManagerTitle extends JFrame{
       getContentPane().add(lbluserid);
       lbluserid.setText("관리자:" + this.userid);
       
+      
+
+
       setVisible(true);
       
    }
 
-   public static void main(String[] args) {
+  
+
+private void ThreadTime() {
+	t1 = new Thread() {
+	
+	 public void run() {
+		 while(true) {
+			 Calendar t = Calendar.getInstance();
+			 
+			 StringBuffer now = new StringBuffer();
+			 
+			 now.append(t.get(Calendar.YEAR));
+			 now.append("년");
+			 now.append(t.get(Calendar.MONTH)+1);
+			 now.append("월");
+			 now.append(t.get(Calendar.DATE));
+			 now.append("일");
+			 now.append(" ");
+			 now.append(t.get(Calendar.HOUR_OF_DAY));
+			 now.append("시");
+			 now.append(t.get(Calendar.MINUTE));
+			 now.append("분");
+			 now.append(t.get(Calendar.SECOND));
+			 now.append("초");
+			 
+			 lblNewLabel_1.setText(now.toString());
+			 
+			 try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		 }
+	 }
+	 
+	};
+	 
+	t1.start();
+}
+
+
+
+public static void main(String[] args) {
    new ManagerTitle();
 
    }
+
+
 }

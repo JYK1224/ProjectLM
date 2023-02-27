@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Calendar;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -13,16 +14,19 @@ import javax.swing.JTable;
 
 
 public class UserTitle extends JFrame{
-   private JTable table;
-   LMProductInquiry piy;
-   String userid;
-   UserTitle utl;
-   DeptList dpl;
-   ShopList spl;
-   IpgoList ipl;
-   LMipgo   ipo;
-   LMProdOrder pro;
-   PullQuiry pqr;
+	
+	Thread t1;
+	JLabel lblNewLabel_1;
+	private JTable table;
+	LMProductInquiry piy;
+	String userid;
+	UserTitle utl;
+	DeptList dpl;
+	ShopList spl;
+	IpgoList ipl;
+	LMipgo   ipo;
+	LMProdOrder pro;
+	PullQuiry pqr;
    
    
    public UserTitle() {
@@ -45,6 +49,11 @@ private void Init() {
       lblNewLabel.setBounds(129, 39, 550, 87);
       getContentPane().add(lblNewLabel);
    
+      lblNewLabel_1 = new JLabel("aaa");
+	  lblNewLabel_1.setBounds(594, 523, 168, 15);
+	  getContentPane().add(lblNewLabel_1);
+      
+      ThreadTime();
      
       JButton btnNewButton_4 = new JButton("상품상세조회");
       btnNewButton_4.setFont(new Font("굴림", Font.BOLD, 20));
@@ -199,4 +208,42 @@ private void Init() {
    new UserTitle();
 
    }
+   
+   private void ThreadTime() {
+		t1 = new Thread() {
+		
+		 public void run() {
+			 while(true) {
+				 Calendar t = Calendar.getInstance();
+				 
+				 StringBuffer now = new StringBuffer();
+				 
+				 now.append(t.get(Calendar.YEAR));
+				 now.append("년");
+				 now.append(t.get(Calendar.MONTH)+1);
+				 now.append("월");
+				 now.append(t.get(Calendar.DATE));
+				 now.append("일");
+				 now.append(" ");
+				 now.append(t.get(Calendar.HOUR_OF_DAY));
+				 now.append("시");
+				 now.append(t.get(Calendar.MINUTE));
+				 now.append("분");
+				 now.append(t.get(Calendar.SECOND));
+				 now.append("초");
+				 
+				 lblNewLabel_1.setText(now.toString());
+				 
+				 try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			 }
+		 }
+		 
+		};
+		 
+		t1.start();
+	}
 }
