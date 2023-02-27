@@ -55,7 +55,7 @@ public class DeptProc extends JFrame{
 	
 		
 		setTitle("그린물류시스템");
-		icon = new ImageIcon("D:/ws/java/PrjLM5/src/lmimage/신규거래처조회111.png");
+		icon = new ImageIcon("./image/신규거래처조회111.png");
 	      
 	      JPanel panel = new JPanel() {
 	         public void paintComponent(Graphics g) {
@@ -118,7 +118,7 @@ public class DeptProc extends JFrame{
 		//등록
 		JButton btnIn_1 = new JButton("등록");
 		btnIn_1.setFont(new Font("새굴림", Font.PLAIN, 13));
-		btnIn_1.setIcon(new ImageIcon(DeptProc.class.getResource("/lmimage/\uC2E0\uADDC\uAC70\uB798\uCC98\uB4F1\uB85D\uBC84\uD2BC.png")));
+		btnIn_1.setIcon(new ImageIcon(DeptProc.class.getResource("/lmimage/신규거래처등록버튼.png")));
 		btnIn_1.setBounds(18, 367, 70, 32);
 		btnIn_1 .setHorizontalTextPosition(JButton.CENTER); // 텍스트 가운데
 		btnIn_1.addActionListener(new ActionListener() {
