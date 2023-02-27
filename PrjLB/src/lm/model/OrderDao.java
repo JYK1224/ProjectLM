@@ -83,7 +83,7 @@ public class OrderDao {
 	}
 
 	// 주문 테이블 검색 후 불러오기
-	public Vector<Vector> getOrder(String search) {
+	public Vector<Vector> getOrder(String search , String userid) {
 
 		Vector<Vector>  list = new Vector<Vector>();   // 조회된 결과전체 대응 : rs
 
@@ -116,7 +116,7 @@ public class OrderDao {
 				v.add( iPrice );
 				v.add( stockNum );
 				v.add( "" );
-				v.add( userName );
+				v.add( userid );
 
 
 				list.add( v );  //  전체 목록에 추가
@@ -268,7 +268,7 @@ public class OrderDao {
 
 
 	// 주문하기
-	public void insertList(ArrayList<Object> orderNum, ArrayList<Object> orderDate, ArrayList<Object> orderDname, ArrayList<Object> orderPname) {
+	public void insertList(ArrayList<Object> orderNum, ArrayList<Object> orderDate, ArrayList<Object> orderDname, ArrayList<Object> orderPname, String userid) {
 
 		int j = orderNum.size();
 
@@ -289,7 +289,7 @@ public class OrderDao {
 						+ "    (SELECT NVL(MAX(orderid), 0) + 1 FROM ordering),\r\n"
 						+ "    ? ,\r\n"
 						+ "    TO_date( ? , 'YYYY-MM-DD HH:MI:SS' ) ,\r\n"
-						+ "    71695210,\r\n"
+						+ "    ?,\r\n"
 						+ "    (SELECT PID FROM PRODUCT WHERE PNAME =  ? ),\r\n"
 						+ "    (SELECT DID FROM DEPT_ACC WHERE DNAME =  ? )\r\n"
 						+ ")";
@@ -300,9 +300,9 @@ public class OrderDao {
 					pstmt  = conn.prepareStatement(sql);			
 					pstmt.setString(1, (String) orderNum.get(i) );		// 주문수량
 					pstmt.setString(2, (String) orderDate.get(i));		// 주문일자
-					//			pstmt.setString(3, username);	// 주문직원ID
-					pstmt.setString(3, (String) orderPname.get(i));	    // 상품명
-					pstmt.setString(4, (String) orderDname.get(i));		// 거래처명
+					pstmt.setString(3, userid);	// 주문직원ID
+					pstmt.setString(4, (String) orderPname.get(i));	    // 상품명
+					pstmt.setString(5, (String) orderDname.get(i));		// 거래처명
 
 					aftcnt = pstmt.executeUpdate();
 

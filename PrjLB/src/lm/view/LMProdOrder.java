@@ -40,6 +40,7 @@ import net.sourceforge.jdatepicker.impl.UtilDateModel;
 public class LMProdOrder extends JFrame implements ActionListener{
 
 	// Fields
+	private String userid;
 	private static JFrame frame;
 	private static JTextField textField, textField_1, textField_2;
 	private static String selDate = "";
@@ -66,7 +67,8 @@ public class LMProdOrder extends JFrame implements ActionListener{
 
 	// this.setVisible(false) : 창 꺼야 할때 addActionListener 에 추가
 
-	public LMProdOrder() {
+	public LMProdOrder(String userid) {
+		this.userid = userid;
 		initComponent();
 	}
 
@@ -331,7 +333,7 @@ public class LMProdOrder extends JFrame implements ActionListener{
 	private Vector<Vector> getDataList(LMProdOrder order3) {
 		String          search = textField.getText();
 		OrderDao       dao   =  new OrderDao();
-		Vector<Vector>  list  =  dao.getOrder(search);
+		Vector<Vector>  list  =  dao.getOrder(search, userid);
 
 		return list;
 	}
@@ -351,10 +353,6 @@ public class LMProdOrder extends JFrame implements ActionListener{
 		return cols;
 	}
 
-	public static void main(String[] args) {
-
-		order3 = new LMProdOrder();
-	}
 
 
 	// 엑셀 저장형식
@@ -424,7 +422,7 @@ public class LMProdOrder extends JFrame implements ActionListener{
 	private void addList() {
 		getOrderArrayData();
 		OrderDao dao = new OrderDao();			
-		dao.insertList(orderNum,orderDate,orderDname,orderPname);						
+		dao.insertList(orderNum,orderDate,orderDname,orderPname, userid);						
 		orderNum.clear();
 		orderDate.clear();
 		orderDname.clear();
