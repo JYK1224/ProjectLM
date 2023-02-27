@@ -77,6 +77,7 @@ public class Login extends JFrame {
 		btn1.setHorizontalAlignment(SwingConstants.LEADING);
 		btn1.setBounds(340, 276, 138, 51);
 		btn1.setBorderPainted(false);
+		btn1.setFocusable(false);
 		btn1.setContentAreaFilled(false);
 		btn1.setFocusPainted(false);
 		
@@ -133,6 +134,9 @@ public class Login extends JFrame {
 						dispose();
 				}else{
 					JOptionPane.showMessageDialog(null, "실패 : 아이디와 비밀번호를 확인해주세요");
+					textField.grabFocus();
+					textField.setText("");
+					passwordField.setText("");
 				}
 			}
 		});
