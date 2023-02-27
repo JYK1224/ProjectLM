@@ -77,7 +77,7 @@ public class DeptProc extends JFrame{
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 		
 		JLabel lblTitle= new JLabel("신규 거래처 등록");
-		lblTitle.setBounds(142, 27, 237, 69);
+		lblTitle.setBounds(152, 27, 237, 69);
 		lblTitle.setFont(new Font("굴림", Font.BOLD, 30));
 		
 		JLabel lblCode = new JLabel("거래처코드");
