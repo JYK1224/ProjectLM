@@ -192,7 +192,7 @@ public class DeptProc extends JFrame{
 		setLocation(500,200);
 		setSize(450,450);
 		setVisible(true);
-		
+		setResizable(false);
 	}
 	//조회
 	protected void findDept() {

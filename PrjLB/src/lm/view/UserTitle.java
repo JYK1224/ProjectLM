@@ -191,17 +191,17 @@ private void Init() {
       panel.setBounds(798, 565, 139, 29);
       getContentPane().add(panel);
       
-      table = new JTable();
-      table.setBounds(35, 136, 720, 377);
-      getContentPane().add(table);
-      setVisible(true);
-      
       JLabel lbluserid = new JLabel("사용자");
       lbluserid.setFont(new Font("굴림", Font.BOLD, 15));
       lbluserid.setBounds(35, 10, 165, 40);
       getContentPane().add(lbluserid);
       lbluserid.setText("사용자:" + this.userid);
       
+      table = new JTable();
+      table.setBounds(35, 136, 720, 377);
+      getContentPane().add(table);
+      setVisible(true);
+      setResizable(false);
    }
 
    public static void main(String[] args) {

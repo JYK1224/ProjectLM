@@ -160,7 +160,7 @@ public class LMProdRegister extends JFrame{
 		setVisible(true);
 		setLocation(600,150);
 		setSize(400,600);
-		
+		setResizable(false);
 	}
 
 	private void gbAdd(JComponent c, int x, int y, int w, int h) {

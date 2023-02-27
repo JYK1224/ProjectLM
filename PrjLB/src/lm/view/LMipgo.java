@@ -183,6 +183,7 @@ private void init() {
             setLocation(200, 200);
             setVisible(true); // 화면에 보이게
             setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // x버튼 눌렀을때 메모리에서 제거 부탁하는 명령   
+            setResizable(false);
 }
 
 

@@ -174,7 +174,7 @@ public class Proc extends JFrame{
 		this.setLocation(600,230);
 		setSize(350,500);
 		setVisible(true);
-		
+		setResizable(false);
 	}
 
 	protected void findUser() {

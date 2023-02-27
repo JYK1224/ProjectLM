@@ -137,6 +137,7 @@ public class UserList extends JFrame implements ActionListener, MouseListener{
 		this.setLocation(500,150);
 		setSize(600,500);
 		setVisible(true);
+		setResizable(false);
 	}
 
 

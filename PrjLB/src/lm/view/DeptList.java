@@ -145,6 +145,7 @@ import lm.model.DeptDao;
 			this.setLocation(500,150);
 			setSize(600,500);
 			setVisible(true);
+			setResizable(false);
 		}
 
 		//전체 조회

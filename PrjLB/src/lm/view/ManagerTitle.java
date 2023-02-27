@@ -286,7 +286,7 @@ public class ManagerTitle extends JFrame  {
 
 
       setVisible(true);
-      
+      setResizable(false);
    }
 
   

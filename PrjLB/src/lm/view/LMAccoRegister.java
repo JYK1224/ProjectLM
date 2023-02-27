@@ -139,7 +139,7 @@ public class LMAccoRegister extends JFrame{
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setVisible(true);
 		setSize(400,300);
-		
+		setResizable(false);
 	}
 
 	private void gbAdd(JComponent c, int x, int y, int w, int h) {

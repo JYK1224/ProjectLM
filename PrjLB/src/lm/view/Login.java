@@ -144,7 +144,7 @@ public class Login extends JFrame {
 		setLocation(700,300);
 		setSize(500,400);
 		setVisible(true);
-		
+		setResizable(false);
 	}	
 	
 	private void gbadd(JComponent c, int x, int y, int w, int h) {

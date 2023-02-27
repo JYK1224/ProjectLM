@@ -141,7 +141,7 @@ public class Prodproc extends JFrame{
 		setVisible(true);
 		setLocation(600,150);
 		setSize(400,600);
-		
+		setResizable(false);
 	}
 	
 	protected void cnProd() {
