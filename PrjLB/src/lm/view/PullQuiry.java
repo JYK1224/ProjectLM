@@ -542,9 +542,7 @@ public class PullQuiry extends JFrame implements ActionListener{
 		XSSFSheet     sheet    =  workbook.createSheet("Data");
 
 
-		if(ra3.isSelected())getWorkbook_Datara3( sheet );
-		if(ra2.isSelected())getWorkbook_Datara2(sheet);
-		if(ra1.isSelected())getWorkbook_Datara1(sheet);
+		getWorkbook_Data(sheet);
 
 		// 파일 저장
 		FileOutputStream  fos = null;
@@ -564,38 +562,17 @@ public class PullQuiry extends JFrame implements ActionListener{
 
 	}
 
-	private void getWorkbook_Datara3(XSSFSheet sheet) {
+	private void getWorkbook_Data(XSSFSheet sheet) {
 		XSSFRow     row   =  null;
 		XSSFCell    cell  =  null;
 		PullquiryDAO dao = new PullquiryDAO(this);
 
-		// 제목줄 처리
-		Vector<String>  cols =  getColumnList();
-		row          =  sheet.createRow( 0 );
-		for (int i = 0; i < cols.size(); i++) {
-			cell     =  row.createCell(i);
-			cell.setCellValue(  cols.get(i) );    
-		}
-		// Data 줄 처리 r3
-		Vector< Vector >  dataList = dao.ra11();
-		for (int i = 0; i < dataList.size(); i++) {
-			row    =   sheet.createRow(i + 1);
-			for (int j = 0; j < dataList.get(i).size() ; j++) {
-				Vector  v  =  dataList.get(i);
-				cell       =  row.createCell( j );
-				cell.setCellValue( (String) v.get( j ) );
-			}
 
-		}
 
-	}
+		int numcols = jtb1.getColumnCount();
+		int numrows = jtb1.getRowCount();
 
-	private void getWorkbook_Datara2(XSSFSheet sheet) {
-		XSSFRow     row   =  null;
-		XSSFCell    cell  =  null;
-		PullquiryDAO dao = new PullquiryDAO(this);
-
-		// 제목줄 처리
+		//제목줄 처리
 		Vector<String>  cols =  getColumnList();
 		row          =  sheet.createRow( 0 );
 		for (int i = 0; i < cols.size(); i++) {
@@ -603,44 +580,18 @@ public class PullQuiry extends JFrame implements ActionListener{
 			cell.setCellValue(  cols.get(i) );    
 		}
 
-		// Data 줄 처리 ra2
-		Vector< Vector >  dataList2 = dao.ra33();
-		for (int i = 0; i < dataList2.size(); i++) {
-			row    =   sheet.createRow(i + 1);
-			for (int j = 0; j < dataList2.get(i).size() ; j++) {
-				Vector  v  =  dataList2.get(i);
-				cell       =  row.createCell( j );
-				cell.setCellValue( (String) v.get( j ) );
+		//데이터 처리
+		for (int i = 0; i < numrows; i++) {
+			row    =  sheet.createRow(i+1);
+			for (int j = 0; j < numcols ; j++) {
+				cell = row.createCell(j);
+				cell.setCellValue((String) jtb1.getValueAt(i, j));
 			}
-
-		}
-	}
-
-	private void getWorkbook_Datara1(XSSFSheet sheet) {
-		XSSFRow     row   =  null;
-		XSSFCell    cell  =  null;
-		PullquiryDAO dao = new PullquiryDAO(this);
-
-		// 제목줄 처리
-		Vector<String>  cols =  getColumnList();
-		row          =  sheet.createRow( 0 );
-		for (int i = 0; i < cols.size(); i++) {
-			cell     =  row.createCell(i);
-			cell.setCellValue(  cols.get(i) );    
-		}
-
-		// Data 줄 처리 ra1
-		String com =comboboxString();
-		Vector< Vector >  dataList1 = dao.ra22(com);
-		for (int i = 0; i < dataList1.size(); i++) {
-			row    =   sheet.createRow(i + 1);
-			for (int j = 0; j < dataList1.get(i).size() ; j++) {
-				Vector  v  =  dataList1.get(i);
-				cell       =  row.createCell( j );
-				cell.setCellValue( (String) v.get( j ) );
-			}
-
 		}
 
 	}
+
+
+
+
 }
