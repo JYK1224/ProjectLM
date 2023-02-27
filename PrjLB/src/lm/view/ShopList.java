@@ -113,7 +113,7 @@ import lm.model.ShopDao;
 					int mi = now.getMinute();
 					
 					String fmt = "D:\\excel\\ ";
-					String fmt2 = "jtable_%4d %02d %02d %2d %2d.xlsx";
+					String fmt2 = "점포_%4d %02d %02d %2d %2d.xlsx";
 					String filepath = String.format(fmt+fmt2, year, mm, dd, hh, mi );
 					excelWrite(filepath);
 					JOptionPane.showMessageDialog(btnEx, fmt +"로 엑셀파일 저장되었습니다");
@@ -206,24 +206,28 @@ import lm.model.ShopDao;
 		private void getWorkbook_Data(XSSFSheet sheet) {
 			XSSFRow   row = null;
 			XSSFCell cell = null;
-			
-			Vector<String> cols = getColumnlist();
-			row = sheet.createRow(0);
+
+			int numcols = jtable.getColumnCount();
+			int numrows = jtable.getRowCount();
+
+			//제목줄 처리
+			Vector<String>  cols =  getColumnlist();
+			row          =  sheet.createRow( 0 );
 			for (int i = 0; i < cols.size(); i++) {
-				cell = row.createCell(i);
-				cell.setCellValue(cols.get(i));
-				
+				cell     =  row.createCell(i);
+				cell.setCellValue(  cols.get(i) );    
 			}
-			Vector<Vector> dataList =  getDatalist();
-			for (int i = 0; i < dataList.size(); i++) {
-				row = sheet.createRow(i + 1);
-				for (int j = 0; j < dataList.get(i).size(); j++) {
-					Vector v = dataList.get(i);
-					    cell = row.createCell(j);
-					    cell.setCellValue((String)v.get(j));
+
+			//데이터 처리
+			for (int i = 0; i < numrows; i++) {
+				row    =  sheet.createRow(i+1);
+				for (int j = 0; j < numcols ; j++) {
+					cell = row.createCell(j);
+					cell.setCellValue((String) jtable.getValueAt(i, j));
 				}
-			} 
+			}
 		}
+		
 		//조회
 
 		private Vector<Vector> FindShop(String search ){
