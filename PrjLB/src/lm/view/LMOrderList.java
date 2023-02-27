@@ -260,8 +260,8 @@ public class LMOrderList implements ActionListener {
 				int            mi    =  now.getMinute();
 				int            ss    =  now.getSecond();
 
-				String  fmt      = "d:\\ws\\java\\DBProject02\\src\\";
-				fmt             += "jTable_%4d%02d%02d%02d%02d%02d.xlsx";
+				String  fmt      = "D:\\excel\\";
+				fmt             += "주문리스트_%4d%02d%02d%02d%02d%02d.xlsx";
 				String  filepath = String.format(fmt, year, mm, dd, hh, mi, ss );
 
 				System.out.println( filepath );
@@ -281,9 +281,10 @@ public class LMOrderList implements ActionListener {
 				try {
 					fos = new FileOutputStream( filepath );
 					workbook.write(fos);
-					System.out.println("저장완료");
+					JOptionPane.showMessageDialog(null, "저장에 성공하였습니다");
 				} catch (IOException e) {
-					System.out.println("저장Fail");			
+					JOptionPane.showMessageDialog(null, "저장을 실패하였습니다. 저장공간의 위치를 확인해주세요. \n"
+							+"저장공간: "  +  "D:\\excel");			
 					e.printStackTrace();
 				} finally {
 					try {
