@@ -329,10 +329,7 @@ public class ManagerTitle extends JFrame{
       
    }
 
-   public static void main(String[] args) {
-   new ManagerTitle();
 
-   }
  private void ThreadTime() {
 	t1 = new Thread() {
 	
