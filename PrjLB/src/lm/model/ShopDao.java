@@ -147,7 +147,7 @@ public class ShopDao {
 		String sql = " select shopid, shopname, sincharge, sphone "
 				   + " from shop "
 				   + " where shopname like "
-				   + " '%" + search.trim() + "%' ";
+				   + " UPPER('%" + search.trim() + "%') ";
 				   
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
