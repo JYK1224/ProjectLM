@@ -5,16 +5,16 @@ import java.awt.Dimension;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.time.LocalDate;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Vector;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -25,60 +25,46 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import lm.model.IpgoDao;
+import lm.model.IpgoVo;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
-import java.awt.Font;
 
 
 
-import java.awt.BorderLayout;
-import java.awt.TextField;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
-import java.util.Vector;
-
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-
-import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
-
-import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
-import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
-import net.sourceforge.jdatepicker.impl.UtilDateModel;
-import javax.swing.SwingConstants;
 
 
 
 public class LMipgo extends JFrame 
-implements  ActionListener, MouseListener {
+implements  ActionListener  {
 
+	// 필드
    static LMipgo    mList = null;
    IpgoList         iProc = null;
    
-   JLabel        lblAcc, lblMonth, lblDay, lblTot; // 거래처명, 월, 일
-   TextField     txtId, txtTot; // 검색할 항목
+   JLabel        lblAcc, lblMonth, lblDay; // 거래처명, 월, 일
+   TextField     txtId; // 검색할 항목
    JButton       btnFind, btnSet, btnToExcel, btnList; //검수확정, 인쇄(엑셀로 보내기)
    JPanel        topPane, botPane;
    JTable        jTable;
    JScrollPane   pane;
+   
+   private static String selDate = "";
+   public static IpgoVo lmvo = new IpgoVo();
+   
+   public static ArrayList<Object> inDate = new ArrayList<Object>();
+   public static ArrayList<Object> inPname = new ArrayList<Object>();
+   public static ArrayList<Object> inNum = new ArrayList<Object>();
+   
+   
+   
+   
+   
+   
+   
    
    public LMipgo() {   
       init();
@@ -90,12 +76,10 @@ private void init() {
    
    topPane      =  new JPanel();
    lblAcc       =  new JLabel("거래처명: ");
-   lblTot       =  new JLabel("                  총 입고가격: ");
-   txtId        =  new TextField(20);  
-   txtTot       =  new TextField(20);  
-   btnFind      =  new JButton("검색");    
-   btnSet       =  new JButton("검수확정");    
-   btnToExcel   =  new JButton("인쇄");
+   txtId        =  new TextField(30);  
+   btnFind      =  new JButton("입고일자지정 & 검색");    
+   btnSet       =  new JButton("입고확정");    
+   btnToExcel   =  new JButton("엑셀로 저장");
    btnList      =  new JButton("입고내역 조회");
    lblDay       =  new JLabel("         날짜 선택: ");
    botPane      =  new JPanel();
@@ -112,17 +96,44 @@ private void init() {
    JDatePanelImpl datePanel = new JDatePanelImpl(model);
    JDatePickerImpl datePicker = new JDatePickerImpl(datePanel);
    datePicker.setPreferredSize(new Dimension(250, 30));
-//   Date selectedDate = (Date) datePicker.getModel().getValue();
-//   UtilDateModel model1 = new UtilDateModel();
-//   model1.setDate(1990, 8, 24);
+   
+   datePicker.addActionListener(new ActionListener() {		// 선택한 날짜 기준으로, 주문일자와 입고일자에 대입
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			selDate = datePicker.getJFormattedTextField().getText();
+
+			// 선택된 날짜를 DATE 타입으로 저장
+			Date selectedDate = (Date) datePicker.getModel().getValue();
+
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(selectedDate);
+			DateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+			String current = df.format(cal.getTime());
+			//	        System.out.println("current: " + df.format(cal.getTime()));
+
+
+			cal.add(Calendar.DATE, +1);		// 입고예정일 = 주문일 + 1
+			String after = df.format(cal.getTime());
+			//	        System.out.println("after: " + df.format(cal.getTime()));
+
+
+			lmvo.setIndate(current);	// 날짜 갱신
+			//				jTableRefresh(); 	// 테이블 새로고침 메소드
+			
+			System.out.println(current);
+			
+			
+		}
+});
+   
+ 
 
    topPane.add(datePicker);
    topPane.add( btnFind );
    topPane.add( btnSet );
    topPane.add( btnToExcel );
    botPane.add(btnList);
-   botPane.add(lblTot);
-   botPane.add(txtTot);
 
    
    // 버튼에 기능 부여
@@ -145,8 +156,8 @@ private void init() {
 				System.out.println("입고내역 조회 클릭");
 				if(  iProc != null )
 					iProc.dispose();  // 강제로 닫는다
-//				System.out.println("this:" + this);
-//				System.out.println("mList:" + mList);
+				System.out.println("this:" + this);
+				System.out.println("mList:" + mList);
 				iProc = new IpgoList( mList );				
 			}
 		});
@@ -154,36 +165,27 @@ private void init() {
    
    
       // -----------------------------------------------------------------------------      
-      jTable      =   new  JTable();      
-      // data 를 model 에 담아서 채움
-      jTable.setModel(
-            new DefaultTableModel( getDataList() , getColumnList() ) {            
-               // 기본 option 설정 - 각 cell 에 대한 편집가능여부 :isCellEditable
-               @Override
-               public boolean isCellEditable(int row, int column) {
-                     int  currLine = jTable.getSelectedRow();  // 선택한 줄만 수정가능
-                     if( row == currLine  )
-                        return true; 
-                  return false;   // 모든 cell 편집불가능
-               }            
-            }   
-            );
+      jTable      =   new  JTable() {
+    	  @Override
+			public boolean isCellEditable(int row, int column) {
+				int  currColumn = jTable.getSelectedColumn();  // 선택한 열만 수정가능
+				if( currColumn == 7  )
+					return true;			
+				return false;   // 모든 cell 편집불가능
+			}
+      };      
       
-         
-         //jTable 의 Row 이 더블클릭(마우스 동작연결)되면
-         jTable.addMouseListener( this );
-         
-         
+      
+      
          pane  = new JScrollPane( jTable );
-         this.add( pane );
+         getContentPane().add( pane );
          
             getContentPane().add(topPane, BorderLayout.NORTH);
             getContentPane().add(botPane, BorderLayout.SOUTH);
-            setSize(1100, 700); // 창크기
+            setSize(1200, 700); // 창크기
             setLocation(200, 200);
             setVisible(true); // 화면에 보이게
             setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // x버튼 눌렀을때 메모리에서 제거 부탁하는 명령   
-            setResizable(false);
 }
 
 
@@ -205,51 +207,23 @@ private void init() {
             Vector<String>  cols = new Vector<>();  // 문자배열 대신 사용
             cols.add("거래처명");
             cols.add("주문일자");
+            cols.add("입고 예정일");
             cols.add("상품코드");
             cols.add("상품명");
             cols.add("현재 재고");
             cols.add("주문 수량");
-            cols.add("입고 예정일");
             cols.add("입고 수량");
             cols.add("입고 직원");
             return  cols;
          }
          
          
-         
-         
-      /*   
-           
-         // data 조작
-         // 1. 행과 열 수
-         System.out.println( jt.getRowCount()    );  // 줄수 : row 
-         System.out.println( jt.getColumnCount() );  // 칸수 : column
-         
-         // 2. 칼럼이름 가져오기
-         System.out.println("3번째 칸의 제목:" + jt.getColumnName(2)); // 0~
-         
-         // 3. 데이터 줄 삭제      
-         //  jt.remove(0);  // 작동안함
-         dm.removeRow(0);
-         
-         // 4. data 가져오기 (2,3) 위치의 자료
-         System.out.println(  "(2,3) 위치의 자료:" + dm.getValueAt(2, 3) );
-               
-         // 5. data 수정하기 (2,0) 를 변경
-         dm.setValueAt("han", 2, 0);
-         
-         // 6. 선택한 row selection
-         jt.setRowSelectionInterval(1, 1);
-         
-   */
-
-
    public static void main(String[] args) {
    LMipgo mlist = new LMipgo();
 
    }
 
-//---------------------------------------------------
+//-------------------------------------------------------------------
 
    // implements ActionListener 를 위한 구현
    // 버튼들의 이벤트 처리
@@ -258,14 +232,21 @@ private void init() {
    public void actionPerformed(ActionEvent e) {
       
       switch( e.getActionCommand() ) {  // 눌러진 버튼의 글자
-      case "검색":
-          // 새로고침 클릭
-          System.out.println("검색 클릭");
-          break;
-      case "검수확정":
+      case "입고일자지정 & 검색":
+    	  Vector<Vector> list = getDataList(this);
+			jTableRefresh2(list);
+			break;
+      case "입고확정":
          // 새로고침 클릭
-         System.out.println("검수확정 클릭");
-         jTableRefresh();         
+         System.out.println("입고확정 클릭");
+         
+         
+         try {
+				jTable.editCellAt(-1, -1);	// 마지막 cell의 입력을 완료되려면 셀선택을 테이블 밖으로 빼야함(입력 후 엔터치는 것과 같음)
+			}catch(Exception ex) {}
+			addList();
+			
+			
          break;
       case "엑셀로 저장":
          System.out.println("엑셀로 저장....");
@@ -277,7 +258,7 @@ private void init() {
          int            mi    =  now.getMinute();
          int            ss    =  now.getSecond();
          
-         String  fmt      = "d:\\ws\\java\\DBProject02\\src\\";
+         String  fmt      = "D:\\ws\\excelSave\\";
          fmt             += "jTable_%4d%02d%02d%02d%02d%02d.xlsx";
          String  filepath = String.format(fmt, year, mm, dd, hh, mi, ss );
          
@@ -285,17 +266,60 @@ private void init() {
           excelWrite( filepath );
          
          break;
-//      case "입고내역 조회":
-//    	  System.out.println("입고내역 조회 클릭");
-//			if(  iProc != null )
-//				iProc.dispose();  // 강제로 닫는다
-//			iProc = new IpgoList( this );   // this : 현재 실행중인 MemberList        
-//          break;
+      case "입고내역 조회":
+    	  System.out.println("입고내역 조회 클릭");
+			if(  iProc != null )
+				iProc.dispose();  // 강제로 닫는다
+			iProc = new IpgoList( this );   // this : 현재 실행중인 MemberList        
+          break;
       }
          
    }
+  
    
-   // jTable 검수확정 - data를 변경
+   private Vector<Vector> getDataList(LMipgo lmList) {
+	    String         search =  txtId.getText();
+	    IpgoDao          dao    =  new IpgoDao();
+		Vector<Vector> list   =  dao.getOrder(search);
+
+		return list;
+}
+
+private void addList() {
+	   getInArrayData();
+	   IpgoDao dao = new IpgoDao();		
+		
+		dao.insertList(inDate,inPname,inNum);	
+		System.out.println(inDate);
+		System.out.println(inPname);
+		System.out.println(inNum);
+		
+		inDate.clear();
+		inPname.clear();
+		inNum.clear();
+}
+
+   
+private void getInArrayData() {
+	int rowsCount = jTable.getRowCount();
+	for (int i = 0; i < rowsCount; i++) {
+		
+		try {
+			inDate.add(i, jTable.getValueAt(i, 2).toString() );  //  입고예정일
+			inPname.add(i, jTable.getValueAt(i, 4).toString() ); //  상품명
+			inNum.add(i, jTable.getValueAt(i, 7).toString() ); 	 //  입고수량
+			
+		} catch(NullPointerException e) {
+            System.err.println("table.getValueAt 이 null 입니다.");
+            JOptionPane.showMessageDialog(null, 
+                  "입고일자를 지정해주세요.", "날짜지정오류", JOptionPane.ERROR_MESSAGE);
+            return;
+         }
+
+	}
+}
+
+
    public void jTableRefresh() {
       jTable.setModel(
             new DefaultTableModel( getDataList(),  getColumnList()  ) {
@@ -312,53 +336,28 @@ private void init() {
       
    }
    
-   
- //----------------------------------------------------------
- 	// MouseListener 관련 함수들
+   // 검색이후에 
+   public void jTableRefresh2(Vector<Vector> list) {
+	      jTable.setModel(
+	            new DefaultTableModel( list ,  getColumnList()  ) {
+
+	               @Override
+	               public boolean isCellEditable(int row, int column) {               
+	                  return false;
+	               }
+	               
+	            }
+	         );  // jtable 새로운 데이터를 지정
+	         
+	         jTable.repaint();  // jtable을 새로 그린다
+	      
+	   }
+
  	
- 	@Override
- 	public void mouseClicked(MouseEvent e) {
- 		// 마우스를 클릭하면
- 		// button=1 : 왼쪽, button=2 : 가운데, button=3 : 오른쪽
- 		int     row = jTable.getSelectedRow();
- 		// int     col = jTable.getSelectedColumn();
- 		String  innum  = (String) jTable.getValueAt(row, 0); 
- 		System.out.println( e );	
- 		if ( iProc != null)
- 			iProc.dispose();
- 		iProc = new IpgoList( innum, this );
- 	}
-
- 	@Override
- 	public void mousePressed(MouseEvent e) {
- 		// 마우스버튼 누르고 있는 동안
- 		
- 	}
-
- 	@Override
- 	public void mouseReleased(MouseEvent e) {
- 		// 마우스버튼이 눌러졌다가 놓는 순간
- 		
- 	}
-
- 	@Override
- 	public void mouseEntered(MouseEvent e) {
- 		// 마우스 커서가 특정공간안으로 들어갈때(진입)
- 		
- 	}
-
- 	@Override
- 	public void mouseExited(MouseEvent e) {
- 		// 마우스 커서가 특정공간에서 밖으로 나갈때(이탈)
- 		
- 	}
 
       //-----------------------------------------------------
       // excel 로 저장
-      // Workbook -> .xlsx
-      // -> Sheet 
-      //  -> Row
-      //   -> Cell
+    
       private void excelWrite(String filepath) {
          XSSFWorkbook  workbook =  new XSSFWorkbook();
          XSSFSheet     sheet    =  workbook.createSheet("Data");
@@ -410,5 +409,6 @@ private void init() {
       }
 
 
+	
 
 }

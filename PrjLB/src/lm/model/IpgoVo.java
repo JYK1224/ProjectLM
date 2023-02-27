@@ -11,7 +11,6 @@ public class IpgoVo {
 	private String   ordernum;       // 주문수량
 	private String   userid;         // 입고직원
 	private String   dname;          // 거래처명
-	private String   inndate;        // 입고예정일
 	
 	
 	// Constructor
@@ -27,8 +26,8 @@ public class IpgoVo {
 		this.userid         = userid;
 		this.dname          = dname;
 		this.ordernum       = ordernum;
-		this.inndate        = inndate;
 	}
+	
 	
 	// Getter / Setter
 	public String getIndate() {
@@ -85,19 +84,13 @@ public class IpgoVo {
 	public void setOrdernum(String ordernum) {
 		this.ordernum = ordernum;
 	}
-	public String getInndate() {
-		return inndate;
-	}
-	public void setInndate(String inndate) {
-		this.inndate = inndate;
-	}
 	
 	
 	// toString
 	@Override
 	public String toString() {
 		return "LmVO [indate=" + indate + ", pid=" + pid + ", pname=" + pname + ", stocknum=" + stocknum + ", innum="
-				+ innum + ", orderdate=" + orderdate + ", userid=" + userid + ", dname=" + dname +", ordernum=" + ordernum + ", inndate=" + inndate + "]";
+				+ innum + ", orderdate=" + orderdate + ", userid=" + userid + ", dname=" + dname +", ordernum=" + ordernum + "]";
 	}
 	
 }
