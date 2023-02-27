@@ -20,6 +20,7 @@ import java.util.Vector;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -442,10 +443,18 @@ public class LMProdOrder extends JFrame implements ActionListener{
 	static void getOrderArrayData() {
 		int rowsCount = table.getRowCount();
 		for (int i = 0; i < rowsCount; i++) {
-			orderDname.add(i, table.getValueAt(i, 0).toString() );	// dname 거래처명
-			orderDate.add(i, table.getValueAt(i, 1).toString() ); 	// orderdate 주문일자
-			orderPname.add(i, table.getValueAt(i, 3).toString() );	// pname 상품명
-			orderNum.add(i, table.getValueAt(i, 6).toString() ); 	// ordernum 주문수량
+			
+			try {
+				orderDname.add(i, table.getValueAt(i, 0).toString() );	// dname 거래처명
+				orderDate.add(i, table.getValueAt(i, 1).toString() ); 	// orderdate 주문일자
+				orderPname.add(i, table.getValueAt(i, 3).toString() );	// pname 상품명
+				orderNum.add(i, table.getValueAt(i, 6).toString() ); 	// ordernum 주문수량
+			}catch (NullPointerException e) {
+				System.err.println("table.getValueAt 이 null 입니다.");
+				JOptionPane.showMessageDialog(null, 
+						"주문일자를 지정해주세요.", "날짜지정오류", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
 		}
 	}
 
