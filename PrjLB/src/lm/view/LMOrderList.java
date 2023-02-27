@@ -357,6 +357,7 @@ public class LMOrderList implements ActionListener {
 		//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	// 윈도우빌더라서 ㅅㅂ
 		getFrame().setVisible(true);
 		getFrame().setResizable(false);
+		getFrame().setResizable(false);
 
 	}
 	// 테이블 getDateList
