@@ -209,7 +209,7 @@ public class OrderDao {
 				+ " AND O.USERID = U.USERID (+)\r\n "
 				+ " AND DNAME LIKE '%" + search.toUpperCase().trim() + "%'\r\n "
 				+ " AND ( TO_DATE(O.ORDERDATE) BETWEEN TO_DATE('"+ date1 +"') AND TO_DATE('"+ date2 +"') ) \r\n "
-				+ " ORDER BY O.ORDERDATE DESC ";
+				+ " ORDER BY O.ORDERDATE ASC ";
 
 		String  sql2 = "SELECT D.DNAME , O.ORDERDATE,  P.PID, P.PNAME, P.IPRICE , NVL(S.STOCKNUM, 0) STOCKNUM , O.ORDERNUM, U.USERNAME\r\n"
 				+ "  FROM DEPT_ACC D , ORDERING O , PRODUCT P , STOCK S, USERMNG U\r\n"
@@ -224,10 +224,10 @@ public class OrderDao {
 		PreparedStatement  pstmt = null;
 		ResultSet          rs    = null;
 		try {
-			if (date1 != null && date2 != null) {
-				pstmt = conn.prepareStatement(sql1);
-			} else {
+			if (date1.equals("") && date2.equals("")) {
 				pstmt = conn.prepareStatement(sql2);
+			} else {
+				pstmt = conn.prepareStatement(sql1);
 			}
 
 			rs    = pstmt.executeQuery();
