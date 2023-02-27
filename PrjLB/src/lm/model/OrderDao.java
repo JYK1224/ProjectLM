@@ -89,7 +89,7 @@ public class OrderDao {
 
 		String  sql = "SELECT D.DNAME ,  P.PID, P.PNAME, P.IPRICE , NVL(S.STOCKNUM, 0) STOCKNUM \r\n"
 				+ "FROM DEPT_ACC D , PRODUCT P , STOCK S\r\n"
-				+ "WHERE D.DID = P.DID(+)\r\n"
+				+ "WHERE D.DID(+) = P.DID\r\n"
 				+ "AND P.PID = S.PID(+)\r\n"
 				+ "AND D.DNAME LIKE '%"+ search.toUpperCase().trim() + "%'\r\n"
 				+ "ORDER BY D.DNAME ASC";
