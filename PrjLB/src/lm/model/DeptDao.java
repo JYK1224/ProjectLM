@@ -147,7 +147,7 @@ public class DeptDao {
 		String sql = " select did, dname, dincharge, dphone "
 				   + " from dept_acc "
 				   + " where dname like "
-				   + " '%" + search.trim() + "%' ";
+				   + " UPPER('%" + search.trim() + "%') ";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
