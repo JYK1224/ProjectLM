@@ -1,35 +1,26 @@
 package lm.view;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Calendar;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTable;
-
 import lm.model.LoginVo;
-import javax.swing.ImageIcon;
-import java.awt.Panel;
-import java.awt.GridLayout;
-import java.awt.SystemColor;
+import javax.swing.SwingConstants;
 
 
 
 public class ManagerTitle extends JFrame{
+   Thread t1;
+   JLabel lbluserid_1;
    LMProductInquiry piy;
    String userid; 
    LoginVo log;
@@ -308,10 +299,18 @@ public class ManagerTitle extends JFrame{
       JLabel lbluserid = new JLabel("관리자");
       lbluserid.setForeground(SystemColor.text);
       lbluserid.setFont(new Font("새굴림", Font.BOLD, 15));
-      lbluserid.setBounds(12, 440, 165, 40);
+      lbluserid.setBounds(12, 460, 165, 40);
       getContentPane().add(lbluserid);
       lbluserid.setText("관리자:" + this.userid);
       
+      lbluserid_1 = new JLabel("");
+      lbluserid_1.setForeground(SystemColor.text);
+      lbluserid_1.setFont(new Font("새굴림", Font.BOLD, 15));
+      lbluserid_1.setBounds(12, 496, 153, 35);
+      getContentPane().add(lbluserid_1);
+      ImageIcon ldd = new ImageIcon();
+      
+      ThreadTime();
       
       
       JLabel lblNewLabel_1 = new JLabel("dddddd");
@@ -324,11 +323,6 @@ public class ManagerTitle extends JFrame{
       lblNewLabel_1.setBounds(0, 0, 984, 560);
       getContentPane().add(lblNewLabel_1);
       
-      JLabel lblNewLabel = new JLabel("New label");
-      lblNewLabel.setFont(new Font("굴림", Font.BOLD, 15));
-      lblNewLabel.setBounds(12, 490, 165, 41);
-      getContentPane().add(lblNewLabel);
-      ImageIcon ldd = new ImageIcon();
       
       
       setVisible(true);
@@ -339,4 +333,43 @@ public class ManagerTitle extends JFrame{
    new ManagerTitle();
 
    }
+ private void ThreadTime() {
+	t1 = new Thread() {
+	
+	 public void run() {
+		 while(true) {
+			 Calendar t = Calendar.getInstance();
+			 
+			 StringBuffer now = new StringBuffer();
+			 StringBuffer now1 = new StringBuffer();
+			 
+			 now.append(t.get(Calendar.YEAR));
+			 now.append("년");
+			 now.append(t.get(Calendar.MONTH)+1);
+			 now.append("월");
+			 now.append(t.get(Calendar.DATE));
+			 now.append("일");
+			
+			 now1.append(t.get(Calendar.HOUR_OF_DAY));
+			 now1.append("시");
+			 now1.append(t.get(Calendar.MINUTE));
+			 now1.append("분");
+			 now1.append(t.get(Calendar.SECOND));
+			 now1.append("초");
+			 
+			 lbluserid_1.setText("<html><body>"+now.toString()+"<br>"
+			 		+now1.toString()+ "</body></html>");
+			 
+			 try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		 }
+	 }
+	 
+	};
+	 
+	t1.start();
+}
 }
