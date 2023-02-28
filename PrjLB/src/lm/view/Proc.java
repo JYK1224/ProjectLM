@@ -120,7 +120,7 @@ public class Proc extends JFrame{
 		 btnIn.setHorizontalTextPosition(JButton.CENTER);
 		panel.add(btnIn);
 		txtindate = new JTextField();
-		txtindate.setBounds(198, 330, 186, 33);
+		txtindate.setBounds(182, 330, 186, 33);
 		panel.add(txtindate);
 		txtindate.setColumns(10);
 		txtindate.setText(today);
@@ -138,7 +138,7 @@ public class Proc extends JFrame{
 		panel.add(lblid);
 		
 		txtid = new JTextField();
-		txtid.setBounds(198, 129, 186, 25);
+		txtid.setBounds(182, 129, 202, 25);
 		panel.add(txtid);
 		txtid.setColumns(10);
 		JLabel lblpw = new JLabel("비밀번호");
@@ -152,11 +152,11 @@ public class Proc extends JFrame{
 		lblname.setBounds(29, 199, 81, 25);
 		panel.add(lblname);
 		txtname = new JTextField();
-		txtname.setBounds(198, 199, 186, 25);
+		txtname.setBounds(182, 199, 202, 25);
 		panel.add(txtname);
 		txtname.setColumns(10);
 		txtp = new JPasswordField();
-		txtp.setBounds(198, 164, 186, 25);
+		txtp.setBounds(182, 164, 202, 25);
 		panel.add(txtp);
 		JLabel lblty = new JLabel("유형");
 		lblty.setFont(new Font("새굴림", Font.PLAIN, 12));
@@ -167,13 +167,13 @@ public class Proc extends JFrame{
 		user = new JRadioButton("사용자");
 		user.setFont(new Font("새굴림", Font.PLAIN, 12));
 		user.setBackground(SystemColor.window);
-		user.setBounds(198, 235, 103, 23);
+		user.setBounds(181, 235, 103, 23);
 		panel.add(user);
 		group.add(user);
 		manager = new JRadioButton("관리자");
 		manager.setFont(new Font("새굴림", Font.PLAIN, 12));
 		manager.setBackground(SystemColor.window);
-		manager.setBounds(305, 235, 81, 23);
+		manager.setBounds(288, 235, 96, 23);
 		panel.add(manager);
 		group.add(manager);
 		JLabel lblintro = new JLabel("비고");
@@ -183,12 +183,12 @@ public class Proc extends JFrame{
 		panel.add(lblintro);
 		
 		intro = new JTextField();
-		intro.setBounds(198, 264, 168, 56);
+		intro.setBounds(182, 264, 168, 56);
 		panel.add(intro);
 		
 		JLabel lblTitle = new JLabel("\uD68C\uC6D0\uAC00\uC785");
 		lblTitle.setFont(new Font("굴림", Font.BOLD, 30));
-		lblTitle.setBounds(238, 26, 237, 69);
+		lblTitle.setBounds(223, 25, 237, 69);
 		panel.add(lblTitle);
 		btnIn.addActionListener(new ActionListener() {
 			@Override
