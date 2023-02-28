@@ -103,7 +103,9 @@ public class Prodproc extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				addProd();
-			}	
+				addStock();
+			}
+			
 		});
 		btnUp.addActionListener( new ActionListener() {
 			
@@ -144,6 +146,7 @@ public class Prodproc extends JFrame{
 		setResizable(false);
 	}
 	
+
 	protected void cnProd() {
 		this.txtPid.setText(" ");
 		this.txtPname.setText(" ");
@@ -156,26 +159,10 @@ public class Prodproc extends JFrame{
 	}
 
 	protected void deProd() {
-		String pid = this.txtPid.getText();
-		if (pid.equals(" "))
-			return;
-		ProdDao pdao = new ProdDao();
-		int choice = JOptionPane.showConfirmDialog(null, 
-				pid + " 삭제하시겠습니까",
-				"삭제",
-				JOptionPane.OK_CANCEL_OPTION);
-		String msg = "";
-		if (choice == 0 ) {
-			int aftcnt = pdao.deletProd(pid);
-			if(aftcnt == 0) {
-				msg = aftcnt + "개 지웁니다";
-			}
-		}else {
-			msg = "취소하였습니다";
-		}
 		JOptionPane.showMessageDialog(null, 
-				msg + " ", "삭제하였습니다",
-				JOptionPane.OK_OPTION);
+		"데이터 베이스의 모든 내용이 삭제되기"
+		+ " 때문에 담당자에게 문의해주세요");
+		
 	}
 
 	protected void upProd() {
@@ -207,12 +194,18 @@ public class Prodproc extends JFrame{
 		ProdDao pdao = new ProdDao();
 		Prodvo  pv = getViewdata();
 		int aftcnt = pdao.insertProd(pv);
-		
-		JOptionPane.showMessageDialog(null, aftcnt + " 저장" , "추가",
-				JOptionPane.CLOSED_OPTION);
-		
+				
 	}
 
+	protected void addStock() {
+		ProdDao pdao = new ProdDao();
+		String pid = this.txtPid.getText();
+		String dname = (String) this.cmDname.getSelectedItem();
+		int aftcnt = pdao.insertStock(pid, dname);
+		
+		JOptionPane.showMessageDialog(null, aftcnt + " 저장" , "추가",
+				JOptionPane.CLOSED_OPTION);		
+	}
 	private Prodvo getViewdata() {
 		String pid = this.txtPid.getText();
 		String pname = this.txtPname.getText();

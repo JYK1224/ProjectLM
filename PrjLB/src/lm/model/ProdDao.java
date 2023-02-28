@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import oracle.jdbc.OracleConnection;
 
 public class ProdDao {
@@ -81,7 +83,7 @@ public class ProdDao {
 			list.add(dname);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "저장에 실패하였습니다");
 		}finally {
 			try {
 				if(pstmt != null) pstmt.close();
@@ -142,6 +144,32 @@ public class ProdDao {
 			} catch (SQLException e) {
 			}
 		}
+		return aftcnt;
+	}
+	public int insertStock(String pid, String dname) {
+		String sql = " INSERT INTO STOCK "
+				+ " (STOCKID, STOCKNUM, PID, DID) "
+				+ " VALUES ((SELECT MAX(STOCKID) +1 FROM STOCK),?,?,(Select did from dept_acc where dname = ?))";
+		PreparedStatement pstmt = null;
+		int aftcnt = 0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, 0);
+			pstmt.setString(2, pid);
+			pstmt.setString(3, dname);
+			aftcnt = pstmt.executeUpdate();			
+		} catch (SQLException e) {
+		
+			e.printStackTrace();
+		}finally {			
+			try {
+				if(pstmt != null)pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	
+				
 		return aftcnt;
 	}
 }
