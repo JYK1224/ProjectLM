@@ -27,6 +27,7 @@ public class UserTitle extends JFrame{
 	LMipgo   ipo;
 	LMProdOrder pro;
 	PullQuiry pqr;
+	LMOrderList lol;
    
    
    public UserTitle() {
@@ -176,6 +177,16 @@ private void Init() {
       btnNewButton_7_1.setBackground(new Color(204,255,255));
       btnNewButton_7_1.setBounds(593, 171, 153, 59);
       getContentPane().add(btnNewButton_7_1);
+      btnNewButton_7_1.addActionListener(new ActionListener() {
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if(lol != null)
+			lol.getFrame().dispose();
+			lol = new LMOrderList();
+		}
+	});
+      
       
       JButton btnNewButton_8_1 = new JButton("상품입고업무");
       btnNewButton_8_1.setIcon(new ImageIcon(UserTitle.class.getResource("/lmimage/\uBC84\uD2BC61.png")));
