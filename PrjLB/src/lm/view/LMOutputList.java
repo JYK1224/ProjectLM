@@ -24,13 +24,13 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import lm.model.OutputDao;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
@@ -67,7 +67,7 @@ public class LMOutputList implements ActionListener {
 		setFrame(new JFrame());
 		
 		getFrame().setTitle("출고 내역 조회");
-		getFrame().setBounds(700, 300, 1000, 600);
+		getFrame().setBounds(700, 300, 1100, 600);
 		getFrame().getContentPane().setLayout(new FlowLayout(FlowLayout.CENTER));	
 
 		// 시작일 달력
@@ -245,6 +245,7 @@ public class LMOutputList implements ActionListener {
 		// 엑셀로저장
 		btnNewButton_2 = new JButton("엑셀로 저장");
 		btnNewButton_2.setPreferredSize(new Dimension(100, 30));	// FlowLayout의 컴포넌트 리사이즈 방법
+		btnNewButton_2.setToolTipText("d:/ws/java/DBProject02/src/jTable_20230220142558.xlsx");
 		getFrame().getContentPane().add(btnNewButton_2);
 		btnNewButton_2.addActionListener(new ActionListener() {
 			
@@ -259,8 +260,8 @@ public class LMOutputList implements ActionListener {
 				int            mi    =  now.getMinute();
 				int            ss    =  now.getSecond();
 
-				String  fmt      = "D:\\excel\\";
-				fmt             += "출고리스트_%4d%02d%02d%02d%02d%02d.xlsx";
+				String  fmt      = "d:\\ws\\java\\DBProject02\\src\\";
+				fmt             += "jTable_%4d%02d%02d%02d%02d%02d.xlsx";
 				String  filepath = String.format(fmt, year, mm, dd, hh, mi, ss );
 
 				System.out.println( filepath );
@@ -284,11 +285,14 @@ public class LMOutputList implements ActionListener {
 			}
 
 		};
-		scrollPane.setPreferredSize(new Dimension(970, 400));	
+		scrollPane.setPreferredSize(new Dimension(1070, 400));	
 		scrollPane.setViewportView(table);
+		 
+		
+		
 
-		// 총 주문가격
-		lblNewLabel_7 = new JLabel("총 주문가격 :");
+		// 총 출고가격
+		lblNewLabel_7 = new JLabel("총 출고가격 :");
 		lblNewLabel_7.setPreferredSize(new Dimension(80, 20));	// FlowLayout의 컴포넌트 리사이즈 방법
 		getFrame().add(lblNewLabel_7);
 
@@ -364,7 +368,7 @@ public class LMOutputList implements ActionListener {
 //	}
 
 	// 검색 후 테이블 getList
-	private Vector<Vector> getDataList(LMOutputList lmOrderList) {
+	private Vector<Vector> getDataList(OutputList OrderList) {
 		String          search = textField.getText();
 		OutputDao        dao   =  new OutputDao();
 		Vector<Vector>  list  =  dao.getOutputList(search, date1, date2);
@@ -381,8 +385,9 @@ public class LMOutputList implements ActionListener {
 		cols.add("상품명");
 		cols.add("출고 가격");
 		cols.add("현재 재고");
+		cols.add("점포명");
 		cols.add("출고 수량");
-		cols.add("출고 직원");
+		cols.add("사원 번호");
 
 		return cols;
 	}
@@ -432,13 +437,13 @@ public class LMOutputList implements ActionListener {
 		int sum = 0;
 		for(int i = 0; i < rowsCount; i++){
 			int pri = 0;
-			if (table.getValueAt(i, 6) != null) {
+			if (table.getValueAt(i, 7) != null) {
 				pri = Integer.parseInt(table.getValueAt(i, 4).toString());
 			}
 			
 			int su  = 0;
-			if (table.getValueAt(i, 6) != null) {
-				su = Integer.parseInt(table.getValueAt(i, 6).toString());
+			if (table.getValueAt(i, 7) != null) {
+				su = Integer.parseInt(table.getValueAt(i, 7).toString());
 			}
 			
 			sum = sum + (pri * su);
@@ -452,7 +457,7 @@ public class LMOutputList implements ActionListener {
 	}
 
 	public static void setFrame(JFrame frame) {
-		LMOutputList.frame = frame;
+		OutputList.frame = frame;
 	}
 
 	//	public static void main(String[] args) {

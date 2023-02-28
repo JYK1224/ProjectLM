@@ -327,7 +327,7 @@ public class ManagerTitle extends JFrame{
       lblNewLabel_1.setBounds(0, 0, 984, 560);
       getContentPane().add(lblNewLabel_1);
       
-      
+      System.out.println(t1);
       
       setVisible(true);
       

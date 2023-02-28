@@ -6,9 +6,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Vector;
 
-import oracle.jdbc.OracleConnection;
-import lm.model.DBConn;
 import lm.view.LMOutput;
+import oracle.jdbc.OracleConnection;
 
 public class OutputDao {
 
@@ -100,11 +99,13 @@ public class OutputDao {
 
 		Vector<Vector>  list = new Vector<Vector>();   // 조회된 결과전체 대응 : rs
 
-		String  sql = "SELECT D.DNAME, (SELECT SYSDATE FROM DUAL) OUTDATE, P.PID, P.PNAME, P.IPRICE, S.STOCKNUM\r\n"
-				+ "  FROM DEPT_ACC D, PRODUCT P, STOCK S\r\n"
-				+ "  WHERE S.PID = P.PID (+)\r\n"
-				+ "    AND P.DID = D.DID (+)\r\n"
-				+ "    AND D.DNAME LIKE '%"+ search.toUpperCase().trim() +"%'\r\n"
+		String  sql = "SELECT D.DNAME , TO_CHAR((SELECT SYSDATE FROM DUAL), 'YYYY-MM-DD') OUTDATE , P.PID , P.PNAME , P.IPRICE , S.STOCKNUM \r\n"
+				+ "  FROM  STOCK S, PRODUCT P, DEPT_ACC D\r\n"
+				+ "  WHERE S.PID = P.PID (+) \r\n"
+				+ "    AND P.DID = D.DID (+) \r\n"
+				+ "    AND D.DNAME LIKE '%"+search.toUpperCase().trim()+"%'\r\n"
+				+ "    AND STOCKNUM IS NOT NULL\r\n"
+				+ "    AND STOCKNUM != 0\r\n"
 				+ "    ORDER BY D.DNAME, P.PNAME, S.STOCKNUM";
 
 		PreparedStatement  pstmt = null;
@@ -150,7 +151,7 @@ public class OutputDao {
 		return  list;
 	}
 	
-	// 출고 확정
+	// 출고 확정 (ordering 테이블에 insert)
 	public void insertList(ArrayList<Object> outDate, ArrayList<Object> outputPname,
 			ArrayList<Object> shopName, ArrayList<Object> outputNum) {
 
@@ -171,7 +172,7 @@ public class OutputDao {
 						+ "    userid\r\n"
 						+ ") VALUES (\r\n"
 						+ "    (SELECT NVL(MAX(outid), 0) + 1 FROM output),\r\n"
-						+ "    TO_date( ? , 'YYYY-MM-DD HH:MI:SS' ),\r\n"
+						+ "    TO_date( ? , 'YYYY-MM-DD HH24:MI:SS' ),\r\n"
 						+ "    ? ,\r\n"
 						+ "    (SELECT PID FROM PRODUCT WHERE PNAME =  ? ),\r\n"
 						+ "    (SELECT SHOPID FROM SHOP WHERE SHOPNAME = ? ),\r\n"
@@ -183,6 +184,7 @@ public class OutputDao {
 				PreparedStatement pstmt  = null;
 				try {
 					pstmt  = conn.prepareStatement(sql);			
+					System.out.println((String) outDate.get(i));
 					pstmt.setString(1, (String) outDate.get(i) );		// 출고일자
 					pstmt.setString(2, (String) outputNum.get(i));		// 출고수량
 					pstmt.setString(3, (String) outputPname.get(i));	    // pid
@@ -246,25 +248,24 @@ public class OutputDao {
 	public Vector<Vector> getOutputList(String search, String date1, String date2) {
 		Vector<Vector>  list = new Vector<Vector>();   // 조회된 결과전체 대응 : rs
 
-		System.out.println(date1);
-		System.out.println(date2);
+		String  sql1 = "SELECT TO_CHAR(O.OUTDATE, 'YYYY-MM-DD HH24:MI:SS') OUTDATE , D.DNAME , P.PID , P.PNAME , P.SPRICE , SH.SHOPNAME, NVL(S.STOCKNUM, 0) STOCKNUM, O.OUTNUM \r\n"
+				+ "				FROM OUTPUT O, DEPT_ACC D, PRODUCT P, STOCK S, SHOP SH\r\n"
+				+ "				WHERE O.PID = P.PID (+)\r\n"
+				+ "				   AND P.DID = D.DID (+)\r\n"
+				+ "				   AND P.PID = S.PID (+)\r\n"
+				+ "                   AND O.SHOPID = SH.SHOPID (+)\r\n"
+				+ "				   AND ( TO_DATE(O.OUTDATE) BETWEEN TO_DATE('"+ date1 +"') AND TO_DATE('"+ date2 +"') ) \r\n"
+				+ "				   AND D.DNAME LIKE '%" + search.toUpperCase().trim() + "%'\r\n"
+				+ "				   ORDER BY O.OUTDATE DESC";
 
-		String  sql1 = "SELECT TO_CHAR(O.OUTDATE, 'YYYY-MM-DD') OUTDATE , D.DNAME , P.PID , P.PNAME , P.SPRICE , S.STOCKNUM , O.OUTNUM \r\n"
-				+ "  FROM OUTPUT O, DEPT_ACC D, PRODUCT P, STOCK S\r\n"
-				+ "  WHERE O.PID = P.PID (+)\r\n"
-				+ "    AND P.DID = D.DID (+)\r\n"
-				+ "    AND P.PID = S.PID (+)\r\n"
-				+ "    AND ( TO_DATE(O.OUTDATE) BETWEEN TO_DATE('"+ date1 +"') AND TO_DATE('"+ date2 +"') ) \r\n"
-				+ "    AND D.DNAME LIKE '%" + search.toUpperCase().trim() + "%'"
-				+ "	   ORDER BY O.OUTDATE ASC ";
-
-		String  sql2 = "SELECT TO_CHAR(O.OUTDATE, 'YYYY-MM-DD') OUTDATE , D.DNAME , P.PID , P.PNAME , P.SPRICE , S.STOCKNUM , O.OUTNUM \r\n"
-				+ "  FROM OUTPUT O, DEPT_ACC D, PRODUCT P, STOCK S\r\n"
-				+ "  WHERE O.PID = P.PID (+)\r\n"
-				+ "    AND P.DID = D.DID (+)\r\n"
-				+ "    AND P.PID = S.PID (+)\r\n"
-				+ "    AND D.DNAME LIKE '%" + search.toUpperCase().trim() + "%'\r\n"
-				+ "    ORDER BY O.OUTDATE ASC";
+		String  sql2 = "SELECT TO_CHAR(O.OUTDATE, 'YYYY-MM-DD HH24:MI:SS') OUTDATE , D.DNAME , P.PID , P.PNAME , P.SPRICE , SH.SHOPNAME, NVL(S.STOCKNUM, 0) STOCKNUM, O.OUTNUM \r\n"
+				+ "				FROM OUTPUT O, DEPT_ACC D, PRODUCT P, STOCK S, SHOP SH\r\n"
+				+ "				WHERE O.PID = P.PID (+)\r\n"
+				+ "				   AND P.DID = D.DID (+)\r\n"
+				+ "				   AND P.PID = S.PID (+)\r\n"
+				+ "                   AND O.SHOPID = SH.SHOPID (+)\r\n"
+				+ "				   AND D.DNAME LIKE '%" + search.toUpperCase().trim() + "%'\r\n"
+				+ "				   ORDER BY O.OUTDATE DESC";
 
 
 		PreparedStatement  pstmt = null;
@@ -284,8 +285,9 @@ public class OutputDao {
 				String  pName       =  rs.getString("PNAME");    // 4
 				String  sPrice      =  rs.getString("SPRICE");    // 5
 				String  stockNum    =  rs.getString("STOCKNUM");    // 6
-				String  outNum    =  rs.getString("OUTNUM");	// 7
-//				String  userName    =  rs.getString("USERNAME");    // 8
+				String  shopName    =  rs.getString("SHOPNAME");    // 7
+				String  outNum    =  rs.getString("OUTNUM");	// 8
+//				String  userName    =  rs.getString("USERNAME");    // 9
 
 				Vector  v         = new Vector();  // 안쪽 Vector : 한 줄 Row 를 의미
 				v.add( outDate );
@@ -294,6 +296,7 @@ public class OutputDao {
 				v.add( pName );
 				v.add( sPrice );
 				v.add( stockNum );
+				v.add( shopName );
 				v.add( outNum );
 				v.add( "" );
 
@@ -311,5 +314,44 @@ public class OutputDao {
 
 		return  list;
 	}
+	
+	// 재고 테이블에 현재수량 업데이트
+	public void updateStock(ArrayList<Object> outputPname, ArrayList<Object> outputNum) {
+		int j = outputNum.size();
+
+		for (int i = 0; i < j; i++) {
+			if(outputNum.get(i).equals("")) {
+				insertList();
+			}else {	if(outputNum.get(i).equals("0")) {
+				insertList();
+			}else {
+				String  sql   = " UPDATE STOCK\r\n"
+						+ " SET STOCKNUM = NVL(STOCKNUM, 0) - ? \r\n"
+						+ " WHERE PID = (SELECT PID FROM PRODUCT WHERE PNAME = ? )";
+
+				System.out.println("0");
+				int               aftcnt = 0;
+				PreparedStatement pstmt  = null;
+				try {
+					pstmt  = conn.prepareStatement(sql);			
+					pstmt.setString(1, (String) outputNum.get(i) );		// 출고수량
+					pstmt.setString(2, (String) outputPname.get(i));	// pid
+					aftcnt = pstmt.executeUpdate();
+
+				} catch (SQLException e) {
+					e.printStackTrace();
+				} finally {
+					try {
+						conn.commit();
+						if(pstmt != null) pstmt.close();
+					} catch (SQLException e) {
+					}
+				}		
+			} // orderNum.get(i) 가 null 아니고, 0도 아닐때
+			}
+		}	// for
+
+	}
+		
 
 }
