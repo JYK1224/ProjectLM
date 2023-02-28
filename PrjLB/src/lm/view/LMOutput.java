@@ -217,7 +217,6 @@ public class LMOutput extends JFrame implements ActionListener{
 		// 엑셀로저장
 		btnNewButton_2 = new JButton("엑셀로 저장");
 		btnNewButton_2.setPreferredSize(new Dimension(100, 30));	// FlowLayout의 컴포넌트 리사이즈 방법
-		btnNewButton_2.setToolTipText("d:/ws/java/DBProject02/src/jTable_20230220142558.xlsx");
 		frame.getContentPane().add(btnNewButton_2);
 
 		btnNewButton_2.addActionListener( new ActionListener() {
@@ -233,8 +232,8 @@ public class LMOutput extends JFrame implements ActionListener{
 				int            mi    =  now.getMinute();
 				int            ss    =  now.getSecond();
 
-				String  fmt      = "d:\\ws\\java\\DBProject02\\src\\";
-				fmt             += "jTable_%4d%02d%02d%02d%02d%02d.xlsx";
+				String  fmt      = "D:\\excel\\";
+				fmt             += "출고내역_%4d%02d%02d%02d%02d%02d.xlsx";
 				String  filepath = String.format(fmt, year, mm, dd, hh, mi, ss );
 
 				System.out.println( filepath );
