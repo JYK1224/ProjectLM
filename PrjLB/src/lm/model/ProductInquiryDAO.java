@@ -6,6 +6,7 @@ import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 
+
 import lm.view.LMProductInquiry;
 import oracle.jdbc.OracleConnection;
 
@@ -48,21 +49,21 @@ private void init1() {
 				String  pcode    =  rs.getString("PID");
 				ev.getTab1().setText(pcode);				
 				String  dcode    =  rs.getString("DID");
-				ev.getTab2().setText(dcode);
+				ev.getTab6().setText(dcode);
 				String   pname   =  rs.getString("PNAME");
-				ev.getTab3().setText(pname);
+				ev.getTab2().setText(pname);
 				String  dname   =  rs.getString("DNAME");
-				ev.getTab4().setText(dname);
+				ev.getTab7().setText(dname);
 				String  iprice   =  rs.getString("IPRICE");
-				ev.getTab5().setText(iprice);
+				ev.getTab3().setText(iprice);
 				String  sprice   =  rs.getString("SPRICE");
-				ev.getTab7().setText(sprice);
+				ev.getTab4().setText(sprice);
 				String  aname   =  rs.getString("ANAME");
 				ev.getTab10().setText(aname);
 				String  stocknum  =  rs.getString("STOCKNUM");
-				ev.getTab8().setText(stocknum);
+				ev.getTab9().setText(stocknum);
 				String  rateofreturn  =  rs.getString("RATEOFRETURN");
-				ev.getTab9().setText(rateofreturn + "%");				
+				ev.getTab5().setText(rateofreturn + "%");				
 			}else {
 				JOptionPane.showMessageDialog(null, "잘못된 상품명 입니다.");
 			}
@@ -106,21 +107,21 @@ public void init() {
 				String  pcode    =  rs.getString("PID");
 				ev.getTab1().setText(pcode);				
 				String  dcode    =  rs.getString("DID");
-				ev.getTab2().setText(dcode);
+				ev.getTab6().setText(dcode);
 				String   pname   =  rs.getString("PNAME");
-				ev.getTab3().setText(pname);
+				ev.getTab2().setText(pname);
 				String  dname   =  rs.getString("DNAME");
-				ev.getTab4().setText(dname);
+				ev.getTab7().setText(dname);
 				String  iprice   =  rs.getString("IPRICE");
-				ev.getTab5().setText(iprice);
+				ev.getTab3().setText(iprice);
 				String  sprice   =  rs.getString("SPRICE");
-				ev.getTab7().setText(sprice);
+				ev.getTab4().setText(sprice);
 				String  aname   =  rs.getString("ANAME");
 				ev.getTab10().setText(aname);
 				String  stocknum  =  rs.getString("STOCKNUM");
-				ev.getTab8().setText(stocknum);
+				ev.getTab9().setText(stocknum);
 				String  rateofreturn  =  rs.getString("RATEOFRETURN");
-				ev.getTab9().setText(rateofreturn + "%");				
+				ev.getTab5().setText(rateofreturn + "%");				
 			}else {
 				JOptionPane.showMessageDialog(null, "잘못된 상품코드 입니다.");
 			}
@@ -142,5 +143,4 @@ public void init() {
 	}
 }
 }
-
 
