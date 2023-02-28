@@ -41,13 +41,13 @@ public class ManagerTitle extends JFrame{
    
    
    public ManagerTitle() {
-	   setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/lmimage/alphabets-33744_640.png")));
-		getContentPane().setBackground(new Color(231,231,231));
       Init();
    }
 
    public ManagerTitle(String userid) {
 	   this.userid = userid;
+	   setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/lmimage/alphabets-33744_640.png")));
+	   getContentPane().setBackground(new Color(231,231,231));
 	   Init();
    }
 
