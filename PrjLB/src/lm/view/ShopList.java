@@ -63,7 +63,7 @@ import java.awt.Graphics;
 		}
 
 		private void init() {
-			setTitle( " 점포 목록 ");
+			setTitle( "점포전체조회");
 			
 			icon = new ImageIcon("./image/리스트들.png");
 			
