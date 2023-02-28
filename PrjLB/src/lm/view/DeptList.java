@@ -56,7 +56,7 @@ import lm.model.DeptDao;
 
 
 		private void init() {
-			setTitle( "거래처목록 ");
+			setTitle( "거래처조회 ");
 			topPane = new JPanel();
 			txtname = new JTextField (" "); 
 			txtname.setColumns(15);

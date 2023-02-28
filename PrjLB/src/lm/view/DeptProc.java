@@ -54,7 +54,7 @@ public class DeptProc extends JFrame{
 	public void init () {
 	
 		
-		setTitle("그린물류시스템");
+		setTitle("신규거래처등록");
 		icon = new ImageIcon("./image/신규거래처조회111.png");
 	      
 	      JPanel panel = new JPanel() {

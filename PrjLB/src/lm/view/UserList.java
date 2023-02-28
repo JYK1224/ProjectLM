@@ -54,7 +54,7 @@ public class UserList extends JFrame implements ActionListener, MouseListener{
 	
 	
 	private void init() {
-		setTitle( "회원관리 ");
+		setTitle( "사용자관리");
 		
 		icon = new ImageIcon("./image/리스트들.png");
 		

@@ -123,7 +123,7 @@ public class PullQuiry extends JFrame implements ActionListener{
 
 
 	private void init() {
-		setTitle("전체상품조회");
+		setTitle("상품전체조회");
 
 
 
