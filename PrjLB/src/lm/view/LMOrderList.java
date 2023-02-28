@@ -324,7 +324,6 @@ public class LMOrderList implements ActionListener {
 		});
 
 
-
 		getFrame().setVisible(true);
 		getFrame().setResizable(false);
 
