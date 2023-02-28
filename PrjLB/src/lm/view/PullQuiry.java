@@ -222,20 +222,20 @@ public class PullQuiry extends JFrame implements ActionListener{
 																		ra3.setBackground(SystemColor.window);
 																		ra3.setBounds(201, 26, 92, 27);
 																		panel.add(ra3);
-																		ra3.setFont(new Font("새굴림", Font.BOLD, 15));
+																		ra3.setFont(new Font("새굴림", Font.PLAIN, 15));
 																		ra3.setSelected(true);
 																		this.group.add(ra3);
 																		ra1 = new JRadioButton("상품분류");
 																		ra1.setBackground(SystemColor.window);
 																		ra1.setBounds(201, 62, 92, 27);
 																		panel.add(ra1);
-																		ra1.setFont(new Font("새굴림", Font.BOLD, 15));
+																		ra1.setFont(new Font("새굴림", Font.PLAIN, 15));
 																		this.group.add(ra1);
 																		ra2 = new JRadioButton("거래처명");
 																		ra2.setBackground(SystemColor.window);
 																		ra2.setBounds(201, 99, 92, 27);
 																		panel.add(ra2);
-																		ra2.setFont(new Font("새굴림", Font.BOLD, 15));
+																		ra2.setFont(new Font("새굴림", Font.PLAIN, 15));
 																		this.group.add(ra2);
 																		
 																				combo = new JComboBox();
