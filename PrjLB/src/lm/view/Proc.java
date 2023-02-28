@@ -1,297 +1,240 @@
 package lm.view;
 
-import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import javax.swing.ButtonGroup;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 import lm.model.UserDao;
 import lm.model.Uservo;
 
 public class Proc extends JFrame{
-
-	JPanel p;
-	JTextField txtid,txtname,txtindate;
-	JPasswordField txtp;
-	JTextArea intro;
-	JRadioButton user, manager;
-	ButtonGroup group;
-	GridBagLayout gb;
-	GridBagConstraints gbc;
-	JButton btnAdd, btnDelete, btnUpdate, btnCancel, btnFind;
+	private JTextField txtid, txtname, txtindate;
+	private JPasswordField txtp;
+	private JTextArea intro;
+	private ButtonGroup group;
+	private JRadioButton user, manager;	
+	private JButton btnFn ;
 	UserList uList = null;
 	
-	public Proc() {
+	//생성자
+	public Proc () {
 		init();
 	}
-	
-	public Proc(UserList ulist) {
+	public Proc (UserList ulist) {
 		this();
-		this.uList = ulist;
+		this.uList = ulist ;
 	}
-
-	public Proc(String id, UserList userList) {
-		this();
+	public Proc (String id, UserList userList) {
+		this ();
 		this.uList = uList;
 		txtid.setText(id);
-		btnFind.doClick();
+		btnFn.doClick();
 	}
-
+	
+	
 	private void init() {
-		setTitle( "회원가입");
 		
-		gb          = new GridBagLayout();
-		this.setLayout(gb);
-		gbc         = new GridBagConstraints();
-		gbc.fill    = GridBagConstraints.BOTH;
-		gbc.weightx = 1.0; 
-		gbc.weighty = 1.0; 
+		setTitle("그린물류시스템");
+		setSize(400,550);
 		
-		// 아이디
-		JLabel lblId = new JLabel("아이디(사번)");
-		        txtid = new JTextField( 20 );
-		gbAdd( lblId, 0, 0, 1, 1); 
-		gbAdd( txtid, 1, 0, 3, 1);
-		
-		// 암호
-		JLabel lblPwd = new JLabel("암호");
-		         txtp = new JPasswordField(20);
-		gbAdd( lblPwd, 0, 1, 1, 1); 
-		gbAdd( txtp, 1, 1, 3, 1);
-		
-		//이름
-		JLabel lblName = new JLabel("이름");
-		          txtname = new JTextField(20);
-		gbAdd( lblName, 0, 2, 1, 1); 
-		gbAdd( txtname, 1, 2, 3, 1);
-		
-		//유형
+		JLabel lblid = new JLabel("아이디(사번)");
+		JLabel lblpw = new JLabel("비밀번호");
+		JLabel lblname = new JLabel("이름");
 		JLabel lblty = new JLabel("유형");
+		JLabel lblintro = new JLabel("비고");
+		JLabel lblindate = new JLabel("가입일");
+		
+		txtid = new JTextField();
+		txtid.setColumns(10);
+		txtp = new JPasswordField();
+		txtname = new JTextField();
+		txtname.setColumns(10);
+		txtindate = new JTextField();
+		txtindate.setColumns(10);
+		String today = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+		txtindate.setText(today);
+		txtindate.setEditable(false);
+		
 		user = new JRadioButton("사용자");
-		manager = new JRadioButton ("관리자");
+		manager = new JRadioButton("관리자");
 		group = new ButtonGroup();
 		group.add(user);
 		group.add(manager);
-		JPanel pty = new JPanel (new FlowLayout(FlowLayout.LEFT));
-		pty.add(user);
-		pty.add(manager);
-		gbAdd( lblty, 0, 3, 1, 1); 
-		gbAdd( pty,  1, 3, 3, 1);
 		
-		//비고
-		JLabel  lblintro = new JLabel ("비고");
-		           intro = new JTextArea(5,10);
+		intro = new JTextArea(5,10);
 		JScrollPane pane = new JScrollPane(intro);
-		gbAdd( lblintro, 0, 5, 1, 1); 
-		gbAdd( pane,    1, 5, 3, 1);
 		
-		//가입일
-		JLabel lblIndate = new JLabel("가입일");
-		txtindate = new JTextField(20);
-		String today     =LocalDateTime.now().
-				          format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-		txtindate.setText(today);
-		txtindate.setEditable(false);
-		gbAdd( lblIndate, 0, 6, 1, 1); 
-		gbAdd( txtindate, 1, 6, 3, 1);
-		
-		//버튼
-		JPanel pButton = new JPanel();
-		btnAdd    = new JButton("추가");
-		btnDelete = new JButton("삭제");
-		btnDelete.setForeground(Color.RED);
-		btnUpdate = new JButton("수정");
-		btnCancel = new JButton("새로고침");
-		btnCancel.setForeground(Color.blue);
-		btnFind = new JButton("조회");
-		//기능
-		btnAdd.addActionListener(new ActionListener() {
-			
+		JButton btnIn = new JButton("등록");
+		btnIn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("추가");
 				addUser();
 			}
 		});
-		btnDelete.addActionListener(new ActionListener() {
+		JButton btnDe = new JButton("삭제");
+		btnDe.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				removeUser();
-				System.out.println("삭제");
 			}
 		});
-		btnUpdate.addActionListener(new ActionListener() {
-			
+		JButton btnUp = new JButton("수정");
+		btnUp.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				updateUser();
 			}
 		});
-		btnCancel.addActionListener(new ActionListener() {
+		JButton btnCn = new JButton("새로고침");
+		btnCn.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				cancelUser();
 			}
 		});
-		btnFind.addActionListener(new ActionListener() {
-			
+		
+		JButton btnFn = new JButton("조회");
+		btnFn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				findUser();
 			}
 		});
 		
-		pButton.add( btnAdd );
-		pButton.add( btnDelete );
-		pButton.add( btnUpdate );
-		pButton.add( btnCancel );
-		pButton.add( btnFind);
-		
-		gbAdd(pButton , 0, 7, 4, 1);
-		
-		
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		GroupLayout groupLayout = new GroupLayout(getContentPane());
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(49)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addComponent(btnIn)
+									.addGap(18)
+									.addComponent(btnDe)
+									.addGap(18)
+									.addComponent(btnUp))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addComponent(lblty, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)
+									.addGap(18)
+									.addComponent(user)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(manager))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addComponent(lblname, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)
+									.addGap(18)
+									.addComponent(txtname, GroupLayout.PREFERRED_SIZE, 164, GroupLayout.PREFERRED_SIZE))
+								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+									.addGroup(groupLayout.createSequentialGroup()
+										.addComponent(lblpw, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)
+										.addGap(18)
+										.addComponent(txtp))
+									.addGroup(groupLayout.createSequentialGroup()
+										.addComponent(lblid, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)
+										.addGap(18)
+										.addComponent(txtid, GroupLayout.PREFERRED_SIZE, 164, GroupLayout.PREFERRED_SIZE)))
+								.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
+									.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+										.addComponent(lblintro, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)
+										.addGap(18)
+										.addComponent(pane))
+									.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+										.addComponent(lblindate, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)
+										.addGap(18)
+										.addComponent(txtindate, GroupLayout.PREFERRED_SIZE, 164, GroupLayout.PREFERRED_SIZE)))))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(99)
+							.addComponent(btnCn)
+							.addGap(29)
+							.addComponent(btnFn)))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(59)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblid, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
+						.addComponent(txtid, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
+					.addGap(18)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblpw, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
+						.addComponent(txtp, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
+					.addGap(18)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblname, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
+						.addComponent(txtname, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
+					.addGap(18)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblty, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
+						.addComponent(user)
+						.addComponent(manager))
+					.addPreferredGap(ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(lblintro, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
+							.addGap(50)
+							.addComponent(lblindate, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE))
+						.addComponent(txtindate, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
+					.addGap(27)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(btnIn, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnDe, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnUp, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
+					.addGap(18)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnFn, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnCn, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
+					.addGap(24))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(251)
+					.addComponent(pane, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(195, Short.MAX_VALUE))
+		);
+		getContentPane().setLayout(groupLayout);
 		this.setLocation(600,230);
-		setSize(350,500);
 		setVisible(true);
 		setResizable(false);
 	}
 
+	//버튼 기능 
+	//조회
 	protected void findUser() {
 		String userid = this.txtid.getText();
-		if(userid.trim().equals(" ") )
-			return;
-		UserDao ud = new UserDao();
-		Uservo vo = ud.getUser(userid);
-		setViewData(vo); 
-	}
-
-	private void gbAdd(JComponent c, int x, int y, int w, int h) {
-		gbc.gridx       = x;
-		gbc.gridy       = y;
-		gbc.gridwidth   = w;
-		gbc.gridheight  = h;
-		gb.setConstraints(c, gbc);
-		gbc.insets = new Insets(2, 2, 2, 2);
-		this.add(c, gbc);
-		
-	}
-	//버튼기능
-	//추가
-	protected void addUser() {
-		UserDao uDao = new UserDao();
-		Uservo ep = getViewData();
-		System.out.println(ep.getUsername() + ep.getUserpw());
-		int aftcnt = uDao.insertUser(ep);
-		
-		JOptionPane.showMessageDialog(null, aftcnt + "저장" , "추가",
-				JOptionPane.CLOSED_OPTION);
-		
-	
-	}
-	//추가
-	private Uservo getViewData() {
-		
-		String userid = this.txtid.getText();
-		
-		
-		String userpw = this.txtp.getText();
-		String username = this.txtname.getText();
-		String ty = "";
-		if(this.user.isSelected()) ty = "사용자";
-		if(this.manager.isSelected()) ty = "관리자";
-		String intro = this.intro.getText();
-		String indate = this.txtindate.getText();
-		
-		Uservo us = new Uservo(
-				Integer.parseInt(userid), userpw, username, ty, intro , indate);
-				
-		return us;
-	}
-	//삭제
-	protected void removeUser() {
-		String userid = this.txtid.getText();
-		if(userid.equals(" ") )
-			return;
-		UserDao udao = new UserDao();
-		int choice = JOptionPane.showConfirmDialog(null,
-				userid + " 삭제하시겠습니까?",
-				"삭제",
-				JOptionPane.OK_CANCEL_OPTION);
-		String msg = "";
-		if(choice == 0) {
-			int aftcnt = udao.deleteUser(userid);
-			if(aftcnt > 0) {
-				msg = aftcnt + "지웁니다";
-			}
-			} else{
-				msg = "취소하였습니다";
-			}
-		JOptionPane.showMessageDialog(null, 
-				msg + " ",
-				"삭제하였습니다",
-				JOptionPane.OK_OPTION );
-		
-	}
-	//수정
-	protected void updateUser() {
-		String userid = this.txtid.getText();
-		UserDao udao = new UserDao();
-		
-		int choice = JOptionPane.showConfirmDialog(null, 
-					userid + "수정하시겠습니까?",
-					"수정하시겠습니까",
-					JOptionPane.OK_CANCEL_OPTION);
-		int aftcnt = 0;
-		String msg = " ";
-		if ( choice == 0 ) {
-			Uservo us = getViewData();
-			aftcnt = udao.updateUser(us);
-			if( aftcnt > 0 )
-				msg = userid + "수정완료";
-			else
-				msg = userid + "수정완료";
-		} else {
-			msg = "취소했습니다";
+		if( userid.trim().equals(" ")) {
+			JOptionPane.showMessageDialog(null, "아이디를 다시 확인해주세요");
+		}else {
+			UserDao udao = new UserDao();
+			Uservo vo = udao.getUser(userid);
+			setViewData(vo);
 		}
-		JOptionPane.showConfirmDialog(null, msg,
-				" ",
-				JOptionPane.OK_OPTION);
 		
 	}
-	//새로고침
-	protected void cancelUser() {
-		clearViewData();
-	}
-	
-
-	private void setViewData(Uservo us) {
-		int userid      = us.getUserid();
-		String userpw   = us.getUserpw();
-		String username = us.getUsername();
-		String ty       = us.getty();   
-		String intro    = us.getIntro();
-		String indate   = us.getIndate();
+	private void setViewData(Uservo vo) {
+		int userid      = vo.getUserid();
+		String userpw   = vo.getUserpw();
+		String username = vo.getUsername();
+		String ty       = vo.getty();   
+		String intro    = vo.getIntro();
+		String indate   = vo.getIndate();
 		
 		this.txtid.setText(String.valueOf(userid));
 		this.txtp.setText(userpw);
@@ -309,6 +252,10 @@ public class Proc extends JFrame{
 		
 	}
 
+	//새로고침
+	protected void cancelUser() {
+		clearViewData();
+	}
 	private void clearViewData() {
 		this.txtid.setText( "" );
 		this.txtp.setText( "" );
@@ -319,9 +266,82 @@ public class Proc extends JFrame{
 		this.txtindate.setText("");
 		this.txtid.grabFocus();
 	}
+	//수정
+	protected void updateUser() {
+		String userid = this.txtid.getText();
+		if(userid.trim().equals(" ")) {
+			JOptionPane.showMessageDialog(null, "아디를 다시 확인해주세요");
+		}else {
+			UserDao udao = new UserDao();
+			int choice = JOptionPane.showConfirmDialog(null, 
+					userid + "수정하시겠습니까?",
+					"수정하시겠습니까",
+					JOptionPane.OK_CANCEL_OPTION);
+			int aftcnt = 0;
+			String msg = " ";
+			if (choice == 0 ) {
+				Uservo vo = getViewData();
+				aftcnt = udao.updateUser(vo);
+				if( aftcnt > 0 )
+					msg = userid + "수정완료";
+				else 
+					msg = userid + "수정완료";
+			} else {
+				msg = "취소했습니다";
+			}
+			JOptionPane.showConfirmDialog(null, msg, 
+					" " , JOptionPane.OK_OPTION);		
+		}
+		}
+	//삭제
+	protected void removeUser() {
+		JOptionPane.showMessageDialog(null, 
+				"데이터 베이스의 모든 내용이 "
+				+ "삭제되기 때문에 담당자에게 문의해주세요");
+	}
+	//등록
+	protected void addUser() {
+		UserDao udao = new UserDao();
+		Uservo vo = getViewData();
+		int aftcnt = udao.insertUser(vo);
+		
+		JOptionPane.showMessageDialog(null, aftcnt + "저장", "추가",
+				JOptionPane.CLOSED_OPTION);
+		
+	}
+	private Uservo getViewData() {
+		
+		String   userid = this.txtid.getText();
+		String   userpw = this.txtp.getText();
+		String username = this.txtname.getText();
+		String ty = "";
+		if(this.user.isSelected())  
+			ty = "사용자";
+		if(this.manager.isSelected())
+			ty = "관리자";
+		String   intro  = this.intro.getText();
+		String   indate = this.txtindate.getText();
+		
+		Uservo vo = new Uservo(
+				Integer.parseInt(userid), userpw, username, ty, intro, indate);		
+
+		return vo;
+	}
 
 	public static void main(String[] args) {
 		
 		new Proc();
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
