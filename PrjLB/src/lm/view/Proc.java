@@ -30,15 +30,15 @@ import java.awt.Color;
 import java.awt.Font;
 
 public class Proc extends JFrame{
-	private JTextField txtid, txtname, txtindate , intro;
+	private JTextField txtid, txtname, txtindate ;
 	private JPasswordField txtp;
-	
+	private JTextArea intro;
 	private ButtonGroup group;
 	private JRadioButton user, manager;	
 	private JButton btnFn ;
 	UserList uList = null;
 	ImageIcon icon;
-	
+	UserDao udao;
 	//생성자
 	public Proc () {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/lmimage/alphabets-33744_640.png")));
@@ -185,9 +185,10 @@ public class Proc extends JFrame{
 		lblintro.setBounds(29, 269, 81, 25);
 		panel.add(lblintro);
 		
-		intro = new JTextField();
+		intro = new JTextArea(5, 10);
+		JScrollPane sp = new JScrollPane(intro);
 		intro.setBounds(182, 264, 168, 56);
-		panel.add(intro);
+		panel.add(sp);
 		
 		JLabel lblTitle = new JLabel("\uD68C\uC6D0\uAC00\uC785");
 		lblTitle.setFont(new Font("굴림", Font.BOLD, 30));
@@ -236,10 +237,11 @@ public class Proc extends JFrame{
 	//조회
 	protected void findUser() {
 		String userid = this.txtid.getText();
-		if( userid.trim().equals(" ")) {
+		UserDao udao = new UserDao();
+		int result = udao.existsfind(userid);
+		if (result == 0) {
 			JOptionPane.showMessageDialog(null, "아이디를 다시 확인해주세요");
 		}else {
-			UserDao udao = new UserDao();
 			Uservo vo = udao.getUser(userid);
 			setViewData(vo);
 		}
@@ -257,7 +259,7 @@ public class Proc extends JFrame{
 		this.txtp.setText(userpw);
 		this.txtname.setText(username);
 		switch (ty) {
-		case "일반사용자" :
+		case "사용자" :
 			this.user.setSelected(true);
 			break;
 		case "관리자" :
@@ -286,10 +288,11 @@ public class Proc extends JFrame{
 	//수정
 	protected void updateUser() {
 		String userid = this.txtid.getText();
-		if(userid.trim().equals(" ")) {
-			JOptionPane.showMessageDialog(null, "아디를 다시 확인해주세요");
+		UserDao udao = new UserDao();
+		int result = udao.existsfind(userid);
+		if(result == 0) {
+			JOptionPane.showMessageDialog(null, "아이디를 다시 확인해주세요");
 		}else {
-			UserDao udao = new UserDao();
 			int choice = JOptionPane.showConfirmDialog(null, 
 					userid + "수정하시겠습니까?",
 					"수정하시겠습니까",

@@ -216,6 +216,32 @@ public class DeptDao {
 		
 		return dv;
 	}
-	
+	public int existsfind(String did) {
+		String sql = " select "
+				   + " case when exists "
+				   + " (select * from dept_acc where did = " +did+")"
+				   + "    then 1 "
+				   + "    else 0 "
+				   + "   end as d "
+				   + " from dual ";
 
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		int aftcnt = 0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) 
+				aftcnt = rs.getInt("d");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(pstmt != null) pstmt.close();
+			} catch (SQLException e) {
+			}
+		}
+		return aftcnt;
+	}
 }

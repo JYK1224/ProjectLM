@@ -29,8 +29,8 @@ public class ShopProc extends JFrame{
    private JTextField txtCode, txtdname, txtName, txtdPhone;
    private JButton btnIn, btnUp, btnDe, btnCn, btnFind ;
    ImageIcon icon;
-	JScrollPane scrollPane;
-   
+   JScrollPane scrollPane;
+   ShopDao sdao;
    ShopList slist = null;
    
    public ShopProc () {
@@ -207,12 +207,14 @@ public void init () {
 	//조회
 	protected void findShop() {
 	   String sid = this.txtCode.getText();
-	   if(sid.trim().equals(" "))
-		   return;
 	   ShopDao sdao = new ShopDao();
-	   Shopvo sv = sdao.getSid(sid);
-	   setViewData(sv);
-	   
+	   int result = sdao.existsfind(sid);
+	   if(result == 0) {
+		   JOptionPane.showMessageDialog(null, "점포코드를 확인해주세요");
+	   }else {
+		   Shopvo sv = sdao.getSid(sid);
+		   setViewData(sv);
+	   }
    }
 	//조회
    private void setViewData(Shopvo sv) {
@@ -266,26 +268,30 @@ public void init () {
    protected void upShop() {
       String sid = this.txtCode.getText();
       ShopDao sdao = new ShopDao();
-      
-      int choice = JOptionPane.showConfirmDialog(null,
-               sid + "수정하시겠습니까",
-               "수정하시겠습니까",
-               JOptionPane.OK_CANCEL_OPTION
-               );
-      int aftcnt = 0;
-      String msg = " ";
-      if( choice == 0 ) {
-         Shopvo sv = getViewData();
-         aftcnt = sdao.updataDept(sv);
-         if( aftcnt > 0 )
-            msg = sid + "수정완료";
-         else 
-            msg = sid + "수정완료";
-      } else {
-         msg = "취소했습니다";
+      int result = sdao.existsfind(sid);
+      if(result == 0 ) {
+    	  JOptionPane.showMessageDialog(null, "점포코드를 확인해주세요");
+      }else{
+    	  int choice = JOptionPane.showConfirmDialog(null,
+    			  sid + "수정하시겠습니까",
+    			  "수정하시겠습니까",
+    			  JOptionPane.OK_CANCEL_OPTION
+    			  );
+    	  int aftcnt = 0;
+    	  String msg = " ";
+    	  if( choice == 0 ) {
+    		  Shopvo sv = getViewData();
+    		  aftcnt = sdao.updataDept(sv);
+    		  if( aftcnt > 0 )
+    			  msg = sid + "수정완료";
+    		  else 
+    			  msg = sid + "수정완료";
+    	  } else {
+    		  msg = "취소했습니다";
+    	  }
+    	  JOptionPane.showConfirmDialog(null, msg,
+    			  " ", JOptionPane.OK_OPTION);
       }
-      JOptionPane.showConfirmDialog(null, msg,
-            " ", JOptionPane.OK_OPTION);
    }
 
    //등록

@@ -196,11 +196,11 @@ public class UserDao {
 			list.add(v);
 			
 			}
-		
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
 			try {
+				if(rs != null) rs.close();
 				if(pstmt != null) pstmt.close();
 			} catch (SQLException e) {
 			}
@@ -236,7 +236,8 @@ public class UserDao {
 			e.printStackTrace();
 		}finally {
 			try {
-				pstmt.close();
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
 			} catch (SQLException e) {
 			}
 		}
@@ -249,8 +250,8 @@ public class UserDao {
 			 	   + " from usermng"
 			 	   + " where userid = ?"
 			 	   + " and userpw = ? ";
-		PreparedStatement pstmt ;
-		ResultSet rs ;
+		PreparedStatement pstmt = null ;
+		ResultSet rs = null ;
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, userid);
@@ -261,6 +262,13 @@ public class UserDao {
 				}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+			try {
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return -1;
 	
@@ -285,8 +293,43 @@ public class UserDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+			try {
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+			} catch (SQLException e) {
+			}
 		}
 		return -1;
 	}
-	
+	public int existsfind(String userid) {
+		
+		String sql = "SELECT "
+				+ "   CASE WHEN EXISTS(SELECT * FROM USERMNG where USERID = "+ userid +") "
+				+ "     THEN 1 "
+				+ "     ELSE 0 "
+				+ "   END as d "
+				+ "FROM dual ";
+			
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		int aftcnt = 0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if ( rs.next()) {
+				aftcnt = rs.getInt("d");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs != null) pstmt.close();
+				if(pstmt != null) pstmt.close();
+			} catch (SQLException e) {
+			}
+		}
+		return aftcnt;
+	}
 }

@@ -54,6 +54,7 @@ import java.awt.Toolkit;
 		private JLabel lblNewLabel_1;
 		ImageIcon icon;
 		
+		
 		public ShopList () {
 			setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/lmimage/alphabets-33744_640.png")));
 			getContentPane().setBackground(new Color(231,231,231));

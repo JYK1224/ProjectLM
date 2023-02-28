@@ -32,7 +32,7 @@ public class Prodproc extends JFrame{
 	private JButton btnIn, btnDe, btnUp, btnCn;
 	private JComboBox cmAname, cmDname;
 	private JLabel lblPid, lblPname, lblDid, lblAid, lblIpr, lblSpr;
-	 ImageIcon icon;
+	ImageIcon icon;
 	ProdDao dao;
 	
 	public Prodproc() {
@@ -240,25 +240,29 @@ public class Prodproc extends JFrame{
 	protected void upProd() {
 		String pid = this.txtPid.getText();
 		ProdDao pdao = new ProdDao();
-		
-		int choice = JOptionPane.showConfirmDialog(null, 
-				pid + "수정하시겠습니까?",
-				"수정하시겠습니까?",
-				JOptionPane.OK_CANCEL_OPTION);
-		int aftcnt = 0;
-		String msg = " ";
-		if(choice == 0) {
-			Prodvo pv = getViewdata();
-			aftcnt = pdao.updateProd(pv);
-			if(aftcnt > 0 )
-				msg = pid + "수정완료";
-			else 
-				msg = pid + "수정완료";
+		int result = pdao.existsfind(pid);
+		if(result == 0 ) {
+			JOptionPane.showMessageDialog(null, "상품코드를 확인해주세요");
 		}else {
-			msg = "취소했습니다";
+			int choice = JOptionPane.showConfirmDialog(null, 
+					pid + "수정하시겠습니까?",
+					"수정하시겠습니까?",
+					JOptionPane.OK_CANCEL_OPTION);
+			int aftcnt = 0;
+			String msg = " ";
+			if(choice == 0) {
+				Prodvo pv = getViewdata();
+				aftcnt = pdao.updateProd(pv);
+				if(aftcnt > 0 )
+					msg = pid + "수정완료";
+				else 
+					msg = pid + "수정완료";
+			}else {
+				msg = "취소했습니다";
+			}
+			JOptionPane.showConfirmDialog(null, msg,
+					" ", JOptionPane.OK_OPTION);
 		}
-		JOptionPane.showConfirmDialog(null, msg,
-				" ", JOptionPane.OK_OPTION);
 	}
 	//새로고침
 	protected void cnProd() {
