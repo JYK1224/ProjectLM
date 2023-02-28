@@ -61,7 +61,7 @@ public class ManagerTitle extends JFrame{
       btnNewButton.setIcon(new ImageIcon(ManagerTitle.class.getResource("/lmimage/\uBC84\uD2BC61.png")));
       btnNewButton .setHorizontalTextPosition(JButton.CENTER); // 텍스트 가운데
       btnNewButton.setFont(new Font("새굴림", Font.BOLD, 16));
-      btnNewButton.setBorderPainted(false);
+      //btnNewButton.setBorderPainted(false);
       btnNewButton.setBounds(260, 188, 153, 59);
       getContentPane().add(btnNewButton);
       btnNewButton.addActionListener(new ActionListener() {
