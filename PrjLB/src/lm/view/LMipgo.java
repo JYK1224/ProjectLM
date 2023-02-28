@@ -250,6 +250,7 @@ private void init() {
             getContentPane().setLayout(groupLayout);
             setSize(1000, 600); // 창크기
             setLocation(600,150);
+            setResizable(false);
             setVisible(true); // 화면에 보이게
             setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // x버튼 눌렀을때 메모리에서 제거 부탁하는 명령   
 }

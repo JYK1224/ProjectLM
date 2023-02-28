@@ -43,6 +43,7 @@ private void Init() {
       setTitle("물류관리시스템-일반사용자");
       setSize(800,580);
       setLocation(600,150);
+      setResizable(false);
       getContentPane().setLayout(null);
    
      

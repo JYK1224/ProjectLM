@@ -57,7 +57,7 @@ public class Proc extends JFrame{
 	private void init() {
 		
 		setTitle("그린물류시스템");
-		
+		setResizable(false);
 		 icon = new ImageIcon("./image/신규거래처조회111.png");
 	      
 	      JPanel panel = new JPanel() {
@@ -225,6 +225,7 @@ public class Proc extends JFrame{
 		getContentPane().setLayout(groupLayout);
 		this. setLocation(600,150);
 		setVisible(true);
+		
 		
 	}
 

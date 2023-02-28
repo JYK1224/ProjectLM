@@ -55,6 +55,7 @@ public class ManagerTitle extends JFrame{
       setTitle("물류관리시스템-관리자");
       setSize(1000,580);
       setLocation(600,150);
+      setResizable(false);
       getContentPane().setLayout(null);
       
       JButton btnNewButton = new JButton("신규거래처등록");

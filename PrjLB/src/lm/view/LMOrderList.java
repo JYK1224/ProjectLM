@@ -84,6 +84,7 @@ public class LMOrderList extends JFrame implements ActionListener {
 	private void initComponent() {
 		this.setTitle("주문내역 조회");
 		 setLocation(600,150);
+		 setResizable(false);
 		icon = new ImageIcon("./image/큰거1.png");
 		
 		JPanel panel = new JPanel() {
