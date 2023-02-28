@@ -176,7 +176,9 @@ public void init () {
       btnDe.addActionListener(new ActionListener() {
          @Override
          public void actionPerformed(ActionEvent e) {
-            deShop();
+        	 JOptionPane.showMessageDialog(null, 
+        				"데이터 베이스의 모든 내용이 삭제되기"
+        				+ " 때문에 담당자에게 문의해주세요");
          }
       });
       btnUp.addActionListener(new ActionListener() {

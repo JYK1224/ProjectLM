@@ -160,7 +160,9 @@ public class DeptProc extends JFrame{
 		btnDe_1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				deDept();
+				JOptionPane.showMessageDialog(null, 
+						"데이터 베이스의 모든 내용이 삭제되기"
+						+ " 때문에 담당자에게 문의해주세요");
 			}
 		});
 		btnFind = new JButton("조회");
