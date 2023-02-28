@@ -1,6 +1,5 @@
 package lm.view;
 
-
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
@@ -165,9 +164,9 @@ public class UserList extends JFrame implements ActionListener, MouseListener{
 		btnfind .setHorizontalTextPosition(JButton.CENTER); // 텍스트 가운데
 		panel.add(btnfind);
 		
-		lblNewLabel = new JLabel("\uD68C\uC6D0 \uAD00\uB9AC");
+		lblNewLabel = new JLabel("사용자 관리");
 		lblNewLabel.setFont(new Font("새굴림", Font.BOLD, 40));
-		lblNewLabel.setBounds(229, 10, 215, 79);
+		lblNewLabel.setBounds(229, 10, 261, 79);
 		panel.add(lblNewLabel);
 		
 		lblNewLabel_1 = new JLabel("  \uC774\uB984 : ");
@@ -355,3 +354,4 @@ public class UserList extends JFrame implements ActionListener, MouseListener{
 	}
 }
 	
+
