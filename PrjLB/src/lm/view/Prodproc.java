@@ -201,7 +201,7 @@ public class Prodproc extends JFrame{
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(groupLayout);
-		setLocation(600,150);
+		
 		setVisible(true);
 		setResizable(false);
 		
