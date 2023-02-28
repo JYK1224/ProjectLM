@@ -94,12 +94,12 @@ public class Proc extends JFrame{
 		btnCn.setHorizontalTextPosition(JButton.CENTER);
 		panel.add(btnCn);
 		
-		JButton btnFn_1 = new JButton("조회");
-		btnFn_1.setIcon(new ImageIcon(Proc.class.getResource("/lmimage/\uC2E0\uADDC\uAC70\uB798\uCC98\uB4F1\uB85D\uBC84\uD2BC.png")));
-		btnFn_1.setFont(new Font("새굴림", Font.PLAIN, 12));
-		btnFn_1.setBounds(358, 371, 70, 32);
-		btnFn_1.setHorizontalTextPosition(JButton.CENTER);
-		panel.add(btnFn_1);
+		btnFn = new JButton("조회");
+		btnFn.setIcon(new ImageIcon(Proc.class.getResource("/lmimage/\uC2E0\uADDC\uAC70\uB798\uCC98\uB4F1\uB85D\uBC84\uD2BC.png")));
+		btnFn.setFont(new Font("새굴림", Font.PLAIN, 12));
+		btnFn.setBounds(358, 371, 70, 32);
+		btnFn.setHorizontalTextPosition(JButton.CENTER);
+		panel.add(btnFn);
 		JButton btnUp = new JButton("수정");
 		btnUp.setIcon(new ImageIcon(Proc.class.getResource("/lmimage/\uC2E0\uADDC\uAC70\uB798\uCC98\uB4F1\uB85D\uBC84\uD2BC.png")));
 		btnUp.setFont(new Font("새굴림", Font.PLAIN, 12));
@@ -117,7 +117,7 @@ public class Proc extends JFrame{
 		btnIn.setIcon(new ImageIcon(Proc.class.getResource("/lmimage/\uC2E0\uADDC\uAC70\uB798\uCC98\uB4F1\uB85D\uBC84\uD2BC.png")));
 		btnIn.setFont(new Font("새굴림", Font.PLAIN, 12));
 		btnIn.setBounds(8, 371, 70, 32);
-		 btnIn.setHorizontalTextPosition(JButton.CENTER);
+		btnIn.setHorizontalTextPosition(JButton.CENTER);
 		panel.add(btnIn);
 		txtindate = new JTextField();
 		txtindate.setBounds(182, 330, 186, 33);
@@ -209,7 +209,7 @@ public class Proc extends JFrame{
 				updateUser();
 			}
 		});
-		btnFn_1.addActionListener(new ActionListener() {
+		btnFn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				findUser();
@@ -225,7 +225,7 @@ public class Proc extends JFrame{
 		getContentPane().setLayout(groupLayout);
 		this.setLocation(600,230);
 		setVisible(true);
-		setResizable(false);
+		
 	}
 
 	//버튼 기능 
