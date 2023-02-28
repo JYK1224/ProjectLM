@@ -75,7 +75,7 @@ public class LMOutput extends JFrame implements ActionListener{
 		frame.setTitle("상품 출고 화면");
 		frame.setBounds(100, 100, 1200, 600);
 		frame.getContentPane().setLayout(new FlowLayout(FlowLayout.CENTER));
-		frame. setLocation(600,150);
+		frame. setLocation(650,200);
 
 		// 거래처명
 		JLabel lblNewLabel = new JLabel("거래처명 :");

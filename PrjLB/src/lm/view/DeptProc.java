@@ -209,7 +209,7 @@ public class DeptProc extends JFrame{
 		);
 		getContentPane().setLayout(groupLayout);
 		
-		 setLocation(600,150);
+		 setLocation(650,200);
 		setSize(454,454);
 		setVisible(true);
 		setResizable(false);

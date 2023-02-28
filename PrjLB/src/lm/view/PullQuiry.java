@@ -428,7 +428,7 @@ public class PullQuiry extends JFrame implements ActionListener{
 												});
 		getContentPane().setLayout(groupLayout);
 		setVisible(true);
-		 setLocation(600,150);
+		 setLocation(650,200);
 		setSize(1000,600);
 		setResizable(false);
 	}

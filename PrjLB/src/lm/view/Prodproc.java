@@ -57,7 +57,7 @@ public class Prodproc extends JFrame{
 	      };
 		
 		setSize(454,454);
-		 setLocation(600,150);
+		 setLocation(650,200);
 		
 		dao = new ProdDao();
 		ArrayList<String> alDept = dao.getDept();

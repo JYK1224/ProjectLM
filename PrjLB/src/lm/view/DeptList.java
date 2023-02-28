@@ -210,7 +210,7 @@ import java.awt.Toolkit;
 			getContentPane().setLayout(groupLayout);
 			
 			setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-			this. setLocation(600,150);
+			this. setLocation(650,200);
 			setSize(620,543);
 			setVisible(true);
 			setResizable(false);
