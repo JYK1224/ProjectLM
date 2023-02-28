@@ -24,13 +24,13 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import lm.model.OutputDao;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
@@ -369,7 +369,7 @@ public class LMOutputList implements ActionListener {
 //	}
 
 	// 검색 후 테이블 getList
-	private Vector<Vector> getDataList(OutputList OrderList) {
+	private Vector<Vector> getDataList(LMOutputList OrderList) {
 		String          search = textField.getText();
 		OutputDao        dao   =  new OutputDao();
 		Vector<Vector>  list  =  dao.getOutputList(search, date1, date2);
@@ -458,7 +458,7 @@ public class LMOutputList implements ActionListener {
 	}
 
 	public static void setFrame(JFrame frame) {
-		OutputList.frame = frame;
+		LMOutputList.frame = frame;
 	}
 
 	//	public static void main(String[] args) {

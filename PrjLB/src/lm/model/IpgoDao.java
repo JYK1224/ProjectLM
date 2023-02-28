@@ -305,7 +305,7 @@ public class IpgoDao {
 
 	}
 
-
+	// 입고 확정
 	public void insertList(ArrayList<Object> inDate, ArrayList<Object> inPname, ArrayList<Object> inNum) {
 
 		int j = inNum.size();
@@ -324,7 +324,7 @@ public class IpgoDao {
 						+ "    userid\r\n"
 						+ ") VALUES (\r\n"
 						+ "    (SELECT NVL(MAX(inid), 0) + 1 FROM input),\r\n"
-						+ "    TO_date( ? , 'YYYY-MM-DD' ),\r\n"
+						+ "    TO_date( ? , 'YYYY-MM-DD HH24:MI:SS' ),\r\n"
 						+ "    ?,\r\n"
 						+ "    (SELECT PID FROM PRODUCT WHERE PNAME =  ? ),\r\n"
 						+ "    ?\r\n"
@@ -371,7 +371,7 @@ public class IpgoDao {
 		System.out.println(date1);
 		System.out.println(date2);
 
-		String  sql1 = "SELECT I.INDATE , D.DNAME, P.PID, P.PNAME, P.IPRICE, S.STOCKNUM, I.INNUM, U.USERID\r\n"
+		String  sql1 = "SELECT TO_CHAR(I.INDATE, 'YYYY-MM-DD HH24:MI:SS') INDATE , D.DNAME, P.PID, P.PNAME, P.IPRICE, S.STOCKNUM, I.INNUM, U.USERID\r\n"
 				+ "  FROM INPUT I, DEPT_ACC D, PRODUCT P, STOCK S, USERMNG U\r\n"
 				+ "  WHERE I.PID = P.PID (+)\r\n"
 				+ "    AND P.DID = D.DID (+)\r\n"
@@ -379,16 +379,16 @@ public class IpgoDao {
 				+ "    AND I.USERID = U.USERID (+)\r\n"
 				+ "    AND D.DNAME LIKE '%"  + search.toUpperCase().trim() + "%'\r\n"
 				+ "    AND ( TO_DATE(I.INDATE) BETWEEN TO_DATE('"+ date1 +"') AND TO_DATE('"+ date2 +"') )\r\n"
-				+ "    ORDER BY I.INDATE ASC";
+				+ "    ORDER BY I.INDATE DESC";
 
-		String  sql2 = "SELECT I.INDATE , D.DNAME, P.PID, P.PNAME, P.IPRICE, S.STOCKNUM, I.INNUM, U.USERID\r\n"
+		String  sql2 = "SELECT TO_CHAR(I.INDATE, 'YYYY-MM-DD HH24:MI:SS') INDATE , D.DNAME, P.PID, P.PNAME, P.IPRICE, S.STOCKNUM, I.INNUM, U.USERID\r\n"
 				+ "  FROM INPUT I, DEPT_ACC D, PRODUCT P, STOCK S, USERMNG U\r\n"
 				+ "  WHERE I.PID = P.PID (+)\r\n"
 				+ "    AND P.DID = D.DID (+)\r\n"
 				+ "    AND P.PID = S.PID (+)\r\n"
 				+ "    AND I.USERID = U.USERID\r\n"
 				+ "    AND D.DNAME LIKE '%"+ search.toUpperCase().trim() +"%'\r\n"
-				+ "    ORDER BY I.INDATE";
+				+ "    ORDER BY I.INDATE DESC";
 
 
 		PreparedStatement  pstmt = null;

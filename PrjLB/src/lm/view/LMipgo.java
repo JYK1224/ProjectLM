@@ -378,7 +378,26 @@ private void getInArrayData() {
    for (int i = 0; i < rowsCount; i++) {
       
       try {
-         inDate.add(i, jTable.getValueAt(i, 2).toString() );  //  입고예정일
+    	// 현재시간 불러와서 outDate에 넣자
+			Calendar t = Calendar.getInstance();
+			 
+			 StringBuffer now = new StringBuffer();
+			 StringBuffer now1 = new StringBuffer();
+			 
+			 now.append(t.get(Calendar.YEAR));
+			 now.append("-");
+			 now.append(t.get(Calendar.MONTH)+1);
+			 now.append("-");
+			 now.append(t.get(Calendar.DATE));
+			
+			 now1.append(t.get(Calendar.HOUR_OF_DAY));
+			 now1.append(":");
+			 now1.append(t.get(Calendar.MINUTE));
+			 now1.append(":");
+			 now1.append(t.get(Calendar.SECOND));
+			 
+         inDate.add(i, now.toString() + " " + now1.toString() );  //  입고예정일
+         
          inPname.add(i, jTable.getValueAt(i, 4).toString() ); //  상품명
          inNum.add(i, jTable.getValueAt(i, 7).toString() );     //  입고수량
          
