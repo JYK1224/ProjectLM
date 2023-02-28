@@ -1,5 +1,6 @@
 package lm.view;
 
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDateTime;
@@ -7,6 +8,7 @@ import java.time.format.DateTimeFormatter;
 
 import javax.swing.ButtonGroup;
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -21,15 +23,20 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 import lm.model.UserDao;
 import lm.model.Uservo;
+import javax.swing.JPanel;
+import java.awt.SystemColor;
+import java.awt.Color;
+import java.awt.Font;
 
 public class Proc extends JFrame{
-	private JTextField txtid, txtname, txtindate;
+	private JTextField txtid, txtname, txtindate , intro;
 	private JPasswordField txtp;
-	private JTextArea intro;
+	
 	private ButtonGroup group;
 	private JRadioButton user, manager;	
 	private JButton btnFn ;
 	UserList uList = null;
+	ImageIcon icon;
 	
 	//생성자
 	public Proc () {
@@ -50,43 +57,145 @@ public class Proc extends JFrame{
 	private void init() {
 		
 		setTitle("그린물류시스템");
-		setSize(400,550);
 		
-		JLabel lblid = new JLabel("아이디(사번)");
-		JLabel lblpw = new JLabel("비밀번호");
-		JLabel lblname = new JLabel("이름");
-		JLabel lblty = new JLabel("유형");
-		JLabel lblintro = new JLabel("비고");
-		JLabel lblindate = new JLabel("가입일");
+		 icon = new ImageIcon("./image/신규거래처조회111.png");
+	      
+	      JPanel panel = new JPanel() {
+	         public void paintComponent(Graphics g) {
+	             g.drawImage(icon.getImage(), 0, 0, null);
+	             setOpaque(false);
+	             super.paintComponent(g);
+	            }
+	      };
 		
-		txtid = new JTextField();
-		txtid.setColumns(10);
-		txtp = new JPasswordField();
-		txtname = new JTextField();
-		txtname.setColumns(10);
-		txtindate = new JTextField();
-		txtindate.setColumns(10);
+		setSize(454,454);
 		String today = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-		txtindate.setText(today);
-		txtindate.setEditable(false);
-		
-		user = new JRadioButton("사용자");
-		manager = new JRadioButton("관리자");
 		group = new ButtonGroup();
-		group.add(user);
-		group.add(manager);
 		
-		intro = new JTextArea(5,10);
-		JScrollPane pane = new JScrollPane(intro);
+		JScrollPane scrollPane = new JScrollPane();
+		
+		GroupLayout groupLayout = new GroupLayout(getContentPane());
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 425, Short.MAX_VALUE)
+		);
+		
+		
+		scrollPane.setViewportView(panel);
+		panel.setLayout(null);
+		JButton btnCn = new JButton("새로고침");
+		btnCn.setIcon(new ImageIcon(Proc.class.getResource("/lmimage/4\uC790\uB9AC\uBC84\uD2BC.png")));
+		btnCn.setFont(new Font("새굴림", Font.PLAIN, 12));
+		btnCn.setBounds(253, 371, 93, 32);
+		btnCn.setHorizontalTextPosition(JButton.CENTER);
+		panel.add(btnCn);
+		
+		JButton btnFn_1 = new JButton("조회");
+		btnFn_1.setIcon(new ImageIcon(Proc.class.getResource("/lmimage/\uC2E0\uADDC\uAC70\uB798\uCC98\uB4F1\uB85D\uBC84\uD2BC.png")));
+		btnFn_1.setFont(new Font("새굴림", Font.PLAIN, 12));
+		btnFn_1.setBounds(358, 371, 70, 32);
+		btnFn_1.setHorizontalTextPosition(JButton.CENTER);
+		panel.add(btnFn_1);
+		JButton btnUp = new JButton("수정");
+		btnUp.setIcon(new ImageIcon(Proc.class.getResource("/lmimage/\uC2E0\uADDC\uAC70\uB798\uCC98\uB4F1\uB85D\uBC84\uD2BC.png")));
+		btnUp.setFont(new Font("새굴림", Font.PLAIN, 12));
+		btnUp.setBounds(89, 371, 70, 32);
+		btnUp.setHorizontalTextPosition(JButton.CENTER);
+		panel.add(btnUp);
+		JButton btnDe = new JButton("삭제");
+		btnDe.setIcon(new ImageIcon(Proc.class.getResource("/lmimage/\uC2E0\uADDC\uAC70\uB798\uCC98\uB4F1\uB85D\uBC84\uD2BC.png")));
+		btnDe.setFont(new Font("새굴림", Font.PLAIN, 12));
+		btnDe.setBounds(171, 371, 70, 32);
+		btnDe.setHorizontalTextPosition(JButton.CENTER);
+		panel.add(btnDe);
 		
 		JButton btnIn = new JButton("등록");
+		btnIn.setIcon(new ImageIcon(Proc.class.getResource("/lmimage/\uC2E0\uADDC\uAC70\uB798\uCC98\uB4F1\uB85D\uBC84\uD2BC.png")));
+		btnIn.setFont(new Font("새굴림", Font.PLAIN, 12));
+		btnIn.setBounds(8, 371, 70, 32);
+		 btnIn.setHorizontalTextPosition(JButton.CENTER);
+		panel.add(btnIn);
+		txtindate = new JTextField();
+		txtindate.setBounds(220, 330, 164, 33);
+		panel.add(txtindate);
+		txtindate.setColumns(10);
+		txtindate.setText(today);
+		txtindate.setEditable(false);
+		JLabel lblindate = new JLabel("가입일");
+		lblindate.setFont(new Font("새굴림", Font.PLAIN, 12));
+		lblindate.setForeground(SystemColor.text);
+		lblindate.setBounds(29, 332, 81, 29);
+		panel.add(lblindate);
+		
+		JLabel lblid = new JLabel("아이디(사번)");
+		lblid.setFont(new Font("새굴림", Font.PLAIN, 12));
+		lblid.setForeground(SystemColor.text);
+		lblid.setBounds(29, 129, 81, 25);
+		panel.add(lblid);
+		
+		txtid = new JTextField();
+		txtid.setBounds(220, 129, 164, 25);
+		panel.add(txtid);
+		txtid.setColumns(10);
+		JLabel lblpw = new JLabel("비밀번호");
+		lblpw.setFont(new Font("새굴림", Font.PLAIN, 12));
+		lblpw.setForeground(SystemColor.text);
+		lblpw.setBounds(29, 164, 81, 25);
+		panel.add(lblpw);
+		JLabel lblname = new JLabel("이름");
+		lblname.setFont(new Font("새굴림", Font.PLAIN, 12));
+		lblname.setForeground(SystemColor.text);
+		lblname.setBounds(29, 199, 81, 25);
+		panel.add(lblname);
+		txtname = new JTextField();
+		txtname.setBounds(220, 199, 164, 25);
+		panel.add(txtname);
+		txtname.setColumns(10);
+		txtp = new JPasswordField();
+		txtp.setBounds(220, 164, 164, 25);
+		panel.add(txtp);
+		JLabel lblty = new JLabel("유형");
+		lblty.setFont(new Font("새굴림", Font.PLAIN, 12));
+		lblty.setForeground(SystemColor.text);
+		lblty.setBounds(29, 234, 81, 25);
+		panel.add(lblty);
+		
+		user = new JRadioButton("사용자");
+		user.setFont(new Font("새굴림", Font.PLAIN, 12));
+		user.setBackground(SystemColor.window);
+		user.setBounds(220, 235, 81, 23);
+		panel.add(user);
+		group.add(user);
+		manager = new JRadioButton("관리자");
+		manager.setFont(new Font("새굴림", Font.PLAIN, 12));
+		manager.setBackground(SystemColor.window);
+		manager.setBounds(305, 235, 81, 23);
+		panel.add(manager);
+		group.add(manager);
+		JLabel lblintro = new JLabel("비고");
+		lblintro.setFont(new Font("새굴림", Font.PLAIN, 12));
+		lblintro.setForeground(SystemColor.text);
+		lblintro.setBounds(29, 269, 81, 25);
+		panel.add(lblintro);
+		
+		intro = new JTextField();
+		intro.setBounds(220, 264, 146, 56);
+		panel.add(intro);
+		
+		JLabel lblTitle = new JLabel("\uD68C\uC6D0\uAC00\uC785");
+		lblTitle.setFont(new Font("굴림", Font.BOLD, 30));
+		lblTitle.setBounds(238, 26, 237, 69);
+		panel.add(lblTitle);
 		btnIn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				addUser();
 			}
 		});
-		JButton btnDe = new JButton("삭제");
 		btnDe.addActionListener(new ActionListener() {
 			
 			@Override
@@ -94,14 +203,18 @@ public class Proc extends JFrame{
 				removeUser();
 			}
 		});
-		JButton btnUp = new JButton("수정");
 		btnUp.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				updateUser();
 			}
 		});
-		JButton btnCn = new JButton("새로고침");
+		btnFn_1.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				findUser();
+			}
+		});
 		btnCn.addActionListener(new ActionListener() {
 			
 			@Override
@@ -109,106 +222,6 @@ public class Proc extends JFrame{
 				cancelUser();
 			}
 		});
-		
-		JButton btnFn = new JButton("조회");
-		btnFn.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				findUser();
-			}
-		});
-		
-		GroupLayout groupLayout = new GroupLayout(getContentPane());
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(49)
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(btnIn)
-									.addGap(18)
-									.addComponent(btnDe)
-									.addGap(18)
-									.addComponent(btnUp))
-								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(lblty, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)
-									.addGap(18)
-									.addComponent(user)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(manager))
-								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(lblname, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)
-									.addGap(18)
-									.addComponent(txtname, GroupLayout.PREFERRED_SIZE, 164, GroupLayout.PREFERRED_SIZE))
-								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-									.addGroup(groupLayout.createSequentialGroup()
-										.addComponent(lblpw, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)
-										.addGap(18)
-										.addComponent(txtp))
-									.addGroup(groupLayout.createSequentialGroup()
-										.addComponent(lblid, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)
-										.addGap(18)
-										.addComponent(txtid, GroupLayout.PREFERRED_SIZE, 164, GroupLayout.PREFERRED_SIZE)))
-								.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
-									.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
-										.addComponent(lblintro, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)
-										.addGap(18)
-										.addComponent(pane))
-									.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
-										.addComponent(lblindate, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)
-										.addGap(18)
-										.addComponent(txtindate, GroupLayout.PREFERRED_SIZE, 164, GroupLayout.PREFERRED_SIZE)))))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(99)
-							.addComponent(btnCn)
-							.addGap(29)
-							.addComponent(btnFn)))
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(59)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblid, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
-						.addComponent(txtid, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblpw, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
-						.addComponent(txtp, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblname, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
-						.addComponent(txtname, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblty, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
-						.addComponent(user)
-						.addComponent(manager))
-					.addPreferredGap(ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(lblintro, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
-							.addGap(50)
-							.addComponent(lblindate, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE))
-						.addComponent(txtindate, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
-					.addGap(27)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(btnIn, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnDe, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnUp, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnFn, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnCn, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
-					.addGap(24))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(251)
-					.addComponent(pane, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(195, Short.MAX_VALUE))
-		);
 		getContentPane().setLayout(groupLayout);
 		this.setLocation(600,230);
 		setVisible(true);
@@ -333,10 +346,6 @@ public class Proc extends JFrame{
 		new Proc();
 	}
 }
-
-
-
-
 
 
 
