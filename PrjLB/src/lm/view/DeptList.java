@@ -114,7 +114,7 @@ import java.awt.Graphics;
 			btnIn   = new JButton("거래처등록");
 			btnIn.setIcon(new ImageIcon(DeptList.class.getResource("/lmimage/4\uC790\uB9AC\uBC84\uD2BC.png")));
 			btnIn.setFont(new Font("새굴림", Font.PLAIN, 12));
-			btnIn.setBounds(375, 100, 93, 32);
+			btnIn.setBounds(369, 100, 97, 32);
 			btnIn .setHorizontalTextPosition(JButton.CENTER); // 텍스트 가운데
 			panel.add(btnIn);
 			
@@ -156,7 +156,7 @@ import java.awt.Graphics;
 			btnRe   = new JButton("새로고침");
 			btnRe.setIcon(new ImageIcon(DeptList.class.getResource("/lmimage/4\uC790\uB9AC\uBC84\uD2BC.png")));
 			btnRe.setFont(new Font("새굴림", Font.PLAIN, 12));
-			btnRe.setBounds(277, 100, 93, 32);
+			btnRe.setBounds(270, 100, 93, 32);
 			btnRe .setHorizontalTextPosition(JButton.CENTER); // 텍스트 가운데
 			panel.add(btnRe);
 			//새로고침
@@ -167,13 +167,13 @@ import java.awt.Graphics;
 				}
 			});
 			txtname = new JTextField (" "); 
-			txtname.setBounds(72, 101, 123, 32);
+			txtname.setBounds(72, 101, 120, 32);
 			panel.add(txtname);
 			txtname.setColumns(15);
 			btnfind = new JButton("조회");
 			btnfind.setIcon(new ImageIcon(DeptList.class.getResource("/lmimage/\uC2E0\uADDC\uAC70\uB798\uCC98\uB4F1\uB85D\uBC84\uD2BC.png")));
 			btnfind.setFont(new Font("새굴림", Font.PLAIN, 12));
-			btnfind.setBounds(202, 100, 70, 32);
+			btnfind.setBounds(195, 100, 70, 32);
 			btnfind .setHorizontalTextPosition(JButton.CENTER); // 텍스트 가운데
 			panel.add(btnfind);
 			

@@ -3,6 +3,7 @@ package lm.view;
 import javax.swing.JFrame;
 
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -15,6 +16,7 @@ import java.util.Vector;
 
 import javax.swing.ButtonGroup;
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -42,6 +44,8 @@ import java.time.LocalDateTime;
 
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JPanel;
+import java.awt.SystemColor;
 
 public class PullQuiry extends JFrame implements ActionListener{
 	JTextField txt;
@@ -53,6 +57,10 @@ public class PullQuiry extends JFrame implements ActionListener{
 	JRadioButton ra1,ra2,ra3;
 	JButton btn1 , btn2, btn3;
 	PullQuiry ev;
+	private JScrollPane scrollPane;
+	private JPanel panel;
+	ImageIcon icon;
+	private JLabel lblNewLabel;
 
 	public JRadioButton getRa1() {
 		return ra1;
@@ -126,218 +134,21 @@ public class PullQuiry extends JFrame implements ActionListener{
 		setTitle("상품전체조회");
 
 
-
-		JLabel lab1 = new JLabel("전체상품조회");
-		lab1.setFont(new Font("굴림", Font.BOLD, 40));
-		lab1.setBounds(336, 10, 400, 84);
-		getContentPane().add(lab1);
-
-		ra3 = new JRadioButton("전체조회");
-		ra3.setFont(new Font("굴림", Font.PLAIN, 15));
-		ra3.setSelected(true);
-		ra1 = new JRadioButton("상품분류");
-		ra1.setFont(new Font("굴림", Font.PLAIN, 15));
-		ra2 = new JRadioButton("거래처명");
-		ra2.setFont(new Font("굴림", Font.PLAIN, 15));
-
+		icon = new ImageIcon("./image/큰거1.png");
+		
+		JPanel panel = new JPanel() {
+	         public void paintComponent(Graphics g) {
+	        
+	             g.drawImage(icon.getImage(), 0, 0, null);
+	     
+	             setOpaque(false);
+	             super.paintComponent(g);
+	            }
+	      };
+		
 		this.group        = new ButtonGroup();
-		this.group.add(ra3);
-		this.group.add(ra1);
-		this.group.add(ra2);
-
-
-
-
-		ra3.addItemListener(new ItemListener() {
-			@Override
-			public void itemStateChanged(ItemEvent e) {
-				if(e.getStateChange()==ItemEvent.SELECTED) {
-					txt.setEnabled(false);
-					combo.setEnabled(false);
-				}else {
-					txt.setEnabled(true);
-					combo.setEnabled(true);
-				}
-
-
-			}
-		});
-		ra3.addKeyListener(new KeyListener() {
-
-			@Override
-			public void keyTyped(KeyEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void keyReleased(KeyEvent e) {
-
-				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-					btn1.doClick();
-				}
-
-			}
-
-			@Override
-			public void keyPressed(KeyEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-		});
-		ra1.addItemListener(new ItemListener() {
-			@Override
-			public void itemStateChanged(ItemEvent e) {
-				if(e.getStateChange()==ItemEvent.SELECTED) 
-					txt.setEnabled(false);
-				else 
-					txt.setEnabled(true);
-			}
-		});
-		ra1.addKeyListener(new KeyListener() {
-
-			@Override
-			public void keyTyped(KeyEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void keyReleased(KeyEvent e) {
-				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-					btn1.doClick();
-				}
-
-			}
-
-			@Override
-			public void keyPressed(KeyEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-		});
-		ra2.addItemListener(new ItemListener() {
-			@Override
-			public void itemStateChanged(ItemEvent e) {
-				if(e.getStateChange()==ItemEvent.SELECTED) 
-					combo.setEnabled(false);
-				else 
-					combo.setEnabled(true);
-			}
-		});
-
-		ra2.addKeyListener(new KeyListener() {
-
-			@Override
-			public void keyTyped(KeyEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void keyReleased(KeyEvent e) {
-				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-					btn1.doClick();
-				}
-			}
-
-			@Override
-			public void keyPressed(KeyEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-		});
-
-
-		txt = new JTextField();
-		txt.setColumns(10);
-		txt.addKeyListener(new KeyListener() {
-
-			@Override
-			public void keyTyped(KeyEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void keyReleased(KeyEvent e) {
-				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-					btn1.doClick();
-				}
-
-			}
-
-			@Override
-			public void keyPressed(KeyEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-		});
-
-		jtb1 = new JTable();
-
-
-		btn1 = new JButton("조회");
-		btn1.setFont(new Font("굴림", Font.PLAIN, 15));
-		btn1.addActionListener(this);
-
-
-
-		btn2 = new JButton("엑셀로저장");
-		btn2.setFont(new Font("굴림", Font.PLAIN, 15));
-		btn2.addActionListener(this);
-
-		btn3 = new JButton("상품개별조회");
-		btn3.setFont(new Font("굴림", Font.PLAIN, 15));
-		btn3.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				new LMProductInquiry();
-
-			}
-		});
-
-
-		JLabel lalb1 = new JLabel("총 이익률 : ");
-		lalb1.setFont(new Font("굴림", Font.PLAIN, 17));
-
-		lalb2 = new JLabel();
-		lalb2.setFont(new Font("굴림", Font.PLAIN, 17));
-
-		JLabel lalb3 = new JLabel("총 재고금액 : ");
-		lalb3.setFont(new Font("굴림", Font.PLAIN, 17));
-
-		lalb4 = new JLabel();
-		lalb4.setFont(new Font("굴림", Font.PLAIN, 17));
-
-		sp1 = new JScrollPane(jtb1);
-
-		combo = new JComboBox();
-		combo.setFont(new Font("굴림", Font.PLAIN, 15));
-		combo.setModel(new DefaultComboBoxModel(new String[] {"가공식품","기호식품","냉동냉장","주류"}));
-		combo.addKeyListener(new KeyListener() {
-
-			@Override
-			public void keyTyped(KeyEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void keyReleased(KeyEvent e) {
-				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-					btn1.doClick();
-				}
-
-			}
-
-			@Override
-			public void keyPressed(KeyEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-		});
+		
+		scrollPane = new JScrollPane();
 
 
 
@@ -346,85 +157,271 @@ public class PullQuiry extends JFrame implements ActionListener{
 
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
 		groupLayout.setHorizontalGroup(
-				groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-								.addGroup(groupLayout.createSequentialGroup()
-										.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-										.addComponent(lalb1)
-										.addGap(32)
-										.addComponent(lalb2, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
-										.addGap(33)
-										.addComponent(lalb3)
-										.addGap(35)
-										.addComponent(lalb4, GroupLayout.PREFERRED_SIZE, 153, GroupLayout.PREFERRED_SIZE)
-										.addGap(83))
-								.addGroup(groupLayout.createSequentialGroup()
-										.addGap(70)
-										.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
-												.addComponent(sp1, Alignment.LEADING)
-												.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
-														.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-																.addComponent(ra2)
-																.addComponent(ra3)
-																.addComponent(ra1))
-														.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-																.addGroup(groupLayout.createSequentialGroup()
-																		.addGap(13)
-																		.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-																				.addComponent(txt, GroupLayout.PREFERRED_SIZE, 392, GroupLayout.PREFERRED_SIZE)
-																				.addComponent(combo, GroupLayout.PREFERRED_SIZE, 119, GroupLayout.PREFERRED_SIZE))
-																		.addPreferredGap(ComponentPlacement.UNRELATED)
-																		.addComponent(btn1, GroupLayout.PREFERRED_SIZE, 106, GroupLayout.PREFERRED_SIZE)
-																		.addPreferredGap(ComponentPlacement.UNRELATED)
-																		.addComponent(btn2, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
-																		.addPreferredGap(ComponentPlacement.RELATED)
-																		.addComponent(btn3))
-																.addGroup(groupLayout.createSequentialGroup()
-																		.addGap(228)
-																		.addComponent(lab1, GroupLayout.PREFERRED_SIZE, 311, GroupLayout.PREFERRED_SIZE)))))
-										.addGap(78)))
-						.addContainerGap())
-				);
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 994, Short.MAX_VALUE)
+		);
 		groupLayout.setVerticalGroup(
-				groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-						.addGap(22)
-						.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-								.addGroup(groupLayout.createSequentialGroup()
-										.addGap(10)
-										.addComponent(lab1, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
-										.addGap(18)
-										.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-												.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-														.addComponent(btn3, GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-														.addComponent(btn2, GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
-												.addComponent(btn1, GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)))
-								.addGroup(groupLayout.createSequentialGroup()
-										.addComponent(ra3)
-										.addGap(6)
-										.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-												.addComponent(ra1)
-												.addComponent(combo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-										.addGap(6)
-										.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-												.addComponent(ra2)
-												.addComponent(txt, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE))))
-						.addGap(18)
-						.addComponent(sp1, GroupLayout.PREFERRED_SIZE, 305, GroupLayout.PREFERRED_SIZE)
-						.addGap(34)
-						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lalb1)
-								.addComponent(lalb2)
-								.addComponent(lalb3)
-								.addComponent(lalb4, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
-						.addGap(26))
-				);
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 571, Short.MAX_VALUE)
+		);
+		
+	
+		scrollPane.setViewportView(panel);
+		panel.setLayout(null);
+		
+				lalb2 = new JLabel();
+				lalb2.setForeground(SystemColor.text);
+				lalb2.setBounds(486, 522, 83, 27);
+				panel.add(lalb2);
+				lalb2.setFont(new Font("굴림", Font.PLAIN, 17));
+				
+						lalb4 = new JLabel();
+						lalb4.setForeground(SystemColor.text);
+						lalb4.setBounds(730, 526, 153, 20);
+						panel.add(lalb4);
+						lalb4.setFont(new Font("굴림", Font.PLAIN, 17));
+						
+						
+								JLabel lalb1 = new JLabel("총 이익률 : ");
+								lalb1.setForeground(SystemColor.text);
+								lalb1.setBounds(348, 526, 84, 20);
+								panel.add(lalb1);
+								lalb1.setFont(new Font("굴림", Font.PLAIN, 17));
+								
+										JLabel lalb3 = new JLabel("총 재고금액 : ");
+										lalb3.setForeground(SystemColor.text);
+										lalb3.setBounds(617, 526, 100, 20);
+										panel.add(lalb3);
+										lalb3.setFont(new Font("굴림", Font.PLAIN, 17));
+										
+												btn3 = new JButton("상품개별조회");
+												btn3.setIcon(new ImageIcon(PullQuiry.class.getResource("/lmimage/5\uC790\uB9AC\uBC84\uD2BC.png")));
+												btn3.setBounds(725, 94, 106, 32);
+												btn3 .setHorizontalTextPosition(JButton.CENTER); // 텍스트 가운데
+												panel.add(btn3);
+												btn3.setFont(new Font("새굴림", Font.PLAIN, 12));
+												
+												
+												
+														btn2 = new JButton("\uC5D1\uC140\uB85C \uC800\uC7A5");
+														btn2.setIcon(new ImageIcon(PullQuiry.class.getResource("/lmimage/5\uC790\uB9AC\uBC84\uD2BC.png")));
+														btn2.setBounds(843, 94, 106, 32);
+														btn2 .setHorizontalTextPosition(JButton.CENTER); // 텍스트 가운데
+														panel.add(btn2);
+														btn2.setFont(new Font("새굴림", Font.PLAIN, 12));
+														
+														
+																btn1 = new JButton("조회");
+																btn1.setIcon(new ImageIcon(PullQuiry.class.getResource("/lmimage/\uC2E0\uADDC\uAC70\uB798\uCC98\uB4F1\uB85D\uBC84\uD2BC.png")));
+																btn1.setBounds(511, 94, 70, 32);
+																btn1 .setHorizontalTextPosition(JButton.CENTER); // 텍스트 가운데
+																panel.add(btn1);
+																btn1.setFont(new Font("새굴림", Font.PLAIN, 12));
+																
+																		ra3 = new JRadioButton("전체조회");
+																		ra3.setBackground(SystemColor.window);
+																		ra3.setBounds(201, 26, 92, 27);
+																		panel.add(ra3);
+																		ra3.setFont(new Font("새굴림", Font.PLAIN, 15));
+																		ra3.setSelected(true);
+																		this.group.add(ra3);
+																		ra1 = new JRadioButton("상품분류");
+																		ra1.setBackground(SystemColor.window);
+																		ra1.setBounds(201, 62, 92, 27);
+																		panel.add(ra1);
+																		ra1.setFont(new Font("새굴림", Font.PLAIN, 15));
+																		this.group.add(ra1);
+																		ra2 = new JRadioButton("거래처명");
+																		ra2.setBackground(SystemColor.window);
+																		ra2.setBounds(201, 99, 92, 27);
+																		panel.add(ra2);
+																		ra2.setFont(new Font("새굴림", Font.PLAIN, 15));
+																		this.group.add(ra2);
+																		
+																				combo = new JComboBox();
+																				combo.setBounds(302, 63, 119, 24);
+																				panel.add(combo);
+																				combo.setFont(new Font("굴림", Font.PLAIN, 15));
+																				combo.setModel(new DefaultComboBoxModel(new String[] {"가공식품","기호식품","냉동냉장","주류"}));
+																				combo.addKeyListener(new KeyListener() {
 
+																					@Override
+																					public void keyTyped(KeyEvent e) {
+																						// TODO Auto-generated method stub
 
+																					}
 
-		txt.setEnabled(false);
-		combo.setEnabled(false);
+																					@Override
+																					public void keyReleased(KeyEvent e) {
+																						if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+																							btn1.doClick();
+																						}
+
+																					}
+
+																					@Override
+																					public void keyPressed(KeyEvent e) {
+																						// TODO Auto-generated method stub
+
+																					}
+																				});
+																				combo.setEnabled(false);
+																				
+																				
+																						txt = new JTextField();
+																						txt.setBounds(301, 95, 201, 32);
+																						panel.add(txt);
+																						txt.setColumns(10);
+																						txt.addKeyListener(new KeyListener() {
+
+																							@Override
+																							public void keyTyped(KeyEvent e) {
+																								// TODO Auto-generated method stub
+
+																							}
+
+																							@Override
+																							public void keyReleased(KeyEvent e) {
+																								if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+																									btn1.doClick();
+																								}
+
+																							}
+
+																							@Override
+																							public void keyPressed(KeyEvent e) {
+																								// TODO Auto-generated method stub
+
+																							}
+																						});
+																						
+																						
+																						
+																								txt.setEnabled(false);
+																								
+																										jtb1 = new JTable();
+																										
+																												sp1 = new JScrollPane(jtb1);
+																												sp1.setBounds(5, 158, 970, 351);
+																												panel.add(sp1);
+																												
+																												lblNewLabel = new JLabel("\uC0C1\uD488\uC804\uCCB4\uC870\uD68C");
+																												lblNewLabel.setFont(new Font("새굴림", Font.BOLD, 40));
+																												lblNewLabel.setBounds(703, 10, 391, 79);
+																												panel.add(lblNewLabel);
+																		ra2.addItemListener(new ItemListener() {
+																			@Override
+																			public void itemStateChanged(ItemEvent e) {
+																				if(e.getStateChange()==ItemEvent.SELECTED) 
+																					combo.setEnabled(false);
+																				else 
+																					combo.setEnabled(true);
+																			}
+																		});
+																		
+																				ra2.addKeyListener(new KeyListener() {
+																		
+																					@Override
+																					public void keyTyped(KeyEvent e) {
+																						// TODO Auto-generated method stub
+																		
+																					}
+																		
+																					@Override
+																					public void keyReleased(KeyEvent e) {
+																						if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+																							btn1.doClick();
+																						}
+																					}
+																		
+																					@Override
+																					public void keyPressed(KeyEvent e) {
+																						// TODO Auto-generated method stub
+																		
+																					}
+																				});
+																		ra1.addItemListener(new ItemListener() {
+																			@Override
+																			public void itemStateChanged(ItemEvent e) {
+																				if(e.getStateChange()==ItemEvent.SELECTED) 
+																					txt.setEnabled(false);
+																				else 
+																					txt.setEnabled(true);
+																			}
+																		});
+																		ra1.addKeyListener(new KeyListener() {
+
+																			@Override
+																			public void keyTyped(KeyEvent e) {
+																				// TODO Auto-generated method stub
+
+																			}
+
+																			@Override
+																			public void keyReleased(KeyEvent e) {
+																				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+																					btn1.doClick();
+																				}
+
+																			}
+
+																			@Override
+																			public void keyPressed(KeyEvent e) {
+																				// TODO Auto-generated method stub
+
+																			}
+																		});
+																		
+																		
+																		
+																		
+																				ra3.addItemListener(new ItemListener() {
+																					@Override
+																					public void itemStateChanged(ItemEvent e) {
+																						if(e.getStateChange()==ItemEvent.SELECTED) {
+																							txt.setEnabled(false);
+																							combo.setEnabled(false);
+																						}else {
+																							txt.setEnabled(true);
+																							combo.setEnabled(true);
+																						}
+																		
+																		
+																					}
+																				});
+																				ra3.addKeyListener(new KeyListener() {
+
+																					@Override
+																					public void keyTyped(KeyEvent e) {
+																						// TODO Auto-generated method stub
+
+																					}
+
+																					@Override
+																					public void keyReleased(KeyEvent e) {
+
+																						if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+																							btn1.doClick();
+																						}
+
+																					}
+
+																					@Override
+																					public void keyPressed(KeyEvent e) {
+																						// TODO Auto-generated method stub
+
+																					}
+																				});
+																btn1.addActionListener(this);
+														btn2.addActionListener(this);
+												btn3.addActionListener(new ActionListener() {
+
+													@Override
+													public void actionPerformed(ActionEvent e) {
+														new LMProductInquiry();
+
+													}
+												});
 		getContentPane().setLayout(groupLayout);
 		setVisible(true);
 		setLocation(450,200);

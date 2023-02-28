@@ -22,7 +22,6 @@ public class Uservo {
 	public Uservo(String username2) {
 		this.username = username2;
 	}
-
 	public int getUserid() {
 		return userid;
 	}
