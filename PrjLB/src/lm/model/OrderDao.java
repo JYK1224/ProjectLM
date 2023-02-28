@@ -201,7 +201,7 @@ public class OrderDao {
 		System.out.println(date1);
 		System.out.println(date2);
 
-		String  sql1 = " SELECT D.DNAME , O.ORDERDATE,  P.PID, P.PNAME, P.IPRICE , NVL(S.STOCKNUM, 0) STOCKNUM , O.ORDERNUM, U.USERNAME\r\n "
+		String  sql1 = " SELECT D.DNAME , TO_CHAR(O.ORDERDATE, 'YYYY-MM-DD') ORDERDATE,  P.PID, P.PNAME, P.IPRICE , NVL(S.STOCKNUM, 0) STOCKNUM , O.ORDERNUM, U.USERNAME\r\n "
 				+ " FROM DEPT_ACC D , ORDERING O , PRODUCT P , STOCK S, USERMNG U\r\n "
 				+ " WHERE D.DID = P.DID (+)\r\n "
 				+ " AND P.PID = S.PID (+)\r\n "
@@ -211,7 +211,7 @@ public class OrderDao {
 				+ " AND ( TO_DATE(O.ORDERDATE) BETWEEN TO_DATE('"+ date1 +"') AND TO_DATE('"+ date2 +"') ) \r\n "
 				+ " ORDER BY O.ORDERDATE ASC ";
 
-		String  sql2 = "SELECT D.DNAME , O.ORDERDATE,  P.PID, P.PNAME, P.IPRICE , NVL(S.STOCKNUM, 0) STOCKNUM , O.ORDERNUM, U.USERNAME\r\n"
+		String  sql2 = "SELECT D.DNAME , TO_CHAR(O.ORDERDATE, 'YYYY-MM-DD') ORDERDATE,  P.PID, P.PNAME, P.IPRICE , NVL(S.STOCKNUM, 0) STOCKNUM , O.ORDERNUM, U.USERNAME\r\n"
 				+ "  FROM DEPT_ACC D , ORDERING O , PRODUCT P , STOCK S, USERMNG U\r\n"
 				+ "WHERE O.DID = D.DID\r\n"
 				+ "  AND D.DID = P.DID\r\n"
@@ -288,7 +288,7 @@ public class OrderDao {
 						+ ") VALUES (\r\n"
 						+ "    (SELECT NVL(MAX(orderid), 0) + 1 FROM ordering),\r\n"
 						+ "    ? ,\r\n"
-						+ "    TO_date( ? , 'YYYY-MM-DD HH:MI:SS' ) ,\r\n"
+						+ "    TO_date( ? , 'YYYY-MM-DD' ) ,\r\n"
 						+ "    ?,\r\n"
 						+ "    (SELECT PID FROM PRODUCT WHERE PNAME =  ? ),\r\n"
 						+ "    (SELECT DID FROM DEPT_ACC WHERE DNAME =  ? )\r\n"

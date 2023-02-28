@@ -244,7 +244,6 @@ public class LMOrderList implements ActionListener {
 		// 엑셀로저장
 		btnNewButton_2 = new JButton("엑셀로 저장");
 		btnNewButton_2.setPreferredSize(new Dimension(100, 30));	// FlowLayout의 컴포넌트 리사이즈 방법
-		btnNewButton_2.setToolTipText("d:/ws/java/DBProject02/src/jTable_20230220142558.xlsx");
 		getFrame().getContentPane().add(btnNewButton_2);
 
 		btnNewButton_2.addActionListener(new ActionListener() {
@@ -386,7 +385,7 @@ public class LMOrderList implements ActionListener {
 		cols.add("입고 가격");
 		cols.add("현재 재고");
 		cols.add("주문 수량");
-		cols.add("주문 직원");
+		cols.add("사원 번호");
 
 		return cols;
 	}

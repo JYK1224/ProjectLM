@@ -109,7 +109,7 @@ public class LMProdOrder extends JFrame implements ActionListener{
 
 				Calendar cal = Calendar.getInstance();
 				cal.setTime(selectedDate);
-				DateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+				DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 				String current = df.format(cal.getTime());
 				//	        System.out.println("current: " + df.format(cal.getTime()));
 
@@ -349,7 +349,7 @@ public class LMProdOrder extends JFrame implements ActionListener{
 		cols.add("입고 가격");
 		cols.add("현재 재고");
 		cols.add("주문 수량");
-		cols.add("주문 직원");
+		cols.add("사원 번호");
 
 		return cols;
 	}
@@ -439,14 +439,19 @@ public class LMProdOrder extends JFrame implements ActionListener{
 			try {
 				orderDname.add(i, table.getValueAt(i, 0).toString() );	// dname 거래처명
 				orderDate.add(i, table.getValueAt(i, 1).toString() ); 	// orderdate 주문일자
+				if( orderDate.get(i).equals("") ) {
+					JOptionPane.showMessageDialog(null, 
+							"주문일자를 지정해주세요.", "날짜지정오류", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
 				orderPname.add(i, table.getValueAt(i, 3).toString() );	// pname 상품명
-				orderNum.add(i, table.getValueAt(i, 6).toString() ); 	// ordernum 주문수량
 			}catch (NullPointerException e) {
 				System.err.println("table.getValueAt 이 null 입니다.");
 				JOptionPane.showMessageDialog(null, 
-						"주문일자를 지정해주세요.", "날짜지정오류", JOptionPane.ERROR_MESSAGE);
+						"빈칸이 있음.", "빈칸 입력", JOptionPane.ERROR_MESSAGE);
 				return;
 			}
+			orderNum.add(i, table.getValueAt(i, 6).toString() ); 	// ordernum 주문수량
 		}
 	}
 
