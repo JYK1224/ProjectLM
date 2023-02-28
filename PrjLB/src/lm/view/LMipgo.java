@@ -5,10 +5,14 @@ import java.awt.Dimension;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Vector;
 import javax.swing.JButton;
@@ -29,8 +33,6 @@ import lm.model.IpgoVo;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
-
-
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -77,11 +79,11 @@ private void init() {
    topPane      =  new JPanel();
    lblAcc       =  new JLabel("거래처명: ");
    txtId        =  new TextField(30);  
-   btnFind      =  new JButton("입고일자지정 & 검색");    
+   btnFind      =  new JButton("검색");    
    btnSet       =  new JButton("입고확정");    
    btnToExcel   =  new JButton("엑셀로 저장");
    btnList      =  new JButton("입고내역 조회");
-   lblDay       =  new JLabel("         날짜 선택: ");
+   lblDay       =  new JLabel("        입고 일자 선택: ");
    botPane      =  new JPanel();
 
   
@@ -108,20 +110,28 @@ private void init() {
 
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(selectedDate);
-			DateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+			DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 			String current = df.format(cal.getTime());
 			//	        System.out.println("current: " + df.format(cal.getTime()));
-
-
-			cal.add(Calendar.DATE, +1);		// 입고예정일 = 주문일 + 1
-			String after = df.format(cal.getTime());
-			//	        System.out.println("after: " + df.format(cal.getTime()));
-
-
 			lmvo.setIndate(current);	// 날짜 갱신
 			//				jTableRefresh(); 	// 테이블 새로고침 메소드
 			
 			System.out.println(current);
+
+
+			cal.add(Calendar.DATE, +1);		// 입고예정일 = 주문일 + 1
+			String after = df.format(cal.getTime());
+			
+			//어제 
+			Calendar cal2 = Calendar.getInstance();
+			cal2.add(Calendar.DATE, -1);	
+			DateFormat df2 = new SimpleDateFormat("yyyy-MM-dd");
+			String yesterday = df2.format(cal2.getTime());
+			
+			lmvo.setOrderdate(yesterday);
+			//	        System.out.println("after: " + df.format(cal.getTime()));
+
+
 			
 			
 		}
@@ -207,13 +217,13 @@ private void init() {
             Vector<String>  cols = new Vector<>();  // 문자배열 대신 사용
             cols.add("거래처명");
             cols.add("주문일자");
-            cols.add("입고 예정일");
+            cols.add("입고일");
             cols.add("상품코드");
             cols.add("상품명");
             cols.add("현재 재고");
             cols.add("주문 수량");
             cols.add("입고 수량");
-            cols.add("입고 직원");
+            cols.add("사원 번호");
             return  cols;
          }
          
@@ -232,7 +242,7 @@ private void init() {
    public void actionPerformed(ActionEvent e) {
       
       switch( e.getActionCommand() ) {  // 눌러진 버튼의 글자
-      case "입고일자지정 & 검색":
+      case "검색":
     	  Vector<Vector> list = getDataList(this);
 			jTableRefresh2(list);
 			break;
@@ -246,6 +256,9 @@ private void init() {
 			}catch(Exception ex) {}
 			addList();
 			
+	//-------------------------------------------------
+	    // STOCK테이블에 UPDATE해주기
+		// 입고예정일을 주문일 +1로 바꿔주기
 			
          break;
       case "엑셀로 저장":
@@ -285,6 +298,7 @@ private void init() {
 		return list;
 }
 
+   
 private void addList() {
 	   getInArrayData();
 	   IpgoDao dao = new IpgoDao();		
@@ -293,6 +307,9 @@ private void addList() {
 		System.out.println(inDate);
 		System.out.println(inPname);
 		System.out.println(inNum);
+		
+		dao.updateMember(inPname,inNum);
+		
 		
 		inDate.clear();
 		inPname.clear();

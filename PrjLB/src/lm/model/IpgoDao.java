@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Vector;
 
+import org.apache.commons.math3.analysis.function.Add;
+
 import lm.view.LMipgo;
 import oracle.jdbc.OracleConnection;
 
@@ -42,8 +44,9 @@ public class IpgoDao {
 				+ "  AND O.PID = P.PID (+)\r\n"
 				+ "  AND P.PID = S.PID (+)\r\n"
 				+ "  AND O.USERID = U.USERID (+)\r\n"
-				+ "AND DNAME LIKE '%"+ search.toUpperCase().trim() +"%'"
-				+ "ORDER BY D.DNAME, O.ORDERDATE ASC";
+				+ " AND DNAME LIKE '%"+ search.toUpperCase().trim() +"%'"
+				+ " AND TO_DATE(ORDERDATE) BETWEEN  TO_DATE('" +LMipgo.lmvo.getOrderdate() +"')-1 AND TO_DATE('" + LMipgo.lmvo.getOrderdate() +"')"
+				+ " ORDER BY D.DNAME, O.ORDERDATE ASC";
 
 		PreparedStatement pstmt  =  null;
 		ResultSet         rs     =  null;
@@ -52,7 +55,7 @@ public class IpgoDao {
 			rs    =  pstmt.executeQuery();			
 			while( rs.next() ) {
 				String  dname          = rs.getString("DNAME");       // 거래처명
-				String  orderdate      = rs.getString("ORDERDATE");   // 주문일자
+				String  orderdate      = LMipgo.lmvo.getOrderdate();   // 주문일자
 				String  indate         = LMipgo.lmvo.getIndate()  ;   // 주문일자
 				String  pid            = rs.getString("PID");         // 상품코드
 				String  pname          = rs.getString("PNAME");       // 상품명
@@ -88,7 +91,7 @@ public class IpgoDao {
 		return    list;
 	}
 
-	
+
 	// 입고내역 조회 -검색기능
 	public Vector<Vector> getIpgo(String search) {
 
@@ -110,7 +113,7 @@ public class IpgoDao {
 
 			rs    =  pstmt.executeQuery();			
 			while( rs.next() ) {
-				String  indate      = rs.getString("indate");      // 주문일자
+				String  indate      = rs.getString("indate");      // 입고일자
 				String  dname       = rs.getString("dname");       // 거래처명
 				String  pid         = rs.getString("pid");         // 상품코드
 				String  pname       = rs.getString("pname");       // 상품명
@@ -146,34 +149,49 @@ public class IpgoDao {
 	}
 
 
-	
+
 	// 데이터 수정 (입고량만 수정 가능)
-	public int updateMember(IpgoVo vo) {
-		String  sql = "";
-		sql  += "UPDATE  INPUT ";
-		sql  += " SET    INNUM  = ? ";    // 수정항목 입고량
-		//		sql  += " WHERE  USERID   = ?"; 조건
+	public int updateMember(ArrayList<Object> inPname, ArrayList<Object> inNum) {
 
+		int j = inNum.size();
 		int  aftcnt  = 0;
-		PreparedStatement  pstmt = null;
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, vo.getInnum() );
-			//		pstmt.setString(2, vo.getPasswd() );
 
-			aftcnt = pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if(pstmt != null ) pstmt.close();
-			} catch (SQLException e) {			
+		for (int i = 0; i < j; i++) {
+			if(inNum.get(i).equals("")) {
+				insertList();
+			}else {	if(inNum.get(i).equals("0")) {
+				insertList();
+			}else {
+
+				String  sql = " UPDATE STOCK "
+						+ " SET STOCKNUM = 	NVL(STOCKNUM,0) + ? "
+						+ " WHERE PID = (SELECT PID FROM PRODUCT WHERE PNAME =  ? )";
+
+				//		sql  += " WHERE  USERID   = ?"; 조건
+
+				PreparedStatement  pstmt = null;
+				try {
+					pstmt = conn.prepareStatement(sql);
+
+					pstmt.setString(1, (String)inNum.get(i));
+					pstmt.setString(2, (String)inPname.get(i));
+
+					aftcnt = pstmt.executeUpdate();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				} finally {
+					try {
+						if(pstmt != null ) pstmt.close();
+					} catch (SQLException e) {			
+					}
+				}
 			}
-		}		
+			}
+		}
 		return aftcnt;
 	}
 
-	
+
 	// 상품 입고 업무 - Jtable 에 보여줄 data 목록
 
 	public Vector<Vector> getLmList() {
@@ -234,7 +252,7 @@ public class IpgoDao {
 
 	// 입고내역 조회 - Jtable 에 보여줄 data 목록
 
-	public Vector<Vector> geIpgoList() {
+	public Vector<Vector> getIpgoList() {
 
 		Vector<Vector>  list = new Vector<Vector>();   // 조회된 결과전체 대응 : rs
 
@@ -252,7 +270,7 @@ public class IpgoDao {
 
 			rs    = pstmt.executeQuery();
 			while( rs.next() ) {			
-				String  indate         = rs.getString("indate");      // 주문일자
+				String  indate         = rs.getString("indate");      // 입고일자
 				String  dname          = rs.getString("dname");       // 거래처명
 				String  pid            = rs.getString("pid");         // 상품코드
 				String  pname          = rs.getString("pname");       // 상품명
@@ -306,13 +324,13 @@ public class IpgoDao {
 						+ "    userid\r\n"
 						+ ") VALUES (\r\n"
 						+ "    (SELECT NVL(MAX(inid), 0) + 1 FROM input),\r\n"
-						+ "    TO_date( ? , 'YYYY-MM-DD HH:MI:SS' ),\r\n"
+						+ "    TO_date( ? , 'YYYY-MM-DD' ),\r\n"
 						+ "    ?,\r\n"
 						+ "    (SELECT PID FROM PRODUCT WHERE PNAME =  ? ),\r\n"
-						+ "    41133533\r\n"
+						+ "    ?\r\n"
 						+ ")";
 
-				
+
 				int               aftcnt = 0;
 				PreparedStatement pstmt  = null;
 				try {
@@ -320,7 +338,7 @@ public class IpgoDao {
 					pstmt.setString(1, (String) inDate.get(i) );		// 입고일자
 					pstmt.setString(2, (String) inNum.get(i));		// 입고수량
 					pstmt.setString(3, (String) inPname.get(i));	    // 상품명
-//					pstmt.setString(4, (String) username.get(i));		// 입고직원
+					pstmt.setString(4, "41133533");		// 입고직원
 
 					aftcnt = pstmt.executeUpdate();
 
@@ -341,8 +359,8 @@ public class IpgoDao {
 	public int insertList() {
 		return 0;
 	}
-	
-	
+
+
 	// 입고내역 검색버튼
 	//----------------------------------------------------------
 	// sql1이 오라클에서는 작동하는데 이클립스에서는 안됨
@@ -372,7 +390,7 @@ public class IpgoDao {
 				+ "    AND D.DNAME LIKE '%"+ search.toUpperCase().trim() +"%'\r\n"
 				+ "    ORDER BY I.INDATE";
 
-	
+
 		PreparedStatement  pstmt = null;
 		ResultSet          rs    = null;
 		try {
@@ -392,7 +410,7 @@ public class IpgoDao {
 				String  stocknum       = rs.getString("STOCKNUM");    // 현재재고
 				String  innum          = rs.getString("INNUM");       // 입고수량
 				String  userid          = rs.getString("USERID");       // 직원ID
-				
+
 
 				Vector  v         = new Vector();  // 안쪽 Vector : 한 줄 Row 를 의미
 				v.add( indate );
