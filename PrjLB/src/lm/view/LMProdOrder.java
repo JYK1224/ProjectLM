@@ -78,14 +78,14 @@ public class LMProdOrder extends JFrame implements ActionListener{
 	// this.setVisible(false) : 창 꺼야 할때 addActionListener 에 추가
 
 	public LMProdOrder(String userid) {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/lmimage/alphabets-33744_640.png")));
-		getContentPane().setBackground(new Color(231,231,231));
+		
 		this.userid = userid;
 		initComponent();
 	}
 
 	private void initComponent() {
 		frame = new JFrame();
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(LMProdOrder.class.getResource("/lmimage/alphabets-33744_640.png")));
 
 		frame.setTitle("상품 주문 화면");
 		
