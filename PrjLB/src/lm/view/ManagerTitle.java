@@ -263,7 +263,7 @@ public class ManagerTitle extends JFrame{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (lol != null)
-				lol.getFrame().setVisible(false);
+				lol.setVisible(false);
 				lol = new LMOrderList();
 		}
 	});

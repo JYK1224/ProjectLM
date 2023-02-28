@@ -279,7 +279,7 @@ public class LMProdOrder extends JFrame implements ActionListener{
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("주문내역 조회 버튼 클릭....");	
 				if (odl != null)
-					odl.getFrame().setVisible(false);
+					odl.setVisible(false);
 				odl = new LMOrderList();
 			}
 		});

@@ -182,7 +182,7 @@ private void Init() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if(lol != null)
-			lol.getFrame().dispose();
+			lol.dispose();
 			lol = new LMOrderList();
 		}
 	});
