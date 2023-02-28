@@ -147,7 +147,7 @@ private void init() {
             lblDay.setFont(new Font("새굴림", Font.PLAIN, 15));
             lblDay.setBounds(175, 99, 77, 24);
             panel.add(lblDay);
-            btnFind      =  new JButton("입고일자지정 & 검색");    
+            btnFind      =  new JButton("검색");    
             btnFind.setIcon(new ImageIcon(LMipgo.class.getResource("/lmimage/\uAE34\uBC84\uD2BC.png")));
             btnFind.setFont(new Font("새굴림", Font.PLAIN, 12));
             btnFind.setBounds(453, 94, 149, 32);
@@ -215,21 +215,27 @@ private void init() {
 
          Calendar cal = Calendar.getInstance();
          cal.setTime(selectedDate);
-         DateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
          String current = df.format(cal.getTime());
          //           System.out.println("current: " + df.format(cal.getTime()));
-
+         lmvo.setIndate(current);
+         System.out.println(current);
 
          cal.add(Calendar.DATE, +1);      // 입고예정일 = 주문일 + 1
          String after = df.format(cal.getTime());
          //           System.out.println("after: " + df.format(cal.getTime()));
 
-
-         lmvo.setIndate(current);   // 날짜 갱신
+       //어제 
+			Calendar cal2 = Calendar.getInstance();
+			cal2.add(Calendar.DATE, -1);	
+			DateFormat df2 = new SimpleDateFormat("yyyy-MM-dd");
+			String yesterday = df2.format(cal2.getTime());
+			
+			
+			lmvo.setOrderdate(yesterday);
          //            jTableRefresh();    // 테이블 새로고침 메소드
          
-         System.out.println(current);
-         
+       
          
       }
 });
@@ -273,7 +279,7 @@ private void init() {
             cols.add("현재 재고");
             cols.add("주문 수량");
             cols.add("입고 수량");
-            cols.add("입고 직원");
+            cols.add("사원 번호");
             return  cols;
          }
          
@@ -292,7 +298,7 @@ private void init() {
    public void actionPerformed(ActionEvent e) {
       
       switch( e.getActionCommand() ) {  // 눌러진 버튼의 글자
-      case "입고일자지정 & 검색":
+      case "검색":
          Vector<Vector> list = getDataList(this);
          jTableRefresh2(list);
          break;
@@ -353,6 +359,8 @@ private void addList() {
       System.out.println(inDate);
       System.out.println(inPname);
       System.out.println(inNum);
+      
+      dao.updateMember(inPname,inNum);
       
       inDate.clear();
       inPname.clear();
