@@ -31,6 +31,15 @@ import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
 
+import javax.swing.ButtonGroup;
+import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.SystemColor;
+
 
 public class IpgoList extends JFrame implements  ActionListener{
 
@@ -41,7 +50,6 @@ public class IpgoList extends JFrame implements  ActionListener{
 	JLabel        lblAcc, lblMonth, lblStart, lblEnd, lblTot; // 거래처명, 월, 일
 	private static TextField     txtId, txtTot; // 검색할 항목, 총 금액
 	JButton       btnFind, btnToExcel; // 인쇄(엑셀로 보내기)
-	JPanel        topPane, botPane;
 	private static JTable        jTable;
 	private static JScrollPane   pane;
 	
@@ -50,9 +58,12 @@ public class IpgoList extends JFrame implements  ActionListener{
 	private static Date selectedDate1, selectedDate2;
 	private static String date1 = "";
 	private static String date2 = "";
-	
+	ButtonGroup group;
 	LMipgo lml = null;
-
+	private JScrollPane scrollPane;
+	private JPanel panel;
+	private JLabel lblNewLabel;
+	ImageIcon icon;
 	public IpgoList() {   
 		init();
 	}
@@ -77,30 +88,139 @@ public class IpgoList extends JFrame implements  ActionListener{
 	private void init() {
 
 		setTitle("상품 입고내역 조회");
-
-		topPane      =  new JPanel();
-		lblAcc       =  new JLabel("거래처명: ");
-		lblTot       =  new JLabel("                                        "
-				+ "    총 입고가격: ");
-		txtId        =  new TextField(20);  
-		txtTot       =  new TextField(20);  
-		btnFind      =  new JButton("검색");      
-		btnToExcel   =  new JButton("엑셀로 저장");
-		lblStart     =  new JLabel("     기간 시작날짜: ");
-		lblEnd       =  new JLabel("     기간 종료날짜: ");
-		botPane      =  new JPanel();
-
-
-		topPane.add( lblAcc );
-		topPane.add( txtId );
-		topPane.add( lblStart );
-
+		
+		icon = new ImageIcon("./image/큰거1.png");
+		
+		JPanel panel = new JPanel() {
+	         public void paintComponent(Graphics g) {
+	        
+	             g.drawImage(icon.getImage(), 0, 0, null);
+	     
+	             setOpaque(false);
+	             super.paintComponent(g);
+	            }
+	      };
+		
 		// 시작일 달력
 		UtilDateModel model1 = new UtilDateModel();
 		JDatePanelImpl datePanel1 = new JDatePanelImpl(model1);
+		
+		// 종료일 달력
+		UtilDateModel model2 = new UtilDateModel();
+		JDatePanelImpl datePanel2 = new JDatePanelImpl(model2);
+		
+		scrollPane = new JScrollPane();
+		GroupLayout groupLayout = new GroupLayout(getContentPane());
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 984, Short.MAX_VALUE)
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 561, Short.MAX_VALUE)
+		);
+		
+		
+		scrollPane.setViewportView(panel);
+		panel.setLayout(null);
+		lblAcc       =  new JLabel("거래처명: ");
+		lblAcc.setFont(new Font("새굴림", Font.PLAIN, 15));
+		lblAcc.setBounds(210, 18, 83, 23);
+		panel.add(lblAcc);
+		txtId        =  new TextField(20);  
+		txtId.setBounds(302, 18, 164, 23);
+		panel.add(txtId);
+		lblStart     =  new JLabel("     기간 시작날짜: ");
+		lblStart.setFont(new Font("새굴림", Font.PLAIN, 15));
+		lblStart.setBounds(152, 63, 124, 22);
+		panel.add(lblStart);
 		JDatePickerImpl datePicker1 = new JDatePickerImpl(datePanel1);
+		datePicker1.getJFormattedTextField().setBackground(SystemColor.window);
+		datePicker1.setBounds(302, 63, 164, 28);
+		panel.add(datePicker1);
 		datePicker1.setPreferredSize(new Dimension(150, 30));
-		topPane.add(datePicker1);
+		lblEnd       =  new JLabel("     기간 종료날짜: ");
+		lblEnd.setFont(new Font("새굴림", Font.PLAIN, 15));
+		lblEnd.setBounds(152, 108, 124, 25);
+		panel.add(lblEnd);
+		JDatePickerImpl datePicker2 = new JDatePickerImpl(datePanel2);
+		datePicker2.getJFormattedTextField().setBackground(SystemColor.window);
+		datePicker2.setBounds(302, 108, 164, 28);
+		panel.add(datePicker2);
+		datePicker2.setPreferredSize(new Dimension(150, 30));
+		btnFind      =  new JButton("검색");      
+		btnFind.setIcon(new ImageIcon(IpgoList.class.getResource("/lmimage/\uC2E0\uADDC\uAC70\uB798\uCC98\uB4F1\uB85D\uBC84\uD2BC.png")));
+		btnFind.setFont(new Font("새굴림", Font.PLAIN, 12));
+		btnFind.setBounds(488, 103, 70, 32);
+		btnFind .setHorizontalTextPosition(JButton.CENTER); // 텍스트 가운데
+		panel.add(btnFind);
+		btnToExcel   =  new JButton("엑셀로 저장");
+		btnToExcel.setIcon(new ImageIcon(IpgoList.class.getResource("/lmimage/5\uC790\uB9AC\uBC84\uD2BC.png")));
+		btnToExcel.setFont(new Font("새굴림", Font.PLAIN, 12));
+		btnToExcel.setBounds(852, 103, 106, 32);
+		btnToExcel .setHorizontalTextPosition(JButton.CENTER); // 텍스트 가운데
+		panel.add(btnToExcel);
+		lblTot       =  new JLabel(" \uCD1D \uC785\uACE0\uAC00\uACA9: ");
+		lblTot.setForeground(SystemColor.text);
+		lblTot.setFont(new Font("굴림", Font.PLAIN, 17));
+		lblTot.setBounds(617, 526, 100, 20);
+		panel.add(lblTot);
+		txtTot       =  new TextField(20);  
+		txtTot.setFont(new Font("새굴림", Font.PLAIN, 17));
+		txtTot.setBounds(730, 524, 153, 20);
+		panel.add(txtTot);
+		
+		
+		
+				// -----------------------      
+				jTable      =   new  JTable(){
+		
+					@Override
+					public boolean isCellEditable(int row, int column) {
+						return false;   // 모든 cell 편집불가능
+					}
+		
+				};
+				txtTot.setText( String.valueOf(getSumPrice()) );	// 가격 * 수량
+				
+				
+						pane  = new JScrollPane( jTable );
+						pane.setBounds(5, 158, 970, 351);
+						panel.add(pane);
+						
+						lblNewLabel = new JLabel("\uC785\uACE0\uB0B4\uC5ED\uC870\uD68C");
+						lblNewLabel.setFont(new Font("새굴림", Font.BOLD, 40));
+						lblNewLabel.setBounds(703, 10, 391, 79);
+						panel.add(lblNewLabel);
+		// 이벤트핸들러(이벤트발생시 수행할 함수 - actionPreformed() )를 등록
+		// 엑셀로 저장 버튼 클릭
+		btnToExcel.addActionListener( this );
+		
+		
+		
+				// 버튼에 기능 부여
+				// 검색버튼 클릭
+				btnFind.addActionListener( this );
+		
+		
+				datePicker2.addActionListener( new ActionListener() {
+		
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						endDate = datePicker2.getJFormattedTextField().getText();
+		
+						// 선택된 종료날짜를 DATE 타입으로 저장
+						selectedDate2 = (Date) datePicker2.getModel().getValue();
+						SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+						date2 = simpleDateFormat.format(selectedDate2);
+						
+						if(selectedDate1.compareTo(selectedDate2) > 0) {
+							JOptionPane.showMessageDialog(null, 
+									"종료일이 시작일보다 빠릅니다.", "날짜지정오류", JOptionPane.ERROR_MESSAGE);
+						}
+		
+					}
+				});
 		
 		datePicker1.addActionListener( new ActionListener() {
 
@@ -122,71 +242,8 @@ public class IpgoList extends JFrame implements  ActionListener{
 				
 			}
 		});
-		
-		topPane.add( lblEnd );
-		
-		// 종료일 달력
-		UtilDateModel model2 = new UtilDateModel();
-		JDatePanelImpl datePanel2 = new JDatePanelImpl(model2);
-		JDatePickerImpl datePicker2 = new JDatePickerImpl(datePanel2);
-		datePicker2.setPreferredSize(new Dimension(150, 30));	// FlowLayout의 컴포넌트 리사이즈 방법
-		topPane.add(datePicker2);
-
-
-		datePicker2.addActionListener( new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				endDate = datePicker2.getJFormattedTextField().getText();
-
-				// 선택된 종료날짜를 DATE 타입으로 저장
-				selectedDate2 = (Date) datePicker2.getModel().getValue();
-				SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-				date2 = simpleDateFormat.format(selectedDate2);
-				
-				if(selectedDate1.compareTo(selectedDate2) > 0) {
-					JOptionPane.showMessageDialog(null, 
-							"종료일이 시작일보다 빠릅니다.", "날짜지정오류", JOptionPane.ERROR_MESSAGE);
-				}
-
-			}
-		});
-		
-
-		topPane.add( btnFind );
-		topPane.add( btnToExcel );
-		botPane.add(lblTot);
-		botPane.add(txtTot);
-
-
-
-		// 버튼에 기능 부여
-		// 검색버튼 클릭
-		btnFind.addActionListener( this );
-		// 이벤트핸들러(이벤트발생시 수행할 함수 - actionPreformed() )를 등록
-		// 엑셀로 저장 버튼 클릭
-		btnToExcel.addActionListener( this );
-
-
-		// -----------------------      
-		jTable      =   new  JTable(){
-
-			@Override
-			public boolean isCellEditable(int row, int column) {
-				return false;   // 모든 cell 편집불가능
-			}
-
-		};
-		
-		txtTot.setText( String.valueOf(getSumPrice()) );	// 가격 * 수량
-
-
-		pane  = new JScrollPane( jTable );
-		this.add( pane );
-		
-		getContentPane().add(topPane, BorderLayout.NORTH);
-		getContentPane().add(botPane, BorderLayout.SOUTH);
-		setSize(1100, 700); // 창크기
+		getContentPane().setLayout(groupLayout);
+		setSize(1000, 600); // 창크기
 		setLocation(200, 200);
 		setVisible(true); // 화면에 보이게
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // x버튼 눌렀을때 메모리에서 제거 부탁하는 명령   
@@ -219,7 +276,7 @@ public class IpgoList extends JFrame implements  ActionListener{
 
 
 	public static void main(String[] args) {
-		IpgoList    iList =  new IpgoList();
+		new IpgoList();
 
 	}
 
