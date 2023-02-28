@@ -1,6 +1,8 @@
 package lm.view;
 
-import java.awt.BorderLayout;
+
+import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -10,10 +12,12 @@ import java.awt.event.MouseListener;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.Vector;
 
+import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -29,18 +33,21 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import lm.model.UserDao;
-import lm.model.Uservo;
+import java.awt.Font;
+import javax.swing.JLabel;
 
 public class UserList extends JFrame implements ActionListener, MouseListener{
 	
 	private static JButton btnIn,  btnRe , btnEx, btnfind;
 	private static JTextField txtname;
-	private static JPanel  topPane;
 	private static JTable  jtable;
 	private static JScrollPane pane;
+	ImageIcon icon;
 	
 	Proc pc = null;
 	static UserList ulist = null;
+	private JLabel lblNewLabel;
+	private JLabel lblNewLabel_1;
 	
 	public UserList () {
 		init ();
@@ -49,53 +56,39 @@ public class UserList extends JFrame implements ActionListener, MouseListener{
 	
 	private void init() {
 		setTitle( "회원관리 ");
-		topPane = new JPanel();
-		txtname = new JTextField (" "); 
-		txtname.setColumns(15);
-		btnIn   = new JButton("회원가입");
-		btnRe   = new JButton("새로고침");
+		
+		icon = new ImageIcon("./image/리스트들.png");
+		
+		JPanel panel = new JPanel() {
+	         public void paintComponent(Graphics g) {
+	        
+	             g.drawImage(icon.getImage(), 0, 0, null);
+	     
+	             setOpaque(false);
+	             super.paintComponent(g);
+	            }
+	      };
+		
+		JScrollPane scrollPane = new JScrollPane();
+		GroupLayout groupLayout = new GroupLayout(getContentPane());
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addComponent(scrollPane, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 594, Short.MAX_VALUE)
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 471, Short.MAX_VALUE)
+		);
+		
+
+		scrollPane.setViewportView(panel);
+		panel.setLayout(null);
 		btnEx   = new JButton("엑셀로 저장");
-		btnfind = new JButton("조회");
-		
-		topPane.add(txtname);
-		topPane.add(btnfind);
-		topPane.add(btnIn);
-		topPane.add(btnRe);
-		topPane.add(btnEx);
-		this.txtname.addKeyListener(new KeyListener() {
-			@Override
-			public void keyTyped(KeyEvent e) {
-			}
-			@Override
-			public void keyReleased(KeyEvent e) {
-				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-					btnfind.doClick();
-				}
-			}
-			@Override
-			public void keyPressed(KeyEvent e) {
-			}
-		});
-		
-		//회원조회
-		btnfind.addActionListener(this);
-		
-		//회원가입
-		btnIn.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (pc != null)
-					pc.dispose();
-					pc = new Proc(ulist);
-			}
-		});
-		//새로고침
-		btnRe.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				jtableRe();
-			}
-		});
+		btnEx.setFont(new Font("새굴림", Font.PLAIN, 12));
+		btnEx.setIcon(new ImageIcon(UserList.class.getResource("/lmimage/5\uC790\uB9AC\uBC84\uD2BC.png")));
+		btnEx.setBounds(474, 100, 106, 32);
+		btnEx .setHorizontalTextPosition(JButton.CENTER); // 텍스트 가운데
+		panel.add(btnEx);
 		//엑셀
 		btnEx.addActionListener(new ActionListener() {
 			@Override
@@ -116,8 +109,6 @@ public class UserList extends JFrame implements ActionListener, MouseListener{
 				
 			}
 		});
-		//테이블
-		this.add(topPane, BorderLayout.NORTH);
 		jtable = new JTable();
 		jtable.setModel( 
 				new DefaultTableModel(getDatalist(), getColumnlist() ) {
@@ -131,11 +122,80 @@ public class UserList extends JFrame implements ActionListener, MouseListener{
 		jtable.addMouseListener(this);
 		
 		pane = new JScrollPane(jtable);
-		this.add(pane);
+		pane.setBounds(5, 142, 590, 350);
+		panel.add(pane);
+		pane.setPreferredSize(new Dimension(100, 50));
+		txtname = new JTextField (" ");
+		txtname.setBounds(55, 101, 118, 32);
+		panel.add(txtname);
+		txtname.setColumns(15);
+		btnRe   = new JButton("새로고침");
+		btnRe.setFont(new Font("새굴림", Font.PLAIN, 12));
+		btnRe.setIcon(new ImageIcon(UserList.class.getResource("/lmimage/4\uC790\uB9AC\uBC84\uD2BC.png")));
+		btnRe.setBounds(267, 100, 93, 32);
+		btnRe .setHorizontalTextPosition(JButton.CENTER); // 텍스트 가운데
+		panel.add(btnRe);
+		//새로고침
+		btnRe.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				jtableRe();
+			}
+		});
+		btnIn   = new JButton("회원가입");
+		btnIn.setFont(new Font("새굴림", Font.PLAIN, 12));
+		btnIn.setIcon(new ImageIcon(UserList.class.getResource("/lmimage/4\uC790\uB9AC\uBC84\uD2BC.png")));
+		btnIn.setBounds(369, 100, 93, 32);
+		btnIn .setHorizontalTextPosition(JButton.CENTER); // 텍스트 가운데
+		panel.add(btnIn);
+		
+		//회원가입
+		btnIn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (pc != null)
+					pc.dispose();
+					pc = new Proc(ulist);
+			}
+		});
+		btnfind = new JButton("조회");
+		btnfind.setFont(new Font("새굴림", Font.PLAIN, 12));
+		btnfind.setIcon(new ImageIcon(UserList.class.getResource("/lmimage/\uC2E0\uADDC\uAC70\uB798\uCC98\uB4F1\uB85D\uBC84\uD2BC.png")));
+		btnfind.setBounds(185, 100, 70, 32);
+		btnfind .setHorizontalTextPosition(JButton.CENTER); // 텍스트 가운데
+		panel.add(btnfind);
+		
+		lblNewLabel = new JLabel("\uD68C\uC6D0 \uAD00\uB9AC");
+		lblNewLabel.setFont(new Font("새굴림", Font.BOLD, 40));
+		lblNewLabel.setBounds(229, 10, 215, 79);
+		panel.add(lblNewLabel);
+		
+		lblNewLabel_1 = new JLabel("  \uC774\uB984 : ");
+		lblNewLabel_1.setFont(new Font("새굴림", Font.PLAIN, 12));
+		lblNewLabel_1.setBounds(5, 100, 44, 32);
+		panel.add(lblNewLabel_1);
+		
+		//회원조회
+		btnfind.addActionListener(this);
+		this.txtname.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+			}
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+					btnfind.doClick();
+				}
+			}
+			@Override
+			public void keyPressed(KeyEvent e) {
+			}
+		});
+		getContentPane().setLayout(groupLayout);
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setLocation(500,150);
-		setSize(600,500);
+		setSize(620,543);
 		setVisible(true);
 		setResizable(false);
 	}
@@ -293,8 +353,5 @@ public class UserList extends JFrame implements ActionListener, MouseListener{
 	@Override
 	public void mouseExited(MouseEvent e) {
 	}
-	
-	
 }
 	
-
