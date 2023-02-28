@@ -248,7 +248,7 @@ public class ManagerTitle extends JFrame{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 				if( pro != null )
-					pro.setVisible(false);
+					pro.dispose();
 					pro = new LMProdOrder(userid);
 		}
 	});
