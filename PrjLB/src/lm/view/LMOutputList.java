@@ -54,6 +54,7 @@ public class LMOutputList implements ActionListener {
 	
 	// 기본생성자
 	public LMOutputList(){
+		
 		initComponent();
 	}
 

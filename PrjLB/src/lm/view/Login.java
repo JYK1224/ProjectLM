@@ -23,6 +23,7 @@ import javax.swing.JTable;
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.SwingConstants;
+import java.awt.Toolkit;
 //신강원
 public class Login extends JFrame {
 	
@@ -39,6 +40,7 @@ public class Login extends JFrame {
 
 	
 	public Login() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/lmimage/alphabets-33744_640.png")));
 		getContentPane().setBackground(new Color(231,231,231));
 		inti();
 	}

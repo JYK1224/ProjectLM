@@ -1,5 +1,6 @@
 package lm.view;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
@@ -21,6 +22,7 @@ import lm.model.ShopDao;
 import lm.model.Shopvo;
 import javax.swing.ScrollPaneConstants;
 import java.awt.SystemColor;
+import java.awt.Toolkit;
 
 
 public class ShopProc extends JFrame{
@@ -32,6 +34,8 @@ public class ShopProc extends JFrame{
    ShopList slist = null;
    
    public ShopProc () {
+	   setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/lmimage/alphabets-33744_640.png")));
+		getContentPane().setBackground(new Color(231,231,231));
       init();
    }
    

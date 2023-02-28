@@ -2,6 +2,7 @@ package lm.view;
 
 import javax.swing.JFrame;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
@@ -46,6 +47,7 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JPanel;
 import java.awt.SystemColor;
+import java.awt.Toolkit;
 
 public class PullQuiry extends JFrame implements ActionListener{
 	JTextField txt;
@@ -103,6 +105,8 @@ public class PullQuiry extends JFrame implements ActionListener{
 
 
 	public PullQuiry() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/lmimage/alphabets-33744_640.png")));
+		getContentPane().setBackground(new Color(231,231,231));
 		init();
 
 

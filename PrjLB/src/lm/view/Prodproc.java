@@ -20,8 +20,11 @@ import lm.model.ProdDao;
 import lm.model.Prodvo;
 import javax.swing.JScrollPane;
 import javax.swing.JPanel;
+
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.SystemColor;
+import java.awt.Toolkit;
 
 public class Prodproc extends JFrame{
 	
@@ -33,6 +36,8 @@ public class Prodproc extends JFrame{
 	ProdDao dao;
 	
 	public Prodproc() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/lmimage/alphabets-33744_640.png")));
+		getContentPane().setBackground(new Color(231,231,231));
 		init();
 	}
 	

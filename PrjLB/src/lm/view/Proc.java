@@ -25,6 +25,7 @@ import lm.model.UserDao;
 import lm.model.Uservo;
 import javax.swing.JPanel;
 import java.awt.SystemColor;
+import java.awt.Toolkit;
 import java.awt.Color;
 import java.awt.Font;
 
@@ -40,6 +41,8 @@ public class Proc extends JFrame{
 	
 	//생성자
 	public Proc () {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/lmimage/alphabets-33744_640.png")));
+		getContentPane().setBackground(new Color(231,231,231));
 		init();
 	}
 	public Proc (UserList ulist) {

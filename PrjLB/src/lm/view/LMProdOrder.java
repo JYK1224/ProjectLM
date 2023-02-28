@@ -1,5 +1,6 @@
 package lm.view;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
@@ -43,6 +44,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JPanel;
 import java.awt.SystemColor;
+import java.awt.Toolkit;
 import java.awt.Font;
 
 public class LMProdOrder extends JFrame implements ActionListener{
@@ -76,6 +78,8 @@ public class LMProdOrder extends JFrame implements ActionListener{
 	// this.setVisible(false) : 창 꺼야 할때 addActionListener 에 추가
 
 	public LMProdOrder(String userid) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/lmimage/alphabets-33744_640.png")));
+		getContentPane().setBackground(new Color(231,231,231));
 		this.userid = userid;
 		initComponent();
 	}

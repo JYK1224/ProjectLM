@@ -1,5 +1,6 @@
 package lm.view;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -35,7 +36,9 @@ public class DeptProc extends JFrame{
 	
 	
 	public DeptProc () {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(DeptProc.class.getResource("/lmimage/alphabets-33744_640.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/lmimage/alphabets-33744_640.png")));
+		getContentPane().setBackground(new Color(231,231,231));
+		
 		init();
 	}
 	
