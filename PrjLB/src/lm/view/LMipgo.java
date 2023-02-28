@@ -273,7 +273,7 @@ private void init() {
             Vector<String>  cols = new Vector<>();  // 문자배열 대신 사용
             cols.add("거래처명");
             cols.add("주문일자");
-            cols.add("입고 예정일");
+            cols.add("입고일");
             cols.add("상품코드");
             cols.add("상품명");
             cols.add("현재 재고");
