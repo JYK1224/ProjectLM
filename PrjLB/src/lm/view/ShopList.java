@@ -76,8 +76,7 @@ import java.awt.Graphics;
 		             super.paintComponent(g);
 		            }
 		      };
-			
-			scrollPane = new JScrollPane();
+		     	scrollPane = new JScrollPane();
 			GroupLayout groupLayout = new GroupLayout(getContentPane());
 			groupLayout.setHorizontalGroup(
 				groupLayout.createParallelGroup(Alignment.LEADING)
@@ -201,7 +200,7 @@ import java.awt.Graphics;
 			getContentPane().setLayout(groupLayout);
 			
 			setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-			this.setLocation(500,150);
+			this. setLocation(600,150);
 			setSize(620,543);
 			setVisible(true);
 			setResizable(false);
@@ -350,4 +349,5 @@ import java.awt.Graphics;
 		@Override
 		public void mouseExited(MouseEvent e) {
 		}
+		
 	}

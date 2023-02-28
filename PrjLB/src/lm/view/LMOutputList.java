@@ -69,7 +69,7 @@ public class LMOutputList implements ActionListener {
 		getFrame().setTitle("출고 내역 조회");
 		getFrame().setBounds(700, 300, 1000, 600);
 		getFrame().getContentPane().setLayout(new FlowLayout(FlowLayout.CENTER));	
-
+		 getFrame(). setLocation(600,150);
 		// 시작일 달력
 		lblNewLabel_1 = new JLabel("시작일 선택 :");
 		lblNewLabel_1.setBounds(39, 45, 80, 20);

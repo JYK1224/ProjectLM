@@ -376,6 +376,7 @@ public class LMProdOrder extends JFrame implements ActionListener{
 		frame.getContentPane().setLayout(groupLayout);
 
 		//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	// 윈도우빌더라서 ㅅㅂ
+		 frame.setLocation(600,150);
 		frame.setVisible(true);
 		frame.setResizable(false);
 		setResizable(false);

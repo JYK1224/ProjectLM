@@ -193,7 +193,7 @@ public class UserList extends JFrame implements ActionListener, MouseListener{
 		getContentPane().setLayout(groupLayout);
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		this.setLocation(500,150);
+		this. setLocation(600,150);
 		setSize(620,543);
 		setVisible(true);
 		setResizable(false);

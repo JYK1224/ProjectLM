@@ -283,7 +283,7 @@ public class LMProductInquiry extends JFrame implements ActionListener{
 		
 		
 		getContentPane().setLayout(groupLayout);
-		
+		 setLocation(600,150);
 		setVisible(true);
 		setResizable(false);
 	}

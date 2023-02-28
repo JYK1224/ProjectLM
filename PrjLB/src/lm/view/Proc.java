@@ -223,7 +223,7 @@ public class Proc extends JFrame{
 			}
 		});
 		getContentPane().setLayout(groupLayout);
-		this.setLocation(600,230);
+		this. setLocation(600,150);
 		setVisible(true);
 		
 	}
