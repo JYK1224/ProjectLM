@@ -214,6 +214,32 @@ public class ShopDao {
 		}
 		return sv;
 	}
-      
+	public int existsfind(String sid) {
+		String sql = " select "
+				   + " case when exists "
+				   + "  (select * from shop where shopid = " + sid + ")"
+				   + "		then 1 "
+				   + "      else 0 "
+				   + "   end as d "
+				   + " from dual " ;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int aftcnt = 0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) 
+				aftcnt = rs.getInt("d");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+			} catch (SQLException e) {
+			}
+		}
+		return aftcnt;
+	}  
 
 }

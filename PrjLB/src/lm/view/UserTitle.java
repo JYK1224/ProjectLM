@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.ImageIcon;
 import java.awt.SystemColor;
+import java.awt.Toolkit;
 
 
 public class UserTitle extends JFrame{
@@ -35,6 +36,8 @@ public class UserTitle extends JFrame{
    }
 
    public UserTitle(String userid) {
+	   setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/lmimage/alphabets-33744_640.png")));
+		getContentPane().setBackground(new Color(231,231,231));
 	   this.userid = userid;
 	   Init();
    }
@@ -43,6 +46,7 @@ private void Init() {
       setTitle("물류관리시스템-일반사용자");
       setSize(800,580);
       setLocation(600,150);
+      setResizable(false);
       getContentPane().setLayout(null);
    
      

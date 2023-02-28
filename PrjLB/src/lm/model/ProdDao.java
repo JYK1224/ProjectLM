@@ -168,10 +168,38 @@ public class ProdDao {
 				e.printStackTrace();
 			}
 		}
-	
-				
 		return aftcnt;
 	}
+	public int existsfind(String pid) {
+		String sql = " select "
+				   + " case when exists "
+				   + " (select * from product where pid = " + pid + ") "
+				   + "    then 1 "
+				   + "    else 0 "
+				   + "  end as d "
+				   + " from dual ";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int aftcnt = 0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if (rs.next())
+				aftcnt = rs.getInt("d");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs != null)rs.close();
+				if(pstmt != null)pstmt.close();
+			} catch (SQLException e) {
+			}
+		}
+		return aftcnt;
+	}
+
 }
+
 
 	

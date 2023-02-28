@@ -41,9 +41,12 @@ import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
+import java.awt.Color;
+
 import javax.swing.ScrollPaneConstants;
 import java.awt.Font;
 import java.awt.SystemColor;
+import java.awt.Toolkit;
 
 public class LMOrderList extends JFrame implements ActionListener {
 	
@@ -72,6 +75,8 @@ public class LMOrderList extends JFrame implements ActionListener {
 
 	// 기본생성자
 	public LMOrderList(){
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/lmimage/alphabets-33744_640.png")));
+		getContentPane().setBackground(new Color(231,231,231));
 		initComponent();
 	}
 
@@ -83,7 +88,8 @@ public class LMOrderList extends JFrame implements ActionListener {
 
 	private void initComponent() {
 		this.setTitle("주문내역 조회");
-		
+		 setLocation(650,200);
+		 setResizable(false);
 		icon = new ImageIcon("./image/큰거1.png");
 		
 		JPanel panel = new JPanel() {

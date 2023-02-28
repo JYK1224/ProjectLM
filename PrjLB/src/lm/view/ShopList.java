@@ -1,6 +1,7 @@
 package lm.view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -35,6 +36,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Toolkit;
 
 	public class ShopList extends JFrame implements ActionListener, MouseListener{
 		
@@ -52,7 +54,10 @@ import java.awt.Graphics;
 		private JLabel lblNewLabel_1;
 		ImageIcon icon;
 		
+		
 		public ShopList () {
+			setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/lmimage/alphabets-33744_640.png")));
+			getContentPane().setBackground(new Color(231,231,231));
 			init ();
 		}
 		
@@ -76,8 +81,7 @@ import java.awt.Graphics;
 		             super.paintComponent(g);
 		            }
 		      };
-			
-			scrollPane = new JScrollPane();
+		     	scrollPane = new JScrollPane();
 			GroupLayout groupLayout = new GroupLayout(getContentPane());
 			groupLayout.setHorizontalGroup(
 				groupLayout.createParallelGroup(Alignment.LEADING)
@@ -201,7 +205,7 @@ import java.awt.Graphics;
 			getContentPane().setLayout(groupLayout);
 			
 			setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-			this.setLocation(500,150);
+			this. setLocation(650,200);
 			setSize(620,543);
 			setVisible(true);
 			setResizable(false);
@@ -350,4 +354,5 @@ import java.awt.Graphics;
 		@Override
 		public void mouseExited(MouseEvent e) {
 		}
+		
 	}

@@ -1,5 +1,6 @@
 package lm.view;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
@@ -43,6 +44,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JPanel;
 import java.awt.SystemColor;
+import java.awt.Toolkit;
 import java.awt.Font;
 
 public class LMProdOrder extends JFrame implements ActionListener{
@@ -76,12 +78,14 @@ public class LMProdOrder extends JFrame implements ActionListener{
 	// this.setVisible(false) : 창 꺼야 할때 addActionListener 에 추가
 
 	public LMProdOrder(String userid) {
+		
 		this.userid = userid;
 		initComponent();
 	}
 
 	private void initComponent() {
 		frame = new JFrame();
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(LMProdOrder.class.getResource("/lmimage/alphabets-33744_640.png")));
 
 		frame.setTitle("상품 주문 화면");
 		
@@ -376,6 +380,7 @@ public class LMProdOrder extends JFrame implements ActionListener{
 		frame.getContentPane().setLayout(groupLayout);
 
 		//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	// 윈도우빌더라서 ㅅㅂ
+		 frame.setLocation(650,200);
 		frame.setVisible(true);
 		frame.setResizable(false);
 		setResizable(false);

@@ -1,9 +1,11 @@
 package lm.view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.TextField;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileOutputStream;
@@ -78,7 +80,9 @@ implements  ActionListener  {
    
    
    
-   public LMipgo() {   
+   public LMipgo() { 
+	   setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/lmimage/alphabets-33744_640.png")));
+		getContentPane().setBackground(new Color(231,231,231));
       init();
    }
    
@@ -249,7 +253,8 @@ private void init() {
             panel.add(lblNewLabel);
             getContentPane().setLayout(groupLayout);
             setSize(1000, 600); // 창크기
-            setLocation(200, 200);
+            setLocation(650,200);
+            setResizable(false);
             setVisible(true); // 화면에 보이게
             setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // x버튼 눌렀을때 메모리에서 제거 부탁하는 명령   
 }

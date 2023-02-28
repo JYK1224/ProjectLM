@@ -1,5 +1,6 @@
 package lm.view;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -28,14 +29,15 @@ public class DeptProc extends JFrame{
 	private JTextField txtCode, txtdname, txtName, txtdPhone;
 	private JButton btnIn, btnUp, btnDe, btnCn, btnFind ;
 	
-	
 	DeptList dlist = null ;
 	ImageIcon icon;
 	JScrollPane scrollPane;
-	
+	DeptDao ddao;
 	
 	public DeptProc () {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(DeptProc.class.getResource("/lmimage/alphabets-33744_640.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/lmimage/alphabets-33744_640.png")));
+		getContentPane().setBackground(new Color(231,231,231));
+		
 		init();
 	}
 	
@@ -206,7 +208,7 @@ public class DeptProc extends JFrame{
 		);
 		getContentPane().setLayout(groupLayout);
 		
-		setLocation(500,200);
+		 setLocation(650,200);
 		setSize(454,454);
 		setVisible(true);
 		setResizable(false);
@@ -215,12 +217,14 @@ public class DeptProc extends JFrame{
 	//조회
 	protected void findDept() {
 		String did = this.txtCode.getText();
-		if(did.trim().equals(" "))
-			return;
 		DeptDao ddao = new DeptDao();
-		Deptvo    dv = ddao.getDid(did);
-		setViewData(dv);
-		
+		int result = ddao.existsfind(did);
+		if(result == 0) {
+			JOptionPane.showMessageDialog(null, "거래처코드를 확인해주세요");
+		}else {
+			Deptvo    dv = ddao.getDid(did);
+			setViewData(dv);
+		}
 	}
 	private void setViewData(Deptvo dv) {
 		int       did = dv.getDeptid();
@@ -273,26 +277,30 @@ public class DeptProc extends JFrame{
 	protected void upDept() {
 		String did = this.txtCode.getText();
 		DeptDao ddao = new DeptDao();
-		
-		int choice = JOptionPane.showConfirmDialog(null,
+		int result = ddao.existsfind(did);
+		if(result == 0) {
+			JOptionPane.showMessageDialog(null, "거래처코드를 확인해주세요");
+		}else {
+			int choice = JOptionPane.showConfirmDialog(null,
 					did + "수정하시겠습니까",
 					"수정하시겠습니까",
 					JOptionPane.OK_CANCEL_OPTION
 					);
-		int aftcnt = 0;
-		String msg = " ";
-		if( choice == 0 ) {
-			Deptvo dv = getViewData();
-			aftcnt = ddao.updataDept(dv);
-			if( aftcnt > 0 )
-				msg = did + "수정완료";
-			else 
-				msg = did + "수정완료";
-		} else {
-			msg = "취소했습니다";
+			int aftcnt = 0;
+			String msg = " ";
+			if( choice == 0 ) {
+				Deptvo dv = getViewData();
+				aftcnt = ddao.updataDept(dv);
+				if( aftcnt > 0 )
+					msg = did + "수정완료";
+				else 
+					msg = did + "수정완료";
+			} else {
+				msg = "취소했습니다";
+			}
+			JOptionPane.showConfirmDialog(null, msg,
+					" ", JOptionPane.OK_OPTION);
 		}
-		JOptionPane.showConfirmDialog(null, msg,
-				" ", JOptionPane.OK_OPTION);
 	}
 
 	//등록

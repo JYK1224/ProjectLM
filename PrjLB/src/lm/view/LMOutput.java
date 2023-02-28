@@ -73,6 +73,7 @@ public class LMOutput extends JFrame implements ActionListener{
 
 	private void initComponent() {
 
+
 		setTitle("상품 출고 화면");
 		setSize(1100, 600);
 		setLocation(200, 200);
@@ -80,6 +81,7 @@ public class LMOutput extends JFrame implements ActionListener{
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 		JLabel lblNewLabel = new JLabel("거래처명");
+
 
 		textField = new JTextField();
 		textField.setColumns(10);

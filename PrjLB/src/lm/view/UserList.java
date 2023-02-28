@@ -1,7 +1,9 @@
 package lm.view;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -49,6 +51,8 @@ public class UserList extends JFrame implements ActionListener, MouseListener{
 	private JLabel lblNewLabel_1;
 	
 	public UserList () {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/lmimage/alphabets-33744_640.png")));
+		getContentPane().setBackground(new Color(231,231,231));
 		init ();
 	}
 	
@@ -193,7 +197,7 @@ public class UserList extends JFrame implements ActionListener, MouseListener{
 		getContentPane().setLayout(groupLayout);
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		this.setLocation(500,150);
+		this. setLocation(650,200);
 		setSize(620,543);
 		setVisible(true);
 		setResizable(false);
