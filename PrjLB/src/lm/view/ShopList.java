@@ -28,18 +28,29 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import lm.model.ShopDao;
+import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JLabel;
+import java.awt.Font;
+import java.awt.Graphics;
 
 	public class ShopList extends JFrame implements ActionListener, MouseListener{
 		
 		private static JButton btnIn,  btnRe , btnEx, btnfind;
 		private static JTextField txtname;
-		private static JPanel  topPane;
 		private static JTable  jtable;
 		private static JScrollPane pane;
 		String sid ;
 		ShopProc spc = null;
 		static ShopList slist = null;
 		UserTitle utl;
+		private JScrollPane scrollPane;
+		private JPanel panel;
+		private JLabel lblNewLabel;
+		private JLabel lblNewLabel_1;
+		ImageIcon icon;
 		
 		public ShopList () {
 			init ();
@@ -53,53 +64,63 @@ import lm.model.ShopDao;
 
 		private void init() {
 			setTitle( " 점포 목록 ");
-			topPane = new JPanel();
-			txtname = new JTextField (" "); 
-			txtname.setColumns(15);
-			btnIn   = new JButton("신규점포등록");
-			btnRe   = new JButton("새로고침");
-			btnEx   = new JButton("엑셀");
-			btnfind = new JButton("조회");
 			
-			topPane.add(txtname);
-			topPane.add(btnfind);
-			topPane.add(btnIn);
-			topPane.add(btnRe);
-			topPane.add(btnEx);
-			this.txtname.addKeyListener(new KeyListener() {
-				@Override
-				public void keyTyped(KeyEvent e) {
-				}
-				@Override
-				public void keyReleased(KeyEvent e) {
-					if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-						btnfind.doClick();
-					}
-				}
-				@Override
-				public void keyPressed(KeyEvent e) {
-				}
-			});
+			icon = new ImageIcon("./image/리스트들.png");
+			
+			JPanel panel = new JPanel() {
+		         public void paintComponent(Graphics g) {
+		        
+		             g.drawImage(icon.getImage(), 0, 0, null);
+		     
+		             setOpaque(false);
+		             super.paintComponent(g);
+		            }
+		      };
+			
+			scrollPane = new JScrollPane();
+			GroupLayout groupLayout = new GroupLayout(getContentPane());
+			groupLayout.setHorizontalGroup(
+				groupLayout.createParallelGroup(Alignment.LEADING)
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 594, Short.MAX_VALUE)
+			);
+			groupLayout.setVerticalGroup(
+				groupLayout.createParallelGroup(Alignment.LEADING)
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 471, Short.MAX_VALUE)
+			);
+			
+			
+			scrollPane.setViewportView(panel);
+			jtable = new JTable();
+			jtable.setModel( 
+					new DefaultTableModel(getDatalist(), getColumnlist() ) {
+						@Override
+						public boolean isCellEditable(int row, int column) {
+							if (column == 1)
+								return false;
+							return false;
+						}
+					});
+			jtable.addMouseListener(this);
+			panel.setLayout(null);
+			
+			pane = new JScrollPane(jtable);
+			pane.setBounds(5, 142, 590, 350);
+			panel.add(pane);
+			btnfind = new JButton("조회");
+			btnfind.setIcon(new ImageIcon(ShopList.class.getResource("/lmimage/\uC2E0\uADDC\uAC70\uB798\uCC98\uB4F1\uB85D\uBC84\uD2BC.png")));
+			btnfind.setFont(new Font("새굴림", Font.PLAIN, 12));
+			btnfind.setBounds(185, 100, 70, 32);
+			btnfind .setHorizontalTextPosition(JButton.CENTER); // 텍스트 가운데
+			panel.add(btnfind);
 			
 			//점포조회
 			btnfind.addActionListener(this);
-			
-			//점포가입
-			btnIn.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					if (spc != null)
-						spc.dispose();
-						spc = new ShopProc(slist);
-				}
-			});
-			//새로고침
-			btnRe.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					jtableRe();
-				}
-			});
+			btnEx   = new JButton("\uC5D1\uC140\uB85C \uC800\uC7A5");
+			btnEx.setIcon(new ImageIcon(ShopList.class.getResource("/lmimage/5\uC790\uB9AC\uBC84\uD2BC.png")));
+			btnEx.setFont(new Font("새굴림", Font.PLAIN, 12));
+			btnEx.setBounds(474, 100, 106, 32);
+			btnEx .setHorizontalTextPosition(JButton.CENTER); // 텍스트 가운데
+			panel.add(btnEx);
 			//엑셀
 			btnEx.addActionListener(new ActionListener() {
 				@Override
@@ -120,26 +141,68 @@ import lm.model.ShopDao;
 					
 				}
 			});
-			//테이블
-			this.add(topPane, BorderLayout.NORTH);
-			jtable = new JTable();
-			jtable.setModel( 
-					new DefaultTableModel(getDatalist(), getColumnlist() ) {
-						@Override
-						public boolean isCellEditable(int row, int column) {
-							if (column == 1)
-								return false;
-							return false;
-						}
-					});
-			jtable.addMouseListener(this);
+			btnRe   = new JButton("새로고침");
+			btnRe.setIcon(new ImageIcon(ShopList.class.getResource("/lmimage/4\uC790\uB9AC\uBC84\uD2BC.png")));
+			btnRe.setFont(new Font("새굴림", Font.PLAIN, 12));
+			btnRe.setBounds(267, 100, 93, 32);
+			btnRe .setHorizontalTextPosition(JButton.CENTER); // 텍스트 가운데
+			panel.add(btnRe);
+			//새로고침
+			btnRe.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					jtableRe();
+				}
+			});
+			btnIn   = new JButton("\uC810\uD3EC\uB4F1\uB85D");
+			btnIn.setIcon(new ImageIcon(ShopList.class.getResource("/lmimage/4\uC790\uB9AC\uBC84\uD2BC.png")));
+			btnIn.setFont(new Font("새굴림", Font.PLAIN, 12));
+			btnIn.setBounds(369, 100, 93, 32);
+			btnIn .setHorizontalTextPosition(JButton.CENTER); // 텍스트 가운데
+			panel.add(btnIn);
 			
-			pane = new JScrollPane(jtable);
-			this.add(pane);
+			//점포가입
+			btnIn.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					if (spc != null)
+						spc.dispose();
+						spc = new ShopProc(slist);
+				}
+			});
+			txtname = new JTextField (" "); 
+			txtname.setBounds(61, 101, 118, 32);
+			panel.add(txtname);
+			txtname.setColumns(15);
+			
+			lblNewLabel = new JLabel("\uC810\uD3EC \uBAA9\uB85D");
+			lblNewLabel.setFont(new Font("새굴림", Font.BOLD, 40));
+			lblNewLabel.setBounds(229, 10, 261, 79);
+			panel.add(lblNewLabel);
+			
+			lblNewLabel_1 = new JLabel("\uC810\uD3EC\uBA85 : ");
+			lblNewLabel_1.setFont(new Font("새굴림", Font.PLAIN, 12));
+			lblNewLabel_1.setBounds(12, 100, 54, 32);
+			panel.add(lblNewLabel_1);
+			this.txtname.addKeyListener(new KeyListener() {
+				@Override
+				public void keyTyped(KeyEvent e) {
+				}
+				@Override
+				public void keyReleased(KeyEvent e) {
+					if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+						btnfind.doClick();
+					}
+				}
+				@Override
+				public void keyPressed(KeyEvent e) {
+				}
+			});
+			getContentPane().setLayout(groupLayout);
 			
 			setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			this.setLocation(500,150);
-			setSize(600,500);
+			setSize(620,543);
 			setVisible(true);
 			setResizable(false);
 		}
