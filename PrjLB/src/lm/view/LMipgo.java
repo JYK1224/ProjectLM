@@ -134,7 +134,7 @@ private void init() {
             int  currColumn = jTable.getSelectedColumn();  // 선택한 열만 수정가능
             if( currColumn == 7  )
                return true;         
-            return false;   // 모든 cell 편집불가능
+            return false;   // 모든 cell 편집불가능 ㅋ
          }
                };      
                
