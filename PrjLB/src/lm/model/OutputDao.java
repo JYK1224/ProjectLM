@@ -249,7 +249,7 @@ public class OutputDao {
 		System.out.println(date1);
 		System.out.println(date2);
 
-		String  sql1 = "SELECT O.OUTDATE , D.DNAME , P.PID , P.PNAME , P.SPRICE , S.STOCKNUM , O.OUTNUM \r\n"
+		String  sql1 = "SELECT TO_CHAR(O.OUTDATE, 'YYYY-MM-DD') OUTDATE , D.DNAME , P.PID , P.PNAME , P.SPRICE , S.STOCKNUM , O.OUTNUM \r\n"
 				+ "  FROM OUTPUT O, DEPT_ACC D, PRODUCT P, STOCK S\r\n"
 				+ "  WHERE O.PID = P.PID (+)\r\n"
 				+ "    AND P.DID = D.DID (+)\r\n"
@@ -258,7 +258,7 @@ public class OutputDao {
 				+ "    AND D.DNAME LIKE '%" + search.toUpperCase().trim() + "%'"
 				+ "	   ORDER BY O.OUTDATE ASC ";
 
-		String  sql2 = "SELECT O.OUTDATE , D.DNAME , P.PID , P.PNAME , P.SPRICE , S.STOCKNUM , O.OUTNUM \r\n"
+		String  sql2 = "SELECT TO_CHAR(O.OUTDATE, 'YYYY-MM-DD') OUTDATE , D.DNAME , P.PID , P.PNAME , P.SPRICE , S.STOCKNUM , O.OUTNUM \r\n"
 				+ "  FROM OUTPUT O, DEPT_ACC D, PRODUCT P, STOCK S\r\n"
 				+ "  WHERE O.PID = P.PID (+)\r\n"
 				+ "    AND P.DID = D.DID (+)\r\n"
