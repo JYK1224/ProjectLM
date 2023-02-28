@@ -60,8 +60,8 @@ public class ManagerTitle extends JFrame{
       JButton btnNewButton = new JButton("신규거래처등록");
       btnNewButton.setIcon(new ImageIcon(ManagerTitle.class.getResource("/lmimage/\uBC84\uD2BC61.png")));
       btnNewButton .setHorizontalTextPosition(JButton.CENTER); // 텍스트 가운데
-      btnNewButton.setFont(new Font("새굴림", Font.BOLD, 16));
-      btnNewButton.setBorderPainted(false);
+      btnNewButton.setFont(new Font("새굴림", Font.PLAIN, 16));
+      //btnNewButton.setBorderPainted(false);
       btnNewButton.setBounds(260, 188, 153, 59);
       getContentPane().add(btnNewButton);
       btnNewButton.addActionListener(new ActionListener() {
@@ -77,7 +77,7 @@ public class ManagerTitle extends JFrame{
       
       btnNewButton_1.setIcon(new ImageIcon(ManagerTitle.class.getResource("/lmimage/\uBC84\uD2BC61.png")));
       btnNewButton_1 .setHorizontalTextPosition(JButton.CENTER); // 텍스트 가운데
-      btnNewButton_1.setFont(new Font("새굴림", Font.BOLD, 16));
+      btnNewButton_1.setFont(new Font("새굴림", Font.PLAIN, 16));
       btnNewButton_1.setBackground(new Color(255,255,204));
       btnNewButton_1.setBounds(260, 274, 153, 59);
       getContentPane().add(btnNewButton_1);
@@ -93,7 +93,7 @@ public class ManagerTitle extends JFrame{
       JButton btnNewButton_2 = new JButton("사용자관리");
       btnNewButton_2.setIcon(new ImageIcon(ManagerTitle.class.getResource("/lmimage/\uBC84\uD2BC61.png")));
       btnNewButton_2 .setHorizontalTextPosition(JButton.CENTER); // 텍스트 가운데
-      btnNewButton_2.setFont(new Font("새굴림", Font.BOLD, 16));
+      btnNewButton_2.setFont(new Font("새굴림", Font.PLAIN, 16));
       btnNewButton_2.setBackground(new Color(204,255,229));
       btnNewButton_2.setBounds(260, 440, 153, 59);
       getContentPane().add(btnNewButton_2);
@@ -110,7 +110,7 @@ public class ManagerTitle extends JFrame{
       JButton btnNewButton_3 = new JButton("신규상품등록");
       btnNewButton_3.setIcon(new ImageIcon(ManagerTitle.class.getResource("/lmimage/\uBC84\uD2BC61.png")));
       btnNewButton_3 .setHorizontalTextPosition(JButton.CENTER); // 텍스트 가운데
-      btnNewButton_3.setFont(new Font("새굴림", Font.BOLD, 16));
+      btnNewButton_3.setFont(new Font("새굴림", Font.PLAIN, 16));
       btnNewButton_3.setBackground(new Color(229,255,204));
       btnNewButton_3.setBounds(260, 359, 153, 59);
       getContentPane().add(btnNewButton_3);
@@ -126,7 +126,7 @@ public class ManagerTitle extends JFrame{
       JButton btnNewButton_4 = new JButton("상품상세조회");
       btnNewButton_4.setIcon(new ImageIcon(ManagerTitle.class.getResource("/lmimage/\uBC84\uD2BC61.png")));
       btnNewButton_4 .setHorizontalTextPosition(JButton.CENTER); // 텍스트 가운데
-      btnNewButton_4.setFont(new Font("새굴림", Font.BOLD, 16));
+      btnNewButton_4.setFont(new Font("새굴림", Font.PLAIN, 16));
       btnNewButton_4.setBackground(new Color(229,255,204));
       btnNewButton_4.setBounds(425, 440, 153, 59);
       getContentPane().add(btnNewButton_4);
@@ -143,7 +143,7 @@ public class ManagerTitle extends JFrame{
       JButton btnNewButton_5 = new JButton("상품전체조회");
       btnNewButton_5.setIcon(new ImageIcon(ManagerTitle.class.getResource("/lmimage/\uBC84\uD2BC61.png")));
       btnNewButton_5 .setHorizontalTextPosition(JButton.CENTER); // 텍스트 가운데
-      btnNewButton_5.setFont(new Font("새굴림", Font.BOLD, 16));
+      btnNewButton_5.setFont(new Font("새굴림", Font.PLAIN, 16));
       btnNewButton_5.setBackground(new Color(229,255,204));
       btnNewButton_5.setBounds(425, 359, 153, 59);
       getContentPane().add(btnNewButton_5);
@@ -164,7 +164,7 @@ public class ManagerTitle extends JFrame{
       JButton btnNewButton_6 = new JButton("거래처조회");
       btnNewButton_6.setIcon(new ImageIcon(ManagerTitle.class.getResource("/lmimage/\uBC84\uD2BC61.png")));
       btnNewButton_6 .setHorizontalTextPosition(JButton.CENTER); // 텍스트 가운데
-      btnNewButton_6.setFont(new Font("새굴림", Font.BOLD, 16));
+      btnNewButton_6.setFont(new Font("새굴림", Font.PLAIN, 16));
       btnNewButton_6.setBackground(new Color(255,229,204));
       btnNewButton_6.setBounds(425, 188, 153, 59);
       getContentPane().add(btnNewButton_6);
@@ -180,7 +180,7 @@ public class ManagerTitle extends JFrame{
       JButton btnNewButton_7 = new JButton("점포전체조회");
       btnNewButton_7.setIcon(new ImageIcon(ManagerTitle.class.getResource("/lmimage/\uBC84\uD2BC61.png")));
       btnNewButton_7 .setHorizontalTextPosition(JButton.CENTER); // 텍스트 가운데
-      btnNewButton_7.setFont(new Font("새굴림", Font.BOLD, 16));
+      btnNewButton_7.setFont(new Font("새굴림", Font.PLAIN, 16));
       btnNewButton_7.setBackground(new Color(255,255,204));
       btnNewButton_7.setBounds(425, 274, 153, 59);
       getContentPane().add(btnNewButton_7);
@@ -196,7 +196,7 @@ public class ManagerTitle extends JFrame{
       JButton btnNewButton_8 = new JButton("입고내역조회");
       btnNewButton_8.setIcon(new ImageIcon(ManagerTitle.class.getResource("/lmimage/\uBC84\uD2BC61.png")));
       btnNewButton_8 .setHorizontalTextPosition(JButton.CENTER); // 텍스트 가운데
-      btnNewButton_8.setFont(new Font("새굴림", Font.BOLD, 16));
+      btnNewButton_8.setFont(new Font("새굴림", Font.PLAIN, 16));
       btnNewButton_8.setBackground(new Color(204,229,255));
       btnNewButton_8.setBounds(784, 274, 153, 59);
       getContentPane().add(btnNewButton_8);
@@ -216,7 +216,7 @@ public class ManagerTitle extends JFrame{
       });
       btnNewButton_9.setIcon(new ImageIcon(ManagerTitle.class.getResource("/lmimage/\uBC84\uD2BC61.png")));
       btnNewButton_9 .setHorizontalTextPosition(JButton.CENTER); // 텍스트 가운데
-      btnNewButton_9.setFont(new Font("새굴림", Font.BOLD, 16));
+      btnNewButton_9.setFont(new Font("새굴림", Font.PLAIN, 16));
       btnNewButton_9.setBackground(new Color(204,204,255));
       btnNewButton_9.setBounds(621, 359, 153, 59);
       getContentPane().add(btnNewButton_9);
@@ -224,7 +224,7 @@ public class ManagerTitle extends JFrame{
       JButton btnNewButton_10 = new JButton("상품폐기등록");
       btnNewButton_10.setIcon(new ImageIcon(ManagerTitle.class.getResource("/lmimage/\uBC84\uD2BC61.png")));
       btnNewButton_10 .setHorizontalTextPosition(JButton.CENTER); // 텍스트 가운데
-      btnNewButton_10.setFont(new Font("새굴림", Font.BOLD, 16));
+      btnNewButton_10.setFont(new Font("새굴림", Font.PLAIN, 16));
       btnNewButton_10.setBackground(new Color(229,204,255));
       btnNewButton_10.setBounds(621, 440, 153, 59);
       getContentPane().add(btnNewButton_10);
@@ -232,7 +232,7 @@ public class ManagerTitle extends JFrame{
       JButton btnNewButton_11 = new JButton("폐기내역조회");
       btnNewButton_11.setIcon(new ImageIcon(ManagerTitle.class.getResource("/lmimage/\uBC84\uD2BC61.png")));
       btnNewButton_11 .setHorizontalTextPosition(JButton.CENTER); // 텍스트 가운데
-      btnNewButton_11.setFont(new Font("새굴림", Font.BOLD, 16));
+      btnNewButton_11.setFont(new Font("새굴림", Font.PLAIN, 16));
       btnNewButton_11.setBackground(new Color(229,204,255));
       btnNewButton_11.setBounds(784, 440, 153, 59);
       getContentPane().add(btnNewButton_11);
@@ -240,7 +240,7 @@ public class ManagerTitle extends JFrame{
       JButton btnNewButton_6_1 = new JButton("상품주문업무");
       btnNewButton_6_1.setIcon(new ImageIcon(ManagerTitle.class.getResource("/lmimage/\uBC84\uD2BC61.png")));
       btnNewButton_6_1 .setHorizontalTextPosition(JButton.CENTER); // 텍스트 가운데
-      btnNewButton_6_1.setFont(new Font("새굴림", Font.BOLD, 16));
+      btnNewButton_6_1.setFont(new Font("새굴림", Font.PLAIN, 16));
       btnNewButton_6_1.setBackground(new Color(204,255,255));
       btnNewButton_6_1.setBounds(621, 188, 153, 59);
       getContentPane().add(btnNewButton_6_1);
@@ -255,7 +255,7 @@ public class ManagerTitle extends JFrame{
       
       JButton btnNewButton_7_1 = new JButton("주문내역조회",new ImageIcon(ManagerTitle.class.getResource("/lmimage/\uBC84\uD2BC61.png")));
       btnNewButton_7_1.setHorizontalTextPosition(JButton.CENTER); // 텍스트 가운데
-      btnNewButton_7_1.setFont(new Font("새굴림", Font.BOLD, 16));
+      btnNewButton_7_1.setFont(new Font("새굴림", Font.PLAIN, 16));
       btnNewButton_7_1.setBackground(new Color(204,255,255));
       btnNewButton_7_1.setBounds(784, 188, 153, 59);
       getContentPane().add(btnNewButton_7_1);
@@ -263,7 +263,7 @@ public class ManagerTitle extends JFrame{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (lol != null)
-				lol.getFrame().setVisible(false);
+				lol.setVisible(false);
 				lol = new LMOrderList();
 		}
 	});
@@ -271,7 +271,7 @@ public class ManagerTitle extends JFrame{
       JButton btnNewButton_8_1 = new JButton("상품입고업무");
       btnNewButton_8_1.setIcon(new ImageIcon(ManagerTitle.class.getResource("/lmimage/\uBC84\uD2BC61.png")));
       btnNewButton_8_1.setHorizontalTextPosition(JButton.CENTER); // 텍스트 가운데
-      btnNewButton_8_1.setFont(new Font("새굴림", Font.BOLD, 16));
+      btnNewButton_8_1.setFont(new Font("새굴림", Font.PLAIN, 16));
       btnNewButton_8_1.setBackground(new Color(204,229,255));
       btnNewButton_8_1.setBounds(621, 274, 151, 59);
       getContentPane().add(btnNewButton_8_1);
@@ -291,7 +291,7 @@ public class ManagerTitle extends JFrame{
       });
       btnNewButton_9_1.setIcon(new ImageIcon(ManagerTitle.class.getResource("/lmimage/\uBC84\uD2BC61.png")));
       btnNewButton_9_1.setHorizontalTextPosition(JButton.CENTER); // 텍스트 가운데
-      btnNewButton_9_1.setFont(new Font("새굴림", Font.BOLD, 16));
+      btnNewButton_9_1.setFont(new Font("새굴림", Font.PLAIN, 16));
       btnNewButton_9_1.setBackground(new Color(204,204,255));
       btnNewButton_9_1.setBounds(784, 359, 153, 59);
       getContentPane().add(btnNewButton_9_1);

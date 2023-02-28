@@ -1,10 +1,12 @@
 package lm.view;
 
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -16,6 +18,10 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 import lm.model.ProdDao;
 import lm.model.Prodvo;
+import javax.swing.JScrollPane;
+import javax.swing.JPanel;
+import java.awt.Font;
+import java.awt.SystemColor;
 
 public class Prodproc extends JFrame{
 	
@@ -23,7 +29,7 @@ public class Prodproc extends JFrame{
 	private JButton btnIn, btnDe, btnUp, btnCn;
 	private JComboBox cmAname, cmDname;
 	private JLabel lblPid, lblPname, lblDid, lblAid, lblIpr, lblSpr;
-	
+	 ImageIcon icon;
 	ProdDao dao;
 	
 	public Prodproc() {
@@ -35,24 +41,18 @@ public class Prodproc extends JFrame{
 
 		setTitle("신규상품 등록");
 		
-		setSize(400,550);
+		 icon = new ImageIcon("./image/신규거래처조회111.png");
+	      
+	      JPanel panel = new JPanel() {
+	         public void paintComponent(Graphics g) {
+	             g.drawImage(icon.getImage(), 0, 0, null);
+	             setOpaque(false);
+	             super.paintComponent(g);
+	            }
+	      };
+		
+		setSize(454,454);
 		setLocation(600,230);
-		
-		lblPid = new JLabel("상품코드");
-		lblPname = new JLabel("상품명");
-		lblDid = new JLabel("상품분류");
-		lblAid = new JLabel("거래처명");
-		lblIpr = new JLabel("입고가격");
-		lblSpr = new JLabel("판매가격");
-		
-		txtPid = new JTextField();
-		txtPid.setColumns(10);
-		txtPname = new JTextField();
-		txtPname.setColumns(10);
-		txtIpr = new JTextField();
-		txtIpr.setColumns(10);
-		txtSpr = new JTextField();
-		txtSpr.setColumns(10);
 		
 		dao = new ProdDao();
 		ArrayList<String> alDept = dao.getDept();
@@ -60,35 +60,48 @@ public class Prodproc extends JFrame{
 		for (int i = 0; i < alDept.size(); i++) {
 			dept1[i] = alDept.get(i);
 		}
-		cmDname = new JComboBox(dept1);
 		
 		String [] dept = {"주류" , "가공식품", "기호식품", "냉동냉장"};
-		cmAname = new JComboBox(dept);
 		
-		btnIn = new JButton("등록");
-		btnUp = new JButton("수정");
+		JScrollPane scrollPane = new JScrollPane();
+		
+		
+		GroupLayout groupLayout = new GroupLayout(getContentPane());
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 425, Short.MAX_VALUE)
+		);
+		
+		
+		scrollPane.setViewportView(panel);
+		panel.setLayout(null);
+		lblPname = new JLabel("상품명");
+		lblPname.setForeground(SystemColor.text);
+		lblPname.setFont(new Font("새굴림", Font.PLAIN, 15));
+		lblPname.setBounds(30, 174, 76, 18);
+		panel.add(lblPname);
 		btnCn = new JButton("취소");
-		btnDe = new JButton("삭제");
-
-		btnIn.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				addProd();
-				addStock();
-			}
-		});
-		btnUp.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				upProd();
-			}
-		});
+		btnCn.setFont(new Font("새굴림", Font.PLAIN, 12));
+		btnCn.setIcon(new ImageIcon(Prodproc.class.getResource("/lmimage/\uC2E0\uADDC\uAC70\uB798\uCC98\uB4F1\uB85D\uBC84\uD2BC.png")));
+		btnCn.setBounds(331, 365, 70, 32);
+		btnCn.setHorizontalTextPosition(JButton.CENTER);
+		panel.add(btnCn);
 		btnCn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				cnProd();
 			}
 		});
+		btnDe = new JButton("삭제");
+		btnDe.setFont(new Font("새굴림", Font.PLAIN, 12));
+		btnDe.setIcon(new ImageIcon(Prodproc.class.getResource("/lmimage/\uC2E0\uADDC\uAC70\uB798\uCC98\uB4F1\uB85D\uBC84\uD2BC.png")));
+		btnDe.setBounds(234, 365, 70, 32);
+		btnDe.setHorizontalTextPosition(JButton.CENTER);
+		panel.add(btnDe);
 		btnDe.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -96,90 +109,90 @@ public class Prodproc extends JFrame{
 			}
 		});
 		
+		btnIn = new JButton("등록");
+		btnIn.setFont(new Font("새굴림", Font.PLAIN, 12));
+		btnIn.setIcon(new ImageIcon(Prodproc.class.getResource("/lmimage/\uC2E0\uADDC\uAC70\uB798\uCC98\uB4F1\uB85D\uBC84\uD2BC.png")));
+		btnIn.setBounds(36, 365, 70, 32);
+		btnIn.setHorizontalTextPosition(JButton.CENTER);
+		panel.add(btnIn);
 		
-		GroupLayout groupLayout = new GroupLayout(getContentPane());
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(54)
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(btnDe, GroupLayout.PREFERRED_SIZE, 112, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addComponent(btnCn, GroupLayout.PREFERRED_SIZE, 112, GroupLayout.PREFERRED_SIZE))
-						.addGroup(Alignment.LEADING, groupLayout.createParallelGroup(Alignment.TRAILING)
-							.addGroup(groupLayout.createSequentialGroup()
-								.addComponent(lblIpr, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
-								.addGap(18)
-								.addComponent(txtIpr, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE))
-							.addGroup(groupLayout.createSequentialGroup()
-								.addComponent(lblPname, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
-								.addGap(18)
-								.addComponent(txtPname, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE))
-							.addGroup(groupLayout.createSequentialGroup()
-								.addComponent(lblPid, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
-								.addGap(18)
-								.addComponent(txtPid, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE))
-							.addGroup(groupLayout.createSequentialGroup()
-								.addGap(8)
-								.addComponent(lblSpr, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
-								.addGap(18)
-								.addComponent(txtSpr, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE))
-							.addGroup(groupLayout.createSequentialGroup()
-								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-									.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-										.addComponent(lblAid, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
-										.addGap(18))
-									.addGroup(groupLayout.createSequentialGroup()
-										.addGap(6)
-										.addComponent(lblDid, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
-										.addGap(20)))
-								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-									.addComponent(cmAname, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-									.addComponent(cmDname, 0, 151, Short.MAX_VALUE))))
-						.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
-							.addComponent(btnIn, GroupLayout.PREFERRED_SIZE, 112, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addComponent(btnUp, GroupLayout.PREFERRED_SIZE, 112, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap(64, Short.MAX_VALUE))
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(69)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblPid, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
-						.addComponent(txtPid, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblPname, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
-						.addComponent(txtPname, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(lblDid, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
-						.addComponent(cmAname, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblAid, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
-						.addComponent(cmDname, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblIpr, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
-						.addComponent(txtIpr, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblSpr, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
-						.addComponent(txtSpr, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE))
-					.addGap(34)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(btnIn, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnUp, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(btnCn, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnDe, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(14, Short.MAX_VALUE))
-		);
+				btnIn.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						addProd();
+						addStock();
+					}
+				});
+		btnUp = new JButton("수정");
+		btnUp.setFont(new Font("새굴림", Font.PLAIN, 12));
+		btnUp.setIcon(new ImageIcon(Prodproc.class.getResource("/lmimage/\uC2E0\uADDC\uAC70\uB798\uCC98\uB4F1\uB85D\uBC84\uD2BC.png")));
+		btnUp.setBounds(137, 365, 70, 32);
+		 btnUp.setHorizontalTextPosition(JButton.CENTER);
+		panel.add(btnUp);
+		btnUp.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				upProd();
+			}
+		});
+		txtSpr = new JTextField();
+		txtSpr.setBounds(174, 320, 195, 29);
+		panel.add(txtSpr);
+		txtSpr.setColumns(10);
+		lblSpr = new JLabel("판매가격");
+		lblSpr.setForeground(SystemColor.text);
+		lblSpr.setFont(new Font("새굴림", Font.PLAIN, 15));
+		lblSpr.setBounds(30, 328, 76, 18);
+		panel.add(lblSpr);
+		cmDname = new JComboBox(dept1);
+		cmDname.setFont(new Font("새굴림", Font.PLAIN, 12));
+		cmDname.setBackground(SystemColor.window);
+		cmDname.setBounds(174, 242, 195, 29);
+		panel.add(cmDname);
+		txtIpr = new JTextField();
+		txtIpr.setBounds(174, 281, 195, 29);
+		panel.add(txtIpr);
+		txtIpr.setColumns(10);
+		lblIpr = new JLabel("입고가격");
+		lblIpr.setForeground(SystemColor.text);
+		lblIpr.setFont(new Font("새굴림", Font.PLAIN, 15));
+		lblIpr.setBounds(30, 290, 76, 18);
+		panel.add(lblIpr);
+		lblAid = new JLabel("거래처명");
+		lblAid.setForeground(SystemColor.text);
+		lblAid.setFont(new Font("새굴림", Font.PLAIN, 15));
+		lblAid.setBounds(30, 250, 76, 18);
+		panel.add(lblAid);
+		cmAname = new JComboBox(dept);
+		cmAname.setFont(new Font("새굴림", Font.PLAIN, 12));
+		cmAname.setBackground(SystemColor.window);
+		cmAname.setBounds(174, 203, 195, 29);
+		panel.add(cmAname);
+		lblDid = new JLabel("상품분류");
+		lblDid.setForeground(SystemColor.text);
+		lblDid.setFont(new Font("새굴림", Font.PLAIN, 15));
+		lblDid.setBounds(30, 211, 76, 18);
+		panel.add(lblDid);
+		txtPname = new JTextField();
+		txtPname.setBounds(174, 167, 195, 29);
+		panel.add(txtPname);
+		txtPname.setColumns(10);
+		
+		txtPid = new JTextField();
+		txtPid.setBounds(174, 128, 197, 29);
+		panel.add(txtPid);
+		txtPid.setColumns(10);
+		
+		lblPid = new JLabel("상품코드");
+		lblPid.setForeground(SystemColor.text);
+		lblPid.setFont(new Font("새굴림", Font.PLAIN, 15));
+		lblPid.setBounds(30, 137, 76, 18);
+		panel.add(lblPid);
+		
+		JLabel lblTitle = new JLabel("\uC2E0\uADDC \uC0C1\uD488 \uB4F1\uB85D");
+		lblTitle.setFont(new Font("굴림", Font.BOLD, 30));
+		lblTitle.setBounds(174, 27, 237, 69);
+		panel.add(lblTitle);
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(groupLayout);

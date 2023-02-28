@@ -50,7 +50,7 @@ import java.awt.SystemColor;
 public class LMipgo extends JFrame 
 implements  ActionListener  {
 
-	// 필드
+   // 필드
    static LMipgo    mList = null;
    IpgoList         iProc = null;
    ButtonGroup group;
@@ -85,12 +85,12 @@ implements  ActionListener  {
 private void init() {
    
    setTitle("상품입고");
-   	
+      
    
 
-	icon = new ImageIcon("./image/큰거1.png");
-	
-	JPanel panel = new JPanel() {
+   icon = new ImageIcon("./image/큰거1.png");
+   
+   JPanel panel = new JPanel() {
         public void paintComponent(Graphics g) {
        
             g.drawImage(icon.getImage(), 0, 0, null);
@@ -99,9 +99,9 @@ private void init() {
             super.paintComponent(g);
            }
      };
-	
-	this.group        = new ButtonGroup();
-	
+   
+   this.group        = new ButtonGroup();
+   
    // 달력
     UtilDateModel model = new UtilDateModel();
    JDatePanelImpl datePanel = new JDatePanelImpl(model);
@@ -109,12 +109,12 @@ private void init() {
             scrollPane = new JScrollPane();
             GroupLayout groupLayout = new GroupLayout(getContentPane());
             groupLayout.setHorizontalGroup(
-            	groupLayout.createParallelGroup(Alignment.LEADING)
-            		.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 984, Short.MAX_VALUE)
+               groupLayout.createParallelGroup(Alignment.LEADING)
+                  .addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 984, Short.MAX_VALUE)
             );
             groupLayout.setVerticalGroup(
-            	groupLayout.createParallelGroup(Alignment.LEADING)
-            		.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 561, Short.MAX_VALUE)
+               groupLayout.createParallelGroup(Alignment.LEADING)
+                  .addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 561, Short.MAX_VALUE)
             );
             
            
@@ -129,13 +129,13 @@ private void init() {
             
                // -----------------------------------------------------------------------------      
                jTable      =   new  JTable() {
-             	  @Override
-			public boolean isCellEditable(int row, int column) {
-				int  currColumn = jTable.getSelectedColumn();  // 선택한 열만 수정가능
-				if( currColumn == 7  )
-					return true;			
-				return false;   // 모든 cell 편집불가능
-			}
+                  @Override
+         public boolean isCellEditable(int row, int column) {
+            int  currColumn = jTable.getSelectedColumn();  // 선택한 열만 수정가능
+            if( currColumn == 7  )
+               return true;         
+            return false;   // 모든 cell 편집불가능 ㅋ
+         }
                };      
                
                
@@ -147,7 +147,7 @@ private void init() {
             lblDay.setFont(new Font("새굴림", Font.PLAIN, 15));
             lblDay.setBounds(175, 99, 77, 24);
             panel.add(lblDay);
-            btnFind      =  new JButton("입고일자지정 & 검색");    
+            btnFind      =  new JButton("검색");    
             btnFind.setIcon(new ImageIcon(LMipgo.class.getResource("/lmimage/\uAE34\uBC84\uD2BC.png")));
             btnFind.setFont(new Font("새굴림", Font.PLAIN, 12));
             btnFind.setBounds(453, 94, 149, 32);
@@ -167,20 +167,20 @@ private void init() {
             // 입고내역 조회 버튼 클릭
             btnList.addActionListener( this );
             // 버튼에 기능 부여
-            		// 회원가입버튼 클릭
+                  // 회원가입버튼 클릭
                btnList.addActionListener( new ActionListener() {
-            			
-            			@Override
-            			public void actionPerformed(ActionEvent e) {
-            				// 입고내역 조회(ipgolist)을 연다
-            				System.out.println("입고내역 조회 클릭");
-            				if(  iProc != null )
-            					iProc.dispose();  // 강제로 닫는다
-            				System.out.println("this:" + this);
-            				System.out.println("mList:" + mList);
-            				iProc = new IpgoList( mList );				
-            			}
-            		});
+                     
+                     @Override
+                     public void actionPerformed(ActionEvent e) {
+                        // 입고내역 조회(ipgolist)을 연다
+                        System.out.println("입고내역 조회 클릭");
+                        if(  iProc != null )
+                           iProc.dispose();  // 강제로 닫는다
+                        System.out.println("this:" + this);
+                        System.out.println("mList:" + mList);
+                        iProc = new IpgoList( mList );            
+                     }
+                  });
             btnToExcel   =  new JButton("엑셀로 저장");
             btnToExcel.setIcon(new ImageIcon(LMipgo.class.getResource("/lmimage/5\uC790\uB9AC\uBC84\uD2BC.png")));
             btnToExcel.setFont(new Font("새굴림", Font.PLAIN, 12));
@@ -204,34 +204,40 @@ private void init() {
             panel.add(datePicker);
             datePicker.setPreferredSize(new Dimension(250, 30));
             
-            datePicker.addActionListener(new ActionListener() {		// 선택한 날짜 기준으로, 주문일자와 입고일자에 대입
+            datePicker.addActionListener(new ActionListener() {      // 선택한 날짜 기준으로, 주문일자와 입고일자에 대입
 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			selDate = datePicker.getJFormattedTextField().getText();
+      @Override
+      public void actionPerformed(ActionEvent e) {
+         selDate = datePicker.getJFormattedTextField().getText();
 
-			// 선택된 날짜를 DATE 타입으로 저장
-			Date selectedDate = (Date) datePicker.getModel().getValue();
+         // 선택된 날짜를 DATE 타입으로 저장
+         Date selectedDate = (Date) datePicker.getModel().getValue();
 
-			Calendar cal = Calendar.getInstance();
-			cal.setTime(selectedDate);
-			DateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-			String current = df.format(cal.getTime());
-			//	        System.out.println("current: " + df.format(cal.getTime()));
+         Calendar cal = Calendar.getInstance();
+         cal.setTime(selectedDate);
+         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+         String current = df.format(cal.getTime());
+         //           System.out.println("current: " + df.format(cal.getTime()));
+         lmvo.setIndate(current);
+         System.out.println(current);
 
+         cal.add(Calendar.DATE, +1);      // 입고예정일 = 주문일 + 1
+         String after = df.format(cal.getTime());
+         //           System.out.println("after: " + df.format(cal.getTime()));
 
-			cal.add(Calendar.DATE, +1);		// 입고예정일 = 주문일 + 1
-			String after = df.format(cal.getTime());
-			//	        System.out.println("after: " + df.format(cal.getTime()));
-
-
-			lmvo.setIndate(current);	// 날짜 갱신
-			//				jTableRefresh(); 	// 테이블 새로고침 메소드
+       //어제 
+			Calendar cal2 = Calendar.getInstance();
+			cal2.add(Calendar.DATE, -1);	
+			DateFormat df2 = new SimpleDateFormat("yyyy-MM-dd");
+			String yesterday = df2.format(cal2.getTime());
 			
-			System.out.println(current);
 			
-			
-		}
+			lmvo.setOrderdate(yesterday);
+         //            jTableRefresh();    // 테이블 새로고침 메소드
+         
+       
+         
+      }
 });
             txtId        =  new TextField(30);  
             txtId.setBounds(264, 53, 177, 23);
@@ -256,7 +262,7 @@ private void init() {
          //  Vector< Vector > : 안쪽   Vector : ResultSet 의 한 Row - Record
          //                   : 바깥쪽 Vector : ResultSet 전체  Table - Record 배열
          private Vector<Vector> getDataList() {
-        	 IpgoDao       dao   =  new IpgoDao();
+            IpgoDao       dao   =  new IpgoDao();
             Vector<Vector>  list  =  dao.getLmList();
             return  list;
          }
@@ -267,13 +273,13 @@ private void init() {
             Vector<String>  cols = new Vector<>();  // 문자배열 대신 사용
             cols.add("거래처명");
             cols.add("주문일자");
-            cols.add("입고 예정일");
+            cols.add("입고일");
             cols.add("상품코드");
             cols.add("상품명");
             cols.add("현재 재고");
             cols.add("주문 수량");
             cols.add("입고 수량");
-            cols.add("입고 직원");
+            cols.add("사원 번호");
             return  cols;
          }
          
@@ -292,21 +298,21 @@ private void init() {
    public void actionPerformed(ActionEvent e) {
       
       switch( e.getActionCommand() ) {  // 눌러진 버튼의 글자
-      case "입고일자지정 & 검색":
-    	  Vector<Vector> list = getDataList(this);
-			jTableRefresh2(list);
-			break;
+      case "검색":
+         Vector<Vector> list = getDataList(this);
+         jTableRefresh2(list);
+         break;
       case "입고확정":
          // 새로고침 클릭
          System.out.println("입고확정 클릭");
          
          
          try {
-				jTable.editCellAt(-1, -1);	// 마지막 cell의 입력을 완료되려면 셀선택을 테이블 밖으로 빼야함(입력 후 엔터치는 것과 같음)
-			}catch(Exception ex) {}
-			addList();
-			
-			
+            jTable.editCellAt(-1, -1);   // 마지막 cell의 입력을 완료되려면 셀선택을 테이블 밖으로 빼야함(입력 후 엔터치는 것과 같음)
+         }catch(Exception ex) {}
+         addList();
+         
+         
          break;
       case "엑셀로 저장":
          System.out.println("엑셀로 저장....");
@@ -327,10 +333,10 @@ private void init() {
          
          break;
       case "입고내역 조회":
-    	  System.out.println("입고내역 조회 클릭");
-			if(  iProc != null )
-				iProc.dispose();  // 강제로 닫는다
-			iProc = new IpgoList( this );   // this : 현재 실행중인 MemberList        
+         System.out.println("입고내역 조회 클릭");
+         if(  iProc != null )
+            iProc.dispose();  // 강제로 닫는다
+         iProc = new IpgoList( this );   // this : 현재 실행중인 MemberList        
           break;
       }
          
@@ -338,45 +344,47 @@ private void init() {
   
    
    private Vector<Vector> getDataList(LMipgo lmList) {
-	    String         search =  txtId.getText();
-	    IpgoDao          dao    =  new IpgoDao();
-		Vector<Vector> list   =  dao.getOrder(search);
+       String         search =  txtId.getText();
+       IpgoDao          dao    =  new IpgoDao();
+      Vector<Vector> list   =  dao.getOrder(search);
 
-		return list;
+      return list;
 }
 
 private void addList() {
-	   getInArrayData();
-	   IpgoDao dao = new IpgoDao();		
-		
-		dao.insertList(inDate,inPname,inNum);	
-		System.out.println(inDate);
-		System.out.println(inPname);
-		System.out.println(inNum);
-		
-		inDate.clear();
-		inPname.clear();
-		inNum.clear();
+      getInArrayData();
+      IpgoDao dao = new IpgoDao();      
+      
+      dao.insertList(inDate,inPname,inNum);   
+      System.out.println(inDate);
+      System.out.println(inPname);
+      System.out.println(inNum);
+      
+      dao.updateMember(inPname,inNum);
+      
+      inDate.clear();
+      inPname.clear();
+      inNum.clear();
 }
 
    
 private void getInArrayData() {
-	int rowsCount = jTable.getRowCount();
-	for (int i = 0; i < rowsCount; i++) {
-		
-		try {
-			inDate.add(i, jTable.getValueAt(i, 2).toString() );  //  입고예정일
-			inPname.add(i, jTable.getValueAt(i, 4).toString() ); //  상품명
-			inNum.add(i, jTable.getValueAt(i, 7).toString() ); 	 //  입고수량
-			
-		} catch(NullPointerException e) {
+   int rowsCount = jTable.getRowCount();
+   for (int i = 0; i < rowsCount; i++) {
+      
+      try {
+         inDate.add(i, jTable.getValueAt(i, 2).toString() );  //  입고예정일
+         inPname.add(i, jTable.getValueAt(i, 4).toString() ); //  상품명
+         inNum.add(i, jTable.getValueAt(i, 7).toString() );     //  입고수량
+         
+      } catch(NullPointerException e) {
             System.err.println("table.getValueAt 이 null 입니다.");
             JOptionPane.showMessageDialog(null, 
                   "입고일자를 지정해주세요.", "날짜지정오류", JOptionPane.ERROR_MESSAGE);
             return;
          }
 
-	}
+   }
 }
 
 
@@ -398,22 +406,22 @@ private void getInArrayData() {
    
    // 검색이후에 
    public void jTableRefresh2(Vector<Vector> list) {
-	      jTable.setModel(
-	            new DefaultTableModel( list ,  getColumnList()  ) {
+         jTable.setModel(
+               new DefaultTableModel( list ,  getColumnList()  ) {
 
-	               @Override
-	               public boolean isCellEditable(int row, int column) {               
-	                  return false;
-	               }
-	               
-	            }
-	         );  // jtable 새로운 데이터를 지정
-	         
-	         jTable.repaint();  // jtable을 새로 그린다
-	      
-	   }
+                  @Override
+                  public boolean isCellEditable(int row, int column) {               
+                     return false;
+                  }
+                  
+               }
+            );  // jtable 새로운 데이터를 지정
+            
+            jTable.repaint();  // jtable을 새로 그린다
+         
+      }
 
- 	
+    
 
       //-----------------------------------------------------
       // excel 로 저장
@@ -469,6 +477,6 @@ private void getInArrayData() {
       }
 
 
-	
+   
 
 }

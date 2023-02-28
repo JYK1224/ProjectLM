@@ -255,7 +255,7 @@ public class IpgoList extends JFrame implements  ActionListener{
 
 	private Vector<Vector> getDataList() {
 		IpgoDao       dao   =  new IpgoDao();
-		Vector<Vector>  list  =  dao.geIpgoList();
+		Vector<Vector>  list  =  dao.getIpgoList();
 		
 		return  list;
 	}

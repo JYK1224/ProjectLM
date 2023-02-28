@@ -2,6 +2,7 @@ package lm.view;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -35,10 +36,21 @@ import lm.model.OrderDao;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
+import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.JPanel;
+import java.awt.BorderLayout;
+import javax.swing.ScrollPaneConstants;
+import java.awt.Font;
+import java.awt.SystemColor;
 
-public class LMOrderList implements ActionListener {
+public class LMOrderList extends JFrame implements ActionListener {
+	
+	ImageIcon icon;
+	JScrollPane scrollpane;
+	
 
-	private static JFrame frame;
 	private static JLabel lblNewLabel, lblNewLabel_1, lblNewLabel_2, lblNewLabel_3, lblNewLabel_4, lblNewLabel_5, lblNewLabel_6, lblNewLabel_7;
 	private static JTextField textField, textField_1, textField_2, textField_3;
 	private static JButton btnNewButton_1, btnNewButton_2, btnNewButton_3;
@@ -52,6 +64,11 @@ public class LMOrderList implements ActionListener {
 	private static String date2 = "";
 
 	LMProdOrder order3 = null;
+	private JTextField textField_4;
+	private JTextField textField_5;
+	private JLabel lblNewLabel_8;
+	
+
 
 	// 기본생성자
 	public LMOrderList(){
@@ -65,27 +82,56 @@ public class LMOrderList implements ActionListener {
 	}
 
 	private void initComponent() {
-		setFrame(new JFrame());
-
-		getFrame().setTitle("주문 내역 조회");
-		getFrame().setBounds(700, 300, 1000, 600);
-		getFrame().getContentPane().setLayout(new FlowLayout(FlowLayout.CENTER));	
+		this.setTitle("주문내역 조회");
+		
+		icon = new ImageIcon("./image/큰거1.png");
+		
+		JPanel panel = new JPanel() {
+	         public void paintComponent(Graphics g) {
+	             // Approach 1: Dispaly image at at full size
+	             g.drawImage(icon.getImage(), 0, 0, null);
+	             // Approach 2: Scale image to size of component
+	             // Dimension d = getSize();
+	             // g.drawImage(icon.getImage(), 0, 0, d.width, d.height, null);
+	             // Approach 3: Fix the image position in the scroll pane
+	             // Point p = scrollPane.getViewport().getViewPosition();
+	             // g.drawImage(icon.getImage(), p.x, p.y, null);
+	             setOpaque(false);
+	             super.paintComponent(g);
+	            }
+	      };
+			
+		
+		
+		scrollPane = new JScrollPane(panel);
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		panel.setLayout(null);
+		
+		
+		
+		
+		
+		
 
 		// 시작일 달력
-		lblNewLabel_1 = new JLabel("시작일 선택 :");
-		lblNewLabel_1.setBounds(39, 45, 80, 20);
-		getFrame().getContentPane().add(lblNewLabel_1);
-
+		lblNewLabel_1 = new JLabel("\uC2DC\uC791\uC77C \uC120\uD0DD :");
+		lblNewLabel_1.setFont(new Font("새굴림", Font.PLAIN, 12));
+		lblNewLabel_1.setBounds(190, 45, 74, 23);
+		panel.add(lblNewLabel_1);
+		
+		
 		UtilDateModel model1 = new UtilDateModel();
 		JDatePanelImpl datePanel1 = new JDatePanelImpl(model1);
 		JDatePickerImpl datePicker1 = new JDatePickerImpl(datePanel1);
-		datePicker1.setPreferredSize(new Dimension(150, 30));	// FlowLayout의 컴포넌트 리사이즈 방법
-		getFrame().getContentPane().add(datePicker1);
-
+		datePicker1.getJFormattedTextField().setBackground(SystemColor.window);
+		datePicker1.setBounds(276, 45 , 150, 26);
+		panel.add(datePicker1);
+		
 		LocalDate now = LocalDate.now();
 		model1.setDate(now.getYear(), now.getMonthValue()-1, now.getDayOfMonth() );	// 오늘 날짜로 초기세팅
 		model1.setSelected(true);
-
+		
 		datePicker1.addActionListener( new ActionListener() {
 
 			@Override
@@ -120,32 +166,40 @@ public class LMOrderList implements ActionListener {
 				}
 			}
 		});
-
+		
+		
+	
 		// 시작일자
-		lblNewLabel_2 = new JLabel("시작일자 :");
-		lblNewLabel_2.setBounds(39, 45, 80, 20);
-		getFrame().getContentPane().add(lblNewLabel_2);
-
-		textField_1 = new JTextField(13);
-		textField_1.setBounds(326, 45, 147, 20);
-		getFrame().getContentPane().add(textField_1);
-
-		// 여백 라벨
-		lblNewLabel_5 = new JLabel("                         ");
-		lblNewLabel_5.setBounds(39, 45, 80, 20);
-		getFrame().getContentPane().add(lblNewLabel_5);
-
+		lblNewLabel_2 = new JLabel("\uC2DC\uC791\uC77C\uC790 :");
+		lblNewLabel_2.setFont(new Font("새굴림", Font.PLAIN, 12));
+		lblNewLabel_2.setBounds(438, 45, 64, 23);
+		panel.add(lblNewLabel_2);
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(514, 45, 116, 23);
+		panel.add(textField_1);
+		textField_1.setColumns(10);
+		
+		
+		
+		
 		// 종료일 달력
+		
 		lblNewLabel_3 = new JLabel("종료일 선택 :");
-		lblNewLabel_3.setBounds(39, 45, 80, 20);
-		getFrame().getContentPane().add(lblNewLabel_3);
-
+		lblNewLabel_3.setFont(new Font("새굴림", Font.PLAIN, 12));
+		lblNewLabel_3.setBounds(190, 76, 79, 23);
+		panel.add(lblNewLabel_3);
+		
+		
 		UtilDateModel model2 = new UtilDateModel();
 		JDatePanelImpl datePanel2 = new JDatePanelImpl(model2);
 		JDatePickerImpl datePicker2 = new JDatePickerImpl(datePanel2);
-		datePicker2.setPreferredSize(new Dimension(150, 30));	// FlowLayout의 컴포넌트 리사이즈 방법
-		getFrame().getContentPane().add(datePicker2);
-
+		datePicker2.getJFormattedTextField().setBackground(SystemColor.window);
+		datePicker2.setBackground(SystemColor.window);
+			// FlowLayout의 컴포넌트 리사이즈 방법
+		panel.add(datePicker2);
+		datePicker2.setBounds(276, 73 , 150, 26);
+		
 		model2.setDate(now.getYear(), now.getMonthValue()-1, now.getDayOfMonth() );	// 오늘 날짜로 초기세팅
 		model2.setSelected(true);
 
@@ -175,43 +229,40 @@ public class LMOrderList implements ActionListener {
 
 			}
 		});
-
-
-		// 종료일자
-		lblNewLabel_4 = new JLabel("종료일자 :");
-		lblNewLabel_4.setBounds(261, 45, 80, 20);
-		getFrame().getContentPane().add(lblNewLabel_4);
-
-		textField_2 = new JTextField(13);
-		textField_2.setBounds(102, 45, 147, 20);
-		getFrame().getContentPane().add(textField_2);
-
-		// 날짜 초기화
+		
+		//종료일자
+		 lblNewLabel_4 = new JLabel("종료일자 :");
+		 lblNewLabel_4.setFont(new Font("새굴림", Font.PLAIN, 12));
+		lblNewLabel_4.setBounds(438, 78, 64, 23);
+		panel.add(lblNewLabel_4);
+		
+		textField_2 = new JTextField();
+		textField_2.setBounds(514, 77, 116, 23);
+		panel.add(textField_2);
+		textField_2.setColumns(10);
+		
+	
+		
+		//날짜 초기화
 		btnNewButton_3 = new JButton("날짜 초기화");
-		getFrame().getContentPane().add(btnNewButton_3);
-
-		btnNewButton_3.setPreferredSize(new Dimension(100, 30));	// FlowLayout의 컴포넌트 리사이즈 방법
-		getFrame().getContentPane().add(btnNewButton_3);
-
-		btnNewButton_3.addActionListener(this);
-
-
-
-		// 여백 라벨
-		lblNewLabel_6 = new JLabel("                         ");
-		lblNewLabel_6.setBounds(39, 45, 80, 20);
-		getFrame().getContentPane().add(lblNewLabel_6);
-
-
-		// 거래처명
+		btnNewButton_3.setFont(new Font("새굴림", Font.PLAIN, 12));
+		btnNewButton_3.setIcon(new ImageIcon(LMOrderList.class.getResource("/lmimage/5\uC790\uB9AC\uBC84\uD2BC.png")));
+		 btnNewButton_3.addActionListener(this);
+		 btnNewButton_3.setBounds(320, 103, 106, 32);
+		 btnNewButton_3 .setHorizontalTextPosition(JButton.CENTER); // 텍스트 가운데
+		panel.add(btnNewButton_3);
+		
+		//거래처명
 		lblNewLabel = new JLabel("거래처명 :");
-		lblNewLabel.setPreferredSize(new Dimension(60, 20));	// FlowLayout의 컴포넌트 리사이즈 방법
-		getFrame().add(lblNewLabel);
-
-		textField = new JTextField(20);
-		textField.setPreferredSize(new Dimension(80, 20));	// FlowLayout의 컴포넌트 리사이즈 방법
-		getFrame().add(textField);
-
+		lblNewLabel.setFont(new Font("새굴림", Font.PLAIN, 12));
+		lblNewLabel.setBounds(438, 110, 64, 23);
+		panel.add(lblNewLabel);
+		
+		textField = new JTextField();
+		textField.setColumns(10);
+		textField.setBounds(514, 110, 116, 23);
+		panel.add(textField);
+		
 		textField.addKeyListener(new KeyListener() {
 
 			@Override
@@ -230,22 +281,22 @@ public class LMOrderList implements ActionListener {
 				}
 			}
 		});
-
-		// 검색하기
-		btnNewButton_1 = new JButton("검색하기");
-		btnNewButton_1.setToolTipText("거래처명 입력 후 검색");
-		//		btnNewButton_1.setBounds(490, 40, 99, 30);
-		btnNewButton_1.setPreferredSize(new Dimension(100, 30));	// FlowLayout의 컴포넌트 리사이즈 방법
-		getFrame().getContentPane().add(btnNewButton_1);
-
+		
+		//검색하기
+		btnNewButton_1 = new JButton("검색");
+		btnNewButton_1.setFont(new Font("새굴림", Font.PLAIN, 12));
+		btnNewButton_1.setIcon(new ImageIcon(LMOrderList.class.getResource("/lmimage/\uC2E0\uADDC\uAC70\uB798\uCC98\uB4F1\uB85D\uBC84\uD2BC.png")));
+		btnNewButton_1.setBounds(642, 103, 70, 32);
+		btnNewButton_1 .setHorizontalTextPosition(JButton.CENTER); // 텍스트 가운데
+		panel.add(btnNewButton_1);
 		btnNewButton_1.addActionListener(this);
-
-
-		// 엑셀로저장
+		
+		//액셀로 저장
 		btnNewButton_2 = new JButton("엑셀로 저장");
-		btnNewButton_2.setPreferredSize(new Dimension(100, 30));	// FlowLayout의 컴포넌트 리사이즈 방법
-		getFrame().getContentPane().add(btnNewButton_2);
-
+		btnNewButton_2.setFont(new Font("새굴림", Font.PLAIN, 12));
+		btnNewButton_2.setIcon(new ImageIcon(LMOrderList.class.getResource("/lmimage/5\uC790\uB9AC\uBC84\uD2BC.png")));
+		btnNewButton_2.setBounds(852, 103, 106, 32);
+		btnNewButton_2 .setHorizontalTextPosition(JButton.CENTER); // 텍스트 가운데
 		btnNewButton_2.addActionListener(new ActionListener() {
 
 			@Override
@@ -321,42 +372,73 @@ public class LMOrderList implements ActionListener {
 				
 			}
 		});
-
-
-		getFrame().setVisible(true);
-		getFrame().setResizable(false);
-
-		// 테이블
-		scrollPane = new JScrollPane();
-		getFrame().getContentPane().add(scrollPane);
-
+		
+		panel.add(btnNewButton_2);
+	
+		
 		table = new JTable(){
-
+			
 			@Override
 			public boolean isCellEditable(int row, int column) {
 				return false;   // 모든 cell 편집불가능
 			}
-
+			
 		};
-		scrollPane.setPreferredSize(new Dimension(970, 400));	
-		scrollPane.setViewportView(table);
-
+		
+				
+		JScrollPane scrollPane_1 = new JScrollPane(table);
+		scrollPane_1.setBounds(5, 158, 970, 351);
+		panel.add(scrollPane_1);
+		
+		
+		
+		
+		
+		 
 		// 총 주문가격
 		lblNewLabel_7 = new JLabel("총 주문가격 :");
-		lblNewLabel_7.setPreferredSize(new Dimension(80, 20));	// FlowLayout의 컴포넌트 리사이즈 방법
-		getFrame().add(lblNewLabel_7);
+		lblNewLabel_7.setForeground(SystemColor.text);
+		lblNewLabel_7.setFont(new Font("새굴림", Font.PLAIN, 17));
+		lblNewLabel_7.setBounds(617, 526, 100, 20);
+		panel.add(lblNewLabel_7);
+		
+		textField_3 = new JTextField();
+		textField_3.setFont(new Font("새굴림", Font.PLAIN, 17));
+		textField_3.setColumns(10);
+		textField_3.setBounds(730, 524, 153, 20);
+		panel.add(textField_3);
+		textField_3.setText( String.valueOf(getSumPrice()) );
+		
+		lblNewLabel_8 = new JLabel("\uC8FC\uBB38\uB0B4\uC5ED\uC870\uD68C");
+		lblNewLabel_8.setFont(new Font("새굴림", Font.BOLD, 40));
+		lblNewLabel_8.setBounds(703, 10, 391, 79);
+		panel.add(lblNewLabel_8);
+		
+		
+		
+		
+		
 
-		textField_3 = new JTextField(15);
-		textField_3.setPreferredSize(new Dimension(80, 20));	// FlowLayout의 컴포넌트 리사이즈 방법
-		getFrame().add(textField_3);
-		textField_3.setText( String.valueOf(getSumPrice()) );	// 가격 * 수량
-
-
-		//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	// 윈도우빌더라서 ㅅㅂ
-		getFrame().setVisible(true);
-		getFrame().setResizable(false);
-		getFrame().setResizable(false);
-
+		
+		
+		
+		
+		GroupLayout groupLayout = new GroupLayout(getContentPane());
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 1084, Short.MAX_VALUE)
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(2)
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 559, Short.MAX_VALUE))
+		);
+		getContentPane().setLayout(groupLayout);
+		
+		this.setSize(1000,600);
+		this.setVisible(true);
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
 	// 테이블 getDateList
 	private Vector<Vector> getDataList() {
@@ -385,7 +467,7 @@ public class LMOrderList implements ActionListener {
 		cols.add("입고 가격");
 		cols.add("현재 재고");
 		cols.add("주문 수량");
-		cols.add("사원 번호");
+		cols.add("주문 직원");
 
 		return cols;
 	}
@@ -394,7 +476,7 @@ public class LMOrderList implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 
 		switch( e.getActionCommand() ) {
-		case "검색하기":
+		case "검색":
 
 			if(date1.equals("") || date2.equals("")) {
 				JOptionPane.showMessageDialog(null, 
@@ -450,18 +532,8 @@ public class LMOrderList implements ActionListener {
 		return sum;
 	}
 
-	public static JFrame getFrame() {
-		return frame;
+
+		public static void main(String[] args) {
+		LMOrderList window = new LMOrderList();
 	}
-
-	public static void setFrame(JFrame frame) {
-		LMOrderList.frame = frame;
-	}
-
-	//	public static void main(String[] args) {
-	//	OrderList window = new OrderList();
-	//}
-
-
-
 }
