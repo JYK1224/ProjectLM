@@ -185,7 +185,7 @@ public class IpgoList extends JFrame implements  ActionListener{
 		btnToExcel.setBounds(852, 103, 106, 32);
 		btnToExcel .setHorizontalTextPosition(JButton.CENTER); // 텍스트 가운데
 		panel.add(btnToExcel);
-		lblTot       =  new JLabel(" \uCD1D \uC785\uACE0\uAC00\uACA9: ");
+		lblTot       =  new JLabel(" \uCD1D \uC785\uACE0\uAE08\uC561: ");
 		lblTot.setForeground(SystemColor.text);
 		lblTot.setFont(new Font("굴림", Font.PLAIN, 17));
 		lblTot.setBounds(617, 526, 100, 20);

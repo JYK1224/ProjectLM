@@ -398,7 +398,7 @@ public class LMOrderList extends JFrame implements ActionListener {
 		
 		
 		// 총 주문가격
-		lblNewLabel_7 = new JLabel("총 주문가격 :");
+		lblNewLabel_7 = new JLabel("\uCD1D \uC8FC\uBB38\uAE08\uC561 :");
 		lblNewLabel_7.setForeground(SystemColor.text);
 		lblNewLabel_7.setFont(new Font("새굴림", Font.PLAIN, 17));
 		lblNewLabel_7.setBounds(617, 526, 100, 20);
