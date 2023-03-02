@@ -318,8 +318,6 @@ public class LMDispose extends JFrame implements ActionListener{
 
 			if(table.getValueAt(i, 6).toString().equals("")) {
 				disNum.add("0");
-				JOptionPane.showMessageDialog(null, "폐기 수량 입력해라");
-				break;
 			} else {
 			disNum.add(i, table.getValueAt(i, 6).toString() );   //  폐기수량
 			}
