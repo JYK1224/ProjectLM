@@ -24,6 +24,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -54,7 +55,6 @@ public class LMOutputList implements ActionListener {
 	
 	// 기본생성자
 	public LMOutputList(){
-		
 		initComponent();
 	}
 
@@ -70,7 +70,7 @@ public class LMOutputList implements ActionListener {
 		getFrame().setTitle("출고 내역 조회");
 		getFrame().setBounds(700, 300, 1100, 600);
 		getFrame().getContentPane().setLayout(new FlowLayout(FlowLayout.CENTER));	
-		 getFrame(). setLocation(650,200);
+
 		// 시작일 달력
 		lblNewLabel_1 = new JLabel("시작일 선택 :");
 		lblNewLabel_1.setBounds(39, 45, 80, 20);
@@ -369,7 +369,7 @@ public class LMOutputList implements ActionListener {
 //	}
 
 	// 검색 후 테이블 getList
-	private Vector<Vector> getDataList(LMOutputList OrderList) {
+	private Vector<Vector> getDataList(LMOutputList LMOrderList) {
 		String          search = textField.getText();
 		OutputDao        dao   =  new OutputDao();
 		Vector<Vector>  list  =  dao.getOutputList(search, date1, date2);
