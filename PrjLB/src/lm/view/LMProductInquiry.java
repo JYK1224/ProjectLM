@@ -164,6 +164,7 @@ public class LMProductInquiry extends JFrame implements ActionListener{
 		});
 		
 		btn = new JButton("조회");
+		btn.setFont(new Font("새굴림", Font.PLAIN, 12));
 		btn.setIcon(new ImageIcon(LMProductInquiry.class.getResource("/lmimage/\uC2E0\uADDC\uAC70\uB798\uCC98\uB4F1\uB85D\uBC84\uD2BC.png")));
 		btn.setBounds(351, 80, 70, 32);
 		btn .setHorizontalTextPosition(JButton.CENTER);
