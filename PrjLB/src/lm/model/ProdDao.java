@@ -170,6 +170,7 @@ public class ProdDao {
 		}
 		return aftcnt;
 	}
+	//중복장지
 	public int existsfind(String pid) {
 		String sql = " select "
 				   + " case when exists "

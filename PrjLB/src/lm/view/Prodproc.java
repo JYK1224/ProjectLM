@@ -125,7 +125,6 @@ public class Prodproc extends JFrame{
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						addProd();
-						addStock();
 					}
 				});
 		btnUp = new JButton("수정");
@@ -214,7 +213,7 @@ public class Prodproc extends JFrame{
 		String dname = (String) this.cmDname.getSelectedItem();
 		int aftcnt = pdao.insertStock(pid, dname);
 		
-		JOptionPane.showMessageDialog(null, aftcnt + "저장", "추가",
+		JOptionPane.showMessageDialog(null, txtPname.getText() + " 재고저장", "추가",
 				JOptionPane.CLOSED_OPTION);
 	}
 	//상품 등록
@@ -228,6 +227,7 @@ public class Prodproc extends JFrame{
 			Prodvo pv = getViewdata();
 			int aftcnt = dao.insertProd(pv);
 			JOptionPane.showMessageDialog(null, "등록되었습니다");
+			addStock();
 		}
 		
 		
