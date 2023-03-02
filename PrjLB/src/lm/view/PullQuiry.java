@@ -138,7 +138,7 @@ public class PullQuiry extends JFrame implements ActionListener{
 		setTitle("상품전체조회");
 
 
-		icon = new ImageIcon("./image/큰거1.png");
+		icon = new ImageIcon("./큰거1.png");
 
 		JPanel panel = new JPanel() {
 			public void paintComponent(Graphics g) {

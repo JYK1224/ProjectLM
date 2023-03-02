@@ -94,7 +94,7 @@ public class LMOutput extends JFrame implements ActionListener{
 		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(LMProdOrder.class.getResource("/lmimage/alphabets-33744_640.png")));
 		frame.setTitle("상품 출고 화면");
 
-		icon = new ImageIcon("./image/큰거1.png");
+		icon = new ImageIcon("./큰거1.png");
 
 		JPanel panel = new JPanel() {
 			public void paintComponent(Graphics g) {

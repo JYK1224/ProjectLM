@@ -100,7 +100,7 @@ public class LMProductInquiry extends JFrame implements ActionListener{
 	private void init() {
 		setTitle("상품상세조회");
 		
-		icon = new ImageIcon("./image/신규거래처조회111.png");
+		icon = new ImageIcon("./신규거래처조회111.png");
 	      
 	      JPanel panel = new JPanel() {
 	         public void paintComponent(Graphics g) {

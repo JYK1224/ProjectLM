@@ -55,7 +55,7 @@ public void init () {
    
       
       setTitle("신규점포등록");
-      icon = new ImageIcon("./image/신규거래처조회111.png");
+      icon = new ImageIcon("./신규거래처조회111.png");
       
       JPanel panel = new JPanel() {
          public void paintComponent(Graphics g) {

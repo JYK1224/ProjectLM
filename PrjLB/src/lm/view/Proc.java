@@ -61,7 +61,7 @@ public class Proc extends JFrame{
 		
 		setTitle("그린물류시스템");
 		setResizable(false);
-		 icon = new ImageIcon("./image/신규거래처조회111.png");
+		 icon = new ImageIcon("./신규거래처조회111.png");
 	      
 	      JPanel panel = new JPanel() {
 	         public void paintComponent(Graphics g) {
