@@ -123,7 +123,7 @@ public class Login extends JFrame {
 				int result2 = dao.findTy(userid);
 					if(result1 == 1 ) {
 						if(result2 == 1 ) {
-							JDialog jd = new JDialog();
+							JDialog jd = new JDialog(0);
 							jd.Dlbl.setText("환영합니다 관리자");
 							jd.btnNewButton.addActionListener(new ActionListener() {								
 								@Override
@@ -133,7 +133,7 @@ public class Login extends JFrame {
 								}
 							});
 						}else {
-							JDialog jd = new JDialog();
+							JDialog jd = new JDialog(0);
 							jd.Dlbl.setText("환영합니다 사용자");
 							jd.btnNewButton.addActionListener(new ActionListener() {								
 								@Override
@@ -149,7 +149,9 @@ public class Login extends JFrame {
 						 
 						dispose();
 				}else{
-					JOptionPane.showMessageDialog(null, "실패 : 아이디와 비밀번호를 확인해주세요");
+					
+					JDialog jd = new JDialog(0);
+					jd.Dlbl.setText("실패 : 아이디와 비밀번호를 확인해주세요");
 					textField.grabFocus();
 					textField.setText("");
 					passwordField.setText("");

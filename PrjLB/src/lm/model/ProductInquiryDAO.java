@@ -67,7 +67,7 @@ private void init1() {
 				String  rateofreturn  =  rs.getString("RATEOFRETURN");
 				ev.getTab5().setText(rateofreturn + "%");				
 			}else {
-				JDialog jd = new JDialog();
+				JDialog jd = new JDialog(0);
 				jd.getDlbl().setText("잘못된 상품명입니다.");
 				
 	
@@ -128,13 +128,13 @@ public void init() {
 				String  rateofreturn  =  rs.getString("RATEOFRETURN");
 				ev.getTab5().setText(rateofreturn + "%");				
 			}else {
-				JDialog jd = new JDialog();
+				JDialog jd = new JDialog(0);
 				jd.getDlbl().setText("잘못된 상품 코드 입니다.");
 			}
 			
 		} catch (SQLException e) {
 			
-			JDialog jd = new JDialog();
+			JDialog jd = new JDialog(0);
 			jd.getDlbl().setText("상품코드는 숫자로 입력해주세요.");
 			
 		}finally {
