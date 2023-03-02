@@ -249,7 +249,7 @@ public class LMOutput extends JFrame implements ActionListener{
 																						public void actionPerformed(ActionEvent e) {
 																							System.out.println("출고내역 확인 버튼 클릭....");	
 																							if (opl != null)
-																								opl.getFrame().setVisible(false);
+																								opl.dispose();
 																							opl = new LMOutputList();
 																						}
 																					});
