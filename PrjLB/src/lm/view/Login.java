@@ -125,6 +125,7 @@ public class Login extends JFrame {
 						if(result2 == 1 ) {
 							JDialog jd = new JDialog(0);
 							jd.Dlbl.setText("환영합니다 관리자");
+							jd.setAlwaysOnTop(true);
 							jd.btnNewButton.addActionListener(new ActionListener() {								
 								@Override
 								public void actionPerformed(ActionEvent e) {
@@ -135,6 +136,7 @@ public class Login extends JFrame {
 						}else {
 							JDialog jd = new JDialog(0);
 							jd.Dlbl.setText("환영합니다 사용자");
+							jd.setAlwaysOnTop(true);
 							jd.btnNewButton.addActionListener(new ActionListener() {								
 								@Override
 								public void actionPerformed(ActionEvent e) {
