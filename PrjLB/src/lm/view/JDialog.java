@@ -29,6 +29,22 @@ public class JDialog extends JFrame {
 	JButton btnNewButton;
 	
 	
+	public JLabel getDlbl() {
+		return Dlbl;
+	}
+
+	public void setDlbl(JLabel dlbl) {
+		Dlbl = dlbl;
+	}
+
+	public JButton getBtnNewButton() {
+		return btnNewButton;
+	}
+
+	public void setBtnNewButton(JButton btnNewButton) {
+		this.btnNewButton = btnNewButton;
+	}
+
 	public JDialog () {
 		
 		init();

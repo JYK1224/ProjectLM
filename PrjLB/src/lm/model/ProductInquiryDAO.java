@@ -1,12 +1,14 @@
 package lm.model;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 
-
+import lm.view.JDialog;
 import lm.view.LMProductInquiry;
 import oracle.jdbc.OracleConnection;
 
@@ -65,7 +67,10 @@ private void init1() {
 				String  rateofreturn  =  rs.getString("RATEOFRETURN");
 				ev.getTab5().setText(rateofreturn + "%");				
 			}else {
-				JOptionPane.showMessageDialog(null, "잘못된 상품명 입니다.");
+				JDialog jd = new JDialog();
+				jd.getDlbl().setText("잘못된 상품명입니다.");
+				
+	
 			}
 			
 		} catch (SQLException e) {
@@ -123,12 +128,15 @@ public void init() {
 				String  rateofreturn  =  rs.getString("RATEOFRETURN");
 				ev.getTab5().setText(rateofreturn + "%");				
 			}else {
-				JOptionPane.showMessageDialog(null, "잘못된 상품코드 입니다.");
+				JDialog jd = new JDialog();
+				jd.getDlbl().setText("잘못된 상품 코드 입니다.");
 			}
 			
 		} catch (SQLException e) {
 			
-			JOptionPane.showMessageDialog(null, "상품코드는 숫자로 입력해주세요");
+			JDialog jd = new JDialog();
+			jd.getDlbl().setText("상품코드는 숫자로 입력해주세요.");
+			
 		}finally {
 			try {
 				if(rs != null)rs.close();
