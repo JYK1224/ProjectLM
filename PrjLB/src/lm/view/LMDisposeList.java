@@ -457,10 +457,10 @@ public class LMDisposeList implements ActionListener {
 		LMDisposeList.frame = frame;
 	}
 
-	//	public static void main(String[] args) {
-	//	OrderList window = new OrderList();
-	//}
+		public static void main(String[] args) {
+			new  LMDisposeList();
+	}
 
-
+	
 
 }

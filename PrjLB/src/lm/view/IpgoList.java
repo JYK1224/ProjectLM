@@ -317,8 +317,8 @@ public class IpgoList extends JFrame implements  ActionListener{
 			int            mi    =  now.getMinute();
 			int            ss    =  now.getSecond();
 
-			String  fmt      = "d:\\ws\\java\\DBProject02\\src\\";
-			fmt             += "jTable_%4d%02d%02d%02d%02d%02d.xlsx";
+			String  fmt      = "d:\\excel\\";
+			fmt             += "입고내역_%4d %02d %02d %02d %02d %02d.xlsx";
 			String  filepath = String.format(fmt, year, mm, dd, hh, mi, ss );
 
 			System.out.println( filepath );
@@ -400,13 +400,15 @@ public class IpgoList extends JFrame implements  ActionListener{
 			} catch (IOException e) {
 			}
 		}
-
 	}
 
 	private void getWorkbook_Data(XSSFSheet sheet) {
 		XSSFRow     row   =  null;
 		XSSFCell    cell  =  null;
-
+		
+		int numcols = jTable.getColumnCount();
+		int numrows = jTable.getRowCount();
+		
 		// 제목줄 처리
 		Vector<String>  cols =  getColumnList();
 		row          =  sheet.createRow( 0 );
@@ -416,13 +418,11 @@ public class IpgoList extends JFrame implements  ActionListener{
 		}
 
 		// Data 줄 처리
-		Vector< Vector >  dataList = getDataList();
-		for (int i = 0; i < dataList.size(); i++) {
+		for (int i = 0; i < numrows; i++) {
 			row    =   sheet.createRow(i + 1);
-			for (int j = 0; j < dataList.get(i).size() ; j++) {
-				Vector  v  =  dataList.get(i);
+			for (int j = 0; j < numcols ; j++) {
 				cell       =  row.createCell( j );
-				cell.setCellValue( (String) v.get( j ) );
+				cell.setCellValue( (String) jTable.getValueAt(i, j));
 			}
 
 		}
