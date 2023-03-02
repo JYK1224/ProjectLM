@@ -55,30 +55,30 @@ public class Login extends JFrame {
 		lbl1.setForeground(Color.WHITE);
 		lbl1.setVerticalAlignment(SwingConstants.BOTTOM);
 		lbl1.setFont(new Font("굴림", Font.BOLD, 17));
-		lbl1.setBounds(60, 268, 67, 30);
+		lbl1.setBounds(50, 268, 67, 30);
 		gbadd(lbl1, 0, 0, 1, 1);
 		
 		JLabel lblNewLabel = new JLabel("비밀번호 :");
 		lblNewLabel.setForeground(Color.WHITE);
 		lblNewLabel.setVerticalAlignment(SwingConstants.BOTTOM);
 		lblNewLabel.setFont(new Font("굴림", Font.BOLD, 17));
-		lblNewLabel.setBounds(60, 297, 110, 30);
+		lblNewLabel.setBounds(50, 297, 110, 30);
 		getContentPane().add(lblNewLabel);
 		
 		textField = new JTextField();
-		textField.setBounds(170, 276, 150, 21);
+		textField.setBounds(160, 276, 150, 21);
 		getContentPane().add(textField);
 		textField.setColumns(10);
 		
 		passwordField = new JPasswordField();
-		passwordField.setBounds(170, 304, 150, 21);
+		passwordField.setBounds(160, 304, 150, 21);
 		getContentPane().add(passwordField);
 		
-		JButton btn1 = new JButton("\uB85C\uADF8\uC778");
+		JButton btn1 = new JButton("");
 		btn1.setFont(new Font("새굴림", Font.PLAIN, 12));
-		btn1.setIcon(new ImageIcon(Login.class.getResource("/lmimage/4\uC790\uB9AC\uBC84\uD2BC.png")));
+		btn1.setIcon(new ImageIcon(Login.class.getResource("/lmimage/\uBC84\uD2BC222.png")));
 		btn1.setHorizontalAlignment(SwingConstants.LEADING);
-		btn1.setBounds(332, 285, 106, 32);
+		btn1.setBounds(320, 285, 129, 32);
 		btn1 .setHorizontalTextPosition(JButton.CENTER);
 		btn1.setBorderPainted(false);
 		btn1.setFocusable(false);
