@@ -36,7 +36,7 @@ private void init1() {
 		sql += " WHERE  P.AID(+) = A.AID ";
 		sql += " AND P.DID = DA.DID(+) ";
 		sql += " AND S.PID(+) = P.PID ";		
-		sql += " AND P.PNAME = ? ";
+		sql += " AND P.PNAME like ? ";
 
 		
 		PreparedStatement pstmt = null;
@@ -96,7 +96,7 @@ public void init() {
 		sql += " WHERE  P.AID(+) = A.AID ";
 		sql += " AND P.DID = DA.DID(+) ";
 		sql += " AND S.PID(+) = P.PID ";		
-		sql += " AND P.PID = TO_NUMBER(";
+		sql += " AND P.PID like TO_NUMBER(";
 		sql += ev.getTxt().getText() +")";
 		
 		PreparedStatement pstmt = null;

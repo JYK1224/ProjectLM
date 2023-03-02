@@ -88,7 +88,7 @@ public void init () {
       JLabel lblCode = new JLabel("점포코드");
       lblCode.setForeground(SystemColor.text);
       lblCode.setBounds(20, 146, 96, 18);
-      lblCode.setFont(new Font("새굴림", Font.BOLD, 15));
+      lblCode.setFont(new Font("새굴림", Font.PLAIN, 15));
       
       txtCode = new JTextField();
       txtCode.setBounds(167, 141, 195, 29);
@@ -97,16 +97,16 @@ public void init () {
       JLabel lblAname = new JLabel("점포명");
       lblAname.setForeground(SystemColor.text);
       lblAname.setBounds(20, 198, 142, 18);
-      lblAname.setFont(new Font("새굴림", Font.BOLD, 15));
+      lblAname.setFont(new Font("새굴림", Font.PLAIN, 15));
       
       txtdname = new JTextField();
       txtdname.setBounds(167, 193, 195, 29);
       txtdname.setColumns(10);
       
-      JLabel lblName = new JLabel("담장자");
+      JLabel lblName = new JLabel("\uB2F4\uB2F9\uC790");
       lblName.setForeground(SystemColor.text);
       lblName.setBounds(20, 254, 142, 18);
-      lblName.setFont(new Font("새굴림", Font.BOLD, 15));
+      lblName.setFont(new Font("새굴림", Font.PLAIN, 15));
       
       txtName = new JTextField();
       txtName.setBounds(167, 249, 195, 29);
@@ -115,7 +115,7 @@ public void init () {
       JLabel lblPhone = new JLabel("연락처");
       lblPhone.setForeground(SystemColor.text);
       lblPhone.setBounds(20, 308, 142, 18);
-      lblPhone.setFont(new Font("새굴림", Font.BOLD, 15));
+      lblPhone.setFont(new Font("새굴림", Font.PLAIN, 15));
       
       txtdPhone = new JTextField();
       txtdPhone.setBounds(167, 300, 195, 29);

@@ -92,7 +92,7 @@ public class LMOutput extends JFrame implements ActionListener{
 	private void initComponent() {
 		frame = new JFrame();
 		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(LMProdOrder.class.getResource("/lmimage/alphabets-33744_640.png")));
-		frame.setTitle("상품출고업무");
+		frame.setTitle("상품출고화면");
 
 		icon = new ImageIcon("./큰거1.png");
 
@@ -514,7 +514,7 @@ public class LMOutput extends JFrame implements ActionListener{
 
 		}
 		System.out.println(sum);
-		JOptionPane.showMessageDialog(null, sum + " 개 주문되었습니다");
+		JOptionPane.showMessageDialog(null, sum + " 개 출고되었습니다");
 
 	}
 

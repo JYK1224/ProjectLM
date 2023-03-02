@@ -104,8 +104,8 @@ public class OutputDao {
 				+ "  WHERE S.PID = P.PID (+) \r\n"
 				+ "    AND P.DID = D.DID (+) \r\n"
 				+ "    AND D.DNAME LIKE '%"+search.toUpperCase().trim()+"%'\r\n"
-				+ "    AND STOCKNUM IS NOT NULL\r\n"
-				+ "    AND STOCKNUM != 0\r\n"
+//				+ "    AND STOCKNUM IS NOT NULL\r\n"
+//				+ "    AND STOCKNUM != 0\r\n"
 				+ "    ORDER BY D.DNAME, P.PNAME, S.STOCKNUM";
 
 		PreparedStatement  pstmt = null;

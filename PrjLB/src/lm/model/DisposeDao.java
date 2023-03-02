@@ -35,8 +35,8 @@ public class DisposeDao {
          		+ " FROM  ASSORTMENT A, PRODUCT P, STOCK S \r\n"
          		+ " WHERE S.PID = P.PID (+)\r\n"
          		+ "  AND P.AID = A.AID (+)\r\n"
-         		+ "  AND STOCKNUM IS NOT NULL\r\n"
-         		+ "  AND STOCKNUM != 0"
+//         		+ "  AND STOCKNUM IS NOT NULL\r\n"
+//         		+ "  AND STOCKNUM != 0"
          		+ "  AND A.ANAME LIKE '%"+ search.toUpperCase().trim() +"%'";
 
          PreparedStatement pstmt  =  null;
@@ -238,8 +238,8 @@ public class DisposeDao {
          		+ " AND P.PID = D.PID (+)\r\n"
          		+ " AND A.ANAME LIKE '%"+search.trim().toUpperCase()+"%'\r\n"
          		+ " AND ( TO_DATE(D.DISDATE) BETWEEN TO_DATE('"+date1+"') AND TO_DATE('"+date2+"') )\r\n"
-         		+ " AND STOCKNUM IS NOT NULL\r\n"
-         		+ " AND STOCKNUM != 0\r\n"
+//         		+ " AND STOCKNUM IS NOT NULL\r\n"
+//         		+ " AND STOCKNUM != 0\r\n"
          		+ " ORDER BY D.DISDATE ASC";
          		
 
@@ -249,8 +249,8 @@ public class DisposeDao {
          		+ " AND P.AID = A.AID (+)\r\n"
          		+ " AND P.PID = D.PID (+)\r\n"
          		+ " AND A.ANAME LIKE '%"+search.trim().toUpperCase()+"%'\r\n"
-         		+ " AND STOCKNUM IS NOT NULL\r\n"
-         		+ " AND STOCKNUM != 0\r\n"
+//         		+ " AND STOCKNUM IS NOT NULL\r\n"
+//         		+ " AND STOCKNUM != 0\r\n"
          		+ " ORDER BY D.DISDATE ASC";
 
       
