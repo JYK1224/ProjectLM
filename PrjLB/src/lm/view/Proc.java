@@ -322,12 +322,17 @@ public class Proc extends JFrame{
 	//등록
 	protected void addUser() {
 		UserDao udao = new UserDao();
-		Uservo vo = getViewData();
-		int aftcnt = udao.insertUser(vo);
-		
-		JOptionPane.showMessageDialog(null, aftcnt + "저장", "추가",
-				JOptionPane.CLOSED_OPTION);
-		
+		String userid = txtid.getText();
+		int result = udao.existsfind(userid);
+		if(result == 1) {
+			JOptionPane.showMessageDialog(null, "아이디가 중복됩니다");
+		}else {
+			Uservo vo = getViewData();
+			int aftcnt = udao.insertUser(vo);
+			JOptionPane.showMessageDialog(null, aftcnt + "저장", "추가",
+					JOptionPane.CLOSED_OPTION);
+		}
+
 	}
 	private Uservo getViewData() {
 		

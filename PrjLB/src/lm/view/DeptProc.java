@@ -306,9 +306,16 @@ public class DeptProc extends JFrame{
 	//등록
 	protected void addDept() {
 		DeptDao ddao = new DeptDao();
-		Deptvo dv = getViewData();
-		int aftcnt = ddao.insertDept(dv); 
-		JOptionPane.showMessageDialog(null, dv.getDeptid()+ "저장" );
+		String did = txtCode.getText();
+		int result = ddao.existsfind(did);
+		if (result == 1 ) {
+			JOptionPane.showMessageDialog(null, "중복된 거래처코드입니다.");
+		}else {
+			Deptvo dv = getViewData();
+			int aftcnt = ddao.insertDept(dv); 
+			JOptionPane.showMessageDialog(null, dv.getDeptid()+ "저장" );
+		}
+		
 	}
 
 	private Deptvo getViewData() {

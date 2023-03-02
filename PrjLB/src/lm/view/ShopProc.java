@@ -297,10 +297,16 @@ public void init () {
    //등록
    protected void addShop() {
       ShopDao sdao = new ShopDao();
-      Shopvo sv = getViewData();
-      int aftcnt = sdao.insertShop(sv); 
-      JOptionPane.showMessageDialog(null, sv.getShopid()+ "저장" );
-   }
+      String sid = txtCode.getText();
+      int result = sdao.existsfind(sid);
+      if( result == 1 ) {
+    	  JOptionPane.showMessageDialog(null, "점포코드가 중복됩니다");
+      }else {
+    	  Shopvo sv = getViewData();
+    	  int aftcnt = sdao.insertShop(sv); 
+    	  JOptionPane.showMessageDialog(null, sv.getShopid()+ "저장" );
+      }
+  }
 
    private Shopvo getViewData() {
       String sid = this.txtCode.getText();

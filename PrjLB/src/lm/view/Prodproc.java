@@ -219,9 +219,17 @@ public class Prodproc extends JFrame{
 	}
 	//상품 등록
 	protected void addProd() {
-		ProdDao pdao = new ProdDao();
-		Prodvo pv = getViewdata();
-		int aftcnt = pdao.insertProd(pv);
+		ProdDao dao = new ProdDao();
+		String pid = txtPid.getText();
+		int result = dao.existsfind(pid);
+		if(result == 1) {
+			JOptionPane.showMessageDialog(null, "중복된 상품코드입니다");
+		}else {
+			Prodvo pv = getViewdata();
+			int aftcnt = dao.insertProd(pv);
+			JOptionPane.showMessageDialog(null, "등록되었습니다");
+		}
+		
 		
 	}
 	private Prodvo getViewdata() {
