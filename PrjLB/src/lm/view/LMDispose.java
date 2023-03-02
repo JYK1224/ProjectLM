@@ -209,7 +209,7 @@ public class LMDispose extends JFrame implements ActionListener{
 			excelWrite( filepath );
 
 			break;
-		case "폐기내역 조회":
+		case "폐기내역조회":
 			System.out.println("폐기내역 조회 클릭");
 			if(  dProc != null )
 				dProc.dispose();  // 강제로 닫는다
@@ -342,22 +342,8 @@ public class LMDispose extends JFrame implements ActionListener{
 						"table.getValueAt 이 null 입니다.", "지정오류", JOptionPane.ERROR_MESSAGE);
 				return;
 			}
-			
-			
-			if(table.getValueAt(i, 6).toString().equals("")) {
-				disNum.add(i, "0");
-			} else {
 				disNum.add(i, table.getValueAt(i, 6).toString() );   //  폐기수량
-			}
-			System.out.print(disNum);
-			// 폐기수량이 현재수량보다 크다면, 경고메세지
-			disStock.add(i, table.getValueAt(i, 5).toString() );   //  현재수량
 			
-			// 배열이름 넣자
-			if( Integer.parseInt((String) disNum.get(i))  >  Integer.parseInt(table.getValueAt(i, 5).toString())) {
-				JOptionPane.showMessageDialog(null, 
-						"폐기할 수량이 현재재고보다 많습니다.", "지정오류", JOptionPane.ERROR_MESSAGE);				
-			}
 		}
 	}
 

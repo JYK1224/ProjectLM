@@ -29,9 +29,12 @@ public class UserTitle extends JFrame{
 	LMProdOrder pro;
 	PullQuiry pqr;
 	LMOrderList lol;
-   
-   
-   public UserTitle() {
+	LMOutput lop;
+	LMDispose ldp;
+	LMDisposeList ldl;
+	LMOutputList lpl;
+	
+	public UserTitle() {
       Init();
    }
 
@@ -139,7 +142,9 @@ private void Init() {
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			new LMOutput();
+				if(lop != null)
+					lop.dispose();
+					lop =new LMOutput();
 			
 		}
 	});
@@ -161,7 +166,9 @@ private void Init() {
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			new LMDispose();
+				if (ldp != null)
+					ldp.dispose();
+					ldp = new LMDispose();
 			
 		}
 	});
@@ -177,7 +184,9 @@ private void Init() {
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			new LMDisposeList();
+				if ( ldl != null)
+					  ldl.dispose();
+					  ldl = new LMDisposeList();
 			
 		}
 	});
@@ -237,8 +246,9 @@ private void Init() {
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			new LMOutputList();
-			
+				if (lpl != null)
+					 lpl.dispose();
+					 lpl =new LMOutputList();
 		}
 	});
       btnNewButton_9_1.setIcon(new ImageIcon(UserTitle.class.getResource("/lmimage/\uBC84\uD2BC61.png")));

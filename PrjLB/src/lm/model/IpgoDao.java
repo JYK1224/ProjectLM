@@ -3,6 +3,7 @@ package lm.model;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLDataException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Vector;
@@ -56,7 +57,7 @@ public class IpgoDao {
 			while( rs.next() ) {
 				String  dname          = rs.getString("DNAME");       // 거래처명
 				String  orderdate      = LMipgo.lmvo.getOrderdate();   // 주문일자
-				String  indate         = LMipgo.lmvo.getIndate()  ;   // 주문일자
+				String  indate         = LMipgo.lmvo.getIndate()  ;   // 입고일자
 				String  pid            = rs.getString("PID");         // 상품코드
 				String  pname          = rs.getString("PNAME");       // 상품명
 				String  stocknum       = rs.getString("STOCKNUM");    // 현재재고
@@ -78,9 +79,10 @@ public class IpgoDao {
 				list.add(v);
 
 			}
-		} catch (SQLException e) {
+		} catch (SQLException e ) {
 			e.printStackTrace();
-		} finally {
+		}
+		finally {
 			try {
 				if(rs    != null)   rs.close();
 				if(pstmt != null)   pstmt.close();
