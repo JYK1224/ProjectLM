@@ -86,7 +86,7 @@ public class LMDisposeList extends JFrame    implements ActionListener {
 	private void initComponent() {
 
 
-		setTitle("폐기 내역 조회");
+		setTitle("폐기내역조회");
 		icon = new ImageIcon("./image/큰거1.png");
 
 		JPanel panel = new JPanel() {
