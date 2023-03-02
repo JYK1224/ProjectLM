@@ -71,7 +71,7 @@ import java.awt.Toolkit;
 
 
 		private void init() {
-			setTitle( "거래처조회 ");
+			setTitle( "거래처조회");
 			
 			icon = new ImageIcon("./리스트들.png");
 			

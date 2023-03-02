@@ -90,7 +90,7 @@ public class Proc extends JFrame{
 		
 		scrollPane.setViewportView(panel);
 		panel.setLayout(null);
-		JButton btnCn = new JButton("새로고침");
+		JButton btnCn = new JButton("취소");
 		btnCn.setIcon(new ImageIcon(Proc.class.getResource("/lmimage/4\uC790\uB9AC\uBC84\uD2BC.png")));
 		btnCn.setFont(new Font("새굴림", Font.PLAIN, 12));
 		btnCn.setBounds(253, 371, 93, 32);
