@@ -152,6 +152,9 @@ public class Login extends JFrame {
 					
 					JDialog jd = new JDialog(0);
 					jd.Dlbl.setText("실패 : 아이디와 비밀번호를 확인해주세요");
+					jd.setAlwaysOnTop(true);
+					
+					
 					textField.grabFocus();
 					textField.setText("");
 					passwordField.setText("");
