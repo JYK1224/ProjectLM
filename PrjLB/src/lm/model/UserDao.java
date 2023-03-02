@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
+import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 
 import lm.view.UserList;
@@ -257,7 +258,7 @@ public class UserDao {
 			pstmt.setString(1, userid);
 			pstmt.setString(2, userpw);
 			rs = pstmt.executeQuery();
-			if (rs.next()) {;
+			if (rs.next()) {
 					return 1;
 				}
 		} catch (SQLException e) {
@@ -322,6 +323,7 @@ public class UserDao {
 				aftcnt = rs.getInt("d");
 			}
 		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "숫자만 입력가능합니다");
 			e.printStackTrace();
 		}finally {
 			try {

@@ -189,6 +189,7 @@ public class ProdDao {
 			if (rs.next())
 				aftcnt = rs.getInt("d");
 		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "숫자만 입력가능합니다");
 			e.printStackTrace();
 		}finally {
 			try {
