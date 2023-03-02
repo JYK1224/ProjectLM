@@ -230,7 +230,6 @@ public class LMOutputList extends  JFrame    implements ActionListener {
 		btnNewButton_2 .setHorizontalTextPosition(JButton.CENTER);
 		panel.add(btnNewButton_2);
 		btnNewButton_2.setPreferredSize(new Dimension(100, 30));	// FlowLayout의 컴포넌트 리사이즈 방법
-		btnNewButton_2.setToolTipText("d:/ws/java/DBProject02/src/jTable_20230220142558.xlsx");
 
 
 		textField_2 = new JTextField(13);
@@ -267,8 +266,8 @@ public class LMOutputList extends  JFrame    implements ActionListener {
 				int            mi    =  now.getMinute();
 				int            ss    =  now.getSecond();
 
-				String  fmt      = "d:\\ws\\java\\DBProject02\\src\\";
-				fmt             += "jTable_%4d%02d%02d%02d%02d%02d.xlsx";
+				String  fmt      = "d:\\excel\\";
+				fmt             += "출고내역_%4d%02d%02d%02d%02d%02d.xlsx";
 				String  filepath = String.format(fmt, year, mm, dd, hh, mi, ss );
 
 				System.out.println( filepath );
