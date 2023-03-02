@@ -238,32 +238,32 @@ public class LMProductInquiry extends JFrame implements ActionListener{
 		
 		tab2 = new JLabel();
 		tab2.setFont(new Font("새굴림", Font.PLAIN, 13));
-		tab2.setBounds(178, 164, 57, 15);
+		tab2.setBounds(178, 164, 160, 15);
 		panel.add(tab2);
 		
 		tab3 = new JLabel();
 		tab3.setFont(new Font("새굴림", Font.PLAIN, 13));
-		tab3.setBounds(178, 189, 57, 15);
+		tab3.setBounds(178, 189, 90, 15);
 		panel.add(tab3);
 		
 		tab4 = new JLabel();
 		tab4.setFont(new Font("새굴림", Font.PLAIN, 13));
-		tab4.setBounds(178, 214, 57, 15);
+		tab4.setBounds(178, 214, 90, 15);
 		panel.add(tab4);
 		
 		tab5 = new JLabel();
 		tab5.setFont(new Font("새굴림", Font.PLAIN, 13));
-		tab5.setBounds(178, 238, 57, 15);
+		tab5.setBounds(178, 238, 70, 15);
 		panel.add(tab5);
 		
 		tab6 = new JLabel();
 		tab6.setFont(new Font("새굴림", Font.PLAIN, 13));
-		tab6.setBounds(178, 263, 57, 15);
+		tab6.setBounds(178, 263, 90, 15);
 		panel.add(tab6);
 		
 		tab7 = new JLabel();
 		tab7.setFont(new Font("새굴림", Font.PLAIN, 13));
-		tab7.setBounds(178, 288, 57, 15);
+		tab7.setBounds(178, 288, 116, 15);
 		panel.add(tab7);
 		
 		tab8 = new JLabel("10%");
@@ -273,12 +273,12 @@ public class LMProductInquiry extends JFrame implements ActionListener{
 		
 		tab9 = new JLabel();
 		tab9.setFont(new Font("새굴림", Font.PLAIN, 13));
-		tab9.setBounds(178, 338, 57, 15);
+		tab9.setBounds(178, 338, 128, 15);
 		panel.add(tab9);
 		
 		tab10 = new JLabel();
 		tab10.setFont(new Font("새굴림", Font.PLAIN, 13));
-		tab10.setBounds(178, 361, 57, 15);
+		tab10.setBounds(178, 361, 90, 15);
 		panel.add(tab10);
 		
 		lblNewLabel = new JLabel("\uC0C1\uD488\uC0C1\uC138\uC870\uD68C");
