@@ -62,7 +62,7 @@ public class LMDispose extends JFrame implements ActionListener{
 	private void init() {
 		setTitle("상품 폐기 업무");
 		
-		icon = new ImageIcon("./큰거1.png");
+		icon = new ImageIcon("./image/큰거1.png");
 		
 		JPanel panel = new JPanel() {
 	        public void paintComponent(Graphics g) {
@@ -181,6 +181,8 @@ public class LMDispose extends JFrame implements ActionListener{
 			System.out.println("검색 클릭");
 			Vector<Vector> list = getDataList(this);
 			jTableRefresh2(list);
+			int rowsCount = table.getRowCount();
+	        JOptionPane.showMessageDialog(null, rowsCount + "건 검색되었습니다");
 			break;
 			
 		case "폐기확정":
@@ -311,9 +313,16 @@ public class LMDispose extends JFrame implements ActionListener{
 
 	private void getInArrayData() {
 		int rowsCount = table.getRowCount();
+		int sum = 0;
 		for (int i = 0; i < rowsCount; i++) {
 
-			try {
+			if(table.getValueAt(i, 6).toString().equals("")) {
+				disNum.add("0");
+				JOptionPane.showMessageDialog(null, "폐기 수량 입력해라");
+				break;
+			} else {
+			disNum.add(i, table.getValueAt(i, 6).toString() );   //  폐기수량
+			}
 
 				// 현재시간 불러와서 disDate에 넣자
 				Calendar t = Calendar.getInstance();
@@ -335,16 +344,12 @@ public class LMDispose extends JFrame implements ActionListener{
 				disDate.add(i, now.toString() + " " + now1.toString() ); 	// disdate 폐기일자
 
 				disPname.add(i, table.getValueAt(i, 3).toString() ); //  상품명
-
-			} catch(NullPointerException e) {
-				System.err.println("table.getValueAt 이 null 입니다.");
-				JOptionPane.showMessageDialog(null, 
-						"table.getValueAt 이 null 입니다.", "지정오류", JOptionPane.ERROR_MESSAGE);
-				return;
-			}
-				disNum.add(i, table.getValueAt(i, 6).toString() );   //  폐기수량
+				
+				sum += Integer.parseInt(disNum.get(i).toString());
 			
 		}
+		System.out.println(sum);
+		JOptionPane.showMessageDialog(null, sum + " 개 폐기되었습니다");
 	}
 
 

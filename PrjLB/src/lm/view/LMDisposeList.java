@@ -87,7 +87,7 @@ public class LMDisposeList extends JFrame    implements ActionListener {
 
 
 		setTitle("폐기 내역 조회");
-		icon = new ImageIcon("./큰거1.png");
+		icon = new ImageIcon("./image/큰거1.png");
 
 		JPanel panel = new JPanel() {
 			public void paintComponent(Graphics g) {
@@ -469,6 +469,9 @@ public class LMDisposeList extends JFrame    implements ActionListener {
 
 			Vector<Vector> list = getDataList(this);
 			jTableRefresh2(list);
+			 int rowsCount = table.getRowCount();
+	         JOptionPane.showMessageDialog(null, rowsCount + "건 검색되었습니다");
+			
 			textField_3.setText( String.valueOf(getSumPrice()) );	// 가격 * 수량
 			break;
 
