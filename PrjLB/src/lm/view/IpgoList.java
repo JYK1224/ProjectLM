@@ -7,6 +7,8 @@ import java.awt.TextField;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -129,27 +131,46 @@ public class IpgoList extends JFrame implements  ActionListener{
 		panel.setLayout(null);
 		lblAcc       =  new JLabel("거래처명: ");
 		lblAcc.setFont(new Font("새굴림", Font.PLAIN, 15));
-		lblAcc.setBounds(210, 18, 83, 23);
+		lblAcc.setBounds(210, 108, 83, 23);
 		panel.add(lblAcc);
 		txtId        =  new TextField(20);  
-		txtId.setBounds(302, 18, 164, 23);
+		txtId.setBounds(302, 108, 164, 23);
 		panel.add(txtId);
+		txtId.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent e) {
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+					btnFind.doClick();
+				}
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+			}
+		});
+		
+		
 		lblStart     =  new JLabel("     기간 시작날짜: ");
 		lblStart.setFont(new Font("새굴림", Font.PLAIN, 15));
-		lblStart.setBounds(152, 63, 124, 22);
+		lblStart.setBounds(152, 21, 124, 22);
 		panel.add(lblStart);
 		JDatePickerImpl datePicker1 = new JDatePickerImpl(datePanel1);
 		datePicker1.getJFormattedTextField().setBackground(SystemColor.window);
-		datePicker1.setBounds(302, 63, 164, 28);
+		datePicker1.setBounds(302, 18, 164, 28);
 		panel.add(datePicker1);
 		datePicker1.setPreferredSize(new Dimension(150, 30));
 		lblEnd       =  new JLabel("     기간 종료날짜: ");
 		lblEnd.setFont(new Font("새굴림", Font.PLAIN, 15));
-		lblEnd.setBounds(152, 108, 124, 25);
+		lblEnd.setBounds(152, 65, 124, 25);
 		panel.add(lblEnd);
 		JDatePickerImpl datePicker2 = new JDatePickerImpl(datePanel2);
 		datePicker2.getJFormattedTextField().setBackground(SystemColor.window);
-		datePicker2.setBounds(302, 108, 164, 28);
+		datePicker2.setBounds(302, 63, 164, 28);
 		panel.add(datePicker2);
 		datePicker2.setPreferredSize(new Dimension(150, 30));
 		btnFind      =  new JButton("검색");      
@@ -383,7 +404,8 @@ public class IpgoList extends JFrame implements  ActionListener{
 	private void excelWrite(String filepath) {
 		XSSFWorkbook  workbook =  new XSSFWorkbook();
 		XSSFSheet     sheet    =  workbook.createSheet("Data");
-
+		String fmt = "d:\\excel";
+		
 		// data 저장 : swing jTable -> Excel Sheet
 		getWorkbook_Data( sheet );
 
@@ -392,10 +414,10 @@ public class IpgoList extends JFrame implements  ActionListener{
 		try {
 			fos = new FileOutputStream( filepath );
 			workbook.write(fos);
-			System.out.println("저장완료");
+			JOptionPane.showMessageDialog(null, fmt + " 로 저장되었습니다");
 		} catch (IOException e) {
 			System.out.println("저장Fail");         
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "저장이 되지 않았습니다");
 		} finally {
 			try {
 				if(fos != null)fos.close();

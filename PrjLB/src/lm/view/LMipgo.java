@@ -9,6 +9,8 @@ import java.awt.TextField;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.DateFormat;
@@ -71,11 +73,6 @@ implements  ActionListener  {
 	public static Calendar cal;
 	public static Date selectedDate;
 
-
-
-
-
-
 	public LMipgo() { 
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/lmimage/alphabets-33744_640.png")));
 		getContentPane().setBackground(new Color(231,231,231));
@@ -122,7 +119,7 @@ implements  ActionListener  {
 		panel.setLayout(null);
 		lblAcc       =  new JLabel("거래처명: ");
 		lblAcc.setFont(new Font("새굴림", Font.PLAIN, 15));
-		lblAcc.setBounds(175, 55, 77, 20);
+		lblAcc.setBounds(172, 99, 77, 24);
 		panel.add(lblAcc);
 
 
@@ -145,12 +142,12 @@ implements  ActionListener  {
 		panel.add(pane);
 		lblDay       =  new JLabel("\uB0A0\uC9DC\uC120\uD0DD: ");
 		lblDay.setFont(new Font("새굴림", Font.PLAIN, 15));
-		lblDay.setBounds(175, 99, 77, 24);
+		lblDay.setBounds(172, 55, 77, 24);
 		panel.add(lblDay);
 		btnFind      =  new JButton("검색");    
-		btnFind.setIcon(new ImageIcon(LMipgo.class.getResource("/lmimage/\uAE34\uBC84\uD2BC.png")));
+		btnFind.setIcon(new ImageIcon(LMipgo.class.getResource("/lmimage/\uC2E0\uADDC\uAC70\uB798\uCC98\uB4F1\uB85D\uBC84\uD2BC.png")));
 		btnFind.setFont(new Font("새굴림", Font.PLAIN, 12));
-		btnFind.setBounds(453, 94, 149, 32);
+		btnFind.setBounds(453, 94, 72, 32);
 		btnFind .setHorizontalTextPosition(JButton.CENTER); // 텍스트 가운데
 		panel.add(btnFind);
 
@@ -201,7 +198,7 @@ implements  ActionListener  {
 		btnSet.addActionListener( this );
 		JDatePickerImpl datePicker = new JDatePickerImpl(datePanel);
 		datePicker.getJFormattedTextField().setBackground(SystemColor.window);
-		datePicker.setBounds(264, 97, 177, 30);
+		datePicker.setBounds(264, 53, 177, 30);
 		panel.add(datePicker);
 		datePicker.setPreferredSize(new Dimension(250, 30));
 
@@ -238,9 +235,23 @@ implements  ActionListener  {
 			}
 		});
 		txtId        =  new TextField(30);  
-		txtId.setBounds(264, 53, 177, 23);
+		txtId.setBounds(264, 97, 177, 23);
 		panel.add(txtId);
-
+		this.txtId.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+			}
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+					btnFind.doClick();
+				}
+			}
+			@Override
+			public void keyPressed(KeyEvent e) {
+			}
+		});
+		
 		lblNewLabel = new JLabel("\uC0C1\uD488\uC785\uACE0\uC5C5\uBB34");
 		lblNewLabel.setFont(new Font("새굴림", Font.BOLD, 40));
 		lblNewLabel.setBounds(703, 10, 391, 79);
@@ -324,7 +335,7 @@ implements  ActionListener  {
 			String  fmt      = "D:\\excel\\";
 			fmt             += "입고_%4d %02d %02d %02d %02d %02d.xlsx";
 			String  filepath = String.format(fmt, year, mm, dd, hh, mi, ss );
-
+			
 			System.out.println( filepath );
 			excelWrite( filepath );
 
@@ -452,9 +463,10 @@ implements  ActionListener  {
 	// excel 로 저장
 
 	private void excelWrite(String filepath) {
+		String fmt = "D:excel";
 		XSSFWorkbook  workbook =  new XSSFWorkbook();
 		XSSFSheet     sheet    =  workbook.createSheet("Data");
-
+		
 		// data 저장 : swing jTable -> Excel Sheet
 		getWorkbook_Data( sheet );
 
@@ -463,9 +475,9 @@ implements  ActionListener  {
 		try {
 			fos = new FileOutputStream( filepath );
 			workbook.write(fos);
-			System.out.println("저장완료");
+			JOptionPane.showMessageDialog(null, fmt + " 로 저장 완료");
 		} catch (IOException e) {
-			System.out.println("저장Fail");         
+			JOptionPane.showMessageDialog(null, "저장이 되지 않았습니다");
 			e.printStackTrace();
 		} finally {
 			try {
