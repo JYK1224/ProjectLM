@@ -34,6 +34,7 @@ import java.awt.Graphics;
 
 import javax.swing.ImageIcon;
 import java.awt.SystemColor;
+import java.awt.Toolkit;
 import java.awt.Color;
 import javax.swing.UIManager;
 
@@ -53,38 +54,40 @@ public class LMDispose extends JFrame implements ActionListener{
 	ImageIcon icon;
 
 	public LMDispose() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/lmimage/alphabets-33744_640.png")));
+		getContentPane().setBackground(new Color(231,231,231));
 		init();
 	}
 
 	private void init() {
 		setTitle("상품 폐기 업무");
-
+		
 		icon = new ImageIcon("./image/큰거1.png");
-
+		
 		JPanel panel = new JPanel() {
-			public void paintComponent(Graphics g) {
-
-				g.drawImage(icon.getImage(), 0, 0, null);
-
-				setOpaque(false);
-				super.paintComponent(g);
-			}
-		};
+	        public void paintComponent(Graphics g) {
+	       
+	            g.drawImage(icon.getImage(), 0, 0, null);
+	    
+	            setOpaque(false);
+	            super.paintComponent(g);
+	           }
+	     };
 		panel.setForeground(UIManager.getColor("ComboBox.background"));
-
-
+		
+		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setSize(1000,600);
 		setLocation(650, 200);
 
 		String [] aid = {"전체보기","주류","가공식품","기호식품","냉동냉장"}; 
-
+		
 		JScrollPane scrollPane = new JScrollPane();
 
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
 		groupLayout.setHorizontalGroup(
-				groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addComponent(scrollPane, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 984, Short.MAX_VALUE)
+			groupLayout.createParallelGroup(Alignment.TRAILING)
+			.addComponent(scrollPane, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 984, Short.MAX_VALUE)
 				);
 		groupLayout.setVerticalGroup(
 				groupLayout.createParallelGroup(Alignment.LEADING)
@@ -179,7 +182,7 @@ public class LMDispose extends JFrame implements ActionListener{
 			Vector<Vector> list = getDataList(this);
 			jTableRefresh2(list);
 			break;
-
+			
 		case "폐기확정":
 			System.out.println("폐기확정 클릭");
 			try {
@@ -209,7 +212,7 @@ public class LMDispose extends JFrame implements ActionListener{
 		case "폐기내역 조회":
 			System.out.println("폐기내역 조회 클릭");
 			if(  dProc != null )
-				dProc.getFrame().setVisible(false);  // 강제로 닫는다
+				dProc.dispose();  // 강제로 닫는다
 			dProc = new LMDisposeList( this );   // this : 현재 실행중인 MemberList        
 			break;
 
@@ -233,7 +236,7 @@ public class LMDispose extends JFrame implements ActionListener{
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(null, "저장을 실패하였습니다. 저장공간의 위치를 확인해주세요. \n"
 					+"저장공간: "  +  "D:\\excel");		
-			e.printStackTrace();
+					e.printStackTrace();
 		} finally {
 			try {
 				if(fos != null)fos.close();
@@ -244,10 +247,10 @@ public class LMDispose extends JFrame implements ActionListener{
 	}
 
 	private void getWorkbook_Data(XSSFSheet sheet) {
-
+		
 		XSSFRow     row   =  null;
 		XSSFCell    cell  =  null;
-
+		
 		int numcols = table.getColumnCount();
 		int numrows = table.getRowCount();
 
@@ -339,8 +342,8 @@ public class LMDispose extends JFrame implements ActionListener{
 						"table.getValueAt 이 null 입니다.", "지정오류", JOptionPane.ERROR_MESSAGE);
 				return;
 			}
-
-
+			
+			
 			if(table.getValueAt(i, 6).toString().equals("")) {
 				disNum.add(i, "0");
 			} else {
@@ -349,7 +352,7 @@ public class LMDispose extends JFrame implements ActionListener{
 			System.out.print(disNum);
 			// 폐기수량이 현재수량보다 크다면, 경고메세지
 			disStock.add(i, table.getValueAt(i, 5).toString() );   //  현재수량
-
+			
 			// 배열이름 넣자
 			if( Integer.parseInt((String) disNum.get(i))  >  Integer.parseInt(table.getValueAt(i, 5).toString())) {
 				JOptionPane.showMessageDialog(null, 
@@ -379,15 +382,15 @@ public class LMDispose extends JFrame implements ActionListener{
 		String         search = null;
 		if (comboBox.getSelectedItem().toString().equals("전체보기")) {
 			search = "";
-
+			
 		} else {
 			search = comboBox.getSelectedItem().toString();
 		}
 		DisposeDao     dao    =  new DisposeDao();
 		Vector<Vector> list   =  dao.getDispose(search);
 		System.out.println(list);
-
-
+		
+		
 		return list;
 	}
 }
