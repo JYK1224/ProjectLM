@@ -241,7 +241,10 @@ public class LMOutputList extends  JFrame    implements ActionListener {
 
 		// 검색하기
 		btnNewButton_1 = new JButton("검색하기");
-		btnNewButton_1.setBounds(551, 198, 100, 30);
+		btnNewButton_1.setIcon(new ImageIcon(LMOutputList.class.getResource("/lmimage/4\uC790\uB9AC\uBC84\uD2BC.png")));
+		btnNewButton_1.setFont(new Font("새굴림", Font.PLAIN, 12));
+		btnNewButton_1.setBounds(653, 104, 90, 32);
+		btnNewButton_1 .setHorizontalTextPosition(JButton.CENTER);
 		panel.add(btnNewButton_1);
 		btnNewButton_1.setToolTipText("거래처명 입력 후 검색");
 		//		btnNewButton_1.setBounds(490, 40, 99, 30);
@@ -249,8 +252,7 @@ public class LMOutputList extends  JFrame    implements ActionListener {
 
 		btnNewButton_1.addActionListener(this);
 
-
-
+		
 
 		btnNewButton_2.addActionListener(new ActionListener() {
 
@@ -468,6 +470,10 @@ public class LMOutputList extends  JFrame    implements ActionListener {
 
 			Vector<Vector> list = getDataList(this);
 			jTableRefresh2(list);
+			
+			 int rowsCount = table.getRowCount();
+	         JOptionPane.showMessageDialog(null, rowsCount + "건 검색되었습니다");
+	         
 			textField_3.setText( String.valueOf(getSumPrice()) );	// 가격 * 수량
 			break;
 

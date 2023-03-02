@@ -229,6 +229,7 @@ public class LMOutput extends JFrame implements ActionListener{
 																									}catch(Exception ex) {}
 																									addList();
 																									jTableRefresh2(getList());
+																									JOptionPane.showMessageDialog(null, "출고되었습니다");
 																								}
 																					
 																							});
