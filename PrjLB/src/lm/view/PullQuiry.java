@@ -494,7 +494,7 @@ public class PullQuiry extends JFrame implements ActionListener{
 
 			}
 			break;
-		case "엑셀로저장":
+		case "엑셀로 저장":
 			LocalDateTime now = LocalDateTime.now();
 			int year = now.getYear();
 			int mm = now.getMonthValue();
