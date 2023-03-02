@@ -297,6 +297,7 @@ public class LMProdOrder extends JFrame implements ActionListener{
 
 		btnNewButton_1.addActionListener(this);
 
+		// 주문 액션
 		btnNewButton.addActionListener(new ActionListener() {
 
 			@Override
@@ -305,6 +306,7 @@ public class LMProdOrder extends JFrame implements ActionListener{
 					table.editCellAt(-1, -1);	// 마지막 cell의 입력을 완료되려면 셀선택을 테이블 밖으로 빼야함(입력 후 엔터치는 것과 같음)
 				}catch(Exception ex) {}
 				addList();
+				JOptionPane.showMessageDialog(null, "주문되었습니다");
 
 			}
 		});
@@ -478,7 +480,7 @@ public class LMProdOrder extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 
 		switch( e.getActionCommand() ) {
-		case "주문일자지정 & 검색하기":
+		case "검색":
 			Vector<Vector> list = getDataList(this);
 			jTableRefresh2(list);
 			break;

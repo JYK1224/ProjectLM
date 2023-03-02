@@ -54,7 +54,7 @@ public class LMOrderList extends JFrame implements ActionListener {
 	JScrollPane scrollpane;
 	
 
-	private static JLabel lblNewLabel, lblNewLabel_1, lblNewLabel_2, lblNewLabel_3, lblNewLabel_4, lblNewLabel_5, lblNewLabel_6, lblNewLabel_7;
+	private static JLabel lblNewLabel, lblNewLabel_1, lblNewLabel_2, lblNewLabel_3, lblNewLabel_4, lblNewLabel_5, lblNewLabel_6, lblNewLabel_7, lblNewLabel_8;
 	private static JTextField textField, textField_1, textField_2, textField_3;
 	private static JButton btnNewButton_1, btnNewButton_2, btnNewButton_3;
 	private static JTable table;
@@ -69,7 +69,6 @@ public class LMOrderList extends JFrame implements ActionListener {
 	LMProdOrder order3 = null;
 	private JTextField textField_4;
 	private JTextField textField_5;
-	private JLabel lblNewLabel_8;
 	
 
 
@@ -398,9 +397,6 @@ public class LMOrderList extends JFrame implements ActionListener {
 		
 		
 		
-		
-		
-		 
 		// 총 주문가격
 		lblNewLabel_7 = new JLabel("총 주문가격 :");
 		lblNewLabel_7.setForeground(SystemColor.text);
@@ -419,13 +415,6 @@ public class LMOrderList extends JFrame implements ActionListener {
 		lblNewLabel_8.setFont(new Font("새굴림", Font.BOLD, 40));
 		lblNewLabel_8.setBounds(703, 10, 391, 79);
 		panel.add(lblNewLabel_8);
-		
-		
-		
-		
-		
-
-		
 		
 		
 		
@@ -460,6 +449,7 @@ public class LMOrderList extends JFrame implements ActionListener {
 		OrderDao        dao   =  new OrderDao();
 		Vector<Vector>  list  =  dao.getOrderList(search, date1, date2);
 
+		
 		return list;
 	}
 
@@ -493,7 +483,12 @@ public class LMOrderList extends JFrame implements ActionListener {
 			}
 
 			Vector<Vector> list = getDataList(this);
+
 			jTableRefresh2(list);
+			
+			int rowsCount = table.getRowCount();
+			JOptionPane.showMessageDialog(null, rowsCount + "건 검색되었습니다");
+			
 			textField_3.setText( String.valueOf(getSumPrice()) );	// 가격 * 수량
 			break;
 
