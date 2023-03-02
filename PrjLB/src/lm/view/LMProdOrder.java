@@ -133,10 +133,10 @@ public class LMProdOrder extends JFrame implements ActionListener{
 		lblNewLabel_3 = new JLabel("주문일자 지정 :");
 		lblNewLabel_3.setFont(new Font("새굴림", Font.PLAIN, 12));
 		panel.add(lblNewLabel_3);
-		lblNewLabel_3.setBounds(193, 58, 84, 15);
+		lblNewLabel_3.setBounds(193, 29, 84, 15);
 
 		textField = new JTextField(20);
-		textField.setBounds(289, 23, 171, 21);
+		textField.setBounds(289, 118, 171, 21);
 		panel.add(textField);
 		//      textField.setBounds(102, 17, 184, 20);
 		textField.setPreferredSize(new Dimension(80, 20));
@@ -163,25 +163,25 @@ public class LMProdOrder extends JFrame implements ActionListener{
 
 		textField_1 = new JTextField(15);
 		panel.add(textField_1);
-		textField_1.setBounds(289, 88, 171, 21);
+		textField_1.setBounds(289, 56, 171, 21);
 
 
 		// 주문일자
 		lblNewLabel_1 = new JLabel("주문일자 :");
 		lblNewLabel_1.setFont(new Font("새굴림", Font.PLAIN, 12));
 		panel.add(lblNewLabel_1);
-		lblNewLabel_1.setBounds(193, 92, 56, 15);
+		lblNewLabel_1.setBounds(193, 61, 56, 15);
 		JDatePickerImpl datePicker = new JDatePickerImpl(datePanel);
 		datePicker.getJFormattedTextField().setBackground(SystemColor.window);
 		datePicker.setBackground(SystemColor.window);
-		datePicker.setBounds(289, 53, 171, 30);
+		datePicker.setBounds(289, 23, 171, 30);
 		panel.add(datePicker);
 		datePicker.setPreferredSize(new Dimension(250, 30));
 
 		// 거래처명
 		JLabel lblNewLabel = new JLabel("거래처명 :");
 		lblNewLabel.setFont(new Font("새굴림", Font.PLAIN, 12));
-		lblNewLabel.setBounds(193, 23, 60, 20);
+		lblNewLabel.setBounds(193, 121, 60, 20);
 		panel.add(lblNewLabel);
 		//      lblNewLabel.setBounds(39, 20, 68, 15);
 		lblNewLabel.setPreferredSize(new Dimension(60, 20));
@@ -190,7 +190,7 @@ public class LMProdOrder extends JFrame implements ActionListener{
 		lblNewLabel_2 = new JLabel("입고일자 :");
 		lblNewLabel_2.setFont(new Font("새굴림", Font.PLAIN, 12));
 		panel.add(lblNewLabel_2);
-		lblNewLabel_2.setBounds(193, 121, 56, 15);
+		lblNewLabel_2.setBounds(193, 92, 56, 15);
 
 		// 엑셀로저장
 		btnNewButton_2 = new JButton("엑셀로 저장");
@@ -205,7 +205,7 @@ public class LMProdOrder extends JFrame implements ActionListener{
 
 		textField_2 = new JTextField(15);
 		panel.add(textField_2);
-		textField_2.setBounds(289, 118, 171, 21);
+		textField_2.setBounds(289, 88, 171, 21);
 
 
 		// 주문
