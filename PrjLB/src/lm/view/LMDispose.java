@@ -291,7 +291,7 @@ public class LMDispose extends JFrame implements ActionListener{
 		cols.add("입고가격");
 		cols.add("현재 재고");
 		cols.add("폐기 수량");
-		cols.add("폐기 직원");
+		cols.add("사원번호");
 		return  cols;
 	}
 
