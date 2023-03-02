@@ -140,7 +140,7 @@ implements  ActionListener  {
 		pane  = new JScrollPane( jTable );
 		pane.setBounds(5, 158, 970, 395);
 		panel.add(pane);
-		lblDay       =  new JLabel("\uB0A0\uC9DC\uC120\uD0DD: ");
+		lblDay       =  new JLabel("입고날짜: ");
 		lblDay.setFont(new Font("새굴림", Font.PLAIN, 15));
 		lblDay.setBounds(172, 55, 77, 24);
 		panel.add(lblDay);
