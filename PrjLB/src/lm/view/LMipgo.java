@@ -85,7 +85,7 @@ implements  ActionListener  {
 
 
 
-		icon = new ImageIcon("./큰거1.png");
+		icon = new ImageIcon(LMipgo.class.getResource("/lmimage/큰거1.png"));
 
 		JPanel panel = new JPanel() {
 			public void paintComponent(Graphics g) {

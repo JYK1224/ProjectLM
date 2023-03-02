@@ -62,7 +62,7 @@ public class LMDispose extends JFrame implements ActionListener{
 	private void init() {
 		setTitle("상품폐기업무");
 		
-		icon = new ImageIcon("./image/큰거1.png");
+		icon = new ImageIcon(LMDispose.class.getResource("/lmimage/큰거1.png"));
 		
 		JPanel panel = new JPanel() {
 	        public void paintComponent(Graphics g) {

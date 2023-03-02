@@ -89,7 +89,7 @@ public class LMOrderList extends JFrame implements ActionListener {
 		this.setTitle("주문내역조회");
 		 setLocation(650,200);
 		 setResizable(false);
-		icon = new ImageIcon("./큰거1.png");
+		icon = new ImageIcon(LMOrderList.class.getResource("/lmimage/큰거1.png"));
 		
 		JPanel panel = new JPanel() {
 	         public void paintComponent(Graphics g) {

@@ -57,7 +57,7 @@ public class DeptProc extends JFrame{
 	
 		
 		setTitle("신규거래처등록");
-		icon = new ImageIcon("./신규거래처조회111.png");
+		icon = new ImageIcon(DeptProc.class.getResource("/lmimage/신규거래처조회111.png"));
 	      
 	      JPanel panel = new JPanel() {
 	         public void paintComponent(Graphics g) {

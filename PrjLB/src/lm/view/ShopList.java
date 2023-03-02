@@ -70,7 +70,7 @@ import java.awt.Toolkit;
 		private void init() {
 			setTitle( "점포전체조회");
 			
-			icon = new ImageIcon("./리스트들.png");
+			icon = new ImageIcon(ShopList.class.getResource("/lmimage/리스트들.png"));
 			
 			JPanel panel = new JPanel() {
 		         public void paintComponent(Graphics g) {

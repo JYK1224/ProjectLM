@@ -73,7 +73,7 @@ import java.awt.Toolkit;
 		private void init() {
 			setTitle( "거래처조회");
 			
-			icon = new ImageIcon("./리스트들.png");
+			icon = new ImageIcon(DeptList.class.getResource("/lmimage/리스트들.png"));
 			
 			JPanel panel = new JPanel() {
 		         public void paintComponent(Graphics g) {

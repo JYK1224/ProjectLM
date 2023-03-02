@@ -89,7 +89,7 @@ public class LMProdOrder extends JFrame implements ActionListener{
 
 		frame.setTitle("상품주문업무");
 
-		icon = new ImageIcon("./큰거1.png");
+		icon = new ImageIcon(LMProdOrder.class.getResource("/lmimage/큰거1.png"));
 
 		JPanel panel = new JPanel() {
 			public void paintComponent(Graphics g) {

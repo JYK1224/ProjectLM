@@ -95,7 +95,7 @@ public class IpgoList extends JFrame implements  ActionListener{
 
 		setTitle("입고내역조회");
 
-		icon = new ImageIcon("./큰거1.png");
+		icon = new ImageIcon(IpgoList.class.getResource("/lmimage/큰거1.png"));
 
 		JPanel panel = new JPanel() {
 			public void paintComponent(Graphics g) {

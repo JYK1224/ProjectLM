@@ -60,7 +60,7 @@ public class UserList extends JFrame implements ActionListener, MouseListener{
 	private void init() {
 		setTitle( "사용자관리");
 		
-		icon = new ImageIcon("./리스트들.png");
+		icon = new ImageIcon(UserList.class.getResource("/lmimage/리스트들.png"));
 		
 		JPanel panel = new JPanel() {
 	         public void paintComponent(Graphics g) {

@@ -82,7 +82,7 @@ public class LMOutputList extends  JFrame    implements ActionListener {
 
 
 		setTitle("출고내역조회");
-		icon = new ImageIcon("./큰거1.png");
+		icon = new ImageIcon(LMOutputList.class.getResource("/lmimage/큰거1.png"));
 
 		JPanel panel = new JPanel() {
 			public void paintComponent(Graphics g) {
