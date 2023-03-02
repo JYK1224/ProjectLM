@@ -6,6 +6,11 @@ import javax.swing.JPanel;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
@@ -20,14 +25,19 @@ public class JDialog extends JFrame {
 	
 	ImageIcon icon;
 	JScrollPane scrollPane;
+	JLabel Dlbl;
+	JButton btnNewButton;
+	
 	
 	public JDialog () {
 		
 		init();
+		
 	}
 
 	private void init() {
 	this.setTitle("경고메시지");
+	
 	
 	setIconImage(Toolkit.getDefaultToolkit().getImage(JDialog.class.getResource("/lmimage/alphabets-33744_640.png")));
 	
@@ -47,21 +57,79 @@ public class JDialog extends JFrame {
              super.paintComponent(g);
             }
       };
+      
 	
 	scrollPane = new JScrollPane(panel);
 	panel.setLayout(null);
 	
-	JLabel Dlbl = new JLabel("");
-	Dlbl.setVerticalAlignment(SwingConstants.TOP);
+	
+	
+	
+	Dlbl = new JLabel("");
+	Dlbl.setHorizontalAlignment(SwingConstants.CENTER);
 	Dlbl.setBounds(124, 10, 246, 47);
 	panel.add(Dlbl);
 	Dlbl.setFont(new Font("새굴림", Font.BOLD, 13));
+	Dlbl.addKeyListener(new KeyListener() {
+		
+		@Override
+		public void keyTyped(KeyEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+		@Override
+		public void keyReleased(KeyEvent e) {
+			if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+				btnNewButton.doClick();
+			}
+			
+		}
+		
+		@Override
+		public void keyPressed(KeyEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+	});
 	
-	JButton btnNewButton = new JButton("확인");
+	
+	btnNewButton = new JButton("확인");
 	btnNewButton.setBounds(209, 67, 70, 32);
-	btnNewButton.setFont(new Font("새굴림", Font.BOLD, 13));
+	btnNewButton.setFont(new Font("새굴림", Font.PLAIN, 13));
 	btnNewButton.setIcon(new ImageIcon(JDialog.class.getResource("/lmimage/신규거래처등록버튼.png")));
 	btnNewButton.setHorizontalTextPosition(JButton.CENTER); // 텍스트 가운데
+	btnNewButton.addKeyListener(new KeyListener() {
+		
+		@Override
+		public void keyTyped(KeyEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+		@Override
+		public void keyReleased(KeyEvent e) {
+			if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+				btnNewButton.doClick();
+				
+			}
+			
+		}
+		
+		@Override
+		public void keyPressed(KeyEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+	});
+	btnNewButton.addActionListener(new ActionListener() {
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			dispose();			
+		}
+	});
+	
 	
 	panel.add(btnNewButton);
 	GroupLayout groupLayout = new GroupLayout(getContentPane());
@@ -77,10 +145,12 @@ public class JDialog extends JFrame {
 	);
 	getContentPane().setLayout(groupLayout);
 	
+	btnNewButton.requestFocus();
 	this.setSize(400,150);
 	this.setVisible(true);
 	this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	setResizable(false);
+	setLocation(750,450);
 	}
 
 	public static void main(String[] args) {

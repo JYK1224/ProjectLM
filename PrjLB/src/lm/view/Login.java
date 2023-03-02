@@ -123,11 +123,25 @@ public class Login extends JFrame {
 				int result2 = dao.findTy(userid);
 					if(result1 == 1 ) {
 						if(result2 == 1 ) {
-							JOptionPane.showMessageDialog(null, "환영합니다 관리자");
-							ManagerTitle mtl = new ManagerTitle(userid);
+							JDialog jd = new JDialog();
+							jd.Dlbl.setText("환영합니다 관리자");
+							jd.btnNewButton.addActionListener(new ActionListener() {								
+								@Override
+								public void actionPerformed(ActionEvent e) {
+									jd.dispose();
+									ManagerTitle mtl = new ManagerTitle(userid);									
+								}
+							});
 						}else {
-							JOptionPane.showMessageDialog(null, "환영합니다 사용자");
-							UserTitle utl = new UserTitle(userid);
+							JDialog jd = new JDialog();
+							jd.Dlbl.setText("환영합니다 사용자");
+							jd.btnNewButton.addActionListener(new ActionListener() {								
+								@Override
+								public void actionPerformed(ActionEvent e) {
+									jd.dispose();
+									UserTitle utl = new UserTitle(userid);									
+								}
+							});							
 						}
 
 			
