@@ -198,7 +198,7 @@ public class JDialog extends JFrame {
 	
 	setIconImage(Toolkit.getDefaultToolkit().getImage(JDialog.class.getResource("/lmimage/alphabets-33744_640.png")));
 	
-	icon = new ImageIcon("./image/다이얼로그.png");
+	icon = new ImageIcon("./다이얼로그.png");
       
       JPanel panel = new JPanel() {
          public void paintComponent(Graphics g) {
