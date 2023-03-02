@@ -60,7 +60,7 @@ public class LMDispose extends JFrame implements ActionListener{
 	}
 
 	private void init() {
-		setTitle("상품 폐기 업무");
+		setTitle("상품폐기업무");
 		
 		icon = new ImageIcon("./image/큰거1.png");
 		
