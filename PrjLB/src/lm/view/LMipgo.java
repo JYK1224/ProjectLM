@@ -72,8 +72,8 @@ implements  ActionListener  {
    private JScrollPane scrollPane;
    private JPanel panel;
    private JLabel lblNewLabel;
-   
-   
+   public static Calendar cal;
+   public static Date selectedDate;
    
    
    
@@ -200,7 +200,7 @@ private void init() {
             btnSet.setBounds(620, 94, 93, 32);
             btnSet .setHorizontalTextPosition(JButton.CENTER); // 텍스트 가운데
             panel.add(btnSet);
-            //검수확정버튼 클릭
+            //입고확정버튼 클릭
             btnSet.addActionListener( this );
             JDatePickerImpl datePicker = new JDatePickerImpl(datePanel);
             datePicker.getJFormattedTextField().setBackground(SystemColor.window);
@@ -215,9 +215,9 @@ private void init() {
          selDate = datePicker.getJFormattedTextField().getText();
 
          // 선택된 날짜를 DATE 타입으로 저장
-         Date selectedDate = (Date) datePicker.getModel().getValue();
+         selectedDate = (Date) datePicker.getModel().getValue();
 
-         Calendar cal = Calendar.getInstance();
+         cal = Calendar.getInstance();
          cal.setTime(selectedDate);
          DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
          String current = df.format(cal.getTime());
@@ -230,10 +230,8 @@ private void init() {
          //           System.out.println("after: " + df.format(cal.getTime()));
 
        //어제 
-			Calendar cal2 = Calendar.getInstance();
-			cal2.add(Calendar.DATE, -1);	
-			DateFormat df2 = new SimpleDateFormat("yyyy-MM-dd");
-			String yesterday = df2.format(cal2.getTime());
+			cal.add(Calendar.DATE, -2);	
+			String yesterday = df.format(cal.getTime());
 			
 			
 			lmvo.setOrderdate(yesterday);
@@ -380,16 +378,18 @@ private void getInArrayData() {
       try {
     	// 현재시간 불러와서 outDate에 넣자
 			Calendar t = Calendar.getInstance();
+			cal.setTime(selectedDate);
 			 
 			 StringBuffer now = new StringBuffer();
 			 StringBuffer now1 = new StringBuffer();
 			 
-			 now.append(t.get(Calendar.YEAR));
+			 now.append(cal.get(Calendar.YEAR));
 			 now.append("-");
-			 now.append(t.get(Calendar.MONTH)+1);
+			 now.append(cal.get(Calendar.MONTH)+1);
 			 now.append("-");
-			 now.append(t.get(Calendar.DATE));
-			
+			 now.append(cal.get(Calendar.DATE));
+			 
+			 
 			 now1.append(t.get(Calendar.HOUR_OF_DAY));
 			 now1.append(":");
 			 now1.append(t.get(Calendar.MINUTE));
