@@ -135,6 +135,14 @@ private void Init() {
 	});
       
       JButton btnNewButton_9 = new JButton("상품출고업무");
+      btnNewButton_9.addActionListener(new ActionListener() {
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			new LMOutput();
+			
+		}
+	});
       btnNewButton_9.setIcon(new ImageIcon(UserTitle.class.getResource("/lmimage/\uBC84\uD2BC61.png")));
       btnNewButton_9 .setHorizontalTextPosition(JButton.CENTER); // 텍스트 가운데
       btnNewButton_9.setFont(new Font("새굴림", Font.PLAIN, 16));
@@ -209,6 +217,14 @@ private void Init() {
 	});
       
       JButton btnNewButton_9_1 = new JButton("출고내역조회");
+      btnNewButton_9_1.addActionListener(new ActionListener() {
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			new LMOutputList();
+			
+		}
+	});
       btnNewButton_9_1.setIcon(new ImageIcon(UserTitle.class.getResource("/lmimage/\uBC84\uD2BC61.png")));
       btnNewButton_9_1 .setHorizontalTextPosition(JButton.CENTER); // 텍스트 가운데
       btnNewButton_9_1.setFont(new Font("새굴림", Font.PLAIN, 16));

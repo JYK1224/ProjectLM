@@ -109,7 +109,7 @@ public class LMOutput extends JFrame implements ActionListener{
 		
 		
 		frame.setBounds(100, 100, 1000, 600);
-
+		frame.setLocation(650,200);
 
 		// 콤보박스에 담을 점포명 배열을 가져와야 함
 

@@ -355,7 +355,7 @@ public class LMOutputList extends  JFrame    implements ActionListener {
 			}
 		});
 		getContentPane().setLayout(groupLayout);
-
+		setLocation(650,200);
 		setVisible(true);
 		setResizable(false);
 

@@ -216,6 +216,7 @@ public class ManagerTitle extends JFrame{
       JButton btnNewButton_9 = new JButton("상품출고업무");
       btnNewButton_9.addActionListener(new ActionListener() {
       	public void actionPerformed(ActionEvent e) {
+      		new LMOutput();
       	}
       });
       btnNewButton_9.setIcon(new ImageIcon(ManagerTitle.class.getResource("/lmimage/\uBC84\uD2BC61.png")));
@@ -291,6 +292,7 @@ public class ManagerTitle extends JFrame{
       JButton btnNewButton_9_1 = new JButton("출고내역조회");
       btnNewButton_9_1.addActionListener(new ActionListener() {
       	public void actionPerformed(ActionEvent e) {
+      		new LMOutputList();
       	}
       });
       btnNewButton_9_1.setIcon(new ImageIcon(ManagerTitle.class.getResource("/lmimage/\uBC84\uD2BC61.png")));
