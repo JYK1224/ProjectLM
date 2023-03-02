@@ -132,6 +132,7 @@ public class LMProductInquiry extends JFrame implements ActionListener{
 		code = new JRadioButton("상품코드");
 		code.setFont(new Font("새굴림", Font.PLAIN, 12));
 		code.setBackground(SystemColor.window);
+		code.setSelected(true);
 		buttonGroup.add(code);
 		code.setBounds(130, 51, 84, 23);
 		panel.add(code);
