@@ -151,7 +151,7 @@ public class Login extends JFrame {
 				}else{
 					
 					JDialog jd = new JDialog(0);
-					jd.Dlbl.setText("실패 : 아이디와 비밀번호를 확인해주세요");
+					jd.Dlbl.setText("<html><body><center>실패 : 아이디와 비밀번호를<br>확인해주세요</center></body></html>");
 					jd.setAlwaysOnTop(true);
 					
 					
