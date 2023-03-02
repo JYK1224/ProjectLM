@@ -1,9 +1,10 @@
 package lm.view;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.SystemColor;
 import java.awt.TextField;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -13,7 +14,15 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Vector;
+
+import javax.swing.ButtonGroup;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -22,6 +31,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -32,20 +42,6 @@ import lm.model.IpgoVo;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
-
-
-
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-
-import javax.swing.ButtonGroup;
-import javax.swing.GroupLayout;
-import javax.swing.ImageIcon;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import java.awt.Font;
-import java.awt.SystemColor;
 
 
 
@@ -234,7 +230,6 @@ implements  ActionListener  {
 				cal.add(Calendar.DATE, -2);	
 				String yesterday = df.format(cal.getTime());
 
-
 				lmvo.setOrderdate(yesterday);
 				//            jTableRefresh();    // 테이블 새로고침 메소드
 
@@ -313,6 +308,7 @@ implements  ActionListener  {
 				jTable.editCellAt(-1, -1);   // 마지막 cell의 입력을 완료되려면 셀선택을 테이블 밖으로 빼야함(입력 후 엔터치는 것과 같음)
 			}catch(Exception ex) {}
 			addList();
+			JOptionPane.showMessageDialog(null, "입고되었습니다");
 			break;
 		
 		case "엑셀로 저장":
@@ -347,9 +343,16 @@ implements  ActionListener  {
 	private Vector<Vector> getDataList(LMipgo lmList) {
 		String         search =  txtId.getText();
 		IpgoDao          dao    =  new IpgoDao();
+		
+		// 날짜 선택된게 없으면 알림창 뜨게
+		if(selectedDate == null) {
+			 JOptionPane.showMessageDialog(null, "날짜를 선택해주세요");
+		}
+		
 		Vector<Vector> list   =  dao.getOrder(search);
-
+		
 		return list;
+
 	}
 
 	private void addList() {
