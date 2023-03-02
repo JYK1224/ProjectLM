@@ -267,7 +267,7 @@ public class LMOutputList extends  JFrame    implements ActionListener {
 				int            ss    =  now.getSecond();
 
 				String  fmt      = "d:\\excel\\";
-				fmt             += "출고내역_%4d%02d%02d%02d%02d%02d.xlsx";
+				fmt             += "출고내역_%4d %02d %02d %02d %02d %02d.xlsx";
 				String  filepath = String.format(fmt, year, mm, dd, hh, mi, ss );
 
 				System.out.println( filepath );
@@ -371,7 +371,7 @@ public class LMOutputList extends  JFrame    implements ActionListener {
 	protected void excelWrite(String filepath) {
 		XSSFWorkbook  workbook =  new XSSFWorkbook();
 		XSSFSheet     sheet    =  workbook.createSheet("Data");
-
+		String fmt = "D:\\excel";
 		// data 저장 : swing jTable -> Excel Sheet
 		getWorkbook_Data( sheet );
 
@@ -380,9 +380,9 @@ public class LMOutputList extends  JFrame    implements ActionListener {
 		try {
 			fos = new FileOutputStream( filepath );
 			workbook.write(fos);
-			System.out.println("저장완료");
+			JOptionPane.showMessageDialog(null, fmt + " 로 저장되었습니다");
 		} catch (IOException e) {
-			System.out.println("저장Fail");			
+			JOptionPane.showMessageDialog(null, "저장에 실패했습니다");
 			e.printStackTrace();
 		} finally {
 			try {
