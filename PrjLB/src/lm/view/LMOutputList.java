@@ -81,7 +81,7 @@ public class LMOutputList extends  JFrame    implements ActionListener {
 	private void initComponent() {
 
 
-		setTitle("출고 내역 조회");
+		setTitle("출고내역조회");
 		icon = new ImageIcon("./큰거1.png");
 
 		JPanel panel = new JPanel() {

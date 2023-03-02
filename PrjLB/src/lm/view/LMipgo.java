@@ -81,7 +81,7 @@ implements  ActionListener  {
 
 	private void init() {
 
-		setTitle("상품입고");
+		setTitle("상품입고업무");
 
 
 

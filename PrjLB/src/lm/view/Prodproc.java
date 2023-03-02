@@ -44,7 +44,7 @@ public class Prodproc extends JFrame{
 	
 	private void init() {
 
-		setTitle("신규상품 등록");
+		setTitle("신규상품등록");
 		
 		 icon = new ImageIcon("./신규거래처조회111.png");
 	      

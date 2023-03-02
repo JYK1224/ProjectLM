@@ -93,7 +93,7 @@ public class IpgoList extends JFrame implements  ActionListener{
 
 	private void init() {
 
-		setTitle("상품 입고내역 조회");
+		setTitle("입고내역조회");
 
 		icon = new ImageIcon("./큰거1.png");
 
