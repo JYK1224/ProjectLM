@@ -28,6 +28,14 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import lm.model.DisposeDao;
 import lm.model.DisposeVo;
+import javax.swing.JPanel;
+import java.awt.Font;
+import java.awt.Graphics;
+
+import javax.swing.ImageIcon;
+import java.awt.SystemColor;
+import java.awt.Color;
+import javax.swing.UIManager;
 
 
 public class LMDispose extends JFrame implements ActionListener{
@@ -42,7 +50,7 @@ public class LMDispose extends JFrame implements ActionListener{
 	public static ArrayList<Object> disPname = new ArrayList<Object>();
 	public static ArrayList<Object> disNum = new ArrayList<Object>();
 	public static ArrayList<Object> disStock = new ArrayList<Object>();
-
+	ImageIcon icon;
 
 	public LMDispose() {
 		init();
@@ -50,26 +58,82 @@ public class LMDispose extends JFrame implements ActionListener{
 
 	private void init() {
 		setTitle("상품 폐기 업무");
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setSize(1200,700);
-		setLocation(200, 200);
 
-		JLabel lblNewLabel = new JLabel("상품 분류");
+		icon = new ImageIcon("./image/큰거1.png");
+
+		JPanel panel = new JPanel() {
+			public void paintComponent(Graphics g) {
+
+				g.drawImage(icon.getImage(), 0, 0, null);
+
+				setOpaque(false);
+				super.paintComponent(g);
+			}
+		};
+		panel.setForeground(UIManager.getColor("ComboBox.background"));
+
+
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setSize(1000,600);
+		setLocation(650, 200);
 
 		String [] aid = {"전체보기","주류","가공식품","기호식품","냉동냉장"}; 
+
+		JScrollPane scrollPane = new JScrollPane();
+
+		GroupLayout groupLayout = new GroupLayout(getContentPane());
+		groupLayout.setHorizontalGroup(
+				groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addComponent(scrollPane, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 984, Short.MAX_VALUE)
+				);
+		groupLayout.setVerticalGroup(
+				groupLayout.createParallelGroup(Alignment.LEADING)
+				.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 561, Short.MAX_VALUE)
+				);
+
+		//JPanel panel = new JPanel();
+		scrollPane.setViewportView(panel);
+		panel.setLayout(null);
+
+		JLabel lblNewLabel = new JLabel("\uC0C1\uD488 \uBD84\uB958 :");
+		lblNewLabel.setFont(new Font("새굴림", Font.PLAIN, 17));
+		lblNewLabel.setBounds(170, 95, 92, 30);
+		panel.add(lblNewLabel);
 		comboBox = new JComboBox(aid);
+		comboBox.setFont(new Font("새굴림", Font.PLAIN, 12));
+		comboBox.setForeground(Color.BLACK);
+		comboBox.setBackground(SystemColor.window);
+		comboBox.setBounds(263, 95, 150, 30);
+		panel.add(comboBox);
+
 
 		JButton btnNewButton = new JButton("검색");
-		btnNewButton.addActionListener( this );
+		btnNewButton.setIcon(new ImageIcon(LMDispose.class.getResource("/lmimage/\uC2E0\uADDC\uAC70\uB798\uCC98\uB4F1\uB85D\uBC84\uD2BC.png")));
+		btnNewButton.setFont(new Font("새굴림", Font.PLAIN, 12));
+		btnNewButton.setBounds(425, 94, 70, 32);
+		btnNewButton .setHorizontalTextPosition(JButton.CENTER);
+		panel.add(btnNewButton);
 
 		JButton btnNewButton_1 = new JButton("폐기확정");
-		btnNewButton_1.addActionListener(this);
-
-		JButton btnNewButton_2 = new JButton("폐기내역 조회");
-		btnNewButton_2.addActionListener(this);
+		btnNewButton_1.setIcon(new ImageIcon(LMDispose.class.getResource("/lmimage/4\uC790\uB9AC\uBC84\uD2BC.png")));
+		btnNewButton_1.setFont(new Font("새굴림", Font.PLAIN, 12));
+		btnNewButton_1.setBounds(599, 95, 92, 32);
+		btnNewButton_1 .setHorizontalTextPosition(JButton.CENTER);
+		panel.add(btnNewButton_1);
 
 		JButton btnNewButton_3 = new JButton("엑셀로 저장");
-		btnNewButton_3.addActionListener(this);
+		btnNewButton_3.setIcon(new ImageIcon(LMDispose.class.getResource("/lmimage/5\uC790\uB9AC\uBC84\uD2BC.png")));
+		btnNewButton_3.setFont(new Font("새굴림", Font.PLAIN, 12));
+		btnNewButton_3.setBounds(843, 95, 103, 32);
+		btnNewButton_3 .setHorizontalTextPosition(JButton.CENTER);
+		panel.add(btnNewButton_3);
+
+		JButton btnNewButton_2 = new JButton("\uD3D0\uAE30\uB0B4\uC5ED\uC870\uD68C");
+		btnNewButton_2.setIcon(new ImageIcon(LMDispose.class.getResource("/lmimage/5\uC790\uB9AC\uBC84\uD2BC.png")));
+		btnNewButton_2.setFont(new Font("새굴림", Font.PLAIN, 12));
+		btnNewButton_2.setBounds(716, 95, 108, 32);
+		btnNewButton_2 .setHorizontalTextPosition(JButton.CENTER);
+		panel.add(btnNewButton_2);
 
 		table = new JTable(){
 			@Override
@@ -82,45 +146,18 @@ public class LMDispose extends JFrame implements ActionListener{
 		};
 
 		JScrollPane pane  = new JScrollPane( table );
-		getContentPane().add( pane );
+		pane.setBounds(5, 158, 970, 395);
+		panel.add(pane);
+		//getContentPane().add( pane );
 
-		GroupLayout groupLayout = new GroupLayout(getContentPane());
-		groupLayout.setHorizontalGroup(
-				groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-						.addGap(35)
-						.addComponent(lblNewLabel)
-						.addGap(32)
-						.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, 227, GroupLayout.PREFERRED_SIZE)
-						.addGap(30)
-						.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED, 284, Short.MAX_VALUE)
-						.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 102, GroupLayout.PREFERRED_SIZE)
-						.addGap(18)
-						.addComponent(btnNewButton_3, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)
-						.addGap(18)
-						.addComponent(btnNewButton_2, GroupLayout.PREFERRED_SIZE, 127, GroupLayout.PREFERRED_SIZE)
-						.addGap(28))
-				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-						.addContainerGap()
-						.addComponent(pane, GroupLayout.DEFAULT_SIZE, 1160, Short.MAX_VALUE)
-						.addContainerGap())
-				);
-		groupLayout.setVerticalGroup(
-				groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-						.addGap(21)
-						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblNewLabel)
-								.addComponent(btnNewButton_2)
-								.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnNewButton_3)
-								.addComponent(btnNewButton)
-								.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-						.addGap(18)
-						.addComponent(pane, GroupLayout.DEFAULT_SIZE, 589, Short.MAX_VALUE)
-						.addContainerGap())
-				);
+		JLabel lblNewLabel_4_1 = new JLabel("\uC0C1\uD488\uD3D0\uAE30\uC5C5\uBB34");
+		lblNewLabel_4_1.setFont(new Font("새굴림", Font.BOLD, 40));
+		lblNewLabel_4_1.setBounds(700, 10, 391, 79);
+		panel.add(lblNewLabel_4_1);
+		btnNewButton_2.addActionListener(this);
+		btnNewButton_3.addActionListener(this);
+		btnNewButton_1.addActionListener(this);
+		btnNewButton.addActionListener( this );
 		getContentPane().setLayout(groupLayout);
 		setVisible(true);
 
@@ -142,7 +179,7 @@ public class LMDispose extends JFrame implements ActionListener{
 			Vector<Vector> list = getDataList(this);
 			jTableRefresh2(list);
 			break;
-			
+
 		case "폐기확정":
 			System.out.println("폐기확정 클릭");
 			try {
@@ -196,7 +233,7 @@ public class LMDispose extends JFrame implements ActionListener{
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(null, "저장을 실패하였습니다. 저장공간의 위치를 확인해주세요. \n"
 					+"저장공간: "  +  "D:\\excel");		
-					e.printStackTrace();
+			e.printStackTrace();
 		} finally {
 			try {
 				if(fos != null)fos.close();
@@ -207,10 +244,10 @@ public class LMDispose extends JFrame implements ActionListener{
 	}
 
 	private void getWorkbook_Data(XSSFSheet sheet) {
-		
+
 		XSSFRow     row   =  null;
 		XSSFCell    cell  =  null;
-		
+
 		int numcols = table.getColumnCount();
 		int numrows = table.getRowCount();
 
@@ -302,8 +339,8 @@ public class LMDispose extends JFrame implements ActionListener{
 						"table.getValueAt 이 null 입니다.", "지정오류", JOptionPane.ERROR_MESSAGE);
 				return;
 			}
-			
-			
+
+
 			if(table.getValueAt(i, 6).toString().equals("")) {
 				disNum.add(i, "0");
 			} else {
@@ -312,7 +349,7 @@ public class LMDispose extends JFrame implements ActionListener{
 			System.out.print(disNum);
 			// 폐기수량이 현재수량보다 크다면, 경고메세지
 			disStock.add(i, table.getValueAt(i, 5).toString() );   //  현재수량
-			
+
 			// 배열이름 넣자
 			if( Integer.parseInt((String) disNum.get(i))  >  Integer.parseInt(table.getValueAt(i, 5).toString())) {
 				JOptionPane.showMessageDialog(null, 
@@ -342,15 +379,15 @@ public class LMDispose extends JFrame implements ActionListener{
 		String         search = null;
 		if (comboBox.getSelectedItem().toString().equals("전체보기")) {
 			search = "";
-			
+
 		} else {
 			search = comboBox.getSelectedItem().toString();
 		}
 		DisposeDao     dao    =  new DisposeDao();
 		Vector<Vector> list   =  dao.getDispose(search);
 		System.out.println(list);
-		
-		
+
+
 		return list;
 	}
 }
