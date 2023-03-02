@@ -51,7 +51,7 @@ public class Proc extends JFrame{
 	}
 	public Proc (String id, UserList userList) {
 		this ();
-		this.uList = uList;
+		this.uList = userList;
 		txtid.setText(id);
 		btnFn.doClick();
 	}
@@ -187,7 +187,7 @@ public class Proc extends JFrame{
 		
 		intro = new JTextArea(5, 10);
 		JScrollPane sp = new JScrollPane(intro);
-		intro.setBounds(182, 264, 168, 56);
+		sp.setBounds(182, 264, 202, 56);
 		panel.add(sp);
 		
 		JLabel lblTitle = new JLabel("\uD68C\uC6D0\uAC00\uC785");
