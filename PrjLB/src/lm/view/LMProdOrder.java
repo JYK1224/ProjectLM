@@ -227,7 +227,7 @@ public class LMProdOrder extends JFrame implements ActionListener{
 																btnNewButton_1 .setHorizontalTextPosition(JButton.CENTER);
 																panel.add(btnNewButton_1);
 																btnNewButton_1.setToolTipText("거래처명 입력 후 검색");
-																btnNewButton_1.setBounds(474, 92, 70, 32);
+																btnNewButton_1.setBounds(474, 94, 70, 32);
 																btnNewButton_1.setPreferredSize(new Dimension(200, 30));
 																
 																

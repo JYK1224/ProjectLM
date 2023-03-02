@@ -2,6 +2,8 @@ package lm.view;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Graphics;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -30,6 +32,14 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import lm.model.OutputDao;
 import lm.model.OutputVo;
+import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JPanel;
+import java.awt.Font;
+import java.awt.SystemColor;
+import java.awt.Color;
 
 public class LMOutput extends JFrame implements ActionListener{
 
@@ -46,6 +56,8 @@ public class LMOutput extends JFrame implements ActionListener{
 	private static ArrayList<Object> shopName = new ArrayList<Object>(); 
 	private static Vector<String> shops;
 	private static Vector<Vector> list;
+	
+	ImageIcon icon;
 	
 
 	public static Vector<Vector> getList() {
@@ -80,45 +92,23 @@ public class LMOutput extends JFrame implements ActionListener{
 
 	private void initComponent() {
 		frame = new JFrame();
-
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(LMProdOrder.class.getResource("/lmimage/alphabets-33744_640.png")));
 		frame.setTitle("상품 출고 화면");
-		frame.setBounds(100, 100, 1200, 600);
-		frame.getContentPane().setLayout(new FlowLayout(FlowLayout.CENTER));
-
-
-		// 거래처명
-		JLabel lblNewLabel = new JLabel("거래처명 :");
-		lblNewLabel.setPreferredSize(new Dimension(60, 20));	// FlowLayout의 컴포넌트 리사이즈 방법
-		frame.add(lblNewLabel);
-
-		textField = new JTextField(20);
-		textField.setPreferredSize(new Dimension(80, 20));	// FlowLayout의 컴포넌트 리사이즈 방법
-		frame.add(textField);
-
-
-		textField.addKeyListener(new KeyListener() {
-
-			@Override
-			public void keyTyped(KeyEvent e) {
-			}
-
-			@Override
-			public void keyReleased(KeyEvent e) {
-			}
-
-			@Override
-			public void keyPressed(KeyEvent e) {
-				int key = e.getKeyCode();
-				if (key == KeyEvent.VK_ENTER) {
-					btnNewButton_1.doClick(); 
-				}
-			}
-		});
-
-		// 점포명 
-		JLabel lblNewLabel_5 = new JLabel("점포명");
-		lblNewLabel_5.setPreferredSize(new Dimension(60, 20));
-		frame.add(lblNewLabel_5);
+		
+		icon = new ImageIcon("./image/큰거1.png");
+		
+		JPanel panel = new JPanel() {
+	        public void paintComponent(Graphics g) {
+	       
+	            g.drawImage(icon.getImage(), 0, 0, null);
+	    
+	            setOpaque(false);
+	            super.paintComponent(g);
+	           }
+	     };
+		
+		
+		frame.setBounds(100, 100, 1000, 600);
 
 
 		// 콤보박스에 담을 점포명 배열을 가져와야 함
@@ -127,134 +117,216 @@ public class LMOutput extends JFrame implements ActionListener{
 		oDao.setShopVector(); 
 
 		setShops(oDao.setShopVector());  
+		
+		JScrollPane scrollPane = new JScrollPane();
+		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 994, Short.MAX_VALUE)
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 571, Short.MAX_VALUE)
+		);
+		
+		
+		scrollPane.setViewportView(panel);
+				panel.setLayout(null);
+		
+		
+				// 거래처명
+				JLabel lblNewLabel = new JLabel("거래처명 :");
+				lblNewLabel.setFont(new Font("새굴림", Font.PLAIN, 15));
+				lblNewLabel.setBounds(176, 54, 75, 30);
+				panel.add(lblNewLabel);
+				lblNewLabel.setPreferredSize(new Dimension(60, 20));
+												
+														// 테이블
+														table = new JTable() {
+												
+															@Override
+															public boolean isCellEditable(int row, int column) {
+																int  currColumn = table.getSelectedColumn();  // 선택한 열만 수정가능
+																if( currColumn == 7  )
+																	return true;			
+																return false;   // 모든 cell 편집불가능
+															}
+												
+														};
+														
 
-		comboBox = new JComboBox(getShops());
-		comboBox.setPreferredSize(new Dimension(150, 30));
-		frame.add(comboBox);
+															table.addKeyListener(new KeyListener() {
 
-		comboBox.addActionListener( new ActionListener() {
+																@Override
+																public void keyTyped(KeyEvent e) {
+																}
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
+																@Override
+																public void keyReleased(KeyEvent e) {
+																}
 
-				ot.setShopId(comboBox.getSelectedItem().toString());
+																@Override
+																public void keyPressed(KeyEvent e) {
+																	int key = e.getKeyCode();
+																	if (key == KeyEvent.VK_ENTER) {
+																		btnNewButton.doClick(); 
+
+																	}
+																}
+															});
+																					
+																							// 엑셀로저장
+																							btnNewButton_2 = new JButton("엑셀로 저장");
+																							btnNewButton_2.setIcon(new ImageIcon(LMOutput.class.getResource("/lmimage/5\uC790\uB9AC\uBC84\uD2BC.png")));
+																							btnNewButton_2.setFont(new Font("새굴림", Font.PLAIN, 12));
+																							btnNewButton_2.setBounds(843, 94, 103, 32);
+																							btnNewButton_2 .setHorizontalTextPosition(JButton.CENTER);
+																							panel.add(btnNewButton_2);
+																							btnNewButton_2.setPreferredSize(new Dimension(100, 30));	// FlowLayout의 컴포넌트 리사이즈 방법
+																							
+																							btnNewButton_2.setToolTipText("d:/ws/java/DBProject02/src/jTable_20230220142558.xlsx");
+																							
+																									btnNewButton_2.addActionListener( new ActionListener() {
+																							
+																										@Override
+																										public void actionPerformed(ActionEvent e) {
+																											System.out.println("엑셀로 저장....");
+																											LocalDateTime  now   =  LocalDateTime.now(); 
+																											int            year  =  now.getYear();
+																											int            mm    =  now.getMonthValue();
+																											int            dd    =  now.getDayOfMonth();
+																											int            hh    =  now.getHour();
+																											int            mi    =  now.getMinute();
+																											int            ss    =  now.getSecond();
+																							
+																											String  fmt      = "d:\\ws\\java\\DBProject02\\src\\";
+																											fmt             += "jTable_%4d%02d%02d%02d%02d%02d.xlsx";
+																											String  filepath = String.format(fmt, year, mm, dd, hh, mi, ss );
+																							
+																											System.out.println( filepath );
+																											excelWrite( filepath );
+																							
+																										}
+																							
+																									});
+																			
+																					// 출고 확정
+																					btnNewButton = new JButton("\uCD9C\uACE0\uD655\uC815");
+																					btnNewButton.setIcon(new ImageIcon(LMOutput.class.getResource("/lmimage/4\uC790\uB9AC\uBC84\uD2BC.png")));
+																					btnNewButton.setFont(new Font("새굴림", Font.PLAIN, 12));
+																					btnNewButton.setBounds(599, 95, 92, 32);
+																					btnNewButton .setHorizontalTextPosition(JButton.CENTER);
+																					panel.add(btnNewButton);
+																					btnNewButton.setToolTipText("출고수량 입력 후 클릭");
+																					btnNewButton.setPreferredSize(new Dimension(100, 30));
+																					
+																							btnNewButton.addActionListener(new ActionListener() {
+																					
+																								@Override
+																								public void actionPerformed(ActionEvent e) {
+																									try {
+																										table.editCellAt(-1, -1);	// 마지막 cell의 입력을 완료되려면 셀선택을 테이블 밖으로 빼야함(입력 후 엔터치는 것과 같음)
+																									}catch(Exception ex) {}
+																									addList();
+																									jTableRefresh2(getList());
+																								}
+																					
+																							});
+																	
+																	
+																			// 출고내역 확인
+																			btnNewButton_3 = new JButton("\uCD9C\uACE0\uB0B4\uC5ED\uD655\uC778");
+																			btnNewButton_3.setIcon(new ImageIcon(LMOutput.class.getResource("/lmimage/5\uC790\uB9AC\uBC84\uD2BC.png")));
+																			btnNewButton_3.setFont(new Font("새굴림", Font.PLAIN, 12));
+																			btnNewButton_3.setBounds(711, 95, 106, 32);
+																			btnNewButton_3 .setHorizontalTextPosition(JButton.CENTER);
+																			panel.add(btnNewButton_3);
+																			btnNewButton_3.setPreferredSize(new Dimension(120, 30));
+																			
+																					btnNewButton_3.addActionListener( new ActionListener() {
+																			
+																						@Override
+																						public void actionPerformed(ActionEvent e) {
+																							System.out.println("출고내역 확인 버튼 클릭....");	
+																							if (opl != null)
+																								opl.getFrame().setVisible(false);
+																							opl = new LMOutputList();
+																						}
+																					});
+															
+																	JScrollPane sp = new JScrollPane(table); 
+																	sp.setBounds(5, 158, 970, 395);
+																	panel.add(sp);
+																	sp.setPreferredSize(new Dimension(1170, 480));
+										
+												comboBox = new JComboBox(getShops());
+												comboBox.setFont(new Font("새굴림", Font.PLAIN, 12));
+												comboBox.setForeground(Color.BLACK);
+												comboBox.setBackground(SystemColor.window);
+												comboBox.setBounds(263, 95, 150, 30);
+												panel.add(comboBox);
+												comboBox.setPreferredSize(new Dimension(150, 30));
+												
+														comboBox.addActionListener( new ActionListener() {
+												
+															@Override
+															public void actionPerformed(ActionEvent e) {
+												
+																ot.setShopId(comboBox.getSelectedItem().toString());
+																
+												
+															}
+														});
+								
+										// 조회
+										JButton btnNewButton_1_1 = new JButton("\uC870\uD68C");
+										btnNewButton_1_1.setIcon(new ImageIcon(LMOutput.class.getResource("/lmimage/\uC2E0\uADDC\uAC70\uB798\uCC98\uB4F1\uB85D\uBC84\uD2BC.png")));
+										btnNewButton_1_1.setFont(new Font("새굴림", Font.PLAIN, 12));
+										btnNewButton_1_1.setBounds(425, 94, 70, 32);
+										btnNewButton_1_1 .setHorizontalTextPosition(JButton.CENTER);
+										panel.add(btnNewButton_1_1);
+										btnNewButton_1_1.setToolTipText("거래처명 입력, 점포 지정 후 조회");
+										//btnNewButton_1_1.setPreferredSize(new Dimension(200, 30));
+										
+												btnNewButton_1_1.addActionListener(this);
+						
+								// 점포명 
+								JLabel lblNewLabel_5_1 = new JLabel("\uC810\uD3EC\uBA85    :");
+								lblNewLabel_5_1.setFont(new Font("새굴림", Font.PLAIN, 15));
+								lblNewLabel_5_1.setBounds(176, 95, 76, 30);
+								panel.add(lblNewLabel_5_1);
+								lblNewLabel_5_1.setPreferredSize(new Dimension(60, 20));
 				
-
-			}
-		});
-
-		// 조회
-		JButton btnNewButton_1 = new JButton("점포지정 & 조회");
-		btnNewButton_1.setToolTipText("거래처명 입력, 점포 지정 후 조회");
-		btnNewButton_1.setPreferredSize(new Dimension(200, 30));	// FlowLayout의 컴포넌트 리사이즈 방법
-		frame.getContentPane().add(btnNewButton_1);
-
-		btnNewButton_1.addActionListener(this);
-
-		// 테이블
-		table = new JTable() {
-
-			@Override
-			public boolean isCellEditable(int row, int column) {
-				int  currColumn = table.getSelectedColumn();  // 선택한 열만 수정가능
-				if( currColumn == 7  )
-					return true;			
-				return false;   // 모든 cell 편집불가능
-			}
-
-		};
-	
-
-		table.addKeyListener(new KeyListener() {
-
-			@Override
-			public void keyTyped(KeyEvent e) {
-			}
-
-			@Override
-			public void keyReleased(KeyEvent e) {
-			}
-
-			@Override
-			public void keyPressed(KeyEvent e) {
-				int key = e.getKeyCode();
-				if (key == KeyEvent.VK_ENTER) {
-					btnNewButton.doClick(); 
-
-				}
-			}
-		});
-
-		JScrollPane sp = new JScrollPane(table); 
-		sp.setPreferredSize(new Dimension(1170, 480));		// 테이블이 담긴 스크롤페인의 사이즈
-		frame.getContentPane().add( sp );
-
-		// 출고 확정
-		btnNewButton = new JButton("출고 확정");
-		btnNewButton.setToolTipText("출고수량 입력 후 클릭");
-		btnNewButton.setPreferredSize(new Dimension(100, 30));	// FlowLayout의 컴포넌트 리사이즈 방법
-
-		frame.getContentPane().add(btnNewButton);
-
-		btnNewButton.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				try {
-					table.editCellAt(-1, -1);	// 마지막 cell의 입력을 완료되려면 셀선택을 테이블 밖으로 빼야함(입력 후 엔터치는 것과 같음)
-				}catch(Exception ex) {}
-				addList();
-				jTableRefresh2(getList());
-			}
-
-		});
-
-
-		// 출고내역 확인
-		btnNewButton_3 = new JButton("출고내역 확인");
-		btnNewButton_3.setPreferredSize(new Dimension(120, 30));	// FlowLayout의 컴포넌트 리사이즈 방법
-		frame.getContentPane().add(btnNewButton_3);
-
-		btnNewButton_3.addActionListener( new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("출고내역 확인 버튼 클릭....");	
-				if (opl != null)
-					opl.getFrame().setVisible(false);
-				opl = new LMOutputList();
-			}
-		});
-
-		// 엑셀로저장
-		btnNewButton_2 = new JButton("엑셀로 저장");
-		btnNewButton_2.setPreferredSize(new Dimension(100, 30));	// FlowLayout의 컴포넌트 리사이즈 방법
-		btnNewButton_2.setToolTipText("d:/ws/java/DBProject02/src/jTable_20230220142558.xlsx");
-		frame.getContentPane().add(btnNewButton_2);
-
-		btnNewButton_2.addActionListener( new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("엑셀로 저장....");
-				LocalDateTime  now   =  LocalDateTime.now(); 
-				int            year  =  now.getYear();
-				int            mm    =  now.getMonthValue();
-				int            dd    =  now.getDayOfMonth();
-				int            hh    =  now.getHour();
-				int            mi    =  now.getMinute();
-				int            ss    =  now.getSecond();
-
-				String  fmt      = "d:\\ws\\java\\DBProject02\\src\\";
-				fmt             += "jTable_%4d%02d%02d%02d%02d%02d.xlsx";
-				String  filepath = String.format(fmt, year, mm, dd, hh, mi, ss );
-
-				System.out.println( filepath );
-				excelWrite( filepath );
-
-			}
-
-		});
+						textField = new JTextField(20);
+						textField.setBounds(263, 55, 150, 30);
+						panel.add(textField);
+						textField.setPreferredSize(new Dimension(80, 20));
+						
+						JLabel lblNewLabel_4_1 = new JLabel("\uC0C1\uD488\uCD9C\uACE0\uC5C5\uBB34");
+						lblNewLabel_4_1.setFont(new Font("새굴림", Font.BOLD, 40));
+						lblNewLabel_4_1.setBounds(700, 10, 391, 79);
+						panel.add(lblNewLabel_4_1);
+						
+						
+								textField.addKeyListener(new KeyListener() {
+						
+									@Override
+									public void keyTyped(KeyEvent e) {
+									}
+						
+									@Override
+									public void keyReleased(KeyEvent e) {
+									}
+						
+									@Override
+									public void keyPressed(KeyEvent e) {
+										int key = e.getKeyCode();
+										if (key == KeyEvent.VK_ENTER) {
+											btnNewButton_1_1.doClick(); 
+										}
+									}
+								});
+		frame.getContentPane().setLayout(groupLayout);
 
 		frame.setVisible(true);
 		frame.setResizable(false);
@@ -364,7 +436,7 @@ public class LMOutput extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 
 		switch( e.getActionCommand() ) {
-		case "점포지정 & 조회":
+		case "조회":
 			Vector<Vector> list = getDataList(this);
 			jTableRefresh2(list);
 			
@@ -449,6 +521,4 @@ public class LMOutput extends JFrame implements ActionListener{
 
 		
 	}
-
-
 }
