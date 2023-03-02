@@ -157,6 +157,14 @@ private void Init() {
       btnNewButton_10.setBackground(new Color(229,204,255));
       btnNewButton_10.setBounds(422, 424, 153, 59);
       getContentPane().add(btnNewButton_10);
+      btnNewButton_10.addActionListener(new ActionListener() {
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			new LMDispose();
+			
+		}
+	});
       
       JButton btnNewButton_11 = new JButton("폐기내역조회");
       btnNewButton_11.setIcon(new ImageIcon(UserTitle.class.getResource("/lmimage/\uBC84\uD2BC61.png")));
@@ -165,6 +173,14 @@ private void Init() {
       btnNewButton_11.setBackground(new Color(229,204,255));
       btnNewButton_11.setBounds(593, 424, 153, 59);
       getContentPane().add(btnNewButton_11);
+      btnNewButton_11.addActionListener(new ActionListener() {
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			new LMDisposeList();
+			
+		}
+	});
       
       JButton btnNewButton_6_1 = new JButton("상품주문업무");
       btnNewButton_6_1.setIcon(new ImageIcon(UserTitle.class.getResource("/lmimage/\uBC84\uD2BC61.png")));
