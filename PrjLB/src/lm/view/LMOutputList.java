@@ -248,6 +248,11 @@ public class LMOutputList extends  JFrame    implements ActionListener {
 		btnNewButton_1.setToolTipText("거래처명 입력 후 검색");
 		//		btnNewButton_1.setBounds(490, 40, 99, 30);
 		btnNewButton_1.setPreferredSize(new Dimension(100, 30));
+		
+		JLabel lblNewLabel_8 = new JLabel("\uCD9C\uACE0\uB0B4\uC5ED\uC870\uD68C");
+		lblNewLabel_8.setFont(new Font("새굴림", Font.BOLD, 40));
+		lblNewLabel_8.setBounds(703, 10, 391, 79);
+		panel.add(lblNewLabel_8);
 
 		btnNewButton_1.addActionListener(this);
 
@@ -522,7 +527,4 @@ public class LMOutputList extends  JFrame    implements ActionListener {
 	public static void main(String[] args) {
 		LMOutputList window = new LMOutputList();
 	}
-
-
-
 }
