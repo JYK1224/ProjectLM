@@ -87,7 +87,7 @@ public class LMProdOrder extends JFrame implements ActionListener{
 		frame = new JFrame();
 		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(LMProdOrder.class.getResource("/lmimage/alphabets-33744_640.png")));
 
-		frame.setTitle("상품주문화면");
+		frame.setTitle("상품주문업무");
 
 		icon = new ImageIcon("./큰거1.png");
 

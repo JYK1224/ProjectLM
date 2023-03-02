@@ -155,7 +155,7 @@ private void Init() {
       btnNewButton_9.setBounds(422, 341, 153, 59);
       getContentPane().add(btnNewButton_9);
       
-      JButton btnNewButton_10 = new JButton("상품폐기등록");
+      JButton btnNewButton_10 = new JButton("상품폐기업무");
       btnNewButton_10.setIcon(new ImageIcon(UserTitle.class.getResource("/lmimage/\uBC84\uD2BC61.png")));
       btnNewButton_10 .setHorizontalTextPosition(JButton.CENTER); // 텍스트 가운데
       btnNewButton_10.setFont(new Font("새굴림", Font.PLAIN, 16));

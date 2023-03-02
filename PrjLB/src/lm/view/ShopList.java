@@ -179,9 +179,9 @@ import java.awt.Toolkit;
 			panel.add(txtname);
 			txtname.setColumns(15);
 			
-			lblNewLabel = new JLabel("\uC810\uD3EC \uBAA9\uB85D");
+			lblNewLabel = new JLabel("\uC810\uD3EC\uC804\uCCB4\uC870\uD68C");
 			lblNewLabel.setFont(new Font("새굴림", Font.BOLD, 40));
-			lblNewLabel.setBounds(229, 10, 261, 79);
+			lblNewLabel.setBounds(208, 11, 261, 79);
 			panel.add(lblNewLabel);
 			
 			lblNewLabel_1 = new JLabel("\uC810\uD3EC\uBA85 : ");
