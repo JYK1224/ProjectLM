@@ -1,5 +1,6 @@
 package lm.view;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -41,6 +42,8 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.SystemColor;
+import java.awt.Toolkit;
+
 import javax.swing.ImageIcon;
 
 public class LMOutputList extends  JFrame    implements ActionListener {
@@ -64,6 +67,8 @@ public class LMOutputList extends  JFrame    implements ActionListener {
 
 	// 기본생성자
 	public LMOutputList(){
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/lmimage/alphabets-33744_640.png")));
+		getContentPane().setBackground(new Color(231,231,231));
 		initComponent();
 	}
 
