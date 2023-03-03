@@ -247,22 +247,24 @@ public class OutputDao {
 	public Vector<Vector> getOutputList(String search, String date1, String date2) {
 		Vector<Vector>  list = new Vector<Vector>();   // 조회된 결과전체 대응 : rs
 
-		String  sql1 = "SELECT TO_CHAR(O.OUTDATE, 'YYYY-MM-DD HH24:MI:SS') OUTDATE , D.DNAME , P.PID , P.PNAME , P.SPRICE , SH.SHOPNAME, NVL(S.STOCKNUM, 0) STOCKNUM, O.OUTNUM \r\n"
-				+ "				FROM OUTPUT O, DEPT_ACC D, PRODUCT P, STOCK S, SHOP SH\r\n"
+		String  sql1 = "SELECT TO_CHAR(O.OUTDATE, 'YYYY-MM-DD HH24:MI:SS') OUTDATE , D.DNAME , P.PID , P.PNAME , P.SPRICE , SH.SHOPNAME, NVL(S.STOCKNUM, 0) STOCKNUM, O.OUTNUM, U.USERNAME \r\n"
+				+ "				FROM OUTPUT O, DEPT_ACC D, PRODUCT P, STOCK S, SHOP SH, USERMNG U\r\n"
 				+ "				WHERE O.PID = P.PID (+)\r\n"
 				+ "				   AND P.DID = D.DID (+)\r\n"
 				+ "				   AND P.PID = S.PID (+)\r\n"
-				+ "                   AND O.SHOPID = SH.SHOPID (+)\r\n"
+				+ "                AND O.SHOPID = SH.SHOPID (+)\r\n"
+				+ "                AND O.USERID = U.USERID (+)\r\n "
 				+ "				   AND ( TO_DATE(O.OUTDATE) BETWEEN TO_DATE('"+ date1 +"') AND TO_DATE('"+ date2 +"') ) \r\n"
 				+ "				   AND SH.SHOPNAME LIKE '%" + search.toUpperCase().trim() + "%'\r\n"
 				+ "				   ORDER BY O.OUTDATE DESC";
 
-		String  sql2 = "SELECT TO_CHAR(O.OUTDATE, 'YYYY-MM-DD HH24:MI:SS') OUTDATE , D.DNAME , P.PID , P.PNAME , P.SPRICE , SH.SHOPNAME, NVL(S.STOCKNUM, 0) STOCKNUM, O.OUTNUM \r\n"
-				+ "				FROM OUTPUT O, DEPT_ACC D, PRODUCT P, STOCK S, SHOP SH\r\n"
+		String  sql2 = "SELECT TO_CHAR(O.OUTDATE, 'YYYY-MM-DD HH24:MI:SS') OUTDATE , D.DNAME , P.PID , P.PNAME , P.SPRICE , SH.SHOPNAME, NVL(S.STOCKNUM, 0) STOCKNUM, O.OUTNUM, U.USERNAME \r\n"
+				+ "				FROM OUTPUT O, DEPT_ACC D, PRODUCT P, STOCK S, SHOP SH, USERMNG U\r\n"
 				+ "				WHERE O.PID = P.PID (+)\r\n"
 				+ "				   AND P.DID = D.DID (+)\r\n"
 				+ "				   AND P.PID = S.PID (+)\r\n"
-				+ "                   AND O.SHOPID = SH.SHOPID (+)\r\n"
+				+ "                AND O.SHOPID = SH.SHOPID (+)\r\n"
+				+ "                AND O.USERID = U.USERID (+)\r\n "
 				+ "				   AND SH.SHOPNAME LIKE '%" + search.toUpperCase().trim() + "%'\r\n"
 				+ "				   ORDER BY O.OUTDATE DESC";
 
@@ -286,7 +288,7 @@ public class OutputDao {
 				String  stockNum    =  rs.getString("STOCKNUM");    // 6
 				String  shopName    =  rs.getString("SHOPNAME");    // 7
 				String  outNum    =  rs.getString("OUTNUM");	// 8
-//				String  userName    =  rs.getString("USERNAME");    // 9
+				String  userName    =  rs.getString("USERNAME");    // 9
 
 				Vector  v         = new Vector();  // 안쪽 Vector : 한 줄 Row 를 의미
 				v.add( outDate );
@@ -297,7 +299,7 @@ public class OutputDao {
 				v.add( stockNum );
 				v.add( shopName );
 				v.add( outNum );
-				v.add( "" );
+				v.add( userName );
 
 				list.add( v );  //  전체 목록에 추가
 			}

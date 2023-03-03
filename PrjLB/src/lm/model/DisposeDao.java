@@ -231,11 +231,12 @@ public class DisposeDao {
          System.out.println(date1);
          System.out.println(date2);
 
-         String  sql1  = "SELECT TO_CHAR(D.DISDATE, 'YYYY-MM-DD HH24:MI:SS') DISDATE, A.ANAME, P.PID, P.PNAME, P.IPRICE, NVL(S.STOCKNUM, 0) STOCKNUM, NVL(D.DISNUM,0) DISNUM\r\n"
-         		+ " FROM  DISUSE D, ASSORTMENT A, PRODUCT P, STOCK S\r\n"
+         String  sql1  = "SELECT TO_CHAR(D.DISDATE, 'YYYY-MM-DD HH24:MI:SS') DISDATE, A.ANAME, P.PID, P.PNAME, P.IPRICE, NVL(S.STOCKNUM, 0) STOCKNUM, NVL(D.DISNUM,0) DISNUM, U.USERNAME\r\n"
+         		+ " FROM  DISUSE D, ASSORTMENT A, PRODUCT P, STOCK S, USERMNG U\r\n"
          		+ " WHERE S.PID = P.PID (+)\r\n"
          		+ " AND P.AID = A.AID (+)\r\n"
          		+ " AND P.PID = D.PID (+)\r\n"
+         		+ " AND D.USERID = U.USERID (+)\r\n "
          		+ " AND A.ANAME LIKE '%"+search.trim().toUpperCase()+"%'\r\n"
          		+ " AND ( TO_DATE(D.DISDATE) BETWEEN TO_DATE('"+date1+"') AND TO_DATE('"+date2+"') )\r\n"
 //         		+ " AND STOCKNUM IS NOT NULL\r\n"
@@ -243,11 +244,12 @@ public class DisposeDao {
          		+ " ORDER BY D.DISDATE ASC";
          		
 
-         String  sql2  = "SELECT TO_CHAR(D.DISDATE, 'YYYY-MM-DD HH24:MI:SS') DISDATE, A.ANAME, P.PID, P.PNAME, P.IPRICE, NVL(S.STOCKNUM, 0) STOCKNUM, NVL(D.DISNUM,0) DISNUM\r\n"
-         		+ " FROM  DISUSE D, ASSORTMENT A, PRODUCT P, STOCK S\r\n"
+         String  sql2  = "SELECT TO_CHAR(D.DISDATE, 'YYYY-MM-DD HH24:MI:SS') DISDATE, A.ANAME, P.PID, P.PNAME, P.IPRICE, NVL(S.STOCKNUM, 0) STOCKNUM, NVL(D.DISNUM,0) DISNUM, U.USERNAME\r\n"
+         		+ " FROM  DISUSE D, ASSORTMENT A, PRODUCT P, STOCK S, USERMNG U\r\n"
          		+ " WHERE S.PID = P.PID (+)\r\n"
          		+ " AND P.AID = A.AID (+)\r\n"
          		+ " AND P.PID = D.PID (+)\r\n"
+         		+ " AND D.USERID = U.USERID (+)\r\n "
          		+ " AND A.ANAME LIKE '%"+search.trim().toUpperCase()+"%'\r\n"
 //         		+ " AND STOCKNUM IS NOT NULL\r\n"
 //         		+ " AND STOCKNUM != 0\r\n"
@@ -272,7 +274,7 @@ public class DisposeDao {
                String  iprice         = rs.getString("IPRICE");      // 폐기가격(입고가)
                String  stocknum       = rs.getString("STOCKNUM");    // 현재재고
                String  disnum         = rs.getString("DISNUM");       // 폐기수량
-//               String  userid         = rs.getString("userid");       // 직원ID
+               String  username         = rs.getString("USERNAME");       // 직원ID
                
 
                Vector  v         = new Vector();  // 안쪽 Vector : 한 줄 Row 를 의미
@@ -283,7 +285,7 @@ public class DisposeDao {
                v.add( iprice );
                v.add( stocknum );
                v.add( disnum );
-               v.add( "" );
+               v.add( username );
 
                list.add( v );  //  전체 목록에 추가
             }

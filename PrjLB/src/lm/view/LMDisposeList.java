@@ -459,7 +459,7 @@ public class LMDisposeList extends JFrame    implements ActionListener {
 		cols.add("폐기 가격");
 		cols.add("현재 재고");
 		cols.add("폐기 수량");
-		cols.add("사원 번호");
+		cols.add("폐기 직원");
 
 		return cols;
 	}
@@ -472,10 +472,11 @@ public class LMDisposeList extends JFrame    implements ActionListener {
 
 			if(date1.equals("") || date2.equals("")) {
 				JDialog jd = new JDialog(0);
-				jd.Dlbl.setText("<html><body><center>시작일 또는 종료일이<br>선택되지 않았습니다.</center></body></html>");
+				jd.Dlbl.setText("시작일 또는 종료일이 선택되지 않았습니다.");
 				jd.setTitle("날짜 지정 오류");
 				textField_1.setText("");
 				textField_2.setText("");
+				
 				return;
 			}
 
@@ -494,6 +495,8 @@ public class LMDisposeList extends JFrame    implements ActionListener {
 		case "날짜 초기화":
 			textField_1.setText("");
 			textField_2.setText("");
+			date1 = "";
+			date2 = "";
 		}
 
 	}
