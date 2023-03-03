@@ -470,7 +470,7 @@ public class LMDisposeList extends JFrame    implements ActionListener {
 		switch( e.getActionCommand() ) {
 		case "검색하기":
 
-			if(textField_1.equals("") || textField_2.equals("")) {
+			if(date1.equals("") || date2.equals("")) {
 				JDialog jd = new JDialog(0);
 				jd.Dlbl.setText("시작일 또는 종료일이 선택되지 않았습니다.");
 				jd.setTitle("날짜 지정 오류");
