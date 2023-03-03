@@ -19,7 +19,6 @@ import java.util.Vector;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -240,8 +239,9 @@ public class IpgoList extends JFrame implements  ActionListener{
 				date2 = simpleDateFormat.format(selectedDate2);
 
 				if(selectedDate1.compareTo(selectedDate2) > 0) {
-					JOptionPane.showMessageDialog(null, 
-							"종료일이 시작일보다 빠릅니다.", "날짜지정오류", JOptionPane.ERROR_MESSAGE);
+					JDialog jd = new JDialog(0);
+					jd.Dlbl.setText("종료일이 시작일보다 빠릅니다.");
+					jd.setTitle("날짜 지정오류");
 				}
 
 			}
@@ -318,15 +318,18 @@ public class IpgoList extends JFrame implements  ActionListener{
 		case "검색":
 
 			if(date1.equals("") || date2.equals("")) {
-				JOptionPane.showMessageDialog(null, 
-						"시작일 또는 종료일이 선택되지 않았습니다.", "날짜지정오류", JOptionPane.ERROR_MESSAGE);
+				JDialog jd = new JDialog(0);
+				jd.Dlbl.setText("시작일 또는 종료일이 선택되지 않았습니다.");
+				jd.setTitle("날짜지정오류");
 				return;
 			}
 
 			Vector<Vector> list = getDataList(this);
 			jTableRefresh2(list);
 			int rowsCount = jTable.getRowCount();
-			JOptionPane.showMessageDialog(null, rowsCount + "건 검색되었습니다");
+			JDialog jd = new JDialog(0);
+			jd.Dlbl.setText(rowsCount + "건 검색되었습니다");
+			jd.setTitle("검색 결과");
 			txtTot.setText( String.valueOf(getSumPrice()) );	// 가격 * 수량
 
 			break;
@@ -414,10 +417,14 @@ public class IpgoList extends JFrame implements  ActionListener{
 		try {
 			fos = new FileOutputStream( filepath );
 			workbook.write(fos);
-			JOptionPane.showMessageDialog(null, fmt + " 로 저장되었습니다");
+			JDialog jd = new JDialog(0);
+			jd.Dlbl.setText(fmt + " 로 저장되었습니다");
+			jd.setTitle("저장완료");
 		} catch (IOException e) {
 			System.out.println("저장Fail");         
-			JOptionPane.showMessageDialog(null, "저장이 되지 않았습니다");
+			JDialog jd = new JDialog(0);
+			jd.Dlbl.setText("저장이 되지 않았습니다");
+			jd.setTitle("저장실패");
 		} finally {
 			try {
 				if(fos != null)fos.close();

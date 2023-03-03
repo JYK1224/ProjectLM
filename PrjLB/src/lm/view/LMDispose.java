@@ -15,7 +15,6 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -182,7 +181,9 @@ public class LMDispose extends JFrame implements ActionListener{
 			Vector<Vector> list = getDataList(this);
 			jTableRefresh2(list);
 			int rowsCount = table.getRowCount();
-	        JOptionPane.showMessageDialog(null, rowsCount + "건 검색되었습니다");
+	        JDialog jd = new JDialog(0);
+	        jd.Dlbl.setText(rowsCount + "건 검색되었습니다");
+	        jd.setTitle("검색 결과");
 			break;
 			
 		case "폐기확정":
@@ -234,10 +235,15 @@ public class LMDispose extends JFrame implements ActionListener{
 		try {
 			fos = new FileOutputStream( filepath );
 			workbook.write(fos);
-			JOptionPane.showMessageDialog(null, "저장에 성공하였습니다");
+			JDialog jd = new JDialog(0);
+			jd.Dlbl.setText("저장에 성공하였습니다");
+			jd.setTitle("저장성공");
 		} catch (IOException e) {
-			JOptionPane.showMessageDialog(null, "저장을 실패하였습니다. 저장공간의 위치를 확인해주세요. \n"
-					+"저장공간: "  +  "D:\\excel");		
+			JDialog jd = new JDialog(0);
+			jd.Dlbl.setText("<html><body><center>저장을 실패하였습니다."
+					+ "<br>저장공간의 위치를 확인해주세요."
+					+ "<br>저장공간: D:\\excel</center></body></html>");
+			jd.setTitle("저장실패");
 					e.printStackTrace();
 		} finally {
 			try {
@@ -347,7 +353,9 @@ public class LMDispose extends JFrame implements ActionListener{
 			
 		}
 		System.out.println(sum);
-		JOptionPane.showMessageDialog(null, sum + " 개 폐기되었습니다");
+		JDialog jd = new JDialog(0);
+		jd.Dlbl.setText(sum + " 개 폐기되었습니다");
+		jd.setTitle("폐기");
 	}
 
 

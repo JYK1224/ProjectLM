@@ -12,7 +12,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -180,9 +179,10 @@ public void init () {
       btnDe.addActionListener(new ActionListener() {
          @Override
          public void actionPerformed(ActionEvent e) {
-        	 JOptionPane.showMessageDialog(null, 
-        				"데이터 베이스의 모든 내용이 삭제되기"
-        				+ " 때문에 담당자에게 문의해주세요");
+        	 lm.view.JDialog jd = new lm.view.JDialog(0);
+     		jd.Dlbl.setText("<html><body><center>데이터 베이스의 모든 내용이 삭제되기"
+     				+ "<br>때문에 담당자에게 문의해주세요</center></body></html>");
+     		jd.setTitle("경고");
          }
       });
       btnUp.addActionListener(new ActionListener() {
@@ -210,7 +210,9 @@ public void init () {
 	   ShopDao sdao = new ShopDao();
 	   int result = sdao.existsfind(sid);
 	   if(result == 0) {
-		   JOptionPane.showMessageDialog(null, "점포코드를 확인해주세요");
+		   JDialog jd = new JDialog(0);
+		   jd.Dlbl.setText("점포코드를 확인해주세요");
+		   jd.setTitle("코드 중복");
 	   }else {
 		   Shopvo sv = sdao.getSid(sid);
 		   setViewData(sv);
@@ -243,26 +245,26 @@ public void init () {
    }
 
    //삭제
-   protected void deShop() {
-      String sid = this.txtCode.getText();
-      if(sid.equals(" ") )
-         return;
-      ShopDao sdao = new ShopDao();
-      int choice = JOptionPane.showConfirmDialog(null, 
-            sid + "삭제하시겠습니까?",
-            "삭제", JOptionPane.OK_CANCEL_OPTION);
-      String msg = "";
-      if(choice == 0) {
-         int aftcnt = sdao.deleteShop(sid);
-         if(aftcnt > 0 ) {
-            msg = sid + " 지웁니다";
-         }
-         } else { 
-            msg = "취소하였습니다";
-         }
-      JOptionPane.showMessageDialog(null, msg + " ",
-            "삭제하였습니다", JOptionPane.OK_OPTION);
-   }
+//   protected void deShop() {
+//      String sid = this.txtCode.getText();
+//      if(sid.equals(" ") )
+//         return;
+//      ShopDao sdao = new ShopDao();
+//      int choice = JOptionPane.showConfirmDialog(null, 
+//            sid + "삭제하시겠습니까?",
+//            "삭제", JOptionPane.OK_CANCEL_OPTION);
+//      String msg = "";
+//      if(choice == 0) {
+//         int aftcnt = sdao.deleteShop(sid);
+//         if(aftcnt > 0 ) {
+//            msg = sid + " 지웁니다";
+//         }
+//         } else { 
+//            msg = "취소하였습니다";
+//         }
+//      JOptionPane.showMessageDialog(null, msg + " ",
+//            "삭제하였습니다", JOptionPane.OK_OPTION);
+//   }
 
    //수정
    protected void upShop() {
@@ -270,27 +272,41 @@ public void init () {
       ShopDao sdao = new ShopDao();
       int result = sdao.existsfind(sid);
       if(result == 0 ) {
-    	  JOptionPane.showMessageDialog(null, "점포코드를 확인해주세요");
+    	  JDialog jd = new JDialog(0);
+    	  jd.Dlbl.setText("점포코드를 확인해주세요");
+    	  jd.setTitle("코드 중복");
       }else{
-    	  int choice = JOptionPane.showConfirmDialog(null,
-    			  sid + "수정하시겠습니까",
-    			  "수정하시겠습니까",
-    			  JOptionPane.OK_CANCEL_OPTION
-    			  );
-    	  int aftcnt = 0;
-    	  String msg = " ";
-    	  if( choice == 0 ) {
-    		  Shopvo sv = getViewData();
-    		  aftcnt = sdao.updataDept(sv);
-    		  if( aftcnt > 0 )
-    			  msg = sid + "수정완료";
-    		  else 
-    			  msg = sid + "수정완료";
-    	  } else {
-    		  msg = "취소했습니다";
-    	  }
-    	  JOptionPane.showConfirmDialog(null, msg,
-    			  " ", JOptionPane.OK_OPTION);
+    	  lm.view.JDialog jd = new lm.view.JDialog(1);
+			jd.Dlbl.setText("수정하시겠습니까?");
+			jd.btnNewButton.setText("수정");
+			jd.btnNewButton.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					int aftcnt = 0;
+					String msg = "";
+					Shopvo sv = getViewData();
+					aftcnt = sdao.updataDept(sv);
+					if( aftcnt > 0 )
+						msg = sid+ "수정완료";
+					else 
+						msg = sid+ "수정완료";
+					lm.view.JDialog jd2 = new lm.view.JDialog(0);
+					jd2.Dlbl.setText(msg);
+					jd2.setTitle("수정완료");
+				}
+			});
+			jd.btnNewButton2.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					String msg = "취소되었습니다";
+					lm.view.JDialog jd2 = new lm.view.JDialog(0);
+					jd2.Dlbl.setText(msg);
+					jd2.setTitle("수정취소");
+					
+				}
+			});
       }
    }
 
@@ -300,11 +316,15 @@ public void init () {
       String sid = txtCode.getText();
       int result = sdao.existsfind(sid);
       if( result == 1 ) {
-    	  JOptionPane.showMessageDialog(null, "점포코드가 중복됩니다");
+    	 JDialog jd = new JDialog(0);
+    	 jd.Dlbl.setText("점포코드가 중복됩니다");
+    	 jd.setTitle("코드 중복");
       }else {
     	  Shopvo sv = getViewData();
     	  int aftcnt = sdao.insertShop(sv); 
-    	  JOptionPane.showMessageDialog(null, sv.getShopid()+ "저장" );
+    	 JDialog jd = new JDialog(0);
+    	 jd.Dlbl.setText(sv.getShopid()+ "저장");
+    	 jd.setTitle("저장");
       }
   }
 

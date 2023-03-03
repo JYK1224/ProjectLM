@@ -20,7 +20,6 @@ import java.util.Vector;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -302,8 +301,9 @@ public class LMOutputList extends  JFrame    implements ActionListener {
 				textField_2.setText(end);
 
 				if(selectedDate1.compareTo(selectedDate2) > 0) {
-					JOptionPane.showMessageDialog(null, 
-							"종료일이 시작일보다 빠릅니다.", "날짜지정오류", JOptionPane.ERROR_MESSAGE);
+					JDialog jd = new JDialog(0);
+					jd.Dlbl.setText("종료일이 시작일보다 빠릅니다.");
+					jd.setTitle("날짜지정오류");
 					textField_2.setText("");
 				}
 
@@ -385,9 +385,15 @@ public class LMOutputList extends  JFrame    implements ActionListener {
 		try {
 			fos = new FileOutputStream( filepath );
 			workbook.write(fos);
-			JOptionPane.showMessageDialog(null, fmt + " 로 저장되었습니다");
+			JDialog jd = new JDialog(0);
+			jd.Dlbl.setText(fmt + " 로 저장 완료");
+			jd.setTitle("저장완료");
 		} catch (IOException e) {
-			JOptionPane.showMessageDialog(null, "저장에 실패했습니다");
+			JDialog jd = new JDialog(0);
+			jd.Dlbl.setText("<html><body><center>저장을 실패하였습니다."
+					+ "<br>저장공간의 위치를 확인해주세요."
+					+ "<br>저장공간: D:\\excel</center></body></html>");
+			jd.setTitle("저장실패");
 			e.printStackTrace();
 		} finally {
 			try {
@@ -465,8 +471,9 @@ public class LMOutputList extends  JFrame    implements ActionListener {
 		case "검색하기":
 
 			if(date1.equals("") || date2.equals("")) {
-				JOptionPane.showMessageDialog(null, 
-						"시작일 또는 종료일이 선택되지 않았습니다.", "날짜지정오류", JOptionPane.ERROR_MESSAGE);
+				JDialog jd = new JDialog(0);
+				jd.Dlbl.setText("시작일 또는 종료일이 선택되지 않았습니다.");
+				jd.setTitle("날짜지정오류");
 				textField_1.setText("");
 				textField_2.setText("");
 				return;
@@ -476,7 +483,9 @@ public class LMOutputList extends  JFrame    implements ActionListener {
 			jTableRefresh2(list);
 			
 			 int rowsCount = table.getRowCount();
-	         JOptionPane.showMessageDialog(null, rowsCount + "건 검색되었습니다");
+			 JDialog jd = new JDialog(0);
+			 jd.Dlbl.setText(rowsCount + "건 검색되었습니다");
+			 jd.setTitle("검색");
 	         
 			textField_3.setText( String.valueOf(getSumPrice()) );	// 가격 * 수량
 			break;

@@ -5,8 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
-import javax.swing.JOptionPane;
 
+import lm.view.JDialog;
 import oracle.jdbc.OracleConnection;
 
 public class DeptDao {
@@ -237,7 +237,9 @@ public class DeptDao {
 			if(rs.next()) 
 				aftcnt = rs.getInt("d");
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "숫자만 입력가능합니다");
+			JDialog jd = new JDialog(0);
+			jd.getDlbl().setText("숫자만 입력가능합니다");
+			jd.setTitle("경고");
 			e.printStackTrace();
 		}finally {
 			try {

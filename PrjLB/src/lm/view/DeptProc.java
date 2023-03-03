@@ -11,9 +11,9 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -162,9 +162,11 @@ public class DeptProc extends JFrame{
 		btnDe_1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, 
-						"데이터 베이스의 모든 내용이 삭제되기"
-						+ " 때문에 담당자에게 문의해주세요");
+				lm.view.JDialog jd = new lm.view.JDialog(0);
+				jd.Dlbl.setText("<html><body><center>데이터 베이스의 모든 내용이 삭제되기"
+						+ "<br>때문에 담당자에게 문의해주세요</center></body></html>");
+				jd.setTitle("경고");
+				
 			}
 		});
 		btnFind = new JButton("조회");
@@ -220,7 +222,9 @@ public class DeptProc extends JFrame{
 		DeptDao ddao = new DeptDao();
 		int result = ddao.existsfind(did);
 		if(result == 0) {
-			JOptionPane.showMessageDialog(null, "거래처코드를 확인해주세요");
+			lm.view.JDialog jd = new lm.view.JDialog(0);
+			jd.Dlbl.setText("거래처코드를 확인해주세요");
+			jd.setTitle("코드 확인");
 		}else {
 			Deptvo    dv = ddao.getDid(did);
 			setViewData(dv);
@@ -252,26 +256,26 @@ public class DeptProc extends JFrame{
 	}
 
 	//삭제
-	protected void deDept() {
-		String did = this.txtCode.getText();
-		if(did.equals(" ") )
-			return;
-		DeptDao ddao = new DeptDao();
-		int choice = JOptionPane.showConfirmDialog(null, 
-				did + "삭제하시겠습니까?",
-				"삭제", JOptionPane.OK_CANCEL_OPTION);
-		String msg = "";
-		if(choice == 0) {
-			int aftcnt = ddao.deleteDept(did);
-			if(aftcnt > 0 ) {
-				msg = did + " 지웁니다";
-			}
-			} else { 
-				msg = "취소하였습니다";
-			}
-		JOptionPane.showMessageDialog(null, msg + " ",
-				"삭제하였습니다", JOptionPane.OK_OPTION);
-	}
+//	protected void deDept() {
+//		String did = this.txtCode.getText();
+//		if(did.equals(" ") )
+//			return;
+//		DeptDao ddao = new DeptDao();
+//		int choice = JOptionPane.showConfirmDialog(null, 
+//				did + "삭제하시겠습니까?",
+//				"삭제", JOptionPane.OK_CANCEL_OPTION);
+//		String msg = "";
+//		if(choice == 0) {
+//			int aftcnt = ddao.deleteDept(did);
+//			if(aftcnt > 0 ) {
+//				msg = did + " 지웁니다";
+//			}
+//			} else { 
+//				msg = "취소하였습니다";
+//			}
+//		JOptionPane.showMessageDialog(null, msg + " ",
+//				"삭제하였습니다", JOptionPane.OK_OPTION);
+//	}
 
 	//수정
 	protected void upDept() {
@@ -279,27 +283,42 @@ public class DeptProc extends JFrame{
 		DeptDao ddao = new DeptDao();
 		int result = ddao.existsfind(did);
 		if(result == 0) {
-			JOptionPane.showMessageDialog(null, "거래처코드를 확인해주세요");
+			lm.view.JDialog jd1 = new lm.view.JDialog(0);
+			jd1.Dlbl.setText("거래처코드를 확인해주세요");
+			jd1.setTitle("코드 확인");
 		}else {
-			int choice = JOptionPane.showConfirmDialog(null,
-					did + "수정하시겠습니까",
-					"수정하시겠습니까",
-					JOptionPane.OK_CANCEL_OPTION
-					);
-			int aftcnt = 0;
-			String msg = " ";
-			if( choice == 0 ) {
-				Deptvo dv = getViewData();
-				aftcnt = ddao.updataDept(dv);
-				if( aftcnt > 0 )
-					msg = did + "수정완료";
-				else 
-					msg = did + "수정완료";
-			} else {
-				msg = "취소했습니다";
-			}
-			JOptionPane.showConfirmDialog(null, msg,
-					" ", JOptionPane.OK_OPTION);
+			lm.view.JDialog jd = new lm.view.JDialog(1);
+			jd.Dlbl.setText("수정하시겠습니까?");
+			jd.btnNewButton.setText("수정");
+			jd.btnNewButton.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					int aftcnt = 0;
+					String msg = "";
+					Deptvo dv = getViewData();
+					aftcnt = ddao.updataDept(dv);
+					if( aftcnt > 0 )
+						msg = did + "수정완료";
+					else 
+						msg = did + "수정완료";
+					lm.view.JDialog jd2 = new lm.view.JDialog(0);
+					jd2.Dlbl.setText(msg);
+					jd2.setTitle("수정완료");
+				}
+			});
+			jd.btnNewButton2.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					String msg = "취소되었습니다";
+					lm.view.JDialog jd2 = new lm.view.JDialog(0);
+					jd2.Dlbl.setText(msg);
+					jd2.setTitle("수정취소");
+					
+				}
+			});
+			
 		}
 	}
 
@@ -309,11 +328,15 @@ public class DeptProc extends JFrame{
 		String did = txtCode.getText();
 		int result = ddao.existsfind(did);
 		if (result == 1 ) {
-			JOptionPane.showMessageDialog(null, "중복된 거래처코드입니다.");
+			lm.view.JDialog jd = new lm.view.JDialog(0);
+			jd.Dlbl.setText("중복된 거래처코드입니다.");
+			jd.setTitle("코드 중복");
 		}else {
 			Deptvo dv = getViewData();
 			int aftcnt = ddao.insertDept(dv); 
-			JOptionPane.showMessageDialog(null, dv.getDeptid()+ "저장" );
+			lm.view.JDialog jd = new lm.view.JDialog(0);
+			jd.Dlbl.setText(dv.getDeptid()+ "저장");
+			jd.setTitle("저장완료");
 		}
 		
 	}

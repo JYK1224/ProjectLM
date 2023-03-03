@@ -57,7 +57,7 @@ public class JDialog extends JFrame {
 	}
 
 	private void init2() {
-		this.setTitle("경고메시지");
+		this.setTitle("");
 		
 		
 		setIconImage(Toolkit.getDefaultToolkit().getImage(JDialog.class.getResource("/lmimage/alphabets-33744_640.png")));
@@ -193,7 +193,7 @@ public class JDialog extends JFrame {
 	}
 
 	private void init() {
-	this.setTitle("경고메시지");
+	this.setTitle("");
 	
 	
 	setIconImage(Toolkit.getDefaultToolkit().getImage(JDialog.class.getResource("/lmimage/alphabets-33744_640.png")));

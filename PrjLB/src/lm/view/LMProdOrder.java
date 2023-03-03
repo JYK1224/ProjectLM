@@ -22,7 +22,6 @@ import java.util.Vector;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -306,7 +305,9 @@ public class LMProdOrder extends JFrame implements ActionListener{
 					table.editCellAt(-1, -1);	// 마지막 cell의 입력을 완료되려면 셀선택을 테이블 밖으로 빼야함(입력 후 엔터치는 것과 같음)
 				}catch(Exception ex) {}
 				addList();
-				JOptionPane.showMessageDialog(null, "주문되었습니다");
+				JDialog jd = new JDialog(0);
+				jd.Dlbl.setText( "주문되었습니다");
+				jd.setTitle("주문완료");
 
 			}
 		});
@@ -436,10 +437,15 @@ public class LMProdOrder extends JFrame implements ActionListener{
 		try {
 			fos = new FileOutputStream( filepath );
 			workbook.write(fos);
-			JOptionPane.showMessageDialog(null, "저장에 성공하였습니다");
+			JDialog jd = new JDialog(0);
+			jd.Dlbl.setText("저장에 성공하였습니다");
+			jd.setTitle("저장성공");
 		} catch (IOException e) {
-			JOptionPane.showMessageDialog(null, "저장을 실패하였습니다. 저장공간의 위치를 확인해주세요. \n"
-					+"저장공간: "  +  "D:\\excel");		
+			JDialog jd = new JDialog(0);
+			jd.Dlbl.setText("<html><body><center>저장을 실패하였습니다."
+					+ "<br>저장공간의 위치를 확인해주세요."
+					+ "<br>저장공간: D:\\excel</center></body></html>");
+			jd.setTitle("저장실패");	
 			e.printStackTrace();
 		} finally {
 			try {
@@ -507,15 +513,17 @@ public class LMProdOrder extends JFrame implements ActionListener{
 				orderDname.add(i, table.getValueAt(i, 0).toString() );	// dname 거래처명
 				orderDate.add(i, table.getValueAt(i, 1).toString() ); 	// orderdate 주문일자
 				if( orderDate.get(i).equals("") ) {
-					JOptionPane.showMessageDialog(null, 
-							"주문일자를 지정해주세요.", "날짜지정오류", JOptionPane.ERROR_MESSAGE);
+					JDialog jd = new JDialog(0);
+					jd.Dlbl.setText("주문일자를 지정해주세요.");
+					jd.setTitle("날짜지정오류");
 					return;
 				}
 				orderPname.add(i, table.getValueAt(i, 3).toString() );	// pname 상품명
 			}catch (NullPointerException e) {
 				System.err.println("table.getValueAt 이 null 입니다.");
-				JOptionPane.showMessageDialog(null, 
-						"빈칸이 있음.", "빈칸 입력", JOptionPane.ERROR_MESSAGE);
+				JDialog jd = new JDialog(0);
+				jd.Dlbl.setText("빈칸이 있음.");
+				jd.setTitle("빈칸 입력");
 				return;
 			}
 			orderNum.add(i, table.getValueAt(i, 6).toString() ); 	// ordernum 주문수량

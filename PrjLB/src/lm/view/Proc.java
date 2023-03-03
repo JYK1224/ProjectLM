@@ -13,7 +13,6 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
@@ -240,7 +239,9 @@ public class Proc extends JFrame{
 		UserDao udao = new UserDao();
 		int result = udao.existsfind(userid);
 		if (result == 0) {
-			JOptionPane.showMessageDialog(null, "아이디를 다시 확인해주세요");
+			JDialog jd = new JDialog(0);
+			jd.Dlbl.setText("아이디를 다시 확인해주세요");
+			jd.setTitle("아이디중복");
 		}else {
 			Uservo vo = udao.getUser(userid);
 			setViewData(vo);
@@ -291,33 +292,49 @@ public class Proc extends JFrame{
 		UserDao udao = new UserDao();
 		int result = udao.existsfind(userid);
 		if(result == 0) {
-			JOptionPane.showMessageDialog(null, "아이디를 다시 확인해주세요");
+			JDialog jd = new JDialog(0);
+			jd.Dlbl.setText("아이디를 다시 확인해주세요");
+			jd.setTitle("아이디 중복");
 		}else {
-			int choice = JOptionPane.showConfirmDialog(null, 
-					userid + "수정하시겠습니까?",
-					"수정하시겠습니까",
-					JOptionPane.OK_CANCEL_OPTION);
-			int aftcnt = 0;
-			String msg = " ";
-			if (choice == 0 ) {
-				Uservo vo = getViewData();
-				aftcnt = udao.updateUser(vo);
-				if( aftcnt > 0 )
-					msg = userid + "수정완료";
-				else 
-					msg = userid + "수정완료";
-			} else {
-				msg = "취소했습니다";
-			}
-			JOptionPane.showConfirmDialog(null, msg, 
-					" " , JOptionPane.OK_OPTION);		
+			lm.view.JDialog jd = new lm.view.JDialog(1);
+			jd.Dlbl.setText("수정하시겠습니까?");
+			jd.btnNewButton.setText("수정");
+			jd.btnNewButton.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					int aftcnt = 0;
+					String msg = "";
+					Uservo vo = getViewData();
+					aftcnt = udao.updateUser(vo);
+					if( aftcnt > 0 )
+						msg = userid + "수정완료";
+					else 
+						msg = userid + "수정완료";
+					lm.view.JDialog jd2 = new lm.view.JDialog(0);
+					jd2.Dlbl.setText(msg);
+					jd2.setTitle("수정완료");
+				}
+			});
+			jd.btnNewButton2.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					String msg = "취소되었습니다";
+					lm.view.JDialog jd2 = new lm.view.JDialog(0);
+					jd2.Dlbl.setText(msg);
+					jd2.setTitle("수정취소");
+					
+				}
+			});
 		}
 		}
 	//삭제
 	protected void removeUser() {
-		JOptionPane.showMessageDialog(null, 
-				"데이터 베이스의 모든 내용이 "
-				+ "삭제되기 때문에 담당자에게 문의해주세요");
+		lm.view.JDialog jd = new lm.view.JDialog(0);
+		jd.Dlbl.setText("<html><body><center>데이터 베이스의 모든 내용이 삭제되기"
+				+ "<br>때문에 담당자에게 문의해주세요</center></body></html>");
+		jd.setTitle("경고");
 	}
 	//등록
 	protected void addUser() {
@@ -325,12 +342,15 @@ public class Proc extends JFrame{
 		String userid = txtid.getText();
 		int result = udao.existsfind(userid);
 		if(result == 1) {
-			JOptionPane.showMessageDialog(null, "아이디가 중복됩니다");
+			JDialog jd = new JDialog(0);
+			jd.Dlbl.setText("아이디가 중복됩니다");
+			jd.setTitle("아이디 중복");
 		}else {
 			Uservo vo = getViewData();
 			int aftcnt = udao.insertUser(vo);
-			JOptionPane.showMessageDialog(null, aftcnt + "저장", "추가",
-					JOptionPane.CLOSED_OPTION);
+			JDialog jd = new JDialog(0);
+			jd.Dlbl.setText( aftcnt + "저장");
+			jd.setTitle("저장");
 		}
 
 	}

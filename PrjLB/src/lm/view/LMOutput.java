@@ -24,7 +24,6 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -390,9 +389,15 @@ public class LMOutput extends JFrame implements ActionListener{
 		try {
 			fos = new FileOutputStream( filepath );
 			workbook.write(fos);
-			JOptionPane.showMessageDialog(null, fmt + " 로 저장되었습니다");
+			JDialog jd = new JDialog(0);
+			jd.Dlbl.setText(fmt + " 로 저장 완료");
+			jd.setTitle("저장완료");
 		} catch (IOException e) {
-			JOptionPane.showMessageDialog(null, "저장에 실패했습니다");
+			JDialog jd = new JDialog(0);
+			jd.Dlbl.setText("<html><body><center>저장을 실패하였습니다."
+					+ "<br>저장공간의 위치를 확인해주세요."
+					+ "<br>저장공간: D:\\excel</center></body></html>");
+			jd.setTitle("저장실패");
 			e.printStackTrace();
 		} finally {
 			try {
@@ -499,14 +504,16 @@ public class LMOutput extends JFrame implements ActionListener{
 				outputPname.add(i, table.getValueAt(i, 3).toString() );	// pname 상품명
 				shopName.add(i, table.getValueAt(i, 6).toString() );	// shop 점포명
 				if( shopName.get(i).equals("점포명 선택해주세요") || shopName.get(i).equals("") ) {
-					JOptionPane.showMessageDialog(null, 
-							"점포명 지정해주세요.", "점포명지정오류", JOptionPane.ERROR_MESSAGE);
+					JDialog jd = new JDialog(0);
+					jd.Dlbl.setText("점포명 지정해주세요.");
+					jd.setTitle("점포명지정오류");
 					return;
 				}
 			} catch(NullPointerException e){
 				System.err.println("table.getValueAt 이 null 입니다.");
-				JOptionPane.showMessageDialog(null, 
-						"빈칸이 있음.", "빈칸 입력", JOptionPane.ERROR_MESSAGE);
+				JDialog jd = new JDialog(0);
+				jd.Dlbl.setText("빈칸이 있음.");
+				jd.setTitle("빈칸지정");
 				return;
 			}
 
@@ -514,7 +521,9 @@ public class LMOutput extends JFrame implements ActionListener{
 
 		}
 		System.out.println(sum);
-		JOptionPane.showMessageDialog(null, sum + " 개 출고되었습니다");
+		JDialog jd = new JDialog(0);
+		jd.Dlbl.setText(sum + " 개 출고되었습니다");
+		jd.setTitle("출고");
 
 	}
 

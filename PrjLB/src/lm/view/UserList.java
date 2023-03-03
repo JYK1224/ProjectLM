@@ -21,7 +21,6 @@ import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -108,7 +107,9 @@ public class UserList extends JFrame implements ActionListener, MouseListener{
 				String fmt2 = "사용자_%4d %02d %02d %2d %2d.xlsx";
 				String filepath = String.format(fmt+fmt2, year, mm, dd, hh, mi );
 				excelWrite(filepath);
-				JOptionPane.showMessageDialog(btnEx, fmt +"로 엑셀파일 저장되었습니다");
+				JDialog jd = new JDialog(0);
+				jd.Dlbl.setText(fmt +"로 엑셀파일 저장되었습니다");
+				jd.setTitle("저장");
 				
 			}
 		});

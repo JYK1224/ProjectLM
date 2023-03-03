@@ -28,7 +28,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -319,7 +318,9 @@ implements  ActionListener  {
 				jTable.editCellAt(-1, -1);   // 마지막 cell의 입력을 완료되려면 셀선택을 테이블 밖으로 빼야함(입력 후 엔터치는 것과 같음)
 			}catch(Exception ex) {}
 			addList();
-			JOptionPane.showMessageDialog(null, "입고되었습니다");
+			JDialog jd = new JDialog(0);
+			jd.Dlbl.setText("입고되었습니다");
+			jd.setTitle("입고");
 			break;
 		
 		case "엑셀로 저장":
@@ -357,7 +358,9 @@ implements  ActionListener  {
 		
 		// 날짜 선택된게 없으면 알림창 뜨게
 		if(selectedDate == null) {
-			 JOptionPane.showMessageDialog(null, "날짜를 선택해주세요");
+			 JDialog jd = new JDialog(0);
+			 jd.Dlbl.setText("날짜를 선택해주세요");
+			 jd.setTitle("날짜선택");
 		}
 		
 		Vector<Vector> list   =  dao.getOrder(search);
@@ -415,8 +418,9 @@ implements  ActionListener  {
 
 			} catch(NullPointerException e) {
 				System.err.println("table.getValueAt 이 null 입니다.");
-				JOptionPane.showMessageDialog(null, 
-						"입고일자를 지정해주세요.", "날짜지정오류", JOptionPane.ERROR_MESSAGE);
+				JDialog jd = new JDialog(0);
+				jd.Dlbl.setText("입고일자를 지정해주세요.");
+				jd.setTitle("날짜지정오류");
 				return;
 			}
 
@@ -475,9 +479,15 @@ implements  ActionListener  {
 		try {
 			fos = new FileOutputStream( filepath );
 			workbook.write(fos);
-			JOptionPane.showMessageDialog(null, fmt + " 로 저장 완료");
+			JDialog jd = new JDialog(0);
+			jd.Dlbl.setText(fmt + " 로 저장 완료");
+			jd.setTitle("저장완료");
 		} catch (IOException e) {
-			JOptionPane.showMessageDialog(null, "저장이 되지 않았습니다");
+			JDialog jd = new JDialog(0);
+			jd.Dlbl.setText("<html><body><center>저장을 실패하였습니다."
+					+ "<br>저장공간의 위치를 확인해주세요."
+					+ "<br>저장공간: D:\\excel</center></body></html>");
+			jd.setTitle("저장실패");
 			e.printStackTrace();
 		} finally {
 			try {
