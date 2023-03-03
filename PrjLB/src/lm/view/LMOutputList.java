@@ -460,7 +460,7 @@ public class LMOutputList extends  JFrame    implements ActionListener {
 		cols.add("현재 재고");
 		cols.add("점포명");
 		cols.add("출고 수량");
-		cols.add("사원 번호");
+		cols.add("출고 직원");
 
 		return cols;
 	}
@@ -496,6 +496,8 @@ public class LMOutputList extends  JFrame    implements ActionListener {
 		case "날짜 초기화":
 			textField_1.setText("");
 			textField_2.setText("");
+			date1 = "";
+			date2 = "";
 		}
 
 	}
