@@ -509,6 +509,8 @@ public class LMOrderList extends JFrame implements ActionListener {
 		case "날짜 초기화":
 			textField_1.setText("");
 			textField_2.setText("");
+			date1 = "";
+			date2 = "";
 		}
 
 	}
