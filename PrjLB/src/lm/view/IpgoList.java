@@ -322,7 +322,7 @@ public class IpgoList extends JFrame implements  ActionListener{
 
 			if(date1.equals("") || date2.equals("")) {
 				JDialog jd = new JDialog(0);
-				jd.Dlbl.setText("시작일 또는 종료일이 선택되지 않았습니다.");
+				jd.Dlbl.setText("<html><body><center>시작일 또는 종료일이<br>선택되지 않았습니다.</center></body></html>");
 				jd.setTitle("날짜지정오류");
 				return;
 			}
