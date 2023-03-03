@@ -226,7 +226,7 @@ public class JDialog extends JFrame {
 	Dlbl.setHorizontalAlignment(SwingConstants.CENTER);
 	Dlbl.setBounds(124, 10, 246, 47);
 	panel.add(Dlbl);
-	Dlbl.setFont(new Font("새굴림", Font.BOLD, 13));
+	Dlbl.setFont(new Font("새굴림", Font.PLAIN, 13));
 
 	
 	

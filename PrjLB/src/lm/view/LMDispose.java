@@ -67,6 +67,7 @@ public class LMDispose extends JFrame implements ActionListener{
 		
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/lmimage/alphabets-33744_640.png")));
 		getContentPane().setBackground(new Color(231,231,231));
+		
 		icon = new ImageIcon(LMDispose.class.getResource("/lmimage/큰거1.png"));
 		
 		JPanel panel = new JPanel() {

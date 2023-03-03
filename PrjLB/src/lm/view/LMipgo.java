@@ -50,6 +50,7 @@ public class LMipgo extends JFrame
 implements  ActionListener  {
 
 	// 필드
+	String user;
 	static LMipgo    mList = null;
 	IpgoList         iProc = null;
 	ButtonGroup   group;
@@ -66,7 +67,6 @@ implements  ActionListener  {
 	public static ArrayList<Object> inDate = new ArrayList<Object>();
 	public static ArrayList<Object> inPname = new ArrayList<Object>();
 	public static ArrayList<Object> inNum = new ArrayList<Object>();
-	public static ArrayList<Object> userid = new ArrayList<Object>();
 
 	private JScrollPane scrollPane;
 	private JPanel panel;
@@ -75,15 +75,20 @@ implements  ActionListener  {
 	public static Date selectedDate;
 
 	public LMipgo() { 
-		setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/lmimage/alphabets-33744_640.png")));
-		getContentPane().setBackground(new Color(231,231,231));
 		init();
+	}
+
+	public LMipgo(String userid) {
+	this.user = userid;
+	init();
 	}
 
 	private void init() {
 
 		setTitle("상품입고업무");
 
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/lmimage/alphabets-33744_640.png")));
+		getContentPane().setBackground(new Color(231,231,231));
 
 
 		icon = new ImageIcon(LMipgo.class.getResource("/lmimage/큰거1.png"));
@@ -375,7 +380,7 @@ implements  ActionListener  {
 		getInArrayData();
 		IpgoDao dao = new IpgoDao();      
 
-		dao.insertList(inDate,inPname,inNum,userid);   
+		dao.insertList(inDate,inPname,inNum,user);   
 		System.out.println(inDate);
 		System.out.println(inPname);
 		System.out.println(inNum);

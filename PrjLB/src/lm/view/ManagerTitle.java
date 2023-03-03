@@ -307,7 +307,7 @@ public class ManagerTitle extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				if (ipo != null)
 					ipo.dispose();
-				ipo = new LMipgo();
+				ipo = new LMipgo(userid);
 			}
 		});
 

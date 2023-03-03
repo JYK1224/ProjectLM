@@ -309,7 +309,7 @@ public class IpgoDao {
 	}
 
 	// 입고 확정
-	public void insertList(ArrayList<Object> inDate, ArrayList<Object> inPname, ArrayList<Object> inNum, ArrayList<Object> userid) {
+	public void insertList(ArrayList<Object> inDate, ArrayList<Object> inPname, ArrayList<Object> inNum,String user) {
 
 		int j = inNum.size();
 
@@ -341,7 +341,7 @@ public class IpgoDao {
 					pstmt.setString(1, (String) inDate.get(i) );		// 입고일자
 					pstmt.setString(2, (String) inNum.get(i));		// 입고수량
 					pstmt.setString(3, (String) inPname.get(i));	    // 상품명
-					pstmt.setString(4, "");		// 입고직원
+					pstmt.setString(4, user);		// 입고직원
 
 					aftcnt = pstmt.executeUpdate();
 
