@@ -197,7 +197,7 @@ public class PullQuiry extends JFrame implements ActionListener{
 		panel.add(lalb3);
 		lalb3.setFont(new Font("굴림", Font.PLAIN, 17));
 
-		btn3 = new JButton("상품개별조회");
+		btn3 = new JButton("\uC0C1\uD488\uC0C1\uC138\uC870\uD68C");
 		btn3.setIcon(new ImageIcon(PullQuiry.class.getResource("/lmimage/5\uC790\uB9AC\uBC84\uD2BC.png")));
 		btn3.setBounds(725, 94, 106, 32);
 		btn3 .setHorizontalTextPosition(JButton.CENTER); // 텍스트 가운데

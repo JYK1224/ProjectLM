@@ -86,7 +86,7 @@ public class LMOrderList extends JFrame implements ActionListener {
 
 	private void initComponent() {
 		this.setTitle("주문내역조회");
-		 setLocation(650,200);
+		 setLocation(700,250);
 		 setResizable(false);
 		icon = new ImageIcon(LMOrderList.class.getResource("/lmimage/큰거1.png"));
 		

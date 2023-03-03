@@ -98,7 +98,7 @@ public class LMDisposeList extends JFrame    implements ActionListener {
 			}
 		};
 		
-		setBounds(700, 300, 1000, 600);
+		setBounds(700, 250, 1000, 600);
 
 		UtilDateModel model1 = new UtilDateModel();
 		JDatePanelImpl datePanel1 = new JDatePanelImpl(model1);
@@ -298,6 +298,11 @@ public class LMDisposeList extends JFrame    implements ActionListener {
 		panel.add(textField_3);
 		textField_3.setPreferredSize(new Dimension(80, 20));
 		textField_3.setText( String.valueOf(getSumPrice()) );
+		
+		JLabel lblNewLabel_5 = new JLabel("\uD3D0\uAE30\uB0B4\uC5ED\uC870\uD68C");
+		lblNewLabel_5.setFont(new Font("새굴림", Font.BOLD, 40));
+		lblNewLabel_5.setBounds(703, 10, 391, 79);
+		panel.add(lblNewLabel_5);
 		datePicker2.addActionListener( new ActionListener() {
 
 			@Override
@@ -528,7 +533,4 @@ public class LMDisposeList extends JFrame    implements ActionListener {
 	public static void main(String[] args) {
 		LMDisposeList window = new LMDisposeList();
 	}
-
-
-
 }

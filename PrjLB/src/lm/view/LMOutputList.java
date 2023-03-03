@@ -190,8 +190,8 @@ public class LMOutputList extends  JFrame    implements ActionListener {
 		textField_1.setBounds(514, 45, 116, 23);
 
 
-		// 거래처명
-		lblNewLabel = new JLabel("거래처명 :");
+		// 점포명
+		lblNewLabel = new JLabel("점포명    :");
 		lblNewLabel.setFont(new Font("새굴림", Font.PLAIN, 12));
 		lblNewLabel.setBounds(438, 110, 64, 23);
 		panel.add(lblNewLabel);
@@ -366,7 +366,7 @@ public class LMOutputList extends  JFrame    implements ActionListener {
 			}
 		});
 		getContentPane().setLayout(groupLayout);
-		setLocation(650,200);
+		setLocation(700,250);
 		setVisible(true);
 		setResizable(false);
 

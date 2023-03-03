@@ -255,7 +255,7 @@ public class OutputDao {
 				+ "				   AND P.PID = S.PID (+)\r\n"
 				+ "                   AND O.SHOPID = SH.SHOPID (+)\r\n"
 				+ "				   AND ( TO_DATE(O.OUTDATE) BETWEEN TO_DATE('"+ date1 +"') AND TO_DATE('"+ date2 +"') ) \r\n"
-				+ "				   AND D.DNAME LIKE '%" + search.toUpperCase().trim() + "%'\r\n"
+				+ "				   AND SH.SHOPNAME LIKE '%" + search.toUpperCase().trim() + "%'\r\n"
 				+ "				   ORDER BY O.OUTDATE DESC";
 
 		String  sql2 = "SELECT TO_CHAR(O.OUTDATE, 'YYYY-MM-DD HH24:MI:SS') OUTDATE , D.DNAME , P.PID , P.PNAME , P.SPRICE , SH.SHOPNAME, NVL(S.STOCKNUM, 0) STOCKNUM, O.OUTNUM \r\n"
@@ -264,7 +264,7 @@ public class OutputDao {
 				+ "				   AND P.DID = D.DID (+)\r\n"
 				+ "				   AND P.PID = S.PID (+)\r\n"
 				+ "                   AND O.SHOPID = SH.SHOPID (+)\r\n"
-				+ "				   AND D.DNAME LIKE '%" + search.toUpperCase().trim() + "%'\r\n"
+				+ "				   AND SH.SHOPNAME LIKE '%" + search.toUpperCase().trim() + "%'\r\n"
 				+ "				   ORDER BY O.OUTDATE DESC";
 
 
