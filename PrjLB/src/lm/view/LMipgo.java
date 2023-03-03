@@ -52,13 +52,13 @@ implements  ActionListener  {
 	// 필드
 	static LMipgo    mList = null;
 	IpgoList         iProc = null;
-	ButtonGroup group;
+	ButtonGroup   group;
 	JLabel        lblAcc, lblMonth, lblDay; // 거래처명, 월, 일
 	TextField     txtId; // 검색할 항목
 	JButton       btnFind, btnSet, btnToExcel, btnList; //검수확정, 인쇄(엑셀로 보내기)
 	JTable        jTable;
 	JScrollPane   pane;
-	ImageIcon icon;
+	ImageIcon     icon;
 
 	private static String selDate = "";
 	public static IpgoVo lmvo = new IpgoVo();
@@ -66,6 +66,8 @@ implements  ActionListener  {
 	public static ArrayList<Object> inDate = new ArrayList<Object>();
 	public static ArrayList<Object> inPname = new ArrayList<Object>();
 	public static ArrayList<Object> inNum = new ArrayList<Object>();
+	public static ArrayList<Object> userid = new ArrayList<Object>();
+
 	private JScrollPane scrollPane;
 	private JPanel panel;
 	private JLabel lblNewLabel;
@@ -373,7 +375,7 @@ implements  ActionListener  {
 		getInArrayData();
 		IpgoDao dao = new IpgoDao();      
 
-		dao.insertList(inDate,inPname,inNum);   
+		dao.insertList(inDate,inPname,inNum,userid);   
 		System.out.println(inDate);
 		System.out.println(inPname);
 		System.out.println(inNum);

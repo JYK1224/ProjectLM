@@ -259,11 +259,12 @@ public class IpgoDao {
 		Vector<Vector>  list = new Vector<Vector>();   // 조회된 결과전체 대응 : rs
 
 		String  sql = "SELECT I.INDATE, D.DNAME,  P.PID, P.PNAME, NVL(P.IPRICE, 0) IPRICE, ";
-		sql +=		  "NVL(S.STOCKNUM, 0) STOCKNUM, NVL(I.INNUM,0) INNUM ";
-		sql +=		  "FROM INPUT I, PRODUCT P, STOCK S, DEPT_ACC D ";
+		sql +=		  "NVL(S.STOCKNUM, 0) STOCKNUM, NVL(I.INNUM,0) INNUM  , u.username username ";
+		sql +=		  "FROM INPUT I, PRODUCT P, STOCK S, DEPT_ACC D , usermng u";
 		sql +=		  "WHERE P.DID = D.DID   (+) ";
 		sql +=		  "AND D.DID =  S.DID    (+) ";
-		sql +=		  "AND P.PID = I.PID (+) ";
+		sql +=		  "AND P.PID = I.PID (+) "
+				    + "and i.userid = u.userid ";
 
 		PreparedStatement  pstmt = null;
 		ResultSet          rs    = null;
@@ -279,7 +280,7 @@ public class IpgoDao {
 				String  iprice         = rs.getString("iprice");      // 입고가격
 				String  stocknum       = rs.getString("stocknum");    // 현재재고
 				String  innum          = rs.getString("innum");       // 입고수량
-
+				String  username       = rs.getString("username");
 
 				Vector<String>  v         = new Vector<String>();  // 안쪽 Vector : 한 줄 Row 를 의미
 				v.add( indate );
@@ -289,7 +290,7 @@ public class IpgoDao {
 				v.add( iprice );
 				v.add( stocknum );
 				v.add( innum );
-				v.add( "" );
+				v.add( username );
 
 				list.add( v );  //  전체 목록에 추가
 			}
@@ -308,7 +309,7 @@ public class IpgoDao {
 	}
 
 	// 입고 확정
-	public void insertList(ArrayList<Object> inDate, ArrayList<Object> inPname, ArrayList<Object> inNum) {
+	public void insertList(ArrayList<Object> inDate, ArrayList<Object> inPname, ArrayList<Object> inNum, ArrayList<Object> userid) {
 
 		int j = inNum.size();
 
@@ -340,7 +341,7 @@ public class IpgoDao {
 					pstmt.setString(1, (String) inDate.get(i) );		// 입고일자
 					pstmt.setString(2, (String) inNum.get(i));		// 입고수량
 					pstmt.setString(3, (String) inPname.get(i));	    // 상품명
-					pstmt.setString(4, "41133533");		// 입고직원
+					pstmt.setString(4, "");		// 입고직원
 
 					aftcnt = pstmt.executeUpdate();
 
@@ -373,7 +374,7 @@ public class IpgoDao {
 		System.out.println(date1);
 		System.out.println(date2);
 
-		String  sql1 = "SELECT TO_CHAR(I.INDATE, 'YYYY-MM-DD HH24:MI:SS') INDATE , D.DNAME, P.PID, P.PNAME, P.IPRICE, S.STOCKNUM, I.INNUM, U.USERID\r\n"
+		String  sql1 = "SELECT TO_CHAR(I.INDATE, 'YYYY-MM-DD HH24:MI:SS') INDATE , D.DNAME, P.PID, P.PNAME, P.IPRICE, S.STOCKNUM, I.INNUM, U.username\r\n"
 				+ "  FROM INPUT I, DEPT_ACC D, PRODUCT P, STOCK S, USERMNG U\r\n"
 				+ "  WHERE I.PID = P.PID (+)\r\n"
 				+ "    AND P.DID = D.DID (+)\r\n"
@@ -383,7 +384,7 @@ public class IpgoDao {
 				+ "    AND ( TO_DATE(I.INDATE) BETWEEN TO_DATE('"+ date1 +"') AND TO_DATE('"+ date2 +"') )\r\n"
 				+ "    ORDER BY I.INDATE DESC";
 
-		String  sql2 = "SELECT TO_CHAR(I.INDATE, 'YYYY-MM-DD HH24:MI:SS') INDATE , D.DNAME, P.PID, P.PNAME, P.IPRICE, S.STOCKNUM, I.INNUM, U.USERID\r\n"
+		String  sql2 = "SELECT TO_CHAR(I.INDATE, 'YYYY-MM-DD HH24:MI:SS') INDATE , D.DNAME, P.PID, P.PNAME, P.IPRICE, S.STOCKNUM, I.INNUM, U.username\r\n"
 				+ "  FROM INPUT I, DEPT_ACC D, PRODUCT P, STOCK S, USERMNG U\r\n"
 				+ "  WHERE I.PID = P.PID (+)\r\n"
 				+ "    AND P.DID = D.DID (+)\r\n"
@@ -411,7 +412,7 @@ public class IpgoDao {
 				String  iprice          = rs.getString("IPRICE");      // 입고가격
 				String  stocknum       = rs.getString("STOCKNUM");    // 현재재고
 				String  innum          = rs.getString("INNUM");       // 입고수량
-				String  userid          = rs.getString("USERID");       // 직원ID
+				String  username          = rs.getString("username");       // 직원ID
 
 
 				Vector  v         = new Vector();  // 안쪽 Vector : 한 줄 Row 를 의미
@@ -422,7 +423,7 @@ public class IpgoDao {
 				v.add( iprice );
 				v.add( stocknum );
 				v.add( innum );
-				v.add( userid );
+				v.add( username );
 
 				list.add( v );  //  전체 목록에 추가
 			}
