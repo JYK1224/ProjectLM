@@ -27,7 +27,7 @@ public class DisposeDao {
          }
       }
       // 폐기 업무 - 검색 기능 - 진짜임
-      public Vector<Vector> getDispose(String search) {
+      public Vector<Vector> getDispose(String search,String userid) {
 
          Vector<Vector>  list = new Vector<Vector>();
 
@@ -62,7 +62,7 @@ public class DisposeDao {
                v.add(iprice);
                v.add(stocknum);
                v.add("");
-               v.add("");
+               v.add(userid);
 
                list.add(v);
 

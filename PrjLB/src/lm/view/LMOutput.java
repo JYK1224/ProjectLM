@@ -41,6 +41,7 @@ import lm.model.OutputVo;
 public class LMOutput extends JFrame implements ActionListener{
 
 	// Fields
+	String userid;
 	private static JFrame frame;
 	private static JTextField textField;
 	private static JTable table;
@@ -81,11 +82,18 @@ public class LMOutput extends JFrame implements ActionListener{
 	public static OutputVo ot = new OutputVo();
 
 
-	public LMOutput() {
+	public LMOutput(String userid) {
+		this.userid = userid;
 		OutputDao odao = new OutputDao();
 		odao.setShopVector();
 		initComponent();
 
+	}
+
+	public LMOutput() {
+		OutputDao odao = new OutputDao();
+		odao.setShopVector();
+		initComponent();
 	}
 
 	private void initComponent() {
@@ -346,7 +354,7 @@ public class LMOutput extends JFrame implements ActionListener{
 	private Vector<Vector> getDataList(LMOutput output) {
 		String          search = textField.getText();
 		OutputDao       dao   =  new OutputDao();
-		Vector<Vector>  list  =  dao.getOutput(search);
+		Vector<Vector>  list  =  dao.getOutput(search,userid);
 		setList(list);
 
 		return list;

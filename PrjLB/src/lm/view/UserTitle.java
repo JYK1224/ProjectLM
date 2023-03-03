@@ -144,7 +144,7 @@ private void Init() {
 		public void actionPerformed(ActionEvent e) {
 				if(lop != null)
 					lop.dispose();
-					lop =new LMOutput();
+					lop =new LMOutput(userid);
 			
 		}
 	});
@@ -168,7 +168,7 @@ private void Init() {
 		public void actionPerformed(ActionEvent e) {
 				if (ldp != null)
 					ldp.dispose();
-					ldp = new LMDispose();
+					ldp = new LMDispose(userid);
 			
 		}
 	});

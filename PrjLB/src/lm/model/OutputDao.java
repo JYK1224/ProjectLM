@@ -95,7 +95,7 @@ public class OutputDao {
 	}
 
 	// 출고 테이블 검색 후 불러오기
-	public Vector<Vector> getOutput(String search) {
+	public Vector<Vector> getOutput(String search,String userid) {
 
 		Vector<Vector>  list = new Vector<Vector>();   // 조회된 결과전체 대응 : rs
 
@@ -122,7 +122,6 @@ public class OutputDao {
 				String  stocknum    =  rs.getString("STOCKNUM");  // 6 현재재고
 				String  shopid      =  LMOutput.ot.getShopId();	// 7 점포명
 																// 8 출고수량
-//				String  userid    =  rs.getString("USERID");  	// 9 출고직원
 
 				Vector  v         = new Vector();  // 안쪽 Vector : 한 줄 Row 를 의미
 				v.add( dname );
@@ -133,7 +132,7 @@ public class OutputDao {
 				v.add( stocknum );
 				v.add( shopid );
 				v.add( "" );
-				v.add( "" );
+				v.add( userid );
 
 				list.add( v );  //  전체 목록에 추가
 			}

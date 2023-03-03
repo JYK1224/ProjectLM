@@ -39,6 +39,7 @@ import javax.swing.UIManager;
 
 
 public class LMDispose extends JFrame implements ActionListener{
+	String userid;
 	private static JTable table;
 	private static JComboBox comboBox;
 
@@ -53,14 +54,19 @@ public class LMDispose extends JFrame implements ActionListener{
 	ImageIcon icon;
 
 	public LMDispose() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/lmimage/alphabets-33744_640.png")));
-		getContentPane().setBackground(new Color(231,231,231));
+		init();
+	}
+
+	public LMDispose(String userid) {
+		this.userid = userid;
 		init();
 	}
 
 	private void init() {
 		setTitle("상품폐기업무");
 		
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/lmimage/alphabets-33744_640.png")));
+		getContentPane().setBackground(new Color(231,231,231));
 		icon = new ImageIcon(LMDispose.class.getResource("/lmimage/큰거1.png"));
 		
 		JPanel panel = new JPanel() {
@@ -384,7 +390,7 @@ public class LMDispose extends JFrame implements ActionListener{
 			search = comboBox.getSelectedItem().toString();
 		}
 		DisposeDao     dao    =  new DisposeDao();
-		Vector<Vector> list   =  dao.getDispose(search);
+		Vector<Vector> list   =  dao.getDispose(search,userid);
 		System.out.println(list);
 		
 		
