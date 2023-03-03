@@ -191,6 +191,7 @@ public class LMDispose extends JFrame implements ActionListener{
 	        JDialog jd = new JDialog(0);
 	        jd.Dlbl.setText(rowsCount + "건 검색되었습니다");
 	        jd.setTitle("검색 결과");
+	        jd.setAlwaysOnTop(true);
 			break;
 			
 		case "폐기확정":
@@ -245,12 +246,14 @@ public class LMDispose extends JFrame implements ActionListener{
 			JDialog jd = new JDialog(0);
 			jd.Dlbl.setText("저장에 성공하였습니다");
 			jd.setTitle("저장성공");
+			jd.setAlwaysOnTop(true);
 		} catch (IOException e) {
 			JDialog jd = new JDialog(0);
 			jd.Dlbl.setText("<html><body><center>저장을 실패하였습니다."
 					+ "<br>저장공간의 위치를 확인해주세요."
 					+ "<br>저장공간: D:\\excel</center></body></html>");
 			jd.setTitle("저장실패");
+			jd.setAlwaysOnTop(true);
 					e.printStackTrace();
 		} finally {
 			try {
@@ -363,6 +366,7 @@ public class LMDispose extends JFrame implements ActionListener{
 		JDialog jd = new JDialog(0);
 		jd.Dlbl.setText(sum + " 개 폐기되었습니다");
 		jd.setTitle("폐기");
+		jd.setAlwaysOnTop(true);
 	}
 
 

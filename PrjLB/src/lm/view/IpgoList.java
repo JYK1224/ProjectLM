@@ -245,6 +245,7 @@ public class IpgoList extends JFrame implements  ActionListener{
 					JDialog jd = new JDialog(0);
 					jd.Dlbl.setText("종료일이 시작일보다 빠릅니다.");
 					jd.setTitle("날짜 지정오류");
+					jd.setAlwaysOnTop(true);
 				}
 
 			}
@@ -324,6 +325,7 @@ public class IpgoList extends JFrame implements  ActionListener{
 				JDialog jd = new JDialog(0);
 				jd.Dlbl.setText("<html><body><center>시작일 또는 종료일이<br>선택되지 않았습니다.</center></body></html>");
 				jd.setTitle("날짜지정오류");
+				jd.setAlwaysOnTop(true);
 				return;
 			}
 
@@ -333,6 +335,7 @@ public class IpgoList extends JFrame implements  ActionListener{
 			JDialog jd = new JDialog(0);
 			jd.Dlbl.setText(rowsCount + "건 검색되었습니다");
 			jd.setTitle("검색 결과");
+			jd.setAlwaysOnTop(true);
 			
 			DecimalFormat dc = new DecimalFormat("###,###,###,###"+"원");
 			String ch = dc.format(Double.parseDouble(String.valueOf(getSumPrice())));
@@ -427,11 +430,13 @@ public class IpgoList extends JFrame implements  ActionListener{
 			JDialog jd = new JDialog(0);
 			jd.Dlbl.setText(fmt + " 로 저장되었습니다");
 			jd.setTitle("저장완료");
+			jd.setAlwaysOnTop(true);
 		} catch (IOException e) {
 			System.out.println("저장Fail");         
 			JDialog jd = new JDialog(0);
 			jd.Dlbl.setText("저장이 되지 않았습니다");
 			jd.setTitle("저장실패");
+			jd.setAlwaysOnTop(true);
 		} finally {
 			try {
 				if(fos != null)fos.close();

@@ -328,6 +328,7 @@ public class LMDisposeList extends JFrame    implements ActionListener {
 					JDialog jd = new JDialog(0);
 					jd.Dlbl.setText("종료일이 시작일보다 빠릅니다.");
 					jd.setTitle("날짜지정오류");
+					jd.setAlwaysOnTop(true);
 					textField_2.setText("");
 				}
 
@@ -382,12 +383,14 @@ public class LMDisposeList extends JFrame    implements ActionListener {
 			JDialog jd = new JDialog(0);
 			jd.Dlbl.setText("저장에 성공하였습니다");
 			jd.setTitle("저장성공");
+			jd.setAlwaysOnTop(true);
 		} catch (IOException e) {
 			JDialog jd = new JDialog(0);
 			jd.Dlbl.setText("<html><body><center>저장을 실패하였습니다."
 					+ "<br>저장공간의 위치를 확인해주세요."
 					+ "<br>저장공간: D:\\excel</center></body></html>");
 			jd.setTitle("저장실패");	
+			jd.setAlwaysOnTop(true);
 			e.printStackTrace();
 		} finally {
 			try {
@@ -474,6 +477,7 @@ public class LMDisposeList extends JFrame    implements ActionListener {
 				JDialog jd = new JDialog(0);
 				jd.Dlbl.setText("시작일 또는 종료일이 선택되지 않았습니다.");
 				jd.setTitle("날짜 지정 오류");
+				jd.setAlwaysOnTop(true);
 				textField_1.setText("");
 				textField_2.setText("");
 				
@@ -486,6 +490,7 @@ public class LMDisposeList extends JFrame    implements ActionListener {
 	         JDialog jd = new JDialog(0);
 	         jd.Dlbl.setText(rowsCount + "건 검색되었습니다");
 	         jd.setTitle("검색결과");
+	         jd.setAlwaysOnTop(true);
 	         DecimalFormat dc = new DecimalFormat("###,###,###,###"+"원");
 				String ch = dc.format(Double.parseDouble(String.valueOf(getSumPrice())));
 				lblNewLabel_6.setText( String.valueOf(ch) );	

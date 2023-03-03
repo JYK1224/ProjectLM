@@ -155,6 +155,7 @@ import java.awt.Toolkit;
 					JDialog jd = new JDialog(0);
 					jd.Dlbl.setText(fmt +"로 엑셀파일 저장되었습니다");
 					jd.setTitle("저장");
+					jd.setAlwaysOnTop(true);
 					
 				}
 			});

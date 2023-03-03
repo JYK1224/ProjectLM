@@ -58,7 +58,7 @@ public class JDialog extends JFrame {
 
 	private void init2() {
 		this.setTitle("");
-		
+		this.setAlwaysOnTop(true);
 		
 		setIconImage(Toolkit.getDefaultToolkit().getImage(JDialog.class.getResource("/lmimage/alphabets-33744_640.png")));
 		
@@ -194,6 +194,7 @@ public class JDialog extends JFrame {
 
 	private void init() {
 	this.setTitle("");
+	this.setAlwaysOnTop(true);
 	
 	
 	setIconImage(Toolkit.getDefaultToolkit().getImage(JDialog.class.getResource("/lmimage/alphabets-33744_640.png")));

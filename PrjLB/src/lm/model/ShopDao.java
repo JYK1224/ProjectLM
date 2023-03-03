@@ -237,6 +237,7 @@ public class ShopDao {
 			JDialog jd = new JDialog(0);
 			jd.getDlbl().setText("숫자만 입력 가능합니다");
 			jd.setTitle("경고");
+			jd.setAlwaysOnTop(true);
 			e.printStackTrace();
 		}finally {
 			try {

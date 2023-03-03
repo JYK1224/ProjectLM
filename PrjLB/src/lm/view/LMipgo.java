@@ -328,6 +328,7 @@ implements  ActionListener  {
 			JDialog jd = new JDialog(0);
 			jd.Dlbl.setText("입고되었습니다");
 			jd.setTitle("입고");
+			jd.setAlwaysOnTop(true);
 			break;
 		
 		case "엑셀로 저장":
@@ -368,6 +369,7 @@ implements  ActionListener  {
 			 JDialog jd = new JDialog(0);
 			 jd.Dlbl.setText("날짜를 선택해주세요");
 			 jd.setTitle("날짜선택");
+			 jd.setAlwaysOnTop(true);
 		}
 		
 		Vector<Vector> list   =  dao.getOrder(search);
@@ -428,6 +430,7 @@ implements  ActionListener  {
 				JDialog jd = new JDialog(0);
 				jd.Dlbl.setText("입고일자를 지정해주세요.");
 				jd.setTitle("날짜지정오류");
+				jd.setAlwaysOnTop(true);
 				return;
 			}
 
@@ -489,12 +492,14 @@ implements  ActionListener  {
 			JDialog jd = new JDialog(0);
 			jd.Dlbl.setText(fmt + " 로 저장 완료");
 			jd.setTitle("저장완료");
+			jd.setAlwaysOnTop(true);
 		} catch (IOException e) {
 			JDialog jd = new JDialog(0);
 			jd.Dlbl.setText("<html><body><center>저장을 실패하였습니다."
 					+ "<br>저장공간의 위치를 확인해주세요."
 					+ "<br>저장공간: D:\\excel</center></body></html>");
 			jd.setTitle("저장실패");
+			jd.setAlwaysOnTop(true);
 			e.printStackTrace();
 		} finally {
 			try {

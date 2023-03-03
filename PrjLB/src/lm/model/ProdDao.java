@@ -83,7 +83,10 @@ public class ProdDao {
 			list.add(dname);
 			}
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "저장에 실패하였습니다");
+			lm.view.JDialog jd = new lm.view.JDialog(0);
+			jd.getDlbl().setText("저장에 실패하였습니다");
+			jd.setTitle("저장오류");
+			jd.setAlwaysOnTop(true);
 		}finally {
 			try {
 				if(pstmt != null) pstmt.close();
@@ -189,7 +192,9 @@ public class ProdDao {
 			if (rs.next())
 				aftcnt = rs.getInt("d");
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "숫자만 입력가능합니다");
+			lm.view.JDialog jd = new lm.view.JDialog(0);
+			jd.getDlbl().setText("숫자만 저장가능합니다");
+			jd.setAlwaysOnTop(true);
 			e.printStackTrace();
 		}finally {
 			try {
