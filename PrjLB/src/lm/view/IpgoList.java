@@ -417,7 +417,7 @@ public class IpgoList extends JFrame implements  ActionListener{
 	private void excelWrite(String filepath) {
 		XSSFWorkbook  workbook =  new XSSFWorkbook();
 		XSSFSheet     sheet    =  workbook.createSheet("Data");
-		String fmt = "d:\\excel";
+		String fmt = "D:\\Execl";
 		
 		// data 저장 : swing jTable -> Excel Sheet
 		getWorkbook_Data( sheet );
@@ -428,7 +428,7 @@ public class IpgoList extends JFrame implements  ActionListener{
 			fos = new FileOutputStream( filepath );
 			workbook.write(fos);
 			JDialog jd = new JDialog(0);
-			jd.Dlbl.setText(fmt + " 로 저장되었습니다");
+			jd.Dlbl.setText(fmt + " 로 저장에 성공하였습니다");
 			jd.setTitle("저장완료");
 			jd.setAlwaysOnTop(true);
 		} catch (IOException e) {

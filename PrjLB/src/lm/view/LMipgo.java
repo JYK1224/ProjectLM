@@ -477,7 +477,7 @@ implements  ActionListener  {
 	// excel 로 저장
 
 	private void excelWrite(String filepath) {
-		String fmt = "D:excel";
+		String fmt = "D:\\excel";
 		XSSFWorkbook  workbook =  new XSSFWorkbook();
 		XSSFSheet     sheet    =  workbook.createSheet("Data");
 		
@@ -490,7 +490,7 @@ implements  ActionListener  {
 			fos = new FileOutputStream( filepath );
 			workbook.write(fos);
 			JDialog jd = new JDialog(0);
-			jd.Dlbl.setText(fmt + " 로 저장 완료");
+			jd.Dlbl.setText(fmt + " 로 저장에 성공하였습니다");
 			jd.setTitle("저장완료");
 			jd.setAlwaysOnTop(true);
 		} catch (IOException e) {

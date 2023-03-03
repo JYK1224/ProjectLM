@@ -153,7 +153,7 @@ import java.awt.Toolkit;
 					String filepath = String.format(fmt+fmt2, year, mm, dd, hh, mi );
 					excelWrite(filepath);
 					JDialog jd = new JDialog(0);
-					jd.Dlbl.setText(fmt +"로 엑셀파일 저장되었습니다");
+					jd.Dlbl.setText(fmt +"로 저장에 성공하였습니다");
 					jd.setTitle("저장");
 					jd.setAlwaysOnTop(true);
 					

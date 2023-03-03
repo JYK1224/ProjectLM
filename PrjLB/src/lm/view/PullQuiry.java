@@ -506,7 +506,7 @@ public class PullQuiry extends JFrame implements ActionListener{
 			String filepath = String.format(fmt+fmt2, year, mm, dd, hh, mi );
 			excelWrite1(filepath);
 			JDialog jd = new JDialog(0);
-			jd.Dlbl.setText("<html><body><center>"+ fmt + "로<br>엑셀파일 저장되었습니다.</center></body></html>");
+			jd.Dlbl.setText(fmt + "로 저장에 성공하였습니다");
 			jd.setTitle("저장");
 
 			break;

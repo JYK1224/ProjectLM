@@ -244,7 +244,8 @@ public class LMDispose extends JFrame implements ActionListener{
 			fos = new FileOutputStream( filepath );
 			workbook.write(fos);
 			JDialog jd = new JDialog(0);
-			jd.Dlbl.setText("저장에 성공하였습니다");
+			jd.Dlbl.setText("D:\\excel 저장에 성공하였습니다");
+					       
 			jd.setTitle("저장성공");
 			jd.setAlwaysOnTop(true);
 		} catch (IOException e) {

@@ -339,7 +339,7 @@ public class LMOrderList extends JFrame implements ActionListener {
 					fos = new FileOutputStream( filepath );
 					workbook.write(fos);
 					lm.view.JDialog jd = new lm.view.JDialog(0);
-					jd.Dlbl.setText("저장에 성공하였습니다");
+					jd.Dlbl.setText("D:\\excel 로 저장에 성공하였습니다");
 					jd.setTitle("저장성공");
 				} catch (IOException e) {
 					JDialog jd = new JDialog(0);
