@@ -10,6 +10,7 @@ import java.awt.event.KeyListener;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -52,7 +53,7 @@ public class LMDisposeList extends JFrame    implements ActionListener {
 
 	private static JFrame frame;
 	private static JLabel lblNewLabel, lblNewLabel_1, lblNewLabel_2, lblNewLabel_3, lblNewLabel_4, lblNewLabel_7;
-	private static JTextField textField, textField_1, textField_2, textField_3;
+	private static JTextField textField, textField_1, textField_2;
 	private static JButton btnNewButton_1, btnNewButton_2, btnNewButton_3;
 	private static JTable table;
 	private static JScrollPane scrollPane;
@@ -68,6 +69,7 @@ public class LMDisposeList extends JFrame    implements ActionListener {
 	LMDispose lmdispose = null;
 	private JScrollPane scrollPane_1;
 	private JPanel panel;
+	private JLabel lblNewLabel_6;
 
 	// 기본생성자
 	public LMDisposeList(){
@@ -291,18 +293,17 @@ public class LMDisposeList extends JFrame    implements ActionListener {
 
 		scrollPane.setPreferredSize(new Dimension(1070, 400));	
 		scrollPane.setViewportView(table);
-
-		textField_3 = new JTextField(15);
-		textField_3.setFont(new Font("새굴림", Font.PLAIN, 17));
-		textField_3.setBounds(730, 526, 153, 20);
-		panel.add(textField_3);
-		textField_3.setPreferredSize(new Dimension(80, 20));
-		textField_3.setText( String.valueOf(getSumPrice()) );
 		
 		JLabel lblNewLabel_5 = new JLabel("\uD3D0\uAE30\uB0B4\uC5ED\uC870\uD68C");
 		lblNewLabel_5.setFont(new Font("새굴림", Font.BOLD, 40));
 		lblNewLabel_5.setBounds(703, 10, 391, 79);
 		panel.add(lblNewLabel_5);
+		
+		lblNewLabel_6 = new JLabel("");
+		lblNewLabel_6.setForeground(SystemColor.text);
+		lblNewLabel_6.setFont(new Font("새굴림", Font.PLAIN, 17));
+		lblNewLabel_6.setBounds(730, 525, 153, 20);
+		panel.add(lblNewLabel_6);
 		datePicker2.addActionListener( new ActionListener() {
 
 			@Override
@@ -484,8 +485,10 @@ public class LMDisposeList extends JFrame    implements ActionListener {
 	         JDialog jd = new JDialog(0);
 	         jd.Dlbl.setText(rowsCount + "건 검색되었습니다");
 	         jd.setTitle("검색결과");
+	         DecimalFormat dc = new DecimalFormat("###,###,###,###"+"원");
+				String ch = dc.format(Double.parseDouble(String.valueOf(getSumPrice())));
+				lblNewLabel_6.setText( String.valueOf(ch) );	
 			
-			textField_3.setText( String.valueOf(getSumPrice()) );	// 가격 * 수량
 			break;
 
 		case "날짜 초기화":

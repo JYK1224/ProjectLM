@@ -10,6 +10,7 @@ import java.awt.event.KeyListener;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -54,7 +55,7 @@ public class LMOrderList extends JFrame implements ActionListener {
 	
 
 	private static JLabel lblNewLabel, lblNewLabel_1, lblNewLabel_2, lblNewLabel_3, lblNewLabel_4, lblNewLabel_5, lblNewLabel_6, lblNewLabel_7, lblNewLabel_8;
-	private static JTextField textField, textField_1, textField_2, textField_3;
+	private static JTextField textField, textField_1, textField_2;
 	private static JButton btnNewButton_1, btnNewButton_2, btnNewButton_3;
 	private static JTable table;
 	private static JScrollPane scrollPane;
@@ -68,6 +69,7 @@ public class LMOrderList extends JFrame implements ActionListener {
 	LMProdOrder order3 = null;
 	private JTextField textField_4;
 	private JTextField textField_5;
+	private JLabel lblNewLabel_9;
 	
 
 
@@ -409,17 +411,17 @@ public class LMOrderList extends JFrame implements ActionListener {
 		lblNewLabel_7.setBounds(617, 526, 100, 20);
 		panel.add(lblNewLabel_7);
 		
-		textField_3 = new JTextField();
-		textField_3.setFont(new Font("새굴림", Font.PLAIN, 17));
-		textField_3.setColumns(10);
-		textField_3.setBounds(730, 524, 153, 20);
-		panel.add(textField_3);
-		textField_3.setText( String.valueOf(getSumPrice()) );
-		
 		lblNewLabel_8 = new JLabel("\uC8FC\uBB38\uB0B4\uC5ED\uC870\uD68C");
+		lblNewLabel_8.setForeground(Color.BLACK);
 		lblNewLabel_8.setFont(new Font("새굴림", Font.BOLD, 40));
 		lblNewLabel_8.setBounds(703, 10, 391, 79);
 		panel.add(lblNewLabel_8);
+		
+		lblNewLabel_9 = new JLabel("");
+		lblNewLabel_9.setForeground(SystemColor.text);
+		lblNewLabel_9.setFont(new Font("새굴림", Font.PLAIN, 17));
+		lblNewLabel_9.setBounds(730, 525, 153, 20);
+		panel.add(lblNewLabel_9);
 		
 		
 		
@@ -497,7 +499,11 @@ public class LMOrderList extends JFrame implements ActionListener {
 			jd.Dlbl.setText(rowsCount + "건 검색되었습니다");
 			jd.setTitle("검색");
 			
-			textField_3.setText( String.valueOf(getSumPrice()) );	// 가격 * 수량
+			
+			DecimalFormat dc = new DecimalFormat("###,###,###,###"+"원");
+			String ch = dc.format(Double.parseDouble(String.valueOf(getSumPrice())));
+			lblNewLabel_9.setText( String.valueOf(ch) );	
+				// 가격 * 수량
 			break;
 
 		case "날짜 초기화":

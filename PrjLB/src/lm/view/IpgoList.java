@@ -11,6 +11,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -51,7 +52,7 @@ public class IpgoList extends JFrame implements  ActionListener{
 
 
 	JLabel        lblAcc, lblMonth, lblStart, lblEnd, lblTot; // 거래처명, 월, 일
-	private static TextField     txtId, txtTot; // 검색할 항목, 총 금액
+	private static TextField     txtId; // 검색할 항목, 총 금액
 	JButton       btnFind, btnToExcel; // 인쇄(엑셀로 보내기)
 	private static JTable        jTable;
 	private static JScrollPane   pane;
@@ -67,6 +68,7 @@ public class IpgoList extends JFrame implements  ActionListener{
 	private JPanel panel;
 	private JLabel lblNewLabel;
 	ImageIcon icon;
+	private JLabel lblNewLabel_1;
 	public IpgoList() { 
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/lmimage/alphabets-33744_640.png")));
 		getContentPane().setBackground(new Color(231,231,231));
@@ -189,10 +191,6 @@ public class IpgoList extends JFrame implements  ActionListener{
 		lblTot.setFont(new Font("굴림", Font.PLAIN, 17));
 		lblTot.setBounds(617, 526, 100, 20);
 		panel.add(lblTot);
-		txtTot       =  new TextField(20);  
-		txtTot.setFont(new Font("새굴림", Font.PLAIN, 17));
-		txtTot.setBounds(730, 524, 153, 20);
-		panel.add(txtTot);
 
 
 
@@ -205,7 +203,6 @@ public class IpgoList extends JFrame implements  ActionListener{
 			}
 
 		};
-		txtTot.setText( String.valueOf(getSumPrice()) );	// 가격 * 수량
 
 
 		pane  = new JScrollPane( jTable );
@@ -216,6 +213,12 @@ public class IpgoList extends JFrame implements  ActionListener{
 		lblNewLabel.setFont(new Font("새굴림", Font.BOLD, 40));
 		lblNewLabel.setBounds(703, 10, 391, 79);
 		panel.add(lblNewLabel);
+		
+		lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setForeground(SystemColor.text);
+		lblNewLabel_1.setFont(new Font("새굴림", Font.PLAIN, 17));
+		lblNewLabel_1.setBounds(730, 525, 153, 20);
+		panel.add(lblNewLabel_1);
 		// 이벤트핸들러(이벤트발생시 수행할 함수 - actionPreformed() )를 등록
 		// 엑셀로 저장 버튼 클릭
 		btnToExcel.addActionListener( this );
@@ -330,7 +333,11 @@ public class IpgoList extends JFrame implements  ActionListener{
 			JDialog jd = new JDialog(0);
 			jd.Dlbl.setText(rowsCount + "건 검색되었습니다");
 			jd.setTitle("검색 결과");
-			txtTot.setText( String.valueOf(getSumPrice()) );	// 가격 * 수량
+			
+			DecimalFormat dc = new DecimalFormat("###,###,###,###"+"원");
+			String ch = dc.format(Double.parseDouble(String.valueOf(getSumPrice())));
+			lblNewLabel_1.setText( String.valueOf(ch) );	
+			
 
 			break;
 		case "엑셀로 저장":
