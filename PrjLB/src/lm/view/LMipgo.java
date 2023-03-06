@@ -382,7 +382,7 @@ implements  ActionListener  {
 		getInArrayData();
 		IpgoDao dao = new IpgoDao();      
 
-		dao.insertList(inDate,inPname,inNum,user);   
+		dao.insertList(inDate,inPname,inNum, user);   
 		System.out.println(inDate);
 		System.out.println(inPname);
 		System.out.println(inNum);
